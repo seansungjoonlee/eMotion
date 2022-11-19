@@ -1,15 +1,7 @@
 import { Text, View, StyleSheet, Image } from 'react-native';
 import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
 
-const colorMapping = {
-    "happy": "#FFF27A",
-    "anxious":"#FF7A8C",
-    "angry":"#CA7AFF",
-    "sad":"#7AFF8C",
-    "surprised":"#FFA07A"
-}
-
-function getStops(feelings) {
+function getStops(feelings, colorMapping) {
     let colors = [];
     for(let i = 0; i < feelings.length; i++){
         colors.push(colorMapping[feelings[i]]);
@@ -26,8 +18,8 @@ function getStops(feelings) {
     return stops;
 }
 
-export default function Emotion({ feelings, size }) {
-    const stops = getStops(feelings, size);
+export default function Emotion({ feelings, size, colorMapping }) {
+    const stops = getStops(feelings, colorMapping);
     size = size.toString();
     return (
         <Svg height='100%' width="100%">
