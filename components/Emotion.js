@@ -11,7 +11,7 @@ function getStops(feelings, colorMapping) {
     for(let i = 0; i < colors.length; i++){
         const offset = (i+1) * (1/(colors.length));
         stops.push(
-            <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" />
+            <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
         );
     }
     
