@@ -1,10 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Menu from './app/screens/Menu';
+import Start from './app/screens/Start';
+import HowDoYouFeel from './app/screens/HowDoYouFeel';
+import CareToElaborate from './app/screens/CareToElaborate';
 
 export default function App() {
   return (
-    <Menu/>
+    <CareToElaborate/>
   );
 }
 
@@ -13,6 +14,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    height: '100%',
+    width:'100%'
   },
 });
