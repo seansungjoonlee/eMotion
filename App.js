@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Emotion from './components/Emotion';
 import BasicSelection from './components/BasicSelection';
+import SecondSelection from './components/SecondSelection';
 
 let currentFeelings = ["joyful", "anxious", "angry", "sad", "surprised"];
 const colorMapping = {
@@ -14,7 +15,7 @@ const colorMapping = {
 export default function App() {
   return (
     <View style={styles.container}>
-      <Emotion feelings={currentFeelings} size={120} colorMapping={colorMapping}/>
+      <SecondSelection colorMapping={colorMapping} currentFeelings={['joyful', 'surprised']}/>
     </View>
   );
 }
