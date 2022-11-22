@@ -4,37 +4,72 @@ import { PieChart } from 'react-native-svg-charts'
 import { G, Circle, Text } from 'react-native-svg';
 
 const basicFeelings = ["joyful", "anxious", "angry", "sad", "surprised"];
+const basicToSecondary = {"joyful": ["joyful1","joyful2","joyful3","joyful4"], 
+                        "anxious": ["anxious1","anxious2","anxious3","anxious4"],
+                        "angry": ["angry1","angry2","angry3","angry4"],
+                        "sad": ["sad1","sad2","sad3","sad4"],
+                        "surprised": ["surprised1","surprised2","surprised3","surprised4"],}
 
 function check(value) {
         return value !== this;
 }
 
 export default function SecondSelection({ colorMapping, currentFeelings }){
+    let [currentOuter, setCurrentOuter] = useState([]);
     const currentBasic = currentFeelings;
-    let data = [];
+    let innerData = [];
+    let outerData = [];
+    let outerFeelings = [];
     for(let i = 0; i < currentBasic.length; i++){
-        data.push(1);
+        innerData.push(1);
+        for (let j = 0; j < basicToSecondary[currentBasic[i]].length; j++) {
+            outerData.push(1);
+            outerFeelings.push(basicToSecondary[currentBasic[i]][j]);
+        }
     }
 
     let setCurrentFeelings;
     [currentFeelings, setCurrentFeelings] = useState(currentFeelings);
-    const pieData = data
+    const innerPieData = innerData
     .filter((value) => value > 0)
     .map((value, index) => ({
         value,
         svg: {
             fill: colorMapping[currentBasic[index]],
             onPress: () => {
-                console.log('pressed')
             },
         },
-        key: `pie-${index}`,
+        key: `innerPie-${index}`,
     }))
 
-    const Labels = ({ slices, height, width }) => {
+    const outerPieData = outerData
+    .filter((value) => value > 0)
+    .map((value, index) => ({
+        value,
+        svg: {
+            fill: colorMapping[outerFeelings[index]],
+            onPress: () => {
+                let pos = currentOuter.indexOf(outerFeelings[index]);
+                if (pos === -1) {
+                    setCurrentOuter(currentOuter => [...currentOuter, outerFeelings[index]]);
+                }
+                else {
+                    let updated = [];
+                    for (let i = 0; i < currentOuter.length; i++) {
+                        if (i !== pos) {
+                            updated.push(currentOuter[i]);
+                        }
+                    }
+                    setCurrentOuter(updated);
+                }
+            },
+        },
+        key: `outerPie-${index}`,
+    }))
+
+    const LabelsInner = ({ slices, height, width }) => {
         return slices.map((slice, index) => {
             let pos = currentFeelings.indexOf(basicFeelings[index]);
-            console.log(currentFeelings);
             let weight = 'normal';
             let size = 10;
             const { labelCentroid, pieCentroid, data } = slice;
@@ -57,23 +92,52 @@ export default function SecondSelection({ colorMapping, currentFeelings }){
         })
     }
 
+    const LabelsOuter = ({ slices, height, width }) => {
+        return slices.map((slice, index) => {
+            let pos = currentOuter.indexOf(outerFeelings[index]);
+            let weight = 'normal';
+            let size = 10;
+            if (pos !== -1) {
+                weight = 'bold';
+                size = 14;
+            }
+            const { labelCentroid, pieCentroid, data } = slice;
+            return (
+                <Text
+                    key={index}
+                    x={labelCentroid[ 0 ]}
+                    y={labelCentroid[ 1 ]}
+                    fill={'black'}
+                    textAnchor={'middle'}
+                    alignmentBaseline={'center'}
+                    fontSize={size}
+                    fontWeight={weight}
+                    stroke={'black'}
+                    strokeWidth={0.2}
+                >
+                    {outerFeelings[index]}
+                </Text>
+            )
+        })
+    }
+
     return (
         <View style={styles.container}>
             <PieChart 
-                style={styles.innerRing} 
-                outerRadius={'4%'}
-                innerRadius={40}
-                data={pieData}
+                style={styles.outerRing} 
+                outerRadius={'42%'}
+                innerRadius={150}
+                data={outerPieData}
             >
-                <Labels/>
+                <LabelsOuter/>
             </PieChart>
             <PieChart 
-                style={styles.outerRing} 
-                outerRadius={'45%'}
-                innerRadius={100}
-                data={pieData}
+                style={styles.innerRing} 
+                outerRadius={'1.5%'}
+                innerRadius={58}
+                data={innerPieData}
             >
-                <Labels/>
+                <LabelsInner/>
             </PieChart>
         </View>
     )
@@ -88,13 +152,13 @@ const styles = StyleSheet.create({
       height: '100%'
     },
     innerRing: {
-        height: 200,
-        width: 200,
+        height: 300,
+        width: 300,
         position: 'relative'
     },
     outerRing: {
-        height: 200,
-        width: 200,
+        height: 300,
+        width: 300,
         position: 'absolute',
         x: 0,
         y: 0

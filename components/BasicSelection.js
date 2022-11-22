@@ -10,9 +10,8 @@ function check(value) {
         return value !== this;
 }
 
-export default function BasicSelection({ colorMapping, currentFeelings }){
-    let setCurrentFeelings;
-    [currentFeelings, setCurrentFeelings] = useState(currentFeelings);
+export default function BasicSelection({ colorMapping }){
+    let [currentFeelings, setCurrentFeelings] = useState([]);
     const pieData = data
     .filter((value) => value > 0)
     .map((value, index) => ({
@@ -25,7 +24,13 @@ export default function BasicSelection({ colorMapping, currentFeelings }){
                     setCurrentFeelings(currentFeelings => [...currentFeelings, basicFeelings[index]]);
                 }
                 else {
-                    setCurrentFeelings(currentFeelings => currentFeelings.filter(check, basicFeelings[index]));
+                    let updated = [];
+                    for (let i = 0; i < currentFeelings.length; i++) {
+                        if (i !== pos) {
+                            updated.push(currentFeelings[i]);
+                        }
+                    }
+                    setCurrentFeelings(updated);
                 }
             },
         },
@@ -35,7 +40,6 @@ export default function BasicSelection({ colorMapping, currentFeelings }){
     const Labels = ({ slices, height, width }) => {
         return slices.map((slice, index) => {
             let pos = currentFeelings.indexOf(basicFeelings[index]);
-            console.log(currentFeelings);
             let weight = 'normal';
             let size = 12;
             if (pos !== -1) {
@@ -64,9 +68,9 @@ export default function BasicSelection({ colorMapping, currentFeelings }){
 
     return (
         <PieChart 
-            style={{ height: 200, width: 200 }} 
+            style={{ height: 300, width: 300 }} 
             outerRadius={'4%'}
-            innerRadius={100}
+            innerRadius={150}
             data={pieData}
         >
             <Labels/>
