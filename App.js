@@ -14,7 +14,7 @@ const mapping = colorMapping;
 export default function App() {
   return (
     <View style={styles.container}>
-      <SecondSelection colorMapping={mapping} currentFeelings={['sad', 'anxious', 'joyful']}/>
+      <HowDoYouFeel/>
     </View>
   );
 }

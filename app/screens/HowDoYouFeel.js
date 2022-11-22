@@ -2,7 +2,7 @@ import { ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, T
 export default function HowDoYouFeel() {
 
 return (
-<SafeAreaView>
+<SafeAreaView style={styles.container}>
     <Text style={styles.title}> How do you feel? </Text>
     <Text style={styles.subtitle}> (select all that apply) </Text>
     {/* replace with emotion component */}
@@ -19,6 +19,12 @@ return (
 }
 
 const styles = StyleSheet.create({
+    container:{
+        height: '100%',
+        width: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
     title: {
         fontSize: 30,
         textAlign: 'center',
