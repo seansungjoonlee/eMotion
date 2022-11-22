@@ -1,15 +1,16 @@
 import { ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+import BasicSelection from '../../components/BasicSelection';
+
 export default function HowDoYouFeel() {
 
 return (
-<SafeAreaView>
+<SafeAreaView style={styles.container}>
     <Text style={styles.title}> How do you feel? </Text>
     <Text style={styles.subtitle}> (select all that apply) </Text>
     {/* replace with emotion component */}
-    <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>emotion</Text>
-        {/* include on press */}
-    </TouchableOpacity>
+    <BasicSelection>
+        
+    </BasicSelection>
     <TouchableOpacity style = {styles.selectButton}>
         <Text style = {styles.buttonText}> Select</Text>
     </TouchableOpacity>
@@ -19,6 +20,12 @@ return (
 }
 
 const styles = StyleSheet.create({
+    container:{
+        height: '100%',
+        width: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
     title: {
         fontSize: 30,
         textAlign: 'center',

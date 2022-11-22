@@ -1,4 +1,5 @@
 import { TextInput, StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import SecondSelection from '../../components/SecondSelection';
 export default function CareToElaborate() {
 
 return (

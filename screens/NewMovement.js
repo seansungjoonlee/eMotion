@@ -1,30 +1,32 @@
-import { ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
-export default function HowDoYouFeel() {
+import { TextInput, StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import SecondSelection from '../../components/SecondSelection';
+export default function CareToElaborate() {
 
 return (
-<SafeAreaView style={styles.container}>
-    <Text style={styles.title}> How do you feel? </Text>
-    <Text style={styles.subtitle}> (select all that apply) </Text>
+<>
+<SafeAreaView>
+    <Text style={styles.title}> Starting New Movement </Text>
+    <Text>You got this!</Text>
     {/* replace with emotion component */}
     <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>emotion</Text>
         {/* include on press */}
     </TouchableOpacity>
+
     <TouchableOpacity style = {styles.selectButton}>
-        <Text style = {styles.buttonText}> Select</Text>
+        <Text style = {styles.buttonText}> New Movement</Text>
     </TouchableOpacity>
 </SafeAreaView>
 
+<View style={styles.menu}>
+    <Image source={require('../../assets/profile.png')}></Image>
+    <Image source={require('../../assets/shared.png')}></Image>
+</View>
+</>
 );
 }
 
 const styles = StyleSheet.create({
-    container:{
-        height: '100%',
-        width: '100%',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
     title: {
         fontSize: 30,
         textAlign: 'center',
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
      },
     // take out
     buttonText: {
-        fontSize: 30
+        fontSize: 25
     },  
     selectButton: {
         alignItems: 'center',
@@ -57,5 +59,8 @@ const styles = StyleSheet.create({
         witdh: 100,
         height: 70,
         borderRadius: 10
-     },   
+     },
+     menu: {
+        flexDirection: 'row' 
+     }
 });

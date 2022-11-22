@@ -1,4 +1,5 @@
 import { ImageBackground, StyleSheet, Text, Image, View, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+
 export default function Start() {
 
 return (

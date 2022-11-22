@@ -1,28 +1,27 @@
-import { TextInput, StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import { TextInput, StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import SecondSelection from '../../components/SecondSelection';
 export default function CareToElaborate() {
 
 return (
+<>
 <SafeAreaView>
-    <Text style={styles.title}> Care to elaborate? </Text>
-    <Text style={styles.subtitle}> (select all that apply) </Text>
+    <Text style={styles.title}> Current eMotion </Text>
     {/* replace with emotion component */}
     <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>emotion</Text>
         {/* include on press */}
     </TouchableOpacity>
 
-    <TextInput
-        style={styles.other}
-      //  onChangeText={onChangeNumber}
-      //  value={number}
-        placeholder="Other"
-      />
-
     <TouchableOpacity style = {styles.selectButton}>
-        <Text style = {styles.buttonText}> Select</Text>
+        <Text style = {styles.buttonText}> New Movement</Text>
     </TouchableOpacity>
 </SafeAreaView>
 
+<View style={styles.menu}>
+    <Image source={require('../../assets/profile.png')}></Image>
+    <Image source={require('../../assets/shared.png')}></Image>
+</View>
+</>
 );
 }
 
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
      },
     // take out
     buttonText: {
-        fontSize: 30
+        fontSize: 25
     },  
     selectButton: {
         alignItems: 'center',
@@ -60,8 +59,7 @@ const styles = StyleSheet.create({
         height: 70,
         borderRadius: 10
      },
-     other: {
-        color: 'black',
-        fontSize: 30,
+     menu: {
+        flexDirection: 'row' 
      }
 });
