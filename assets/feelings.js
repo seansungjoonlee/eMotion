@@ -32,4 +32,13 @@ colorMapping["surprised2"] = blend_colors(colorMapping["surprised"], colorMappin
 colorMapping["surprised3"] = blend_colors(colorMapping["surprised"], colorMapping["joyful"], 0.1);
 colorMapping["surprised4"] = blend_colors(colorMapping["surprised"], colorMapping["joyful"], 0.3);
 
-export default colorMapping;
+
+const basicFeelings = ['joyful', 'anxious', 'angry', 'sad', 'surprised'];
+
+const basicToSecondary = {"joyful": ["joyful1","joyful2","joyful3","joyful4"], 
+                        "anxious": ["anxious1","anxious2","anxious3","anxious4"],
+                        "angry": ["angry1","angry2","angry3","angry4"],
+                        "sad": ["sad1","sad2","sad3","sad4"],
+                        "surprised": ["surprised1","surprised2","surprised3","surprised4"],};
+                        
+export { colorMapping, basicFeelings, basicToSecondary };

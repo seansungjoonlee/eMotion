@@ -2,19 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native';
 import { PieChart } from 'react-native-svg-charts'
 import { G, Circle, Text } from 'react-native-svg';
+import { basicFeelings, basicToSecondary, colorMapping } from '../assets/feelings.js';
 
-const basicFeelings = ["joyful", "anxious", "angry", "sad", "surprised"];
-const basicToSecondary = {"joyful": ["joyful1","joyful2","joyful3","joyful4"], 
-                        "anxious": ["anxious1","anxious2","anxious3","anxious4"],
-                        "angry": ["angry1","angry2","angry3","angry4"],
-                        "sad": ["sad1","sad2","sad3","sad4"],
-                        "surprised": ["surprised1","surprised2","surprised3","surprised4"],}
 
 function check(value) {
         return value !== this;
 }
 
-export default function SecondSelection({ colorMapping, currentFeelings }){
+export default function SecondSelection({ currentFeelings }){
     let [currentOuter, setCurrentOuter] = useState([]);
     const currentBasic = currentFeelings;
     let innerData = [];

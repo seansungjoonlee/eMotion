@@ -1,10 +1,18 @@
 import { Text, View, StyleSheet, Image } from 'react-native';
 import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
+import { colorMapping, basicFeelings, basicToSecondary } from '../assets/feelings.js';
 
-function getStops(feelings, colorMapping) {
+function getStops(feelings) {
     let colors = [];
-    for(let i = 0; i < feelings.length; i++){
-        colors.push(colorMapping[feelings[i]]);
+    for(let i = 0; i < basicFeelings.length; i++){
+        if (feelings.indexOf(basicFeelings[i]) > -1) {
+            colors.push(colorMapping[basicFeelings[i]]);
+            for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
+                if (feelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
+                    colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
+                }
+            }
+        }
     }
     colors.push('white');
     let stops = [];
@@ -18,7 +26,7 @@ function getStops(feelings, colorMapping) {
     return stops;
 }
 
-export default function Emotion({ feelings, size, colorMapping }) {
+export default function Emotion({ feelings, size }) {
     const stops = getStops(feelings, colorMapping);
     size = size.toString();
     return (

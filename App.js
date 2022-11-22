@@ -5,16 +5,14 @@ import SecondSelection from './components/SecondSelection';
 import Start from './app/screens/Start';
 import HowDoYouFeel from './app/screens/HowDoYouFeel';
 import CareToElaborate from './app/screens/CareToElaborate';
-import colorMapping from './assets/colorMapping';
+import colorMapping from './assets/feelings';
 
 const mapping = colorMapping;
-
-
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <HowDoYouFeel/>
+      <Emotion feelings={['joyful', 'angry', 'joyful1', 'joyful4', 'angry1', 'anxious', 'anxious3']} size={100}/>
     </View>
   );
 }

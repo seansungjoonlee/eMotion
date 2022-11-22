@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native';
 import { PieChart } from 'react-native-svg-charts'
 import { G, Circle, Text } from 'react-native-svg';
+import { basicFeelings, basicToSecondary, colorMapping } from '../assets/feelings.js';
 
 const data = [1, 1, 1, 1, 1];
-const basicFeelings = ["joyful", "anxious", "angry", "sad", "surprised"];
-
 function check(value) {
         return value !== this;
 }
 
-export default function BasicSelection({ colorMapping }){
+export default function BasicSelection(){
     let [currentFeelings, setCurrentFeelings] = useState([]);
     const pieData = data
     .filter((value) => value > 0)
