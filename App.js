@@ -2,19 +2,16 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import Emotion from './components/Emotion';
 import BasicSelection from './components/BasicSelection';
 import SecondSelection from './components/SecondSelection';
-import Start from './app/screens/Start';
-import HowDoYouFeel from './app/screens/HowDoYouFeel';
-import CareToElaborate from './app/screens/CareToElaborate';
-import colorMapping from './assets/feelings';
+import Start from './screens/Start';
+import HowDoYouFeel from './screens/HowDoYouFeel';
+import CareToElaborate from './screens/CareToElaborate';
 import SuggestedMotions from './components/SuggestedMotions';
-
-const mapping = colorMapping;
+import { NavigationContainer } from './node_modules/@react-navigation/native';
+import Freestyle from './components/Freestyle';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <HowDoYouFeel/>
-    </SafeAreaView>
+    <Freestyle/>
   );
 }
 
@@ -26,5 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
     width: '100%',
+    borderWidth: 3,
+    borderColor: 'red'
   },
 });

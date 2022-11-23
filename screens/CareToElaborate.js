@@ -1,44 +1,56 @@
-import { TextInput, StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
-import SecondSelection from '../../components/SecondSelection';
-export default function CareToElaborate() {
+import { TextInput, View, StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import Emotion from '../components/Emotion';
+import SecondSelection from '../components/SecondSelection';
+import BasicSelection from '../components/BasicSelection';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
-return (
-<SafeAreaView>
-    <Text style={styles.title}> Care to elaborate? </Text>
-    <Text style={styles.subtitle}> (select all that apply) </Text>
-    {/* replace with emotion component */}
-    <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>emotion</Text>
-        {/* include on press */}
-    </TouchableOpacity>
+export default function CareToElaborate({ route }) {
+    let { currentFeelings } = route.params;
+    const [currentSecondary, setCurrentSecondary] = useState([]);
+    const navigator = useNavigation();
+    return (
+    <SafeAreaView style={styles.container}>
+        <Text style={styles.title}> Care to elaborate? </Text>
+        <Text style={styles.subtitle}> (select all that apply) </Text>
+        {/* replace with emotion component */}
+        <View style={styles.selector}>
+            <SecondSelection currentFeelings={currentFeelings} currentSecondary={currentSecondary} setCurrentSecondary={setCurrentSecondary}/>
+        </View>
 
-    <TextInput
-        style={styles.other}
-      //  onChangeText={onChangeNumber}
-      //  value={number}
-        placeholder="Other"
-      />
+        <TextInput
+            style={styles.other}
+        //  onChangeText={onChangeNumber}
+        //  value={number}
+            placeholder="Other"
+        />
 
-    <TouchableOpacity style = {styles.selectButton}>
-        <Text style = {styles.buttonText}> Select</Text>
-    </TouchableOpacity>
-</SafeAreaView>
-
-);
+        <TouchableOpacity style = {styles.selectButton}    
+            onPress={() => navigator.navigate('PlaceHolderScreen',{basicFeelings: currentFeelings, secondaryFeelings: currentSecondary})}>
+            <Text style = {styles.buttonText}> Select</Text>
+        </TouchableOpacity>
+    </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
+    container:{
+        height: '100%',
+        width: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
     title: {
         fontSize: 30,
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 50
+        paddingTop: 20
     },
     subtitle: {
         fontSize: 20,
         textAlign: 'center',
-        paddingTop: 10,
-        paddingBottom: 50
+        paddingTop: 8,
+        paddingBottom: 20
     },
     button: {
         justifyContent: 'center',
@@ -56,7 +68,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'lightgrey',
         padding: 20,
-        margin: 100,
+        margin: 20,
         witdh: 100,
         height: 70,
         borderRadius: 10
@@ -64,5 +76,8 @@ const styles = StyleSheet.create({
      other: {
         color: 'black',
         fontSize: 30,
-     }
+     },
+     selector: {
+        height: 300,
+     },
 });

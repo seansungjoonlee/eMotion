@@ -5,12 +5,8 @@ import { G, Circle, Text } from 'react-native-svg';
 import { basicFeelings, basicToSecondary, colorMapping } from '../assets/feelings.js';
 
 const data = [1, 1, 1, 1, 1];
-function check(value) {
-        return value !== this;
-}
 
-export default function BasicSelection(){
-    let [currentFeelings, setCurrentFeelings] = useState([]);
+export default function BasicSelection({ currentFeelings, setCurrentFeelings }){
     const pieData = data
     .filter((value) => value > 0)
     .map((value, index) => ({

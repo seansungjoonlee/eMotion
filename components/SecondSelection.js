@@ -9,8 +9,7 @@ function check(value) {
         return value !== this;
 }
 
-export default function SecondSelection({ currentFeelings }){
-    let [currentOuter, setCurrentOuter] = useState([]);
+export default function SecondSelection({ currentFeelings, currentSecondary, setCurrentSecondary }){
     const currentBasic = currentFeelings;
     let innerData = [];
     let outerData = [];
@@ -23,8 +22,6 @@ export default function SecondSelection({ currentFeelings }){
         }
     }
 
-    let setCurrentFeelings;
-    [currentFeelings, setCurrentFeelings] = useState(currentFeelings);
     const innerPieData = innerData
     .filter((value) => value > 0)
     .map((value, index) => ({
@@ -44,18 +41,18 @@ export default function SecondSelection({ currentFeelings }){
         svg: {
             fill: colorMapping[outerFeelings[index]],
             onPress: () => {
-                let pos = currentOuter.indexOf(outerFeelings[index]);
+                let pos = currentSecondary.indexOf(outerFeelings[index]);
                 if (pos === -1) {
-                    setCurrentOuter(currentOuter => [...currentOuter, outerFeelings[index]]);
+                    setCurrentSecondary(currentSecondary => [...currentSecondary, outerFeelings[index]]);
                 }
                 else {
                     let updated = [];
-                    for (let i = 0; i < currentOuter.length; i++) {
+                    for (let i = 0; i < currentSecondary.length; i++) {
                         if (i !== pos) {
-                            updated.push(currentOuter[i]);
+                            updated.push(currentSecondary[i]);
                         }
                     }
-                    setCurrentOuter(updated);
+                    setCurrentSecondary(updated);
                 }
             },
         },
@@ -89,7 +86,7 @@ export default function SecondSelection({ currentFeelings }){
 
     const LabelsOuter = ({ slices, height, width }) => {
         return slices.map((slice, index) => {
-            let pos = currentOuter.indexOf(outerFeelings[index]);
+            let pos = currentSecondary.indexOf(outerFeelings[index]);
             let weight = 'normal';
             let size = 10;
             if (pos !== -1) {
