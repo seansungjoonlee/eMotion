@@ -7,11 +7,19 @@ import HowDoYouFeel from './screens/HowDoYouFeel';
 import CareToElaborate from './screens/CareToElaborate';
 import SuggestedMotions from './components/SuggestedMotions';
 import { NavigationContainer } from './node_modules/@react-navigation/native';
-import Freestyle from './components/Freestyle';
+import { createStackNavigator } from '@react-navigation/stack';
+import PlaceHolderScreen from './screens/PlaceHolderScreen';
 
 export default function App() {
-  return (
-    <Freestyle/>
+  const Stack = createStackNavigator();
+  return (  
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />
+        <Stack.Screen options={{headerShown: false}} name="CareToElaborate" component={CareToElaborate} />
+        <Stack.Screen options={{headerShown: false}} name="PlaceHolderScreen" component={PlaceHolderScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
