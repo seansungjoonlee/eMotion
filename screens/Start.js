@@ -1,20 +1,23 @@
 import { ImageBackground, StyleSheet, Text, Image, View, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import HowDoYouFeel from './HowDoYouFeel';
 
 export default function Start() {
 
-return (
-<SafeAreaView>
-    <Text style={styles.title}> eMotion </Text>
-    <Text style={styles.subtitle}> feel your workouts! </Text>
-    {/* replace with emotion component */}
-    <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>click to begin</Text>
-        {/* include on press */}
-    </TouchableOpacity>
+    const navigator = useNavigation();
+    return (
+        <SafeAreaView>
+            <Text style={styles.title}> eMotion </Text>
+            <Text style={styles.subtitle}> feel your workouts! </Text>
+            {/* replace with emotion component */}
+            <TouchableOpacity style={styles.button} onPress={() => navigator.navigate('HowDoYouFeel')}>
+                <Text style={styles.buttonText}>click to begin</Text>
+                {/* include on press */}
+            </TouchableOpacity>
 
-</SafeAreaView>
+        </SafeAreaView>
 
-);
+    );
 }
 
 const styles = StyleSheet.create({

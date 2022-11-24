@@ -4,6 +4,7 @@ import SecondSelection from '../components/SecondSelection';
 import BasicSelection from '../components/BasicSelection';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import React from 'react';
 
 export default function CareToElaborate({ route }) {
     let { basic, setBasic } = route.params;
@@ -26,7 +27,17 @@ export default function CareToElaborate({ route }) {
         />
 
         <TouchableOpacity style = {styles.selectButton}    
-            onPress={() => navigator.navigate('CurrentEmotion',{basicFeelings: basic, secondaryFeelings: secondary, setSecondary: setSecondary, setBasic: setBasic})}>
+            onPress={() => {
+                    let newFeelings = [];
+                    for (let i = 0; i < basic.length; i++) {
+                        newFeelings.push(basic[i]);
+                    }
+                    for (let i = 0; i < secondary.length; i++) {
+                        newFeelings.push(secondary[i]);
+                    }
+                    navigator.navigate('CurrentEmotion',{newFeelings:newFeelings, setSecondary: setSecondary, setBasic: setBasic })   
+            }
+            }>
             <Text style = {styles.buttonText}> Select</Text>
         </TouchableOpacity>
     </SafeAreaView>

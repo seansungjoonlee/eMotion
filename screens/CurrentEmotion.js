@@ -7,18 +7,8 @@ let feelings = [];
 
 export default function CurrentEmotion({ route }) {
     const navigator = useNavigation();
-    const { basicFeelings, secondaryFeelings, setBasic, setSecondary } = route.params;
-    let newFeelings = [];
-    for (let i = 0; i < basicFeelings.length; i++){
-        if (newFeelings.indexOf(basicFeelings[i]) === -1) {
-            newFeelings.push(basicFeelings[i]);
-        }
-    }
-    for (let i = 0; i < secondaryFeelings.length; i++){
-        if (newFeelings.indexOf(secondaryFeelings[i]) === -1) {
-            newFeelings.push(secondaryFeelings[i]);
-        }
-    }
+    const { newFeelings, setBasic, setSecondary } = route.params;
+    
     for (let i = 0; i < newFeelings.length; i++) {
         if (feelings.indexOf(newFeelings[i]) === -1) {
             feelings.push(newFeelings[i]);
