@@ -6,9 +6,7 @@ import Emotion from '../components/Emotion';
 import SuggestedMotions from '../components/SuggestedMotions';
 
 export default function ChooseMotion({ route }) {
-    const { feelings } = route.params;
-    const navigator = useNavigation();
-
+    const { feelings, setBasic, setSecondary } = route.params;
     return (
     <SafeAreaView style={styles.container}>
         <View style={styles.emotionBox}>
@@ -16,7 +14,7 @@ export default function ChooseMotion({ route }) {
         </View>
         <Text>Suggested:</Text>
         <View style={styles.suggestedBox}>
-            <SuggestedMotions currentFeelings={feelings}/>
+            <SuggestedMotions currentFeelings={feelings} setBasic={setBasic} setSecondary={setSecondary}/>
         </View>
     </SafeAreaView>
     );

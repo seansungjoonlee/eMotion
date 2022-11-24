@@ -6,9 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
 export default function CareToElaborate({ route }) {
-    let { currentBasic, setCurrentBasic } = route.params;
-    console.log(route);
-    const [currentSecondary, setCurrentSecondary] = useState([]);
+    let { basic, setBasic } = route.params;
+    const [secondary, setSecondary] = useState([]);
     const navigator = useNavigation();
     return (
     <SafeAreaView style={styles.container}>
@@ -16,7 +15,7 @@ export default function CareToElaborate({ route }) {
         <Text style={styles.subtitle}> (select all that apply) </Text>
         {/* replace with emotion component */}
         <View style={styles.selector}>
-            <SecondSelection currentBasic={currentBasic} currentSecondary={currentSecondary} setCurrentSecondary={setCurrentSecondary}/>
+            <SecondSelection basic={basic} secondary={secondary} setSecondary={setSecondary}/>
         </View>
 
         <TextInput
@@ -27,7 +26,7 @@ export default function CareToElaborate({ route }) {
         />
 
         <TouchableOpacity style = {styles.selectButton}    
-            onPress={() => navigator.navigate('CurrentEmotion',{basicFeelings: currentBasic, secondaryFeelings: currentSecondary, setCurrentSecondary: setCurrentSecondary, setCurrentBasic: setCurrentBasic})}>
+            onPress={() => navigator.navigate('CurrentEmotion',{basicFeelings: basic, secondaryFeelings: secondary, setSecondary: setSecondary, setBasic: setBasic})}>
             <Text style = {styles.buttonText}> Select</Text>
         </TouchableOpacity>
     </SafeAreaView>

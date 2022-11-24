@@ -3,7 +3,7 @@ import motionData from '../utils/motionData';
 import MotionSuggestion from './MotionSuggestion';
 
 
-function getMotions(motionData, currentFeelings){
+function getMotions(motionData, currentFeelings, setBasic, setSecondary){
   let motions = {};
     for (let i = 0; i < motionData.length; i++) {
       let motion = motionData[i];
@@ -23,8 +23,11 @@ function getMotions(motionData, currentFeelings){
   for (const motion in motions) {
     motionList.push({
       name: motion,
-      feelings: motions[motion],
-      key: motion
+      motionFeelings: motions[motion],
+      allFeelings: currentFeelings,
+      key: motion,
+      setBasic: setBasic,
+      setSecondary: setSecondary
     });
   }
   return motionList;
@@ -33,13 +36,16 @@ function getMotions(motionData, currentFeelings){
 const renderMotionSuggestion = ({ item, index }) => (
   <MotionSuggestion
     name = {item.name}
-    feelings= {item.feelings}
+    motionFeelings = {item.motionFeelings}
+    allFeelings = {item.allFeelings}
+    setBasic={item.setBasic}
+    setSecondary={item.setSecondary}
   />
 );
 
 
-export default function SuggestedMotions({ currentFeelings }) {
-  const motions = getMotions(motionData, currentFeelings);
+export default function SuggestedMotions({ currentFeelings, setBasic, setSecondary }) {
+  const motions = getMotions(motionData, currentFeelings, setBasic, setSecondary);
   return (
     <View style={styles.container}>
       <FlatList

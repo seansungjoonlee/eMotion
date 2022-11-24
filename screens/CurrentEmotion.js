@@ -5,10 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 
 let feelings = [];
 
-
 export default function CurrentEmotion({ route }) {
     const navigator = useNavigation();
-    const { basicFeelings, secondaryFeelings, setCurrentBasic, setCurrentSecondary } = route.params;
+    const { basicFeelings, secondaryFeelings, setBasic, setSecondary } = route.params;
     let newFeelings = [];
     for (let i = 0; i < basicFeelings.length; i++){
         if (newFeelings.indexOf(basicFeelings[i]) === -1) {
@@ -21,22 +20,22 @@ export default function CurrentEmotion({ route }) {
         }
     }
     for (let i = 0; i < newFeelings.length; i++) {
-        if (feelings.indexOf(newFeelings) === -1) {
+        if (feelings.indexOf(newFeelings[i]) === -1) {
             feelings.push(newFeelings[i]);
         }
     }
-    console.log(feelings);
+    console.log(route);
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}> Current eMotion </Text>
             <Pressable style={styles.emotionBox} onPress = {() => {
-                setCurrentBasic([]);
-                setCurrentSecondary([]);
+                setBasic([]);
+                setSecondary([]);
                 navigator.navigate('HowDoYouFeel')}}>
                 <Emotion feelings={feelings}/>
             </Pressable>
 
-            <TouchableOpacity style = {styles.selectButton} onPress={() => navigator.navigate('ChooseMotion', {feelings: feelings})}>
+            <TouchableOpacity style = {styles.selectButton} onPress={() => navigator.navigate('ChooseMotion', {feelings: feelings, setBasic:setBasic, setSecondary:setSecondary})}>
                 <Text style = {styles.buttonText}> New Movement</Text>
             </TouchableOpacity>
             <View style={styles.menu}>

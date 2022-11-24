@@ -9,15 +9,15 @@ function check(value) {
         return value !== this;
 }
 
-export default function SecondSelection({ currentBasic, currentSecondary, setCurrentSecondary }){
+export default function SecondSelection({ basic, secondary, setSecondary }){
     let innerData = [];
     let outerData = [];
     let outerFeelings = [];
-    for(let i = 0; i < currentBasic.length; i++){
+    for(let i = 0; i < basic.length; i++){
         innerData.push(1);
-        for (let j = 0; j < basicToSecondary[currentBasic[i]].length; j++) {
+        for (let j = 0; j < basicToSecondary[basic[i]].length; j++) {
             outerData.push(1);
-            outerFeelings.push(basicToSecondary[currentBasic[i]][j]);
+            outerFeelings.push(basicToSecondary[basic[i]][j]);
         }
     }
 
@@ -26,7 +26,7 @@ export default function SecondSelection({ currentBasic, currentSecondary, setCur
     .map((value, index) => ({
         value,
         svg: {
-            fill: colorMapping[currentBasic[index]],
+            fill: colorMapping[basic[index]],
             onPress: () => {
             },
         },
@@ -40,18 +40,18 @@ export default function SecondSelection({ currentBasic, currentSecondary, setCur
         svg: {
             fill: colorMapping[outerFeelings[index]],
             onPress: () => {
-                let pos = currentSecondary.indexOf(outerFeelings[index]);
+                let pos = secondary.indexOf(outerFeelings[index]);
                 if (pos === -1) {
-                    setCurrentSecondary(currentSecondary => [...currentSecondary, outerFeelings[index]]);
+                    setSecondary(secondary => [...secondary, outerFeelings[index]]);
                 }
                 else {
                     let updated = [];
-                    for (let i = 0; i < currentSecondary.length; i++) {
+                    for (let i = 0; i < secondary.length; i++) {
                         if (i !== pos) {
-                            updated.push(currentSecondary[i]);
+                            updated.push(secondary[i]);
                         }
                     }
-                    setCurrentSecondary(updated);
+                    setSecondary(updated);
                 }
             },
         },
@@ -60,7 +60,7 @@ export default function SecondSelection({ currentBasic, currentSecondary, setCur
 
     const LabelsInner = ({ slices, height, width }) => {
         return slices.map((slice, index) => {
-            let pos = currentBasic.indexOf(basicFeelings[index]);
+            let pos = basic.indexOf(basicFeelings[index]);
             let weight = 'normal';
             let size = 10;
             const { labelCentroid, pieCentroid, data } = slice;
@@ -77,7 +77,7 @@ export default function SecondSelection({ currentBasic, currentSecondary, setCur
                     stroke={'black'}
                     strokeWidth={0.2}
                 >
-                    {currentBasic[index]}
+                    {basic[index]}
                 </Text>
             )
         })
@@ -85,7 +85,7 @@ export default function SecondSelection({ currentBasic, currentSecondary, setCur
 
     const LabelsOuter = ({ slices, height, width }) => {
         return slices.map((slice, index) => {
-            let pos = currentSecondary.indexOf(outerFeelings[index]);
+            let pos = secondary.indexOf(outerFeelings[index]);
             let weight = 'normal';
             let size = 10;
             if (pos !== -1) {
