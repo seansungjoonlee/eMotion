@@ -36,7 +36,7 @@ export default function CurrentEmotion({ route }) {
                 <Emotion feelings={feelings}/>
             </Pressable>
 
-            <TouchableOpacity style = {styles.selectButton}>
+            <TouchableOpacity style = {styles.selectButton} onPress={() => navigator.navigate('ChooseMotion', {feelings: feelings})}>
                 <Text style = {styles.buttonText}> New Movement</Text>
             </TouchableOpacity>
             <View style={styles.menu}>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     title: {
         fontSize: 30,
