@@ -6,7 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
 export default function CareToElaborate({ route }) {
-    let { currentFeelings } = route.params;
+    let { currentBasic, setCurrentBasic } = route.params;
+    console.log(route);
     const [currentSecondary, setCurrentSecondary] = useState([]);
     const navigator = useNavigation();
     return (
@@ -15,7 +16,7 @@ export default function CareToElaborate({ route }) {
         <Text style={styles.subtitle}> (select all that apply) </Text>
         {/* replace with emotion component */}
         <View style={styles.selector}>
-            <SecondSelection currentFeelings={currentFeelings} currentSecondary={currentSecondary} setCurrentSecondary={setCurrentSecondary}/>
+            <SecondSelection currentBasic={currentBasic} currentSecondary={currentSecondary} setCurrentSecondary={setCurrentSecondary}/>
         </View>
 
         <TextInput
@@ -26,7 +27,7 @@ export default function CareToElaborate({ route }) {
         />
 
         <TouchableOpacity style = {styles.selectButton}    
-            onPress={() => navigator.navigate('PlaceHolderScreen',{basicFeelings: currentFeelings, secondaryFeelings: currentSecondary})}>
+            onPress={() => navigator.navigate('CurrentEmotion',{basicFeelings: currentBasic, secondaryFeelings: currentSecondary, setCurrentSecondary: setCurrentSecondary, setCurrentBasic: setCurrentBasic})}>
             <Text style = {styles.buttonText}> Select</Text>
         </TouchableOpacity>
     </SafeAreaView>

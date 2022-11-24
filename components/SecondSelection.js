@@ -9,8 +9,7 @@ function check(value) {
         return value !== this;
 }
 
-export default function SecondSelection({ currentFeelings, currentSecondary, setCurrentSecondary }){
-    const currentBasic = currentFeelings;
+export default function SecondSelection({ currentBasic, currentSecondary, setCurrentSecondary }){
     let innerData = [];
     let outerData = [];
     let outerFeelings = [];
@@ -61,7 +60,7 @@ export default function SecondSelection({ currentFeelings, currentSecondary, set
 
     const LabelsInner = ({ slices, height, width }) => {
         return slices.map((slice, index) => {
-            let pos = currentFeelings.indexOf(basicFeelings[index]);
+            let pos = currentBasic.indexOf(basicFeelings[index]);
             let weight = 'normal';
             let size = 10;
             const { labelCentroid, pieCentroid, data } = slice;

@@ -6,7 +6,7 @@ import { basicFeelings, basicToSecondary, colorMapping } from '../assets/feeling
 
 const data = [1, 1, 1, 1, 1];
 
-export default function BasicSelection({ currentFeelings, setCurrentFeelings }){
+export default function BasicSelection({ currentBasic, setCurrentBasic }){
     const pieData = data
     .filter((value) => value > 0)
     .map((value, index) => ({
@@ -14,18 +14,18 @@ export default function BasicSelection({ currentFeelings, setCurrentFeelings }){
         svg: {
             fill: colorMapping[basicFeelings[index]],
             onPress: () => {
-                let pos = currentFeelings.indexOf(basicFeelings[index]);
+                let pos = currentBasic.indexOf(basicFeelings[index]);
                 if (pos === -1) {
-                    setCurrentFeelings(currentFeelings => [...currentFeelings, basicFeelings[index]]);
+                    setCurrentBasic(currentBasic => [...currentBasic, basicFeelings[index]]);
                 }
                 else {
                     let updated = [];
-                    for (let i = 0; i < currentFeelings.length; i++) {
+                    for (let i = 0; i < currentBasic.length; i++) {
                         if (i !== pos) {
-                            updated.push(currentFeelings[i]);
+                            updated.push(currentBasic[i]);
                         }
                     }
-                    setCurrentFeelings(updated);
+                    setCurrentBasic(updated);
                 }
             },
         },
@@ -34,7 +34,7 @@ export default function BasicSelection({ currentFeelings, setCurrentFeelings }){
 
     const Labels = ({ slices, height, width }) => {
         return slices.map((slice, index) => {
-            let pos = currentFeelings.indexOf(basicFeelings[index]);
+            let pos = currentBasic.indexOf(basicFeelings[index]);
             let weight = 'normal';
             let size = 12;
             if (pos !== -1) {

@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+import { ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
 import BasicSelection from '../components/BasicSelection';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -17,6 +17,11 @@ export default function PlaceHolderScreen({ route }) {
         <View style={styles.emotionBox}>
             <Emotion feelings={feelings}/>
         </View>
+        <Pressable>
+            <Text>
+                Start Movement
+            </Text>
+        </Pressable>
     </SafeAreaView>
 
     );

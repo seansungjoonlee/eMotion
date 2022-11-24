@@ -4,15 +4,16 @@ import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 export default function HowDoYouFeel() {
-    let [currentFeelings, setCurrentFeelings] = useState([]);
+    let [currentBasic, setCurrentBasic] = useState([]);
     const navigator = useNavigation();
+    console.log(currentBasic);
 
     let button = [];
-    if (currentFeelings.length > 0) {
+    if (currentBasic.length > 0) {
         button = [
             <TouchableOpacity 
-                style = {styles.selectButton} key={currentFeelings.length}
-                onPress={() => navigator.navigate('CareToElaborate', currentFeelings={currentFeelings})}>
+                style = {styles.selectButton} key={currentBasic.length}
+                onPress={() => navigator.navigate('CareToElaborate', { currentBasic: currentBasic, setCurrentBasic:setCurrentBasic })}>
                 <Text style = {styles.buttonText}> Select</Text>
             </TouchableOpacity>
         ]
@@ -23,7 +24,7 @@ export default function HowDoYouFeel() {
         <Text style={styles.title}> How do you feel? </Text>
         <Text style={styles.subtitle}> (select all that apply) </Text>
         {/* replace with emotion component */}
-        <BasicSelection currentFeelings={currentFeelings} setCurrentFeelings={setCurrentFeelings}/>
+        <BasicSelection currentBasic={currentBasic} setCurrentBasic={setCurrentBasic}/>
         {button}
     </SafeAreaView>
 

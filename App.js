@@ -9,6 +9,7 @@ import SuggestedMotions from './components/SuggestedMotions';
 import { NavigationContainer } from './node_modules/@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import PlaceHolderScreen from './screens/PlaceHolderScreen';
+import CurrentEmotion from './screens/CurrentEmotion';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -17,7 +18,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />
         <Stack.Screen options={{headerShown: false}} name="CareToElaborate" component={CareToElaborate} />
-        <Stack.Screen options={{headerShown: false}} name="PlaceHolderScreen" component={PlaceHolderScreen} />
+        <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
       </Stack.Navigator>
     </NavigationContainer>
   );
