@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
 import BasicSelection from '../components/BasicSelection';
 import { useState } from 'react';
 import { TabRouter, useNavigation } from '@react-navigation/native';
@@ -13,6 +13,7 @@ export default function ChooseMotion({ route }) {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
     const [guided, setGuided] = useState(true);
+    const [text, onChangeText] = useState();
 
     function guidedOptions() {
         return (
@@ -31,8 +32,15 @@ export default function ChooseMotion({ route }) {
         return (
             <View style={styles.optionsBox}>
                 <Text style={styles.label}>
-                    Searched:
+                    search for motion:
                 </Text>
+                <View style={styles.textBox}>
+                    <TextInput
+                        style={styles.buttonText}
+                        placeholder="search:"
+                        onChangeText={onChangeText}
+                    />
+                </View>
             </View>
         )
     };
@@ -114,5 +122,14 @@ const styles = StyleSheet.create({
     label: {
         marginLeft: 30,
         fontSize: 20
-    }
+    },
+    textBox: {
+        height: 40,
+        width: 250,
+        borderWidth: 1,
+        borderRadius: 100,
+        justifyContent: 'center',
+        paddingLeft: 10,
+        marginTop: 20
+     }
 });
