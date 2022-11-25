@@ -22,10 +22,6 @@ export default function CurrentEmotion() {
             <TouchableOpacity style = {styles.newMovement} onPress={() => navigator.navigate('ChooseMotion')}>
                 <Text style = {styles.buttonText}> new movement</Text>
             </TouchableOpacity>
-            <View style={styles.menu}>
-                <Image source={require('../assets/profile.png')}></Image>
-                <Image source={require('../assets/shared.png')}></Image>
-            </View>
         </SafeAreaView>
     );
 }
@@ -36,7 +32,7 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start',
         backgroundColor: Themes.background
     },
     title: {
@@ -53,18 +49,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: Themes.background,
         borderWidth: 1,
-        marginTop: 70,
+        marginTop: 50,
         marginBottom: 20,
         width: 200,
         height: 40,
         borderRadius: 1000
-     },
-     menu: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        width: '100%'
      },
      emotionBox: {
         marginTop: 30,

@@ -1,59 +1,59 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import Start from './screens/Start';
-import HowDoYouFeel from './screens/HowDoYouFeel';
-import CareToElaborate from './screens/CareToElaborate';
-import { NavigationContainer } from './node_modules/@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import DuringMotion from './screens/DuringMotion';
-import ChooseMotion from './screens/ChooseMotion';
-import CurrentEmotion from './screens/CurrentEmotion';
+import { NavigationContainer, NavigationHelpersContext } from './node_modules/@react-navigation/native';
 import React from 'react';
 import FeelingContext from './components/FeelingContext';
 import { useState } from 'react';
 import { basicFeelings, basicToSecondary, colorMapping } from './assets/feelings.js';
 import Themes from './assets/Themes.js';
+import MainTask from './components/MainTask';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Reflection from './components/Reflection';
+import Shared from './components/Shared';
+import { FontAwesome } from '@expo/vector-icons';
+import { useIsFocused } from "@react-navigation/native"; 
+import { useNavigation } from './node_modules/@react-navigation/native';
+
 
 export default function App() {
-  const Stack = createStackNavigator();
-
+  const Tab = createBottomTabNavigator();
   const [allFeelings, setAllFeelings] = useState([]);
-const [currentFeelings, setCurrentFeelings] = useState([]);
-const [newFeelings, setNewFeelings] = useState({basic:[], secondary:[]});
-const [basic, setBasic] = useState([]);
-const [motion, setMotion] = useState({name:'', feelings:[]});
+  const [currentFeelings, setCurrentFeelings] = useState([]);
+  const [newFeelings, setNewFeelings] = useState({basic:[], secondary:[]});
+  const [basic, setBasic] = useState([]);
+  const [motion, setMotion] = useState({name:'', feelings:[]});
 
-function updateAllFeelings(feelings) {
-let updated = [...allFeelings];
-for (let i = 0; i < feelings.length; i++) {
-    if (updated.indexOf(feelings[i]) === -1) {
-    updated.push(feelings[i]);
-    }
-}
-setAllFeelings(updated);
-}
+  function updateAllFeelings(feelings) {
+  let updated = [...allFeelings];
+  for (let i = 0; i < feelings.length; i++) {
+      if (updated.indexOf(feelings[i]) === -1) {
+      updated.push(feelings[i]);
+      }
+  }
+  setAllFeelings(updated);
+  }
 
-function updateNewFeelings(feelings) {
-let updated = {...newFeelings};
-for (let i = 0; i < feelings.length; i++) {
-    //basic feeling
-    if (basicFeelings.indexOf(feelings[i]) !== -1) {
-    if (updated.basic.indexOf(feelings[i]) === -1) {
-        updated.basic.push(feelings[i]);
-    }
-    }
-    //secondary feeling
-    else {
-    if (updated.secondary.indexOf(feelings[i]) === -1) {
-        updated.secondary.push(feelings[i]);
-    }
-    }
-}
-setNewFeelings(updated);
-}
+  function updateNewFeelings(feelings) {
+  let updated = {...newFeelings};
+  for (let i = 0; i < feelings.length; i++) {
+      //basic feeling
+      if (basicFeelings.indexOf(feelings[i]) !== -1) {
+      if (updated.basic.indexOf(feelings[i]) === -1) {
+          updated.basic.push(feelings[i]);
+      }
+      }
+      //secondary feeling
+      else {
+      if (updated.secondary.indexOf(feelings[i]) === -1) {
+          updated.secondary.push(feelings[i]);
+      }
+      }
+  }
+  setNewFeelings(updated);
+  }
 
-function updateMotion(name, feelings) {
-let updated = {};
-if (motion.name !== name) {
+  function updateMotion(name, feelings) {
+  let updated = {};
+  if (motion.name !== name) {
     updated.name = name;
     updated.feelings = feelings;
 } else {
@@ -79,18 +79,34 @@ setMotion(updated);
     basic: basic,
     setBasic: setBasic
   };
-  
   return (  
     <FeelingContext.Provider value={feelingSettings}>
-      <NavigationContainer style={styles.container}>
-        <Stack.Navigator>
-          <Stack.Screen options={{headerShown:false}} name="Start" component={Start} />
-          <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />
-          <Stack.Screen options={{headerShown: false}} name="CareToElaborate" component={CareToElaborate} />
-          <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
-          <Stack.Screen options={{headerShown: true}} name="ChooseMotion" component={ChooseMotion} />
-          <Stack.Screen options={{headerShown: false}} name="DuringMotion" component={DuringMotion} />
-        </Stack.Navigator>
+      <NavigationContainer>
+        <Tab.Navigator initialRouteName={'Movement'} tabBarOptions={{
+          labelStyle: { fontSize: 14 },
+        }}
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused }) => {
+            let iconName;
+            let size;
+            if (route.name === 'Reflection') {
+              iconName = 'user';
+              size = focused ? 30: 20;
+            } else if (route.name === 'Movement') {
+              iconName = 'dot-circle-o';
+              size = focused ? 30: 20;
+            } else if (route.name === 'Shared') {
+              iconName = 'users';
+              size = focused ? 30: 20;
+            }
+            return <FontAwesome name={iconName} size={size} color="black" />;
+          }
+        })}>
+
+          <Tab.Screen options={{headerShown:false}} name="Reflection" component={Reflection} />
+          <Tab.Screen options={{headerShown:false}} name="Movement" component={MainTask} />
+          <Tab.Screen options={{headerShown:false}} name="Shared" component={Shared} />
+        </Tab.Navigator>
       </NavigationContainer>
     </FeelingContext.Provider>
   );
