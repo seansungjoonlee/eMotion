@@ -30,7 +30,9 @@ export default function ChooseMotion({ route }) {
     function unguidedOptions() {
         return (
             <View style={styles.optionsBox}>
-                <Text>Searched:</Text>
+                <Text style={styles.label}>
+                    Searched:
+                </Text>
             </View>
         )
     };
@@ -110,6 +112,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     label: {
+        marginLeft: 30,
         fontSize: 20
     }
 });
