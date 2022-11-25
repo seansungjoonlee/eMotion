@@ -4,15 +4,18 @@ import { useNavigation } from '@react-navigation/native';
 import context from 'react-context';
 import { useCallback, useContext } from 'react';
 import FeelingContext from './FeelingContext';
+import { colorMapping } from '../assets/feelings';
 
 function separateEmotions(motionFeelings) {
     let emotions = [];
     for (let i = 0; i < motionFeelings.length; i++) {
-        emotions.push(
-            <View style={styles.emotionBox}>
-                <Emotion feelings={[motionFeelings[i]]}/>
-            </View>
-        )
+        if (motionFeelings[i] in colorMapping) {
+            emotions.push(
+                <View style={styles.emotionBox}>
+                    <Emotion feelings={[motionFeelings[i]]}/>
+                </View>
+            )
+        }
     }
     return emotions;
 };

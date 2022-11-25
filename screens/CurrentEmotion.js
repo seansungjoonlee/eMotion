@@ -9,6 +9,7 @@ import HowDoYouFeel from './HowDoYouFeel';
 export default function CurrentEmotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
+    console.log(context.allFeelings);
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}> Current eMotion </Text>

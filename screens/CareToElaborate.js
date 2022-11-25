@@ -11,6 +11,7 @@ export default function CareToElaborate() {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
     const [secondary, setSecondary] = useState([]);
+    const [text, onChangeText] = useState('');
     return (
     <SafeAreaView style={styles.container}>
         <Text style={styles.title}> Care to elaborate? </Text>
@@ -22,13 +23,14 @@ export default function CareToElaborate() {
 
         <TextInput
             style={styles.other}
-        //  onChangeText={onChangeNumber}
+            onChangeText={onChangeText}
         //  value={number}
             placeholder="Other"
         />
 
         <TouchableOpacity style = {styles.selectButton}    
             onPress={() => {
+                    secondary.push(text);
                     context.updateCurrentFeelings(secondary);
                     context.updateAllFeelings(context.currentFeelings.total);
                     if (context.motion.name === '') {

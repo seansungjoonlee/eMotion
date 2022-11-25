@@ -15,61 +15,62 @@ import { basicFeelings, basicToSecondary, colorMapping } from './assets/feelings
 
 export default function App() {
   const Stack = createStackNavigator();
+
   const [allFeelings, setAllFeelings] = useState([]);
-  const [currentFeelings, setCurrentFeelings] = useState({basic:[], secondary:[], total:[]});
-  const [basic, setBasic] = useState([]);
-  const [motion, setMotion] = useState({name:'', feelings:[]});
+const [currentFeelings, setCurrentFeelings] = useState({basic:[], secondary:[], total:[]});
+const [basic, setBasic] = useState([]);
+const [motion, setMotion] = useState({name:'', feelings:[]});
 
-  function newEmotion() {
-    setCurrentFeelings({basic:[], secondary:[], total:[]});
-  }
+function newEmotion() {
+setCurrentFeelings({basic:[], secondary:[], total:[]});
+}
 
-  function updateAllFeelings(feelings) {
-    let updated = [...allFeelings];
+function updateAllFeelings(feelings) {
+let updated = [...allFeelings];
+for (let i = 0; i < feelings.length; i++) {
+    if (updated.indexOf(feelings[i]) === -1) {
+    updated.push(feelings[i]);
+    }
+}
+setAllFeelings(updated);
+}
+
+function updateCurrentFeelings(feelings) {
+let updated = {...currentFeelings};
+for (let i = 0; i < feelings.length; i++) {
+    //basic feeling
+    if (basicFeelings.indexOf(feelings[i]) !== -1) {
+    if (updated.basic.indexOf(feelings[i]) === -1) {
+        updated.basic.push(feelings[i]);
+        updated.total.push(feelings[i]);
+    }
+    }
+    //secondary feeling
+    else {
+    if (updated.secondary.indexOf(feelings[i]) === -1) {
+        updated.secondary.push(feelings[i]);
+        updated.total.push(feelings[i]);
+    }
+    }
+}
+setCurrentFeelings(updated);
+}
+
+function updateMotion(name, feelings) {
+let updated = {};
+if (motion.name !== name) {
+    updated.name = name;
+    updated.feelings = feelings;
+} else {
+    updated = {...motion};
     for (let i = 0; i < feelings.length; i++) {
-      if (updated.indexOf(feelings[i]) === -1) {
-        updated.push(feelings[i]);
-      }
+    if (motion.feelings.indexOf(feelings[i]) === -1) {
+        updated.feelings.push(feelings[i]);
     }
-    setAllFeelings(updated);
-  }
-
-  function updateCurrentFeelings(feelings) {
-    let updated = {...currentFeelings};
-    for (let i = 0; i < feelings.length; i++) {
-      //basic feeling
-      if (basicFeelings.indexOf(feelings[i]) !== -1) {
-        if (updated.basic.indexOf(feelings[i]) === -1) {
-          updated.basic.push(feelings[i]);
-          updated.total.push(feelings[i]);
-        }
-      }
-      //secondary feeling
-      else {
-        if (updated.secondary.indexOf(feelings[i]) === -1) {
-          updated.secondary.push(feelings[i]);
-          updated.total.push(feelings[i]);
-        }
-      }
     }
-    setCurrentFeelings(updated);
-  }
-
-  function updateMotion(name, feelings) {
-    let updated = {};
-    if (motion.name !== name) {
-      updated.name = name;
-      updated.feelings = feelings;
-    } else {
-      updated = {...motion};
-      for (let i = 0; i < feelings.length; i++) {
-        if (motion.feelings.indexOf(feelings[i]) === -1) {
-          updated.feelings.push(feelings[i]);
-        }
-      }
-    }
-    setMotion(updated);
-  }
+}
+setMotion(updated);
+}
 
   const feelingSettings = {
     allFeelings: allFeelings,
@@ -81,8 +82,8 @@ export default function App() {
     newEmotion: newEmotion,
     basic: basic,
     setBasic: setBasic
-  }
-
+  };
+  
   return (  
     <FeelingContext.Provider value={feelingSettings}>
       <NavigationContainer style={styles.container}>
