@@ -2,17 +2,21 @@ import { ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, T
 import BasicSelection from '../components/BasicSelection';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import FeelingContext from '../components/FeelingContext';
+import React, { useContext } from 'react';
 
 export default function HowDoYouFeel() {
-    let [basic, setBasic] = useState([]);
+    const context = useContext(FeelingContext);
     const navigator = useNavigation();
+    console.log(context);
+
 
     let button = [];
-    if (basic.length > 0) {
+    if (context.basic.length > 0) {
         button = [
             <TouchableOpacity 
-                style = {styles.selectButton} key={basic.length}
-                onPress={() => navigator.navigate('CareToElaborate', { basic: basic, setBasic:setBasic })}>
+                style = {styles.selectButton} key={context.basic.length}
+                onPress={() => navigator.navigate('CareToElaborate')}>
                 <Text style = {styles.buttonText}> Select</Text>
             </TouchableOpacity>
         ]
@@ -23,7 +27,7 @@ export default function HowDoYouFeel() {
         <Text style={styles.title}> How do you feel? </Text>
         <Text style={styles.subtitle}> (select all that apply) </Text>
         {/* replace with emotion component */}
-        <BasicSelection basic={basic} setBasic={setBasic}/>
+        <BasicSelection basic={context.basic} setBasic={context.setBasic}/>
         {button}
     </SafeAreaView>
 

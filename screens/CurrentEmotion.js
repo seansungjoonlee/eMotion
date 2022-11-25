@@ -2,30 +2,23 @@ import { TextInput, StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacit
 import Emotion from '../components/Emotion';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import FeelingContext from '../components/FeelingContext';
+import React, { useContext } from 'react';
 
-let feelings = [];
-
-export default function CurrentEmotion({ route }) {
+export default function CurrentEmotion() {
     const navigator = useNavigation();
-    const { newFeelings, setBasic, setSecondary } = route.params;
-    
-    for (let i = 0; i < newFeelings.length; i++) {
-        if (feelings.indexOf(newFeelings[i]) === -1) {
-            feelings.push(newFeelings[i]);
-        }
-    }
-    console.log(route);
+    const context = useContext(FeelingContext);
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}> Current eMotion </Text>
             <Pressable style={styles.emotionBox} onPress = {() => {
-                setBasic([]);
-                setSecondary([]);
+                context.setBasic([]);
+                context.setSecondary([]);
                 navigator.navigate('HowDoYouFeel')}}>
-                <Emotion feelings={feelings}/>
+                <Emotion feelings={context.allFeelings}/>
             </Pressable>
 
-            <TouchableOpacity style = {styles.selectButton} onPress={() => navigator.navigate('ChooseMotion', {feelings: feelings, setBasic:setBasic, setSecondary:setSecondary})}>
+            <TouchableOpacity style = {styles.selectButton} onPress={() => navigator.navigate('ChooseMotion')}>
                 <Text style = {styles.buttonText}> New Movement</Text>
             </TouchableOpacity>
             <View style={styles.menu}>

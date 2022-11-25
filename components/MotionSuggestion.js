@@ -1,6 +1,9 @@
 import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-native';
 import Emotion from './Emotion';
 import { useNavigation } from '@react-navigation/native';
+import context from 'react-context';
+import { useCallback, useContext } from 'react';
+import FeelingContext from './FeelingContext';
 
 function separateEmotions(motionFeelings) {
     let emotions = [];
@@ -14,11 +17,14 @@ function separateEmotions(motionFeelings) {
     return emotions;
 };
 
-export default function MotionSuggestion({ name, motionFeelings, allFeelings, setBasic, setSecondary }) {
+export default function MotionSuggestion({ name, motionFeelings }) {
     const navigator = useNavigation();
+    const context = useContext(FeelingContext);
     let emotions = separateEmotions(motionFeelings);
     return (
-        <Pressable style={styles.motion} onPress={() => navigator.navigate('DuringMotion', {name:name, allFeelings:allFeelings, setBasic:setBasic, setSecondary:setSecondary, newFeelings:[]})}>
+        <Pressable style={styles.motion} onPress={() => {
+            context.setMotion(name);
+            navigator.navigate('DuringMotion')}}>
             <Text style={styles.name}>{name}</Text>
             <View style={styles.basedOnText}>
                 <Text>based on: </Text>

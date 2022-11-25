@@ -7,15 +7,30 @@ import { createStackNavigator } from '@react-navigation/stack';
 import DuringMotion from './screens/DuringMotion';
 import ChooseMotion from './screens/ChooseMotion';
 import CurrentEmotion from './screens/CurrentEmotion';
-import HowDoYouFeelMotion from './screens/HowDoYouFeelMotion';
-import CareToElaborateMotion from './screens/CareToElaborateMotion';
 import React from 'react';
+import FeelingContext from './components/FeelingContext';
+import { useState } from 'react';
 
 export default function App() {
   const Stack = createStackNavigator();
+  const [allFeelings, setAllFeelings] = useState([]);
+  const [basic, setBasic] = useState([]);
+  const [secondary, setSecondary] = useState([]);
+  const [motion, setMotion] = useState('');
 
+  const feelingSettings = {
+    allFeelings: allFeelings,
+    basic: basic,
+    secondary: secondary,
+    setAllFeelings: setAllFeelings,
+    setBasic: setBasic,
+    setSecondary: setSecondary,
+    motion: motion,
+    setMotion: setMotion
+  }
 
   return (  
+    <FeelingContext.Provider value={feelingSettings}>
       <NavigationContainer style={styles.container}>
         <Stack.Navigator>
           <Stack.Screen options={{headerShown:false}} name="Start" component={Start} />
@@ -24,10 +39,9 @@ export default function App() {
           <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
           <Stack.Screen name="ChooseMotion" component={ChooseMotion} />
           <Stack.Screen name="DuringMotion" component={DuringMotion} />
-          <Stack.Screen options={{headerShown:false}} name="HowDoYouFeelMotion" component={HowDoYouFeelMotion} />
-          <Stack.Screen options={{headerShown: false}} name="CareToElaborateMotion" component={CareToElaborateMotion} />
         </Stack.Navigator>
       </NavigationContainer>
+    </FeelingContext.Provider>
   );
 }
 

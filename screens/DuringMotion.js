@@ -3,22 +3,28 @@ import { useNavigation } from "@react-navigation/native";
 import Emotion from "../components/Emotion";
 import React from "react";
 import { MotionContext } from "../App";
+import FeelingContext from '../components/FeelingContext';
+import { useContext } from 'react';
 
-export default function DuringMotion({ route }) {
+export default function DuringMotion() {
     const navigator = useNavigation();
-    const { name, allFeelings, setBasic, setSecondary, newFeelings } = route.params;
+    const context = useContext(FeelingContext);
     return (
         <SafeAreaView style={styles.container}>
             <Text>
-                motion: {name}
+                motion: {context.name}
             </Text>
             <Pressable style={styles.emotionBox} onPress = {() => {
-                setBasic([]);
-                setSecondary([]);
-                navigator.navigate('HowDoYouFeelMotion', {motion:name, allFeelings:allFeelings})}}>
-                    <Emotion feelings={allFeelings}/>
+                context.setBasic([]);
+                context.setSecondary([]);
+                navigator.navigate('HowDoYouFeel')}}>
+                    <Emotion feelings={context.allFeelings}/>
             </Pressable>
-            <Pressable style={styles.endButton} onPress={() => navigator.navigate('CurrentEmotion', {newFeelings:[], setBasic:setBasic, setSecondary:setSecondary })}>
+            <Pressable style={styles.endButton} onPress={() => 
+                {
+                    context.setMotion('');
+                    navigator.navigate('CurrentEmotion')
+                }}>
                 <Text>end motion</Text>
             </Pressable>
         </SafeAreaView>

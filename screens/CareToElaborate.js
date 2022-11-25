@@ -4,11 +4,11 @@ import SecondSelection from '../components/SecondSelection';
 import BasicSelection from '../components/BasicSelection';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import React from 'react';
+import FeelingContext from '../components/FeelingContext';
+import React, { useContext } from 'react';
 
-export default function CareToElaborate({ route }) {
-    let { basic, setBasic } = route.params;
-    const [secondary, setSecondary] = useState([]);
+export default function CareToElaborate() {
+    const context = useContext(FeelingContext);
     const navigator = useNavigation();
     return (
     <SafeAreaView style={styles.container}>
@@ -16,7 +16,7 @@ export default function CareToElaborate({ route }) {
         <Text style={styles.subtitle}> (select all that apply) </Text>
         {/* replace with emotion component */}
         <View style={styles.selector}>
-            <SecondSelection basic={basic} secondary={secondary} setSecondary={setSecondary}/>
+            <SecondSelection basic={context.basic} secondary={context.secondary} setSecondary={context.setSecondary}/>
         </View>
 
         <TextInput
@@ -29,13 +29,25 @@ export default function CareToElaborate({ route }) {
         <TouchableOpacity style = {styles.selectButton}    
             onPress={() => {
                     let newFeelings = [];
-                    for (let i = 0; i < basic.length; i++) {
-                        newFeelings.push(basic[i]);
+                    for (let i = 0; i < context.basic.length; i++) {
+                        newFeelings.push(context.basic[i]);
                     }
-                    for (let i = 0; i < secondary.length; i++) {
-                        newFeelings.push(secondary[i]);
+                    for (let i = 0; i < context.secondary.length; i++) {
+                        newFeelings.push(context.secondary[i]);
                     }
-                    navigator.navigate('CurrentEmotion',{newFeelings:newFeelings, setSecondary: setSecondary, setBasic: setBasic })   
+                    let updatedFeelings = context.allFeelings;
+                    for (let i = 0; i < newFeelings.length; i++) {
+                        if (updatedFeelings.indexOf(newFeelings[i]) === -1) {
+                            updatedFeelings.push(newFeelings[i]);
+                        }
+                    }
+                    context.setAllFeelings(updatedFeelings);
+                    if (context.motion === "") {
+                        navigator.navigate('CurrentEmotion');
+                    }
+                    else {
+                        navigator.navigate('DuringMotion');
+                    }
             }
             }>
             <Text style = {styles.buttonText}> Select</Text>
