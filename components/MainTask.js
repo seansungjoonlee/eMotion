@@ -17,6 +17,12 @@ import { useNavigation } from '@react-navigation/native';
 export default function MainTask({ navigation }) {
   const Stack = createStackNavigator();
 
+  const forFade = ({ current }) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  });
+
   React.useEffect(() => {
     const pressMovement = navigation.addListener('tabPress', (e) => {
       e.preventDefault();
@@ -27,7 +33,10 @@ export default function MainTask({ navigation }) {
   }, [navigation]);
   
   return (  
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+      cardStyleInterpolator: forFade,
+   }}>
         <Stack.Screen options={{headerShown:false}} name="Start" component={Start} />
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />
         <Stack.Screen options={{headerShown: false}} name="CareToElaborate" component={CareToElaborate} />

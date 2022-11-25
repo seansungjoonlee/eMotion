@@ -8,12 +8,14 @@ import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import Themes from '../assets/Themes';
 import { MaterialIcons } from '@expo/vector-icons'; 
+import SearchedMotions from '../components/SearchedMotions';
 
 export default function ChooseMotion({ route }) {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
     const [guided, setGuided] = useState(true);
-    const [text, onChangeText] = useState();
+    const [text, setText] = useState("");
+    console.log(text);
 
     function guidedOptions() {
         return (
@@ -38,8 +40,12 @@ export default function ChooseMotion({ route }) {
                     <TextInput
                         style={styles.buttonText}
                         placeholder="search:"
-                        onChangeText={onChangeText}
+                        onSubmitEditing={(event) => setText( event.nativeEvent.text
+                        )}
                     />
+                </View>
+                <View style={styles.searchedBox}>
+                    <SearchedMotions searched={text}/>
                 </View>
             </View>
         )
@@ -113,14 +119,14 @@ const styles = StyleSheet.create({
     },
     optionsBox: {
         height: '60%',
-        width: '100%'
+        width: '100%',
+        alignItems: 'center'
     },
     suggestedBox: {
         height: '79%',
         width: '100%'
     },
     label: {
-        marginLeft: 30,
         fontSize: 20
     },
     textBox: {
@@ -131,5 +137,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 10,
         marginTop: 20
-     }
+     },
+     searchedBox: {
+        height: '62%',
+        width: '100%',
+    },
 });

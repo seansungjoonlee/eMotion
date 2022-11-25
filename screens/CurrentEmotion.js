@@ -20,7 +20,7 @@ export default function CurrentEmotion() {
             </Pressable>
 
             <TouchableOpacity style = {styles.newMovement} onPress={() => navigator.navigate('ChooseMotion')}>
-                <Text style = {styles.buttonText}> new movement</Text>
+                <Text style = {styles.buttonText}> new motion</Text>
             </TouchableOpacity>
         </SafeAreaView>
     );
