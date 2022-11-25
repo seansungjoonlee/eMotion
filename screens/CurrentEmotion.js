@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
+import HowDoYouFeel from './HowDoYouFeel';
 
 export default function CurrentEmotion() {
     const navigator = useNavigation();
@@ -12,8 +13,8 @@ export default function CurrentEmotion() {
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}> Current eMotion </Text>
             <Pressable style={styles.emotionBox} onPress = {() => {
+                context.newEmotion();
                 context.setBasic([]);
-                context.setSecondary([]);
                 navigator.navigate('HowDoYouFeel')}}>
                 <Emotion feelings={context.allFeelings}/>
             </Pressable>

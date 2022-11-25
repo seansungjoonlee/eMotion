@@ -6,7 +6,7 @@ import { basicFeelings, basicToSecondary, colorMapping } from '../assets/feeling
 
 const data = [1, 1, 1, 1, 1];
 
-export default function BasicSelection({ basic, setBasic }){
+export default function BasicSelection({ basic, setBasic }) {
     const pieData = data
     .filter((value) => value > 0)
     .map((value, index) => ({

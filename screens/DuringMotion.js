@@ -3,26 +3,31 @@ import { useNavigation } from "@react-navigation/native";
 import Emotion from "../components/Emotion";
 import React from "react";
 import { MotionContext } from "../App";
+import { useState } from "react";
 import FeelingContext from '../components/FeelingContext';
 import { useContext } from 'react';
 
 export default function DuringMotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
+    let [currentMotion, updateCurrentMotion] = useState([]);
     return (
         <SafeAreaView style={styles.container}>
             <Text>
-                motion: {context.name}
+                motion: {context.motion.name}
             </Text>
             <Pressable style={styles.emotionBox} onPress = {() => {
+                context.newEmotion();
                 context.setBasic([]);
-                context.setSecondary([]);
                 navigator.navigate('HowDoYouFeel')}}>
                     <Emotion feelings={context.allFeelings}/>
             </Pressable>
             <Pressable style={styles.endButton} onPress={() => 
                 {
-                    context.setMotion('');
+                    console.log(context.motion)
+                    //update motion to movement
+                    //update motion to motionsData
+                    context.updateMotion('', []);
                     navigator.navigate('CurrentEmotion')
                 }}>
                 <Text>end motion</Text>

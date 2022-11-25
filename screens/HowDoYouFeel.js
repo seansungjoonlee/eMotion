@@ -8,15 +8,17 @@ import React, { useContext } from 'react';
 export default function HowDoYouFeel() {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
-    console.log(context);
 
 
     let button = [];
     if (context.basic.length > 0) {
         button = [
             <TouchableOpacity 
-                style = {styles.selectButton} key={context.basic.length}
-                onPress={() => navigator.navigate('CareToElaborate')}>
+                style = {styles.selectButton} key={context.currentFeelings.basic.length}
+                onPress={() => {
+                    context.updateCurrentFeelings(context.basic);
+                    navigator.navigate('CareToElaborate');
+                }}>
                 <Text style = {styles.buttonText}> Select</Text>
             </TouchableOpacity>
         ]

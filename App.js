@@ -10,23 +10,77 @@ import CurrentEmotion from './screens/CurrentEmotion';
 import React from 'react';
 import FeelingContext from './components/FeelingContext';
 import { useState } from 'react';
+import { basicFeelings, basicToSecondary, colorMapping } from './assets/feelings.js';
+
 
 export default function App() {
   const Stack = createStackNavigator();
   const [allFeelings, setAllFeelings] = useState([]);
+  const [currentFeelings, setCurrentFeelings] = useState({basic:[], secondary:[], total:[]});
   const [basic, setBasic] = useState([]);
-  const [secondary, setSecondary] = useState([]);
-  const [motion, setMotion] = useState('');
+  const [motion, setMotion] = useState({name:'', feelings:[]});
+
+  function newEmotion() {
+    setCurrentFeelings({basic:[], secondary:[], total:[]});
+  }
+
+  function updateAllFeelings(feelings) {
+    let updated = [...allFeelings];
+    for (let i = 0; i < feelings.length; i++) {
+      if (updated.indexOf(feelings[i]) === -1) {
+        updated.push(feelings[i]);
+      }
+    }
+    setAllFeelings(updated);
+  }
+
+  function updateCurrentFeelings(feelings) {
+    let updated = {...currentFeelings};
+    for (let i = 0; i < feelings.length; i++) {
+      //basic feeling
+      if (basicFeelings.indexOf(feelings[i]) !== -1) {
+        if (updated.basic.indexOf(feelings[i]) === -1) {
+          updated.basic.push(feelings[i]);
+          updated.total.push(feelings[i]);
+        }
+      }
+      //secondary feeling
+      else {
+        if (updated.secondary.indexOf(feelings[i]) === -1) {
+          updated.secondary.push(feelings[i]);
+          updated.total.push(feelings[i]);
+        }
+      }
+    }
+    setCurrentFeelings(updated);
+  }
+
+  function updateMotion(name, feelings) {
+    let updated = {};
+    if (motion.name !== name) {
+      updated.name = name;
+      updated.feelings = feelings;
+    } else {
+      updated = {...motion};
+      for (let i = 0; i < feelings.length; i++) {
+        if (motion.feelings.indexOf(feelings[i]) === -1) {
+          updated.feelings.push(feelings[i]);
+        }
+      }
+    }
+    setMotion(updated);
+  }
 
   const feelingSettings = {
     allFeelings: allFeelings,
-    basic: basic,
-    secondary: secondary,
-    setAllFeelings: setAllFeelings,
-    setBasic: setBasic,
-    setSecondary: setSecondary,
+    updateAllFeelings: updateAllFeelings,
+    currentFeelings: currentFeelings,
+    updateCurrentFeelings: updateCurrentFeelings,
     motion: motion,
-    setMotion: setMotion
+    updateMotion: updateMotion,
+    newEmotion: newEmotion,
+    basic: basic,
+    setBasic: setBasic
   }
 
   return (  
@@ -35,10 +89,10 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen options={{headerShown:false}} name="Start" component={Start} />
           <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />
-          <Stack.Screen options={{headerShown: false}} name="CareToElaborate" component={CareToElaborate} />
+          <Stack.Screen options={{headerShown: true}} name="CareToElaborate" component={CareToElaborate} />
           <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
-          <Stack.Screen name="ChooseMotion" component={ChooseMotion} />
-          <Stack.Screen name="DuringMotion" component={DuringMotion} />
+          <Stack.Screen options={{headerShown: true}} name="ChooseMotion" component={ChooseMotion} />
+          <Stack.Screen options={{headerShown: false}} name="DuringMotion" component={DuringMotion} />
         </Stack.Navigator>
       </NavigationContainer>
     </FeelingContext.Provider>

@@ -10,13 +10,14 @@ import React, { useContext } from 'react';
 export default function CareToElaborate() {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
+    const [secondary, setSecondary] = useState([]);
     return (
     <SafeAreaView style={styles.container}>
         <Text style={styles.title}> Care to elaborate? </Text>
         <Text style={styles.subtitle}> (select all that apply) </Text>
         {/* replace with emotion component */}
         <View style={styles.selector}>
-            <SecondSelection basic={context.basic} secondary={context.secondary} setSecondary={context.setSecondary}/>
+            <SecondSelection basic={context.currentFeelings.basic} secondary={secondary} setSecondary={setSecondary}/>
         </View>
 
         <TextInput
@@ -28,24 +29,13 @@ export default function CareToElaborate() {
 
         <TouchableOpacity style = {styles.selectButton}    
             onPress={() => {
-                    let newFeelings = [];
-                    for (let i = 0; i < context.basic.length; i++) {
-                        newFeelings.push(context.basic[i]);
-                    }
-                    for (let i = 0; i < context.secondary.length; i++) {
-                        newFeelings.push(context.secondary[i]);
-                    }
-                    let updatedFeelings = context.allFeelings;
-                    for (let i = 0; i < newFeelings.length; i++) {
-                        if (updatedFeelings.indexOf(newFeelings[i]) === -1) {
-                            updatedFeelings.push(newFeelings[i]);
-                        }
-                    }
-                    context.setAllFeelings(updatedFeelings);
-                    if (context.motion === "") {
+                    context.updateCurrentFeelings(secondary);
+                    context.updateAllFeelings(context.currentFeelings.total);
+                    if (context.motion.name === '') {
                         navigator.navigate('CurrentEmotion');
                     }
                     else {
+                        context.updateMotion(context.motion.name, context.currentFeelings.total);
                         navigator.navigate('DuringMotion');
                     }
             }
