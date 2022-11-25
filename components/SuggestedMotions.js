@@ -23,8 +23,7 @@ function getMotions(motionData, currentFeelings){
   for (const motion in motions) {
     motionList.push({
       name: motion,
-      motionFeelings: motions[motion],
-      key: motion,
+      motionFeelings: motions[motion]
     });
   }
   return motionList;
@@ -34,6 +33,7 @@ const renderMotionSuggestion = ({ item, index }) => (
   <MotionSuggestion
     name = {item.name}
     motionFeelings = {item.motionFeelings}
+    key={index}
   />
 );
 

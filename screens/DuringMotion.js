@@ -17,14 +17,12 @@ export default function DuringMotion() {
                 motion: {context.motion.name}
             </Text>
             <Pressable style={styles.emotionBox} onPress = {() => {
-                context.newEmotion();
                 context.setBasic([]);
                 navigator.navigate('HowDoYouFeel')}}>
                     <Emotion feelings={context.allFeelings}/>
             </Pressable>
             <Pressable style={styles.endButton} onPress={() => 
                 {
-                    console.log(context.motion)
                     //update motion to movement
                     //update motion to motionsData
                     context.updateMotion('', []);

@@ -17,13 +17,10 @@ export default function App() {
   const Stack = createStackNavigator();
 
   const [allFeelings, setAllFeelings] = useState([]);
-const [currentFeelings, setCurrentFeelings] = useState({basic:[], secondary:[], total:[]});
+const [currentFeelings, setCurrentFeelings] = useState([]);
+const [newFeelings, setNewFeelings] = useState({basic:[], secondary:[]});
 const [basic, setBasic] = useState([]);
 const [motion, setMotion] = useState({name:'', feelings:[]});
-
-function newEmotion() {
-setCurrentFeelings({basic:[], secondary:[], total:[]});
-}
 
 function updateAllFeelings(feelings) {
 let updated = [...allFeelings];
@@ -35,25 +32,23 @@ for (let i = 0; i < feelings.length; i++) {
 setAllFeelings(updated);
 }
 
-function updateCurrentFeelings(feelings) {
-let updated = {...currentFeelings};
+function updateNewFeelings(feelings) {
+let updated = {...newFeelings};
 for (let i = 0; i < feelings.length; i++) {
     //basic feeling
     if (basicFeelings.indexOf(feelings[i]) !== -1) {
     if (updated.basic.indexOf(feelings[i]) === -1) {
         updated.basic.push(feelings[i]);
-        updated.total.push(feelings[i]);
     }
     }
     //secondary feeling
     else {
     if (updated.secondary.indexOf(feelings[i]) === -1) {
         updated.secondary.push(feelings[i]);
-        updated.total.push(feelings[i]);
     }
     }
 }
-setCurrentFeelings(updated);
+setNewFeelings(updated);
 }
 
 function updateMotion(name, feelings) {
@@ -76,10 +71,11 @@ setMotion(updated);
     allFeelings: allFeelings,
     updateAllFeelings: updateAllFeelings,
     currentFeelings: currentFeelings,
-    updateCurrentFeelings: updateCurrentFeelings,
+    setCurrentFeelings: setCurrentFeelings,
     motion: motion,
     updateMotion: updateMotion,
-    newEmotion: newEmotion,
+    newFeelings: newFeelings,
+    updateNewFeelings: updateNewFeelings,
     basic: basic,
     setBasic: setBasic
   };
