@@ -11,7 +11,7 @@ import React from 'react';
 import FeelingContext from './components/FeelingContext';
 import { useState } from 'react';
 import { basicFeelings, basicToSecondary, colorMapping } from './assets/feelings.js';
-
+import Themes from './assets/Themes.js';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -86,7 +86,7 @@ setMotion(updated);
         <Stack.Navigator>
           <Stack.Screen options={{headerShown:false}} name="Start" component={Start} />
           <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />
-          <Stack.Screen options={{headerShown: true}} name="CareToElaborate" component={CareToElaborate} />
+          <Stack.Screen options={{headerShown: false}} name="CareToElaborate" component={CareToElaborate} />
           <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
           <Stack.Screen options={{headerShown: true}} name="ChooseMotion" component={ChooseMotion} />
           <Stack.Screen options={{headerShown: false}} name="DuringMotion" component={DuringMotion} />
@@ -99,7 +99,7 @@ setMotion(updated);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Themes.background,
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',

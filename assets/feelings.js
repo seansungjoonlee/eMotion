@@ -5,7 +5,7 @@ const colorMapping = {
   "anxious":"#FF7A8C",
   "angry":"#CA7AFF",
   "sad":"#7AFF8C",
-  "surprised":"#FFA07A"
+  "surprised":"#FFA07A",
 };
 colorMapping["joyful1"] = blend_colors(colorMapping["joyful"], colorMapping["surprised"], 0.3);
 colorMapping["joyful2"] = blend_colors(colorMapping["joyful"], colorMapping["surprised"], 0.1);

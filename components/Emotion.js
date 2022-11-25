@@ -4,8 +4,10 @@ import { colorMapping, basicFeelings, basicToSecondary } from '../assets/feeling
 
 function getStops(feelings) {
     let colors = [];
-
-    if (feelings.length === 1) {
+    if (feelings[0] === "startScreen") {
+        colors = ['#d1d1d1', '#bfbfbf', '#c7c7c7', '#a3a3a3', '#b0b0b0']
+    }
+    else if (feelings.length === 1) {
         colors.push(colorMapping[feelings[0]]);
     }
     else {

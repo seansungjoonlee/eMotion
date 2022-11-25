@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import HowDoYouFeel from './HowDoYouFeel';
+import Themes from '../assets/Themes';
 
 export default function CurrentEmotion() {
     const navigator = useNavigation();
@@ -18,8 +19,8 @@ export default function CurrentEmotion() {
                 <Emotion feelings={context.allFeelings}/>
             </Pressable>
 
-            <TouchableOpacity style = {styles.selectButton} onPress={() => navigator.navigate('ChooseMotion')}>
-                <Text style = {styles.buttonText}> New Movement</Text>
+            <TouchableOpacity style = {styles.newMovement} onPress={() => navigator.navigate('ChooseMotion')}>
+                <Text style = {styles.buttonText}> new movement</Text>
             </TouchableOpacity>
             <View style={styles.menu}>
                 <Image source={require('../assets/profile.png')}></Image>
@@ -32,8 +33,11 @@ export default function CurrentEmotion() {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
+        height: '100%',
+        width: '100%',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
+        backgroundColor: Themes.background
     },
     title: {
         fontSize: 30,
@@ -41,32 +45,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         paddingTop: 50
     },
-    subtitle: {
-        fontSize: 20,
-        textAlign: 'center',
-        paddingTop: 10,
-        paddingBottom: 50
-    },
-    button: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'grey',
-        width: 300,
-        height: 300,
-        borderRadius: 300 / 2,
-     },
-    // take out
     buttonText: {
         fontSize: 20
     },  
-    selectButton: {
+    newMovement: {
         alignItems: 'center',
-        backgroundColor: 'lightgrey',
-        padding: 10,
-        margin: 100,
-        witdh: 100,
-        height: 70,
-        borderRadius: 10
+        justifyContent: 'center',
+        backgroundColor: Themes.background,
+        borderWidth: 1,
+        marginTop: 70,
+        marginBottom: 20,
+        width: 200,
+        height: 40,
+        borderRadius: 1000
      },
      menu: {
         flexDirection: 'row',
@@ -77,7 +68,7 @@ const styles = StyleSheet.create({
      },
      emotionBox: {
         marginTop: 30,
-        height: 200,
-        width: 200,
+        height: 300,
+        width: 300,
      }
 });

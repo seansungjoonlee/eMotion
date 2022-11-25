@@ -1,31 +1,39 @@
-import { ImageBackground, StyleSheet, Text, Image, View, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+import { ImageBackground, StyleSheet, Text, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import HowDoYouFeel from './HowDoYouFeel';
+import Emotion from '../components/Emotion';
+import Themes from '../assets/Themes';
 
 export default function Start() {
-
     const navigator = useNavigation();
+
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}> eMotion </Text>
             <Text style={styles.subtitle}> feel your workouts! </Text>
             {/* replace with emotion component */}
-            <TouchableOpacity style={styles.button} onPress={() => navigator.navigate('HowDoYouFeel')}>
+            <Pressable style={styles.emotionBox} onPress={() => navigator.navigate('HowDoYouFeel')}>
+                <Emotion feelings={['startScreen']}/>
                 <Text style={styles.buttonText}>click to begin</Text>
-                {/* include on press */}
-            </TouchableOpacity>
-
+            </Pressable>
         </SafeAreaView>
 
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: Themes.background,
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
     title: {
         fontSize: 30,
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 100
+        paddingTop: 50
     },
     subtitle: {
         fontStyle:'italic',
@@ -42,8 +50,16 @@ const styles = StyleSheet.create({
         height: 300,
         borderRadius: 300 / 2,
      },
+    emotionBox: {
+        height: 300,
+        width: 300,
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     // take out
     buttonText: {
-        fontSize: 30
-    },     
+        fontSize: 30,
+        position: 'absolute',
+    },    
 });

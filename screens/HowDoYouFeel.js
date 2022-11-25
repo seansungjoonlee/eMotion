@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
+import Themes from '../assets/Themes';
 
 export default function HowDoYouFeel() {
     const context = useContext(FeelingContext);
@@ -19,7 +20,7 @@ export default function HowDoYouFeel() {
                     context.updateNewFeelings(context.basic);
                     navigator.navigate('CareToElaborate');
                 }}>
-                <Text style = {styles.buttonText}> Select</Text>
+                <Text style = {styles.buttonText}> select</Text>
             </TouchableOpacity>
         ]
     }
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'column',
         alignItems: 'center',
+        backgroundColor: Themes.background
     },
     title: {
         fontSize: 30,
@@ -52,28 +54,21 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 20,
         textAlign: 'center',
-        paddingTop: 10,
-        paddingBottom: 50
+        paddingTop: 5,
+        paddingBottom: 35
     },
-    button: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'grey',
-        width: 300,
-        height: 300,
-        borderRadius: 300 / 2,
-     },
     // take out
     buttonText: {
-        fontSize: 30
+        fontSize: 20
     },  
     selectButton: {
         alignItems: 'center',
-        backgroundColor: 'lightgrey',
-        padding: 20,
-        margin: 50,
-        witdh: 100,
-        height: 70,
-        borderRadius: 10
+        justifyContent: 'center',
+        //padding: 20,
+        marginTop: 80,
+        width: 175,
+        height: 50,
+        borderRadius: 1000,
+        borderWidth: 1
      },   
 });

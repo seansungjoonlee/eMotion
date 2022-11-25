@@ -36,10 +36,10 @@ export default function BasicSelection({ basic, setBasic }) {
         return slices.map((slice, index) => {
             let pos = basic.indexOf(basicFeelings[index]);
             let weight = 'normal';
-            let size = 12;
+            let size = 16;
             if (pos !== -1) {
                 weight = 'bold';
-                size = 14;
+                size = 18;
             }
             const { labelCentroid, pieCentroid, data } = slice;
             return (
