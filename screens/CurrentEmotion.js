@@ -19,7 +19,10 @@ export default function CurrentEmotion() {
                 <Emotion feelings={context.allFeelings}/>
             </Pressable>
 
-            <TouchableOpacity style = {styles.newMovement} onPress={() => navigator.navigate('ChooseMotion')}>
+            <TouchableOpacity style = {styles.newMovement} onPress={() => {
+                context.updateMotion('choosing', [])
+                navigator.navigate('ChooseMotion')}
+            }>
                 <Text style = {styles.buttonText}> new motion</Text>
             </TouchableOpacity>
         </SafeAreaView>

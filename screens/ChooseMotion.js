@@ -68,7 +68,10 @@ export default function ChooseMotion({ route }) {
     return (
     <SafeAreaView style={styles.container}>
         <View style={styles.backArrowBox}>
-            <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('CurrentEmotion')}/>
+            <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
+                context.updateMotion('', []);
+                navigator.navigate('CurrentEmotion');
+            }}/>
         </View>
         <View style={styles.guideSelectBox}>
             <Text style={[styles.guideSelect, {textDecorationLine: guidedUnderline}]} onPress={() => setGuided(true)}>
@@ -78,9 +81,12 @@ export default function ChooseMotion({ route }) {
                 unguided
             </Text>
         </View>
-        <View style={styles.emotionBox}>
+        <Pressable style={styles.emotionBox} onPress={() => {
+            context.setBasic([]); 
+            navigator.navigate('HowDoYouFeel');
+            }}>
             <Emotion feelings={context.allFeelings}/>
-        </View>
+        </Pressable>
         <Options/>
         
     </SafeAreaView>

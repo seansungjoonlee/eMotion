@@ -52,6 +52,9 @@ export default function CareToElaborate() {
                     if (context.motion.name === '') {
                         navigator.navigate('CurrentEmotion');
                     }
+                    else if (context.motion.name === 'choosing') {
+                            navigator.navigate('ChooseMotion');
+                    }
                     else {
                         context.updateMotion(context.motion.name, context.currentFeelings);
                         navigator.navigate('DuringMotion');
