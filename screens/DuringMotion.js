@@ -11,6 +11,10 @@ import Themes from "../assets/Themes";
 export default function DuringMotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
+
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+  
     let [currentMotion, updateCurrentMotion] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [note, setNote] = useState();
@@ -62,8 +66,19 @@ export default function DuringMotion() {
                 <TouchableOpacity style={styles.button} onPress={() => 
                     {
                         //update motion to movement
+                        //context.updateMovement(date, context.motion.name, feelings);
+                        // console.log(date);
+                        // console.log(context.motion.name, context.allFeelings);
+                        context.updateMotion(context.motion.name, context.allFeelings);
+                        // let newMotion = {};
+                        // newMotion.name = context.motion.name;
+                        // newMotion.feelings = context.allFeelings;
+                        // console.log("going to updateMovement now");
+                        // console.log("newMotion.name = " + newMotion.name);
+                        // context.updateMovement(newMotion);
+                        // console.log("UPDATED");
                         //update motion to motionsData
-                        context.updateMotion('', []);
+                        // context.updateMotion('', []);
                         navigator.navigate('CurrentEmotion')
                     }}>
                     <Text>end motion</Text>
