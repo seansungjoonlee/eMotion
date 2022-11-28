@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { basicFeelings, basicToSecondary, colorMapping } from './assets/feelings.js';
 import Themes from './assets/Themes.js';
 import MainTask from './components/MainTask';
-import movementData from './utils/movementData';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Reflection from './components/Reflection';
 import Shared from './components/Shared';
@@ -23,9 +22,6 @@ export default function App() {
   const [basic, setBasic] = useState([]);
   const [motion, setMotion] = useState({name:'', feelings:[]});
 
-  const current = new Date();
-  const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-
   function updateAllFeelings(feelings) {
   let updated = [...allFeelings];
   for (let i = 0; i < feelings.length; i++) {
@@ -37,69 +33,39 @@ export default function App() {
   }
 
   function updateNewFeelings(feelings) {
-    let updated = {...newFeelings};
-    for (let i = 0; i < feelings.length; i++) {
+  let updated = {...newFeelings};
+  for (let i = 0; i < feelings.length; i++) {
       //basic feeling
       if (basicFeelings.indexOf(feelings[i]) !== -1) {
-        if (updated.basic.indexOf(feelings[i]) === -1) {
+      if (updated.basic.indexOf(feelings[i]) === -1) {
           updated.basic.push(feelings[i]);
-        }
+      }
       }
       //secondary feeling
       else {
-        if (updated.secondary.indexOf(feelings[i]) === -1) {
+      if (updated.secondary.indexOf(feelings[i]) === -1) {
           updated.secondary.push(feelings[i]);
-        }
       }
-    }
-    setNewFeelings(updated);
+      }
+  }
+  setNewFeelings(updated);
   }
 
   function updateMotion(name, feelings) {
-    let updated = {};
-    if (motion.name !== name) {
-      updated.name = name;
-      updated.feelings = feelings;
-    } else {
-      updated = {...motion};
-      for (let i = 0; i < feelings.length; i++) {
-        if (motion.feelings.indexOf(feelings[i]) === -1) {
-          updated.feelings.push(feelings[i]);
-        }
-      }
+  let updated = {};
+  if (motion.name !== name) {
+    updated.name = name;
+    updated.feelings = feelings;
+} else {
+    updated = {...motion};
+    for (let i = 0; i < feelings.length; i++) {
+    if (motion.feelings.indexOf(feelings[i]) === -1) {
+        updated.feelings.push(feelings[i]);
     }
-
-    if(name != "choosing" && name != '') {
-      console.log("inside if statement++++++++++");
-      console.log("updated.name = " + updated.name);
-      updateMovement(updated);
     }
-    
-
-    setMotion(updated);
-  }
-
-  function updateMovement(newMotion) {
-    console.log("newMotion = " + newMotion.name + newMotion.feelings);
-    console.log("movementData length: " + movementData.length);
-    if ((movementData.length != 0 ) && (movementData[movementData.length - 1].dateEntry == date)) {
-      console.log("movement data is populated, most recent date is: " + movementData[movementData.length-1].dateEntry);
-      movementData[movementData.length - 1].motionEntry.push(newMotion);
-      for(let i = 0; i < movementData[movementData.length - 1].motionEntry.length; i++) {
-        console.log("motion name at index " + i + " " + movementData[movementData.length - 1].motionEntry[i].name);
-      }
-      
-    } else {
-      let movementEntry = {};
-      movementEntry.dateEntry = date;
-      movementEntry.motionEntry = [];
-      movementEntry.motionEntry.push(newMotion);
-      console.log("inside if statement: ****** " + movementEntry.dateEntry + movementEntry.motionEntry.name);
-      movementData.push(movementEntry);
-      console.log("movementData[0] feelings: " + movementData[3].motionEntry.feelings);
-    }
-
-  }
+}
+setMotion(updated);
+}
 
   const feelingSettings = {
     allFeelings: allFeelings,
