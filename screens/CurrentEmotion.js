@@ -12,7 +12,7 @@ export default function CurrentEmotion() {
     const context = useContext(FeelingContext);
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}> Current Movement </Text>
+            <Text style={styles.title}> Today's Movement </Text>
             <Pressable style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
                 <Emotion feelings={context.movement.feelings}/>
@@ -27,6 +27,9 @@ export default function CurrentEmotion() {
                 <Pressable style={styles.emotionBox} onPress = {() => {
                     navigator.navigate('HowDoYouFeel')}}>
                     <Emotion feelings={context.currentFeelings}/>
+                    <Text style={styles.eMotionText}>
+                        Current eMotion
+                    </Text>
                 </Pressable>
         </SafeAreaView>
     );
@@ -55,7 +58,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: Themes.background,
         borderWidth: 1,
-        marginTop: 50,
+        marginTop: 30,
         marginBottom: 20,
         width: 200,
         height: 40,
@@ -68,13 +71,22 @@ const styles = StyleSheet.create({
      },
      emotionBox: {
         marginTop: 10,
-        height: 100,
-        width: 100,
-        marginLeft: 200
+        height: 120,
+        width: 120,
+        marginLeft: 200,
+        position: 'relative',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
      },
      bottomSection: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center'
+     },
+     eMotionText: {
+        position: 'absolute',
+        fontSize: 16,
+        top: -15
      }
 });
