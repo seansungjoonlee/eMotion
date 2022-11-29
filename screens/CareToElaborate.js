@@ -13,8 +13,8 @@ import Themes from '../assets/Themes';
 export default function CareToElaborate() {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
-    const [secondary, setSecondary] = useState([]);
     const [text, onChangeText] = useState();
+    console.log(context.currentFeelings);
     return (
     <SafeAreaView style={styles.container}>
         <View style={styles.backArrowBox}>
@@ -24,7 +24,7 @@ export default function CareToElaborate() {
         <Text style={styles.subtitle}> (select all that apply) </Text>
         {/* replace with emotion component */}
         <View style={styles.selector}>
-            <SecondSelection basic={context.basic} secondary={secondary} setSecondary={setSecondary}/>
+            <SecondSelection basic={context.basic} secondary={context.secondary} setSecondary={context.setSecondary}/>
         </View>
         <View style={styles.textBox}>
             <TextInput
@@ -37,17 +37,11 @@ export default function CareToElaborate() {
         <TouchableOpacity style = {styles.selectButton}    
             onPress={() => {
                     if (text) {
-                        secondary.push(text);
+                        let updated = [...secondary];
+                        updated.push(text);
+                        context.setSecondary(updated);
                     }
-                    let newFeelings = []
-                    for (let i = 0; i < context.basic.length; i++) {
-                        newFeelings.push(context.basic[i]);
-                    }
-                    for (let i = 0; i < secondary.length; i++) {
-                        newFeelings.push(secondary[i]);
-                    }
-                    context.setCurrentFeelings(newFeelings);
-                    context.updateAllFeelings(newFeelings);
+                    context.updateCurrentFeelings();
                     console.log(context.motion);
                     if (context.motion.name === '') {
                         navigator.navigate('CurrentEmotion');

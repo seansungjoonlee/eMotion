@@ -24,7 +24,7 @@ export default function ChooseMotion({ route }) {
                     suggested motions:
                 </Text>
                 <View style={styles.suggestedBox}>
-                    <SuggestedMotions currentFeelings={context.allFeelings}/>
+                    <SuggestedMotions currentFeelings={context.currentFeelings}/>
                 </View>
             </View>
         )
@@ -82,10 +82,9 @@ export default function ChooseMotion({ route }) {
             </Text>
         </View>
         <Pressable style={styles.emotionBox} onPress={() => {
-            context.setBasic([]); 
             navigator.navigate('HowDoYouFeel');
             }}>
-            <Emotion feelings={context.allFeelings}/>
+            <Emotion feelings={context.currentFeelings}/>
         </Pressable>
         <Options/>
         

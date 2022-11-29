@@ -17,7 +17,8 @@ export default function HowDoYouFeel() {
             <TouchableOpacity 
                 style = {styles.selectButton} key={context.basic.length}
                 onPress={() => {
-                    context.updateNewFeelings(context.basic);
+                    context.updateCurrentFeelings(context.basic);
+                    context.updateSecondary(context.basic);
                     navigator.navigate('CareToElaborate');
                 }}>
                 <Text style = {styles.buttonText}> select</Text>

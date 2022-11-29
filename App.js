@@ -17,42 +17,41 @@ import { useNavigation } from './node_modules/@react-navigation/native';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
-  const [allFeelings, setAllFeelings] = useState([]);
   const [currentFeelings, setCurrentFeelings] = useState([]);
-  const [newFeelings, setNewFeelings] = useState({basic:[], secondary:[]});
   const [basic, setBasic] = useState([]);
+  const [secondary, setSecondary] = useState([]);
   const [motion, setMotion] = useState({name:'', feelings:[]});
+  const [movement, setMovement] = useState({feelings: ['joyful', 'anxious']});
 
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
-  function updateAllFeelings(feelings) {
-  let updated = [...allFeelings];
-  for (let i = 0; i < feelings.length; i++) {
-      if (updated.indexOf(feelings[i]) === -1) {
-      updated.push(feelings[i]);
-      }
-  }
-  setAllFeelings(updated);
-  }
-
-  function updateNewFeelings(feelings) {
-    let updated = {...newFeelings};
-    for (let i = 0; i < feelings.length; i++) {
-      //basic feeling
-      if (basicFeelings.indexOf(feelings[i]) !== -1) {
-        if (updated.basic.indexOf(feelings[i]) === -1) {
-          updated.basic.push(feelings[i]);
-        }
-      }
-      //secondary feeling
-      else {
-        if (updated.secondary.indexOf(feelings[i]) === -1) {
-          updated.secondary.push(feelings[i]);
+  function updateSecondary(newBasic) {
+    let updated = [];
+    for (let i = 0; i < newBasic.length; i++) {
+      for (let j = 0; j < basicToSecondary[newBasic[i]].length; j++) {
+        if (secondary.indexOf(basicToSecondary[newBasic[i]][j]) !== -1) {
+          console.log(secondary.indexOf(basicToSecondary[newBasic[i]][j]));
+          updated.push(basicToSecondary[newBasic[i]][j]);
         }
       }
     }
-    setNewFeelings(updated);
+    setSecondary(updated);
+  }
+
+  function updateCurrentFeelings() {
+    let updated = [];
+    for (let i = 0; i < basic.length; i++) {
+      //basic feeling
+      updated.push(basic[i]);
+    }
+    
+    for (let i = 0; i < secondary.length; i++) {
+      //basic feeling
+      updated.push(secondary[i]);
+    }
+
+    setCurrentFeelings(updated);
   }
 
   function updateMotion(name, feelings) {
@@ -102,16 +101,16 @@ export default function App() {
   }
 
   const feelingSettings = {
-    allFeelings: allFeelings,
-    updateAllFeelings: updateAllFeelings,
+    basic: basic,
+    setBasic: setBasic,
+    secondary: secondary,
+    setSecondary: setSecondary,
+    updateSecondary: updateSecondary,
     currentFeelings: currentFeelings,
-    setCurrentFeelings: setCurrentFeelings,
+    updateCurrentFeelings: updateCurrentFeelings,
     motion: motion,
     updateMotion: updateMotion,
-    newFeelings: newFeelings,
-    updateNewFeelings: updateNewFeelings,
-    basic: basic,
-    setBasic: setBasic
+    movement: movement,
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>

@@ -7,6 +7,7 @@ import { useState } from "react";
 import FeelingContext from '../components/FeelingContext';
 import { useContext } from 'react';
 import Themes from "../assets/Themes";
+import { Feather } from '@expo/vector-icons'; 
 
 export default function DuringMotion() {
     const navigator = useNavigation();
@@ -30,11 +31,10 @@ export default function DuringMotion() {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.notesSheet}>
-                        <Pressable
-                        style={[styles.button, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}
-                        >
-                            <Text style={styles.textStyle}>Hide Modal</Text>
+                        <Pressable style={styles.topBar} onPress={() => {
+                            setModalVisible(!modalVisible);
+                        }}>
+                            <Feather name="x" size={36} color="black"/>
                         </Pressable>
                         <View style={styles.noteBox}>
                             <TextInput
@@ -45,6 +45,12 @@ export default function DuringMotion() {
                                 fontSize={30}
                             />
                         </View>
+                        <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible(!modalVisible)}
+                        >
+                            <Text style={styles.textStyle}>Save Note</Text>
+                        </Pressable>
                     </View>
                 </View>
             </Modal>
@@ -52,9 +58,8 @@ export default function DuringMotion() {
                 current motion: {context.motion.name}
             </Text>
             <Pressable style={styles.emotionBox} onPress = {() => {
-                context.setBasic([]);
                 navigator.navigate('HowDoYouFeel')}}>
-                    <Emotion feelings={context.allFeelings}/>
+                    <Emotion feelings={context.currentFeelings}/>
             </Pressable>
             <View style={styles.buttonRow}>
                 <TouchableOpacity style={styles.button} onPress={() =>
@@ -69,7 +74,7 @@ export default function DuringMotion() {
                         //context.updateMovement(date, context.motion.name, feelings);
                         // console.log(date);
                         // console.log(context.motion.name, context.allFeelings);
-                        context.updateMotion(context.motion.name, context.allFeelings);
+                        context.updateMotion(context.motion.name, context.currentFeelings);
                         // let newMotion = {};
                         // newMotion.name = context.motion.name;
                         // newMotion.feelings = context.allFeelings;
@@ -78,7 +83,8 @@ export default function DuringMotion() {
                         // context.updateMovement(newMotion);
                         // console.log("UPDATED");
                         //update motion to motionsData
-                        // context.updateMotion('', []);
+                        context.updateMotion('', []);
+
                         navigator.navigate('CurrentEmotion')
                     }}>
                     <Text>end motion</Text>
@@ -134,7 +140,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 1,
         borderTopLeftRadius: 20,
-        borderTopRightRadius: 20
+        borderTopRightRadius: 20,
 
     },
     centeredView: {
@@ -147,6 +153,15 @@ const styles = StyleSheet.create({
     noteBox: {
         height: '80%',
         width: '80%',
-        borderWidth: 1
+        borderWidth: 1,
+        marginBottom: 10
+    },
+    topBar: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        height: '7%',
+        width: '100%',
+        paddingHorizontal: 30
     }
 });

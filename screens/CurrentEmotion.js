@@ -12,19 +12,22 @@ export default function CurrentEmotion() {
     const context = useContext(FeelingContext);
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}> Current eMotion </Text>
-            <Pressable style={styles.emotionBox} onPress = {() => {
-                context.setBasic([]);
+            <Text style={styles.title}> Current Movement </Text>
+            <Pressable style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
-                <Emotion feelings={context.allFeelings}/>
+                <Emotion feelings={context.movement.feelings}/>
             </Pressable>
 
-            <TouchableOpacity style = {styles.newMovement} onPress={() => {
-                context.updateMotion('choosing', [])
-                navigator.navigate('ChooseMotion')}
-            }>
-                <Text style = {styles.buttonText}> new motion</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style = {styles.newMovement} onPress={() => {
+                    context.updateMotion('choosing', [])
+                    navigator.navigate('ChooseMotion')}
+                }>
+                    <Text style = {styles.buttonText}> new motion</Text>
+                </TouchableOpacity>
+                <Pressable style={styles.emotionBox} onPress = {() => {
+                    navigator.navigate('HowDoYouFeel')}}>
+                    <Emotion feelings={context.currentFeelings}/>
+                </Pressable>
         </SafeAreaView>
     );
 }
@@ -58,9 +61,20 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 1000
      },
-     emotionBox: {
+     movementBox: {
         marginTop: 30,
-        height: 300,
-        width: 300,
+        height: 250,
+        width: 250,
+     },
+     emotionBox: {
+        marginTop: 10,
+        height: 100,
+        width: 100,
+        marginLeft: 200
+     },
+     bottomSection: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
      }
 });
