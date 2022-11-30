@@ -51,6 +51,7 @@ export default function CareToElaborate() {
                     }
                     else {
                         context.updateMotion(context.motion.name, context.currentFeelings);
+                        console.log(context.currentFeelings);
                         navigator.navigate('DuringMotion');
                     }
             }
