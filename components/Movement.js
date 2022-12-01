@@ -2,29 +2,43 @@ import { Text, View, StyleSheet, Image, SafeAreaView } from 'react-native';
 import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
 import { colorMapping, basicFeelings, basicToSecondary } from '../assets/feelings.js';
 
+function getCount(arr, elem) {
+    let count = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === elem) {
+            count += 1;
+        }
+    }
+    return count;
+}
+
 function getOutsideStops(movementFeelings) {
     let colors = ['white'];
     let outsideFeelings = [];
     for (let i = 0; i < movementFeelings.length - 1; i++) {
-        outsideFeelings.push(movementFeelings[i]);
+        for (let j = 0; j < movementFeelings[i].length; j++)
+        {
+            outsideFeelings.push(movementFeelings[i][j]);
+        }
     }
 
-    console.log("here" + movementFeelings);
 
-    for (let i = 0; i < outsideFeelings.length; i++) {
-        let feelings = outsideFeelings[i];
-        for(let j = 0; j < basicFeelings.length; j++){
-            if (feelings.indexOf(basicFeelings[j]) > -1) {
-                colors.push(colorMapping[basicFeelings[j]]);
-                for (let k=0; k < basicToSecondary[basicFeelings[j]].length; k++) {
-                    if (feelings.indexOf(basicToSecondary[basicFeelings[j]][k]) > -1) {
-                        colors.push(colorMapping[basicToSecondary[basicFeelings[j]][k]]);
+    if (outsideFeelings.length === 1) {
+        colors.push(colorMapping[outsideFeelings[0]]);
+    }
+    else {
+        for(let i = 0; i < basicFeelings.length; i++){
+            if (outsideFeelings.indexOf(basicFeelings[i]) > -1) {
+                    colors.push(colorMapping[basicFeelings[i]]);
+                for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
+                    if (outsideFeelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
+                        colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
                     }
                 }
             }
         }
     }
-
+    console.log(colors);
     colors.push('white');
     let stops = [];
     for(let i = 0; i < colors.length; i++){
@@ -36,24 +50,24 @@ function getOutsideStops(movementFeelings) {
     return stops;
 }
 
-function getInsideStops(movementFeelings) {
+function getInsideStops(currentFeelings) {
     let colors = [];
-    let insideFeelings = movementFeelings[movementFeelings.length-1];
-    if (insideFeelings.length === 1) {
-        colors.push(colorMapping[insideFeelings[0]]);
+    if (currentFeelings.length === 1) {
+        colors.push(colorMapping[currentFeelings[0]]);
     }
     else {
         for(let i = 0; i < basicFeelings.length; i++){
-            if (insideFeelings.indexOf(basicFeelings[i]) > -1) {
+            if (currentFeelings.indexOf(basicFeelings[i]) > -1) {
                 colors.push(colorMapping[basicFeelings[i]]);
                 for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
-                    if (insideFeelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
+                    if (currentFeelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
                         colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
                     }
                 }
             }
         }
     }
+    
     colors.push('white');
     let stops = [];
     for(let i = 0; i < colors.length; i++){
@@ -66,9 +80,9 @@ function getInsideStops(movementFeelings) {
     return stops;
 }
 
-export default function Movement({ movementFeelings} ) {
+export default function Movement({ movementFeelings, currentFeelings } ) {
     const outsideStops = getOutsideStops(movementFeelings, colorMapping);
-    const insideStops = getInsideStops(movementFeelings, colorMapping);
+    const insideStops = getInsideStops(currentFeelings, colorMapping);
     return (
         <View style={styles.container}>
             <Svg height='100%' width="100%">

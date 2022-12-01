@@ -43,7 +43,6 @@ export default function CareToElaborate() {
                     }
                     context.updateCurrentFeelings();
                     if (context.motion.name === '') {
-                        console.log("test" + context.currentFeelings);
                         context.updateMovement(context.motion.name, context.currentFeelings);
                         navigator.navigate('CurrentEmotion');
                     }

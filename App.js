@@ -90,27 +90,18 @@ export default function App() {
     let newMotion = {};
     newMotion.name = name;
     newMotion.feelings = feelings;
-    console.log("newMotion = motion: " + newMotion.name + newMotion.feelings);
-    console.log("movementData length: " + movementData.length);
     if ((movementData.length != 0 ) && (movementData[movementData.length - 1].dateEntry == date)) {
-      console.log("movement data is populated, most recent date is: " + movementData[movementData.length-1].dateEntry);
       movementData[movementData.length - 1].motionEntry.push(newMotion);
       // for(let i = 0; i < movementData[movementData.length - 1].motionEntry.length; i++) {
       //   console.log("motion name at index " + i + " " + movementData[movementData.length - 1].motionEntry[i].name);
       // }
-      console.log("names: " + movementNames(movementData[movementData.length-1]));
-      console.log("feelings :" + movementFeelings(movementData[movementData.length-1]));
-
-      
     } else {
       let movementEntry = {};
       movementEntry.dateEntry = date;
       movementEntry.motionEntry = [];
       movementEntry.motionEntry.push(newMotion);
-      console.log("inside if statement: ****** " + movementEntry.dateEntry + movementEntry.motionEntry.name);
       movementData.push(movementEntry);
       //will this console log work when motionEntry is an array? check after hardcoding movements
-      console.log("movementData[0] feelings: " + movementData[0].motionEntry.feelings);
     }
 
   }
