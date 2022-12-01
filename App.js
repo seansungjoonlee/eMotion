@@ -8,8 +8,8 @@ import Themes from './assets/Themes.js';
 import MainTask from './components/MainTask';
 import movementData from './utils/movementData';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Reflection from './components/Reflection';
-import Shared from './components/Shared';
+import ReflectionTask from './components/ReflectionTask';
+import CommunityTask from './components/CommunityTask';
 import { FontAwesome } from '@expo/vector-icons';
 import { useIsFocused } from "@react-navigation/native"; 
 import { useNavigation } from './node_modules/@react-navigation/native';
@@ -162,7 +162,7 @@ export default function App() {
             } else if (route.name === 'Movement') {
               iconName = 'dot-circle-o';
               size = focused ? 30: 20;
-            } else if (route.name === 'Shared') {
+            } else if (route.name === 'Community') {
               iconName = 'users';
               size = focused ? 30: 20;
             }
@@ -170,9 +170,9 @@ export default function App() {
           }
         })}>
 
-          <Tab.Screen options={{headerShown:false}} name="Reflection" component={Reflection} />
+          <Tab.Screen options={{headerShown:false}} name="Reflection" component={ReflectionTask} />
           <Tab.Screen options={{headerShown:false}} name="Movement" component={MainTask} />
-          <Tab.Screen options={{headerShown:false}} name="Shared" component={Shared} />
+          <Tab.Screen options={{headerShown:false}} name="Community" component={CommunityTask} />
         </Tab.Navigator>
       </NavigationContainer>
     </FeelingContext.Provider>

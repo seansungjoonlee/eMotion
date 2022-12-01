@@ -1,9 +1,9 @@
 import { Text, SafeAreaView } from "react-native";
 
-export default function Shared() {
+export default function CommunityTask() {
     return (
         <SafeAreaView>
-            <Text>Shared Screen </Text>
+            <Text>Community Task Screen </Text>
         </SafeAreaView>
     );
 }

@@ -135,8 +135,8 @@ const styles = StyleSheet.create({
   inside: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: '50%',
-    width: '50%',
+    height: '40%',
+    width: '40%',
     position: 'absolute'
   }
 });

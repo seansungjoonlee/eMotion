@@ -33,10 +33,10 @@ export default function CalendarScreen() {
                 dayComponent={({date, state}) => {
                     const newDate = changeDateFormat(date.dateString);
                     return (
-                    <View style={styles.date}>
+                    <Pressable style={styles.date} onPress={() => navigator.navigate("MovementReflectionScreen", {date: newDate})}>
                         <Emotion feelings = {context.getFeelingsDate(newDate)}/>
                         <Text style={styles.dayText}>{date.day}</Text>
-                    </View>
+                    </Pressable>
                     );
                 }}
             />
