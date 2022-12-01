@@ -74,7 +74,7 @@ export default function DuringMotion() {
                         //context.updateMovement(date, context.motion.name, feelings);
                         // console.log(date);
                         // console.log(context.motion.name, context.allFeelings);
-                        context.updateMotion(context.motion.name, context.currentFeelings);
+                        //context.updateMotion(context.motion.name, context.currentFeelings);
                         // let newMotion = {};
                         // newMotion.name = context.motion.name;
                         // newMotion.feelings = context.allFeelings;
