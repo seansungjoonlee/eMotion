@@ -37,6 +37,15 @@ export default function App() {
     setSecondary(updated);
   }
 
+  function getCurrentMovementIndex() {
+    for (let i = 0; i < movementData.length; i++) {
+      if (movementData[i].dateEntry === date) {
+        return i
+      }
+    }
+    return -1
+  }
+
   function updateCurrentFeelings() {
     let updated = [];
     for (let i = 0; i < basic.length; i++) {
@@ -106,8 +115,8 @@ export default function App() {
     let newMotion = {};
     newMotion.name = name;
     newMotion.feelings = feelings;
-    if ((movementData.length !== 0 ) && (movementData[movementData.length - 1].dateEntry === date)) {
-      movementData[movementData.length - 1].motionEntry.push(newMotion);
+    if (getCurrentMovementIndex() !== -1) {
+      movementData[getCurrentMovementIndex()].motionEntry.push(newMotion);
       // for(let i = 0; i < movementData[movementData.length - 1].motionEntry.length; i++) {
       //   console.log("motion name at index " + i + " " + movementData[movementData.length - 1].motionEntry[i].name);
       // }
@@ -134,7 +143,8 @@ export default function App() {
     updateMotion: updateMotion,
     updateMovement: updateMovement,
     movementFeelings: movementFeelings,
-    getFeelingsDate: getFeelingsDate
+    getFeelingsDate: getFeelingsDate,
+    getCurrentMovementIndex: getCurrentMovementIndex
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>

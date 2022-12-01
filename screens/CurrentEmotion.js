@@ -18,7 +18,7 @@ export default function CurrentEmotion() {
             <Text style={styles.title}> Today's Movement </Text>
             <Pressable style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
-                <Movement movementFeelings={context.movementFeelings(movementData[movementData.length-1])} currentFeelings={context.currentFeelings}/>
+                <Movement movementFeelings={context.movementFeelings(movementData[context.getCurrentMovementIndex()])} currentFeelings={context.currentFeelings}/>
             </Pressable>
 
                 <TouchableOpacity style = {styles.newMovement} onPress={() => {
