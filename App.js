@@ -30,7 +30,6 @@ export default function App() {
     for (let i = 0; i < newBasic.length; i++) {
       for (let j = 0; j < basicToSecondary[newBasic[i]].length; j++) {
         if (secondary.indexOf(basicToSecondary[newBasic[i]][j]) !== -1) {
-          console.log(secondary.indexOf(basicToSecondary[newBasic[i]][j]));
           updated.push(basicToSecondary[newBasic[i]][j]);
         }
       }
@@ -78,6 +77,23 @@ export default function App() {
     return names;
   }
 
+  function getFeelingsDate(date) {
+    for (let i = 0; i < movementData.length; i++) {
+      if (movementData[i].dateEntry === date) {
+        const movement = movementData[i];
+        let feelings = [];
+        for (let i = 0; i < movement.motionEntry.length; i++) {
+          let set = movement.motionEntry[i]['feelings'];
+          for (let j = 0; j < set.length; j++) {
+            feelings.push(set[j]);
+          }
+        }
+      return feelings;
+      }
+    }
+    return [];
+  }
+
   function movementFeelings(term) {
     let feelings = [];
     for (let i = 0; i < term.motionEntry.length; i++) {
@@ -90,7 +106,7 @@ export default function App() {
     let newMotion = {};
     newMotion.name = name;
     newMotion.feelings = feelings;
-    if ((movementData.length != 0 ) && (movementData[movementData.length - 1].dateEntry == date)) {
+    if ((movementData.length !== 0 ) && (movementData[movementData.length - 1].dateEntry === date)) {
       movementData[movementData.length - 1].motionEntry.push(newMotion);
       // for(let i = 0; i < movementData[movementData.length - 1].motionEntry.length; i++) {
       //   console.log("motion name at index " + i + " " + movementData[movementData.length - 1].motionEntry[i].name);
@@ -117,7 +133,8 @@ export default function App() {
     motion: motion,
     updateMotion: updateMotion,
     updateMovement: updateMovement,
-    movementFeelings: movementFeelings
+    movementFeelings: movementFeelings,
+    getFeelingsDate: getFeelingsDate
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>

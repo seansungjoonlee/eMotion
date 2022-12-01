@@ -12,13 +12,13 @@ import Movement from '../components/Movement';
 export default function CurrentEmotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
-    console.log(movementData[0].motionEntry)
+    console.log(movementData[0]);
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}> Today's Movement </Text>
             <Pressable style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
-                <Movement movementFeelings={context.movementFeelings(movementData[0])} currentFeelings={context.currentFeelings}/>
+                <Movement movementFeelings={context.movementFeelings(movementData[movementData.length-1])} currentFeelings={context.currentFeelings}/>
             </Pressable>
 
                 <TouchableOpacity style = {styles.newMovement} onPress={() => {

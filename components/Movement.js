@@ -38,7 +38,6 @@ function getOutsideStops(movementFeelings) {
             }
         }
     }
-    console.log(colors);
     colors.push('white');
     let stops = [];
     for(let i = 0; i < colors.length; i++){
