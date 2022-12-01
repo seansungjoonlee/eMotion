@@ -21,7 +21,6 @@ export default function App() {
   const [basic, setBasic] = useState([]);
   const [secondary, setSecondary] = useState([]);
   const [motion, setMotion] = useState({name:'', feelings:[]});
-  const [movement, setMovement] = useState({feelings: ['joyful', 'anxious']});
 
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
@@ -67,14 +66,6 @@ export default function App() {
         }
       }
     }
-
-    //if(name != "choosing" && name != '') {
-    //  console.log("inside if statement++++++++++");
-    //  console.log("updated.name = " + updated.name);
-    //  updateMovement(updated);
-    //}
-    
-
     setMotion(updated);
   }
 
@@ -99,7 +90,7 @@ export default function App() {
     let newMotion = {};
     newMotion.name = name;
     newMotion.feelings = feelings;
-    console.log("newMotion = " + newMotion.name + newMotion.feelings);
+    console.log("newMotion = motion: " + newMotion.name + newMotion.feelings);
     console.log("movementData length: " + movementData.length);
     if ((movementData.length != 0 ) && (movementData[movementData.length - 1].dateEntry == date)) {
       console.log("movement data is populated, most recent date is: " + movementData[movementData.length-1].dateEntry);
@@ -134,8 +125,8 @@ export default function App() {
     updateCurrentFeelings: updateCurrentFeelings,
     motion: motion,
     updateMotion: updateMotion,
-    movement: movement,
-    updateMovement: updateMovement
+    updateMovement: updateMovement,
+    movementFeelings: movementFeelings
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>

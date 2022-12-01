@@ -70,19 +70,6 @@ export default function DuringMotion() {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => 
                     {
-                        //update motion to movement
-                        //context.updateMovement(date, context.motion.name, feelings);
-                        // console.log(date);
-                        // console.log(context.motion.name, context.allFeelings);
-                        //context.updateMotion(context.motion.name, context.currentFeelings);
-                        // let newMotion = {};
-                        // newMotion.name = context.motion.name;
-                        // newMotion.feelings = context.allFeelings;
-                        // console.log("going to updateMovement now");
-                        // console.log("newMotion.name = " + newMotion.name);
-                        // context.updateMovement(newMotion);
-                        // console.log("UPDATED");
-                        //update motion to motionsData
                         context.updateMotion('', []);
 
                         navigator.navigate('CurrentEmotion')

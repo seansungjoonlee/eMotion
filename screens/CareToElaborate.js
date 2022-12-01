@@ -8,13 +8,13 @@ import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import Themes from '../assets/Themes';
+import movementData from '../utils/movementData';
 
 
 export default function CareToElaborate() {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
     const [text, onChangeText] = useState();
-    console.log(context.currentFeelings);
     return (
     <SafeAreaView style={styles.container}>
         <View style={styles.backArrowBox}>
@@ -42,9 +42,8 @@ export default function CareToElaborate() {
                         context.setSecondary(updated);
                     }
                     context.updateCurrentFeelings();
-                    console.log(context.motion);
                     if (context.motion.name === '') {
-                        console.log(context.currentFeelings);
+                        console.log("test" + context.currentFeelings);
                         context.updateMovement(context.motion.name, context.currentFeelings);
                         navigator.navigate('CurrentEmotion');
                     }
@@ -52,10 +51,8 @@ export default function CareToElaborate() {
                             navigator.navigate('ChooseMotion');
                     }
                     else {
-                        console.log("HERE+++++++" + context.currentFeelings);
                         context.updateMovement(context.motion.name, context.currentFeelings);
                         context.updateMotion(context.motion.name, context.currentFeelings);
-                        console.log(context.currentFeelings);
                         navigator.navigate('DuringMotion');
                     }
             }

@@ -6,16 +6,19 @@ import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import HowDoYouFeel from './HowDoYouFeel';
 import Themes from '../assets/Themes';
+import movementData from '../utils/movementData';
+import Movement from '../components/Movement';
 
 export default function CurrentEmotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
+    console.log(movementData[0].motionEntry)
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}> Today's Movement </Text>
             <Pressable style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
-                <Emotion feelings={context.movement.feelings}/>
+                <Movement movementFeelings={context.movementFeelings(movementData[0])}/>
             </Pressable>
 
                 <TouchableOpacity style = {styles.newMovement} onPress={() => {
@@ -24,13 +27,6 @@ export default function CurrentEmotion() {
                 }>
                     <Text style = {styles.buttonText}> new motion</Text>
                 </TouchableOpacity>
-                <Pressable style={styles.emotionBox} onPress = {() => {
-                    navigator.navigate('HowDoYouFeel')}}>
-                    <Emotion feelings={context.currentFeelings}/>
-                    <Text style={styles.eMotionText}>
-                        Current eMotion
-                    </Text>
-                </Pressable>
         </SafeAreaView>
     );
 }
@@ -66,8 +62,8 @@ const styles = StyleSheet.create({
      },
      movementBox: {
         marginTop: 30,
-        height: 250,
-        width: 250,
+        height: 350,
+        width: 350,
      },
      emotionBox: {
         marginTop: 10,

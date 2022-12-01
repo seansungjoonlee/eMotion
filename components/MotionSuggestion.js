@@ -11,7 +11,7 @@ function separateEmotions(motionFeelings) {
     for (let i = 0; i < motionFeelings.length; i++) {
         if (motionFeelings[i] in colorMapping) {
             emotions.push(
-                <View style={styles.emotionBox}>
+                <View style={styles.emotionBox} key={i}>
                     <Emotion feelings={[motionFeelings[i]]}/>
                 </View>
             )

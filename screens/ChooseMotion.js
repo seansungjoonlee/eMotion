@@ -15,7 +15,6 @@ export default function ChooseMotion({ route }) {
     const navigator = useNavigation();
     const [guided, setGuided] = useState(true);
     const [text, setText] = useState("");
-    console.log(text);
 
     function guidedOptions() {
         return (
@@ -73,6 +72,14 @@ export default function ChooseMotion({ route }) {
                 navigator.navigate('CurrentEmotion');
             }}/>
         </View>
+        <Text style={styles.heading}>
+            current eMotion
+        </Text>
+        <Pressable style={styles.emotionBox} onPress={() => {
+            navigator.navigate('HowDoYouFeel');
+            }}>
+            <Emotion feelings={context.currentFeelings}/>
+        </Pressable>
         <View style={styles.guideSelectBox}>
             <Text style={[styles.guideSelect, {textDecorationLine: guidedUnderline}]} onPress={() => setGuided(true)}>
                 guided
@@ -81,11 +88,6 @@ export default function ChooseMotion({ route }) {
                 unguided
             </Text>
         </View>
-        <Pressable style={styles.emotionBox} onPress={() => {
-            navigator.navigate('HowDoYouFeel');
-            }}>
-            <Emotion feelings={context.currentFeelings}/>
-        </Pressable>
         <Options/>
         
     </SafeAreaView>
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     suggestedBox: {
-        height: '79%',
+        height: '69%',
         width: '100%'
     },
     label: {
@@ -147,4 +149,7 @@ const styles = StyleSheet.create({
         height: '62%',
         width: '100%',
     },
+    heading: {
+        fontSize: 20
+    }
 });

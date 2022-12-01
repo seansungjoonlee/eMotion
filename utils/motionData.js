@@ -1,31 +1,31 @@
 const motionData = [
     {
         name: 'squats',
-        feelings: ['joyful', 'anxious', 'joyful1'],
+        feelings: ['joyful', 'anxious', 'content'],
     },
     {
         name: 'lunges',
-        feelings: ['joyful', 'sad', 'joyful1'],
+        feelings: ['joyful', 'sad', 'peaceful'],
     },
     {
         name: 'step-ups',
-        feelings: ['angry', 'surprised', 'surprised2'],
+        feelings: ['angry', 'surprised', 'amazed'],
     },
     {
         name: 'stationary bike',
-        feelings: ['angry', 'anxious', 'angry3'],
+        feelings: ['angry', 'anxious', 'frustrated'],
     },
     {
         name: 'treadmill',
-        feelings: ['joyful', 'joyful1', 'joyful4'],
+        feelings: ['joyful', 'peaceful', 'playful'],
     },
     {
         name: 'med-ball slams',
-        feelings: ['angry', 'anxious', 'anxious3'],
+        feelings: ['angry', 'anxious', 'aggressive'],
     },
     {
         name: 'squat jumps',
-        feelings: ['surprised', 'sad', 'sad4'],
+        feelings: ['surprised', 'sad', 'discouraged'],
     },
 ]
 
