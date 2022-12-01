@@ -11,6 +11,7 @@ export default function MotionsSearched({ name }) {
     const context = useContext(FeelingContext);
     return (
         <Pressable style={styles.motion} onPress={() => {
+            context.updateMovement(name, context.currentFeelings);
             context.updateMotion(name, context.currentFeelings);
             navigator.navigate('DuringMotion')}}>
             <Text style={styles.name}>{name}</Text>
