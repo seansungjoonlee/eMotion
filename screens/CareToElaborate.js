@@ -44,12 +44,16 @@ export default function CareToElaborate() {
                     context.updateCurrentFeelings();
                     console.log(context.motion);
                     if (context.motion.name === '') {
+                        console.log(context.currentFeelings);
+                        context.updateMovement(context.motion.name, context.currentFeelings);
                         navigator.navigate('CurrentEmotion');
                     }
                     else if (context.motion.name === 'choosing') {
                             navigator.navigate('ChooseMotion');
                     }
                     else {
+                        console.log("HERE+++++++" + context.currentFeelings);
+                        context.updateMovement(context.motion.name, context.currentFeelings);
                         context.updateMotion(context.motion.name, context.currentFeelings);
                         console.log(context.currentFeelings);
                         navigator.navigate('DuringMotion');
