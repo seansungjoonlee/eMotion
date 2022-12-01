@@ -75,11 +75,6 @@ export default function ChooseMotion({ route }) {
         <Text style={styles.heading}>
             current eMotion
         </Text>
-        <Pressable style={styles.emotionBox} onPress={() => {
-            navigator.navigate('HowDoYouFeel');
-            }}>
-            <Emotion feelings={context.currentFeelings}/>
-        </Pressable>
         <View style={styles.guideSelectBox}>
             <Text style={[styles.guideSelect, {textDecorationLine: guidedUnderline}]} onPress={() => setGuided(true)}>
                 guided
@@ -88,6 +83,11 @@ export default function ChooseMotion({ route }) {
                 unguided
             </Text>
         </View>
+        <Pressable style={styles.emotionBox} onPress={() => {
+            navigator.navigate('HowDoYouFeel');
+            }}>
+            <Emotion feelings={context.currentFeelings}/>
+        </Pressable>
         <Options/>
         
     </SafeAreaView>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     guideSelectBox: {
-        height: '8%',
+        height: '9%',
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     emotionBox: {
-        height: 200,
-        width: 200,
+        height: 170,
+        width: 170,
     },
     guideSelect: {
         fontSize: 25,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     suggestedBox: {
-        height: '69%',
+        height: '73%',
         width: '100%'
     },
     label: {
@@ -146,10 +146,11 @@ const styles = StyleSheet.create({
         marginTop: 20
      },
      searchedBox: {
-        height: '62%',
+        height: '54%',
         width: '100%',
     },
     heading: {
-        fontSize: 20
+        fontSize: 30,
+        marginBottom: 15
     }
 });

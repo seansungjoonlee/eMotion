@@ -12,14 +12,18 @@ import Movement from '../components/Movement';
 export default function CurrentEmotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
-    console.log(movementData[0]);
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}> Today's Movement </Text>
-            <Pressable style={styles.movementBox} onPress = {() => {
+            <Text style={styles.title}>
+                Today's Movement
+            </Text>
+            <View style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
-                <Movement movementFeelings={context.movementFeelings(movementData[context.getCurrentMovementIndex()])} currentFeelings={context.currentFeelings}/>
-            </Pressable>
+                <Movement movementFeelings={context.movementFeelings(movementData[context.getCurrentMovementIndex()])}/>
+                <Pressable style={styles.emotionBox} onPress = {() => {navigator.navigate('HowDoYouFeel')}}>
+                    <Emotion feelings={context.currentFeelings}/>
+                </Pressable>
+            </View>
 
                 <TouchableOpacity style = {styles.newMovement} onPress={() => {
                     context.updateMotion('choosing', [])
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 50
+        paddingTop: 14
     },
     buttonText: {
         fontSize: 20
@@ -61,19 +65,17 @@ const styles = StyleSheet.create({
         borderRadius: 1000
      },
      movementBox: {
-        marginTop: 30,
+        marginTop: 10,
         height: 350,
         width: 350,
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center'
      },
      emotionBox: {
-        marginTop: 10,
-        height: 120,
-        width: 120,
-        marginLeft: 200,
-        position: 'relative',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+        height: 170,
+        width: 170,
+        position: 'absolute'
      },
      bottomSection: {
         flexDirection: 'row',

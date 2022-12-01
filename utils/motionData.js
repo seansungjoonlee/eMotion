@@ -27,6 +27,14 @@ const motionData = [
         name: 'squat jumps',
         feelings: ['surprised', 'sad', 'discouraged'],
     },
+    {
+        name: 'banded squats',
+        feelings: ['shocked', 'surprised', 'joyful'],
+    },
+    {
+        name: 'pistol squats',
+        feelings: ['aggressive', 'angry', 'eager'],
+    },
 ]
 
 export default motionData;

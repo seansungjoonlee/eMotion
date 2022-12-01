@@ -2,7 +2,6 @@ import { TextInput, TouchableOpacity, Modal, Pressable, SafeAreaView, View, Text
 import { useNavigation } from "@react-navigation/native";
 import Emotion from "../components/Emotion";
 import React from "react";
-import { MotionContext } from "../App";
 import { useState } from "react";
 import FeelingContext from '../components/FeelingContext';
 import { useContext } from 'react';
@@ -46,7 +45,7 @@ export default function DuringMotion() {
                             />
                         </View>
                         <Pressable
-                        style={[styles.button, styles.buttonClose]}
+                        style={[styles.noteButton, styles.buttonClose]}
                         onPress={() => setModalVisible(!modalVisible)}
                         >
                             <Text style={styles.textStyle}>Save Note</Text>
@@ -54,14 +53,16 @@ export default function DuringMotion() {
                     </View>
                 </View>
             </Modal>
+            <Text style={styles.header}>
+                current motion:
+            </Text>
             <Text style={styles.motion}>
-                current motion: {context.motion.name}
+                {context.motion.name}
             </Text>
             <Pressable style={styles.emotionBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
                     <Emotion feelings={context.currentFeelings}/>
             </Pressable>
-            <View style={styles.buttonRow}>
                 <TouchableOpacity style={styles.button} onPress={() =>
                 {
                     setModalVisible(!modalVisible)
@@ -76,9 +77,6 @@ export default function DuringMotion() {
                     }}>
                     <Text>end motion</Text>
                 </TouchableOpacity>
-            </View>
-            <View style={styles.buttonRow}>
-            </View>
         </SafeAreaView>
     );
 }
@@ -92,14 +90,18 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         backgroundColor: Themes.background
     },
+    header: {
+        fontSize: 30,
+        marginTop: 40,
+    },
     motion: {
-        fontSize: 20,
-        marginTop: 30
+        fontSize: 30,
     },
     emotionBox: {
-        width: 300,
-        height: 300,
-        marginTop: 40
+        width: 170,
+        height: 170,
+        marginTop: 38,
+        marginBottom: 50
     },
     buttonRow: {
         height: '10%',
@@ -107,9 +109,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        marginTop: 30
+        marginTop: 50
     },
     button: {
+        height: 50,
+        width: 250,
+        backgroundColor: Themes.background,
+        borderRadius: 1000,
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20
+    },
+    noteButton: {
         height: 50,
         width: 150,
         backgroundColor: Themes.background,
