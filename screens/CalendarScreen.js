@@ -21,7 +21,7 @@ function changeDateFormat(inputDate){  // expects Y-m-d
         day = day[1];
     }
 
-    return day + '/' + month + '/' + year;
+    return month + '/' + day + '/' + year;
 }
 
 

@@ -10,7 +10,7 @@ import movementData from '../utils/movementData';
 import Movement from '../components/Movement';
 
 export default function CurrentEmotion() {
-    const navigator = useNavigation();e
+    const navigator = useNavigation();
     const context = useContext(FeelingContext);
     console.log(movementData[context.getCurrentMovementIndex()]);
     return (

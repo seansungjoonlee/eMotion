@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 export default function AddMotionSearch({ movement }) {
     const [text, setText] = useState("");
-    console.log(movement)
     return (
         <View style={styles.container}>
             <View style={styles.textBox}>
