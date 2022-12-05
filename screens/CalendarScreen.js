@@ -36,7 +36,7 @@ export default function CalendarScreen() {
                 dayComponent={({date, state}) => {
                     const newDate = changeDateFormat(date.dateString);
                     return (
-                    <Pressable style={styles.date} onPress={() => navigator.navigate("MovementReflectionScreen", {date: newDate})}>
+                    <Pressable style={styles.date} onPress={() => navigator.navigate("MovementOverview", {date: newDate})}>
                         <Emotion feelings = {context.getFeelingsDate(newDate)}/>
                         <Text style={styles.dayText}>{date.day}</Text>
                     </Pressable>

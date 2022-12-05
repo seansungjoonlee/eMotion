@@ -10,8 +10,9 @@ import movementData from '../utils/movementData';
 import Movement from '../components/Movement';
 
 export default function CurrentEmotion() {
-    const navigator = useNavigation();
+    const navigator = useNavigation();e
     const context = useContext(FeelingContext);
+    console.log(movementData[context.getCurrentMovementIndex()]);
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>

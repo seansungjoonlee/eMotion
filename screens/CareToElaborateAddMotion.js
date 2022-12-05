@@ -1,4 +1,4 @@
-import { TextInput, View, StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import { TextInput, View, StyleSheet, Text, SafeAreaView, TouchableOpacity, DatePickerAndroid} from 'react-native';
 import Emotion from '../components/Emotion';
 import SecondSelection from '../components/SecondSelection';
 import BasicSelection from '../components/BasicSelection';
@@ -9,22 +9,41 @@ import React, { useContext } from 'react';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import Themes from '../assets/Themes';
 import movementData from '../utils/movementData';
+import Movement from '../components/Movement';
+import { basicFeelings, basicToSecondary } from "../assets/feelings";
 
 
-export default function CareToElaborate() {
-    const context = useContext(FeelingContext);
+export default function CareToElaborateAddMotion({ route }) {
+    const { basic, movement, name, feelings, date, note, status, allFeelings } = route.params;
+    let newSecondary = [];
+    if (status === 'edit') {
+        for (let i = 0; i < basicFeelings.length; i++) {
+            for (let j = 0; j < basicToSecondary[basicFeelings[i]].length; j++) {
+                if (feelings.indexOf(basicToSecondary[basicFeelings[i]][j]) !== -1) {
+                    newSecondary.push(basicToSecondary[basicFeelings[i]][j]);
+                }
+            }
+        }
+    }
     const navigator = useNavigation();
     const [text, onChangeText] = useState();
+    const [secondary, setSecondary] = useState(newSecondary);
     return (
     <SafeAreaView style={styles.container}>
         <View style={styles.backArrowBox}>
-            <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('HowDoYouFeel')}/>
+            <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
+                if (status === 'add') {
+                    navigator.navigate('HowDoYouFeelAddMotion', {status: status, name: name, movement:movement})
+                } else {
+                    navigator.navigate('HowDoYouFeelAddMotion', {status: status, name: name, movement:movement, feelings: feelings, allFeelings: allFeelings, date: date, note: note})
+                }
+            }}/>
         </View>
         <Text style={styles.title}> Care to elaborate? </Text>
         <Text style={styles.subtitle}> (select all that apply) </Text>
         {/* replace with emotion component */}
         <View style={styles.selector}>
-            <SecondSelection basic={context.basic} secondary={context.secondary} setSecondary={context.setSecondary}/>
+            <SecondSelection basic={basic} secondary={secondary} setSecondary={setSecondary}/>
         </View>
         <View style={styles.textBox}>
             <TextInput
@@ -36,24 +55,17 @@ export default function CareToElaborate() {
 
         <TouchableOpacity style = {styles.selectButton}    
             onPress={() => {
-                    if (text) {
-                        let updated = [...context.secondary];
-                        updated.push(text);
-                        context.setSecondary(updated);
-                    }
-                    context.updateCurrentFeelings();
-                    if (context.motion.name === '') {
-                        context.updateMovement(context.motion.name, context.currentFeelings);
-                        navigator.navigate('CurrentEmotion');
-                    }
-                    else if (context.motion.name === 'choosing') {
-                            navigator.navigate('ChooseMotion');
-                    }
-                    else {
-                        context.updateMovement(context.motion.name, context.currentFeelings);
-                        context.updateMotion(context.motion.name, context.currentFeelings);
-                        navigator.navigate('DuringMotion');
-                    }
+                if (text) {
+                    let updated = [...secondary];
+                    updated.push(text);
+                    setSecondary(updated);
+                }
+
+                if (status === 'add') {
+                    navigator.navigate('MovementOverview', {date:movement.dateEntry});
+                } else {
+                    navigator.navigate('ExerciseOverview', {date:movement.dateEntry, feelings:allFeelings, date:date, note:note, name:name});
+                }
             }
             }>
             <Text style = {styles.buttonText}> select</Text>

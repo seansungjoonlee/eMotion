@@ -6,6 +6,12 @@ import Themes from '../assets/Themes.js';
 import { useNavigation } from '@react-navigation/native';
 import CalendarScreen from "../screens/CalendarScreen";
 import MovementReflectionScreen from '../screens/MovementReflectionScreen.js';
+import MovementOverview from '../screens/MovementOverview.js';
+import ExerciseOverview from '../screens/ExerciseOverview.js';
+import EditNote from '../screens/EditNote.js';
+import AddingMotion from '../screens/AddingMotion.js';
+import HowDoYouFeelAddMotion from '../screens/HowDoYouFeelAddMotion.js';
+import CareToElaborateAddMotion from '../screens/CareToElaborateAddMotion.js';
 
 export default function ReflectionTask({ navigation }) {
   const Stack = createStackNavigator();
@@ -22,7 +28,14 @@ export default function ReflectionTask({ navigation }) {
       cardStyleInterpolator: forFade,
    }}>
         <Stack.Screen options={{headerShown:false}} name="CalendarScreen" component={CalendarScreen} />
-        <Stack.Screen options={{headerShown:true}} name="MovementReflectionScreen" component={MovementReflectionScreen} />
+        <Stack.Screen options={{headerShown:false}} name="MovementOverview" component={MovementOverview} />
+        <Stack.Screen options={{headerShown:false}} name="ExerciseOverview" component={ExerciseOverview} />
+        <Stack.Screen options={{headerShown:true}} name="EditNote" component={EditNote} />
+        <Stack.Screen options={{headerShown:false}} name="AddingMotion" component={AddingMotion} />
+        <Stack.Screen options={{headerShown:false}} name="HowDoYouFeelAddMotion" component={HowDoYouFeelAddMotion} />
+        <Stack.Screen options={{headerShown:false}} name="CareToElaborateAddMotion" component={CareToElaborateAddMotion} />
+
+
 
     </Stack.Navigator>
   );

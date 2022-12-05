@@ -46,7 +46,11 @@ export default function DuringMotion() {
                         </View>
                         <Pressable
                         style={[styles.noteButton, styles.buttonClose]}
-                        onPress={() => setModalVisible(!modalVisible)}
+                        onPress={() => {
+                            context.updateNote(note);
+                            setModalVisible(!modalVisible);
+                            console.log(context.motion);
+                        }}
                         >
                             <Text style={styles.textStyle}>Save Note</Text>
                         </Pressable>
@@ -72,7 +76,6 @@ export default function DuringMotion() {
                 <TouchableOpacity style={styles.button} onPress={() => 
                     {
                         context.updateMotion('', []);
-
                         navigator.navigate('CurrentEmotion')
                     }}>
                     <Text>end motion</Text>

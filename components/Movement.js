@@ -39,35 +39,6 @@ function getOutsideStops(movementFeelings) {
     return stops;
 }
 
-function getInsideStops(currentFeelings) {
-    let colors = [];
-    if (currentFeelings.length === 1) {
-        colors.push(colorMapping[currentFeelings[0]]);
-    }
-    else {
-        for(let i = 0; i < basicFeelings.length; i++){
-            if (currentFeelings.indexOf(basicFeelings[i]) > -1) {
-                colors.push(colorMapping[basicFeelings[i]]);
-                for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
-                    if (currentFeelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
-                        colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
-                    }
-                }
-            }
-        }
-    }
-    
-    colors.push('white');
-    let stops = [];
-    for(let i = 0; i < colors.length; i++){
-        const offset = (i+1) * (1/(colors.length));
-        stops.push(
-            <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
-        );
-    }
-    return stops;
-}
-
 export default function Movement({ movementFeelings } ) {
     const outsideStops = getOutsideStops(movementFeelings, colorMapping);
     return (

@@ -20,7 +20,7 @@ export default function App() {
   const [currentFeelings, setCurrentFeelings] = useState([]);
   const [basic, setBasic] = useState([]);
   const [secondary, setSecondary] = useState([]);
-  const [motion, setMotion] = useState({name:'', feelings:[]});
+  const [motion, setMotion] = useState({name:'', feelings:[], note:""});
 
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
@@ -61,11 +61,20 @@ export default function App() {
     setCurrentFeelings(updated);
   }
 
+  function updateNote(text) {
+    let updated = {...motion};
+    updated.note = text;
+    setMotion(updated);
+    console.log(motion);
+  }
+
   function updateMotion(name, feelings) {
     let updated = {};
     if (motion.name !== name) {
       updated.name = name;
       updated.feelings = feelings;
+      updated.note = "";
+
     } else {
       updated = {...motion};
       for (let i = 0; i < feelings.length; i++) {
@@ -103,6 +112,15 @@ export default function App() {
     return [];
   }
 
+  function getMovement(date) {
+    for (let i = 0; i < movementData.length; i++) {
+      if (movementData[i].dateEntry === date) {
+        return movementData[i];
+      }
+    }
+    return -1;
+  }
+
   function movementFeelings(term) {
     let feelings = [];
     for (let i = 0; i < term.motionEntry.length; i++) {
@@ -115,6 +133,7 @@ export default function App() {
     let newMotion = {};
     newMotion.name = name;
     newMotion.feelings = feelings;
+    newMotion.note = "";
     if (getCurrentMovementIndex() !== -1) {
       movementData[getCurrentMovementIndex()].motionEntry.push(newMotion);
       // for(let i = 0; i < movementData[movementData.length - 1].motionEntry.length; i++) {
@@ -144,7 +163,9 @@ export default function App() {
     updateMovement: updateMovement,
     movementFeelings: movementFeelings,
     getFeelingsDate: getFeelingsDate,
-    getCurrentMovementIndex: getCurrentMovementIndex
+    getCurrentMovementIndex: getCurrentMovementIndex,
+    updateNote: updateNote,
+    getMovement: getMovement
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>
