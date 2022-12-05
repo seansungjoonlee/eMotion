@@ -21,6 +21,37 @@ export default function ExerciseOverview({ route }) {
     const context = useContext(FeelingContext);
     const { feelings, date, name, note } = route.params;
     const [newNote, setNewNote] = useState(note);
+    const [editable, setEditable] = useState(false);
+    const [button, setButton] = useState(editButton);
+
+    function editButton() {
+        return (
+            <TouchableOpacity style={styles.button} onPress={() => {
+                setEditable(true);
+                setButton(saveButton);
+            }}>
+                <Text>
+                    edit note
+                </Text>
+            </TouchableOpacity>
+        )
+    }
+
+    function saveButton() {
+        return (
+            <TouchableOpacity style={styles.button} onPress={() => {
+                setEditable(false);
+                setButton(editButton);
+            }}>
+                <Text>
+                    save changes
+                </Text>
+            </TouchableOpacity>
+        )
+    }
+
+
+
     return (
     <SafeAreaView style={styles.container}>
         <View style={styles.backArrowBox}>
@@ -57,9 +88,10 @@ export default function ExerciseOverview({ route }) {
                 style={{padding: 10}}
                 fontSize={20}
                 defaultValue={note}
+                editable={editable}
             />
         </View>
-
+        {button}
     </SafeAreaView>
     );
 }
@@ -81,14 +113,6 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 30,
     },
-    circle: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 150,
-        height: 150,
-        borderRadius: 200/2,
-        backgroundColor: 'grey'
-    },   
     feelingsList: {
         height: 85,
     },
@@ -113,14 +137,11 @@ const styles = StyleSheet.create({
         alignItems: 'left',
         justifyContent: 'flex-start',
         width: 300,
-        height: '30%',
+        height: '20%',
         backgroundColor: "grey",
         borderWidth: 1,
         borderRadius: 10,
         backgroundColor: Themes.background
-    },
-    noteText: {
-        fontSize: 20
     },
     noteHeader: {
         fontSize: 25,
@@ -142,41 +163,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20
     },
-    noteButton: {
-        height: 50,
-        width: 150,
-        backgroundColor: Themes.background,
-        borderRadius: 1000,
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    notesSheet: {
-        width: '85%',
-        height: '80%',
-        backgroundColor: 'white',
-        flexDirection: 'column',
-        justifyContent:'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-
-    },
     centeredView: {
         height: '100%',
         width: '100%',
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'center',
-    },
-    noteBox: {
-        height: '80%',
-        width: '80%',
-        marginBottom: 10
-    },
-    header: {
-        fontSize: 25
     },
     topBar: {
         flexDirection: 'row',
