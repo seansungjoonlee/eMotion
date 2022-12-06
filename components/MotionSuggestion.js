@@ -1,15 +1,14 @@
 import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-native';
 import Emotion from './Emotion';
 import { useNavigation } from '@react-navigation/native';
-import context from 'react-context';
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import FeelingContext from './FeelingContext';
-import { colorMapping } from '../assets/feelings';
 
 function separateEmotions(motionFeelings) {
+    const context = useContext(FeelingContext);
     let emotions = [];
     for (let i = 0; i < motionFeelings.length; i++) {
-        if (motionFeelings[i] in colorMapping) {
+        if (motionFeelings[i] in context.colorMapping) {
             emotions.push(
                 <View style={styles.emotionBox} key={i}>
                     <Emotion feelings={[motionFeelings[i]]}/>

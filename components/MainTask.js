@@ -10,7 +10,7 @@ import CurrentEmotion from '../screens/CurrentEmotion';
 import React from 'react';
 import FeelingContext from '../components/FeelingContext';
 import { useState } from 'react';
-import { basicFeelings, basicToSecondary, colorMapping } from '../assets/feelings.js';
+import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
 import Themes from '../assets/Themes.js';
 import { useNavigation } from '@react-navigation/native';
 

@@ -1,9 +1,11 @@
 import { Text, View, StyleSheet, Image, SafeAreaView } from 'react-native';
 import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
-import { colorMapping, basicFeelings, basicToSecondary } from '../assets/feelings.js';
+import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
+import FeelingContext from './FeelingContext.js';
+import { useContext } from 'react';
 
 
-function getOutsideStops(movementFeelings, status) {
+function getOutsideStops(movementFeelings, status, colorMapping) {
     let colors = ['white'];
     let outsideFeelings = [];
     if (status === 'current') {
@@ -49,7 +51,8 @@ function getOutsideStops(movementFeelings, status) {
 }
 
 export default function Movement({ movementFeelings, status } ) {
-    const outsideStops = getOutsideStops(movementFeelings, status);
+    const context = useContext(FeelingContext);
+    const outsideStops = getOutsideStops(movementFeelings, status, context.colorMapping);
     return (
         <View style={styles.container}>
             <Svg height='100%' width="100%">

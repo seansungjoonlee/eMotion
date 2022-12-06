@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native';
 import { PieChart } from 'react-native-svg-charts'
 import { G, Circle, Text } from 'react-native-svg';
-import { basicFeelings, basicToSecondary, colorMapping } from '../assets/feelings.js';
+import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
+import FeelingContext from './FeelingContext.js';
+import { useContext } from 'react';
+
 
 
 function check(value) {
@@ -10,6 +13,7 @@ function check(value) {
 }
 
 export default function SecondSelection({ basic, secondary, setSecondary }){
+    const context = useContext(FeelingContext);
     let innerData = [];
     let outerData = [];
     let outerFeelings = [];
@@ -26,7 +30,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
     .map((value, index) => ({
         value,
         svg: {
-            fill: colorMapping[basic[index]],
+            fill: context.colorMapping[basic[index]],
             onPress: () => {
             },
         },
@@ -38,7 +42,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
     .map((value, index) => ({
         value,
         svg: {
-            fill: colorMapping[outerFeelings[index]],
+            fill: context.colorMapping[outerFeelings[index]],
             onPress: () => {
                 let pos = secondary.indexOf(outerFeelings[index]);
                 if (pos === -1) {

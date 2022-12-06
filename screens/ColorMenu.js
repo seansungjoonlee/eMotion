@@ -13,7 +13,9 @@ export default function ColorMenu() {
     const context = useContext(FeelingContext);
     return (
         <SafeAreaView style={styles.container}>
-            <Pressable style={styles.button} onPress={() => navigator.navigate('ColorSelection')}>
+            <Pressable style={styles.button} onPress={() => {
+                navigator.navigate('ColorSelection', {feeling: 'joyful'})
+                }}>
                 <Text>
                     joyful
                 </Text>

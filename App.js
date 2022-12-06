@@ -3,7 +3,7 @@ import { NavigationContainer, NavigationHelpersContext } from './node_modules/@r
 import React from 'react';
 import FeelingContext from './components/FeelingContext';
 import { useState } from 'react';
-import { basicFeelings, basicToSecondary, colorMapping } from './assets/feelings.js';
+import { basicFeelings, basicToSecondary, basicColorMapping, mapAllColors } from './assets/feelings.js';
 import Themes from './assets/Themes.js';
 import MainTask from './components/MainTask';
 import hardcodedMovementData from './utils/movementData';
@@ -23,9 +23,19 @@ export default function App() {
   const [secondary, setSecondary] = useState([]);
   const [motion, setMotion] = useState({name:'', feelings:[], note:""});
   const [movementData, setMovementData] = useState(hardcodedMovementData);
+  const [basicMapping, setBasicMapping] = useState(basicColorMapping);
+  const [colorMapping, setColorMapping] = useState(mapAllColors(basicColorMapping));
 
   const current = new Date();
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
+
+  function updateColorMapping(basicFeeling, newColor) {
+    let updated = {...basicMapping};
+    updated[basicFeeling] = newColor;
+    console.log(newColor);
+    setBasicMapping(updated);
+    setColorMapping(mapAllColors(updated));
+  }
   
   function updateSecondary(newBasic) {
     let updated = [];
@@ -256,7 +266,9 @@ export default function App() {
     movementData: movementData,
     date: date,
     editNote: editNote,
-    editMotionFromReflection: editMotionFromReflection
+    editMotionFromReflection: editMotionFromReflection,
+    colorMapping: colorMapping,
+    updateColorMapping: updateColorMapping
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>

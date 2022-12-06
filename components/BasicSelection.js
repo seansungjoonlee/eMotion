@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native';
 import { PieChart } from 'react-native-svg-charts'
 import { G, Circle, Text } from 'react-native-svg';
-import { basicFeelings, basicToSecondary, colorMapping } from '../assets/feelings.js';
+import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
+import FeelingContext from './FeelingContext.js';
+import { useContext } from 'react';
 
 const data = [1, 1, 1, 1, 1];
 
 export default function BasicSelection({ basic, setBasic }) {
+    const context = useContext(FeelingContext);
     const pieData = data
     .filter((value) => value > 0)
     .map((value, index) => ({
         value,
         svg: {
-            fill: colorMapping[basicFeelings[index]],
+            fill: context.colorMapping[basicFeelings[index]],
             onPress: () => {
                 let pos = basic.indexOf(basicFeelings[index]);
                 if (pos === -1) {

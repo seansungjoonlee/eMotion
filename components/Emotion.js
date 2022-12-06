@@ -1,8 +1,10 @@
 import { Text, View, StyleSheet, Image, SafeAreaView } from 'react-native';
 import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
-import { colorMapping, basicFeelings, basicToSecondary } from '../assets/feelings.js';
+import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
+import FeelingContext from './FeelingContext.js';
+import { useContext } from 'react';
 
-function getStops(feelings) {
+function getStops(feelings, colorMapping) {
     let colors = [];
     if (feelings[0] === "startScreen") {
         colors = ['#d1d1d1', '#bfbfbf', '#c7c7c7', '#a3a3a3', '#b0b0b0']
@@ -35,7 +37,8 @@ function getStops(feelings) {
 }
 
 export default function Emotion({ feelings }) {
-    const stops = getStops(feelings, colorMapping);
+    const context = useContext(FeelingContext);
+    const stops = getStops(feelings, context.colorMapping);
     return (
         <View style={styles.container}>
             <Svg height='100%' width="100%">

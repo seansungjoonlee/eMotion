@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 import context from 'react-context';
 import { useCallback, useContext } from 'react';
 import FeelingContext from './FeelingContext';
-import { colorMapping } from '../assets/feelings';
 
 export default function MotionsSearched({ name }) {
     const navigator = useNavigation();
