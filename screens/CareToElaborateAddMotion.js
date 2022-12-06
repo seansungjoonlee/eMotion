@@ -62,6 +62,7 @@ export default function CareToElaborateAddMotion({ route }) {
                 if (text) {
                     let updated = [...secondary];
                     updated.push(text);
+                    secondary.push(text);
                     setSecondary(updated);
                 }
                 let newFeelings = [];

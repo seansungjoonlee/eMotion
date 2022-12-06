@@ -76,7 +76,6 @@ export default function App() {
 
 
   function editNote(status, movementDate, motionName, text) {
-    console.log('entered function');
     if (status === 'motion') {
       for (let i = 0; i < movementData.length; i++) {
         if (movementData[i].dateEntry === movementDate) {

@@ -36,18 +36,19 @@ export default function CareToElaborate() {
 
         <TouchableOpacity style = {styles.selectButton}    
             onPress={() => {
+                    let secondary = [...context.secondary];
                     if (text) {
-                        let updated = [...context.secondary];
-                        updated.push(text);
-                        context.setSecondary(updated);
+                        console.log('entered')
+                        secondary.push(text);
+                        context.setSecondary(secondary);
                     }
-                    context.updateCurrentFeelings(context.basic, context.secondary);
+                    context.updateCurrentFeelings(context.basic, secondary);
                     let newFeelings = []
                     for (let i = 0; i < context.basic.length; i++) {
                         newFeelings.push(context.basic[i]);
                     }
-                    for (let i = 0; i < context.secondary.length; i++) {
-                        newFeelings.push(context.secondary[i]);
+                    for (let i = 0; i < secondary.length; i++) {
+                        newFeelings.push(secondary[i]);
                     }
 
                     if (context.motion.name === '') {
