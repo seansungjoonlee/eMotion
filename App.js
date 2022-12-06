@@ -24,6 +24,8 @@ export default function App() {
 
   const current = new Date();
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
+  
+  let globalMovementData = movementData;
 
   function updateSecondary(newBasic) {
     let updated = [];
@@ -66,6 +68,44 @@ export default function App() {
     updated.note = text;
     setMotion(updated);
     console.log(motion);
+  }
+
+  function editNote(movementDate, motionName, text) {
+    let updated = {};
+    for (let i = 0; i < globalMovementData.length; i++) {
+      if (globalMovementData[i].dateEntry == movementDate) {
+        for (let j = 0; j < globalMovementData[i].motion.length; j++) {
+            if (globalMovementData[i].motion[j].motionEntry.name == motionName) {
+              globalMovementData[i].motion[j].motionEntry.note = text;
+            }
+        }
+      }
+    }
+  }
+
+  function editMotionFromReflection(movementDate, motionName, newFeelings) {
+    let updated = {};
+    for (let i = 0; i < globalMovementData.length; i++) {
+      if (globalMovementData[i].dateEntry == movementDate) {
+        for (let j = 0; j < globalMovementData[i].motion.length; j++) {
+            if (globalMovementData[i].motion[j].motionEntry.name == motionName) {
+              globalMovementData[i].motion[j].motionEntry.feelings = newFeelings;
+            }
+        }
+      }
+    }
+  }
+
+  function getTime() {
+    let newDate = new Date();
+    let time = newDate.getHours();
+    if(newDate.getMinutes() < 10) {
+      time += ':0' + newDate.getMinutes();
+    } else {
+      time += ':' + newDate.getMinutes();
+    }
+    console.log("time is now " + time);
+    return time;
   }
 
   function updateMotion(name, feelings) {
@@ -130,16 +170,30 @@ export default function App() {
   }
 
   function updateMovement(name, feelings) {
+    if (name == "") {
+      name = getTime();
+    }
     let newMotion = {};
+    //add a number to the motion name
+    
     newMotion.name = name;
     newMotion.feelings = feelings;
     newMotion.note = "";
-    if (getCurrentMovementIndex() !== -1) {
-      movementData[getCurrentMovementIndex()].motionEntry.push(newMotion);
-      // for(let i = 0; i < movementData[movementData.length - 1].motionEntry.length; i++) {
-      //   console.log("motion name at index " + i + " " + movementData[movementData.length - 1].motionEntry[i].name);
-      // }
+    //if >=one motion for today has already been logged
+    let currentMovementIndex = getCurrentMovementIndex();
+    if (currentMovementIndex !== -1) {
+      //add the correct number to the motion name
+      let count = 1;
+      for (let i = 0; i < movementData[currentMovementIndex].motionEntry.length; i++) {
+        if (movementData[currentMovementIndex].motionEntry[i].name == (name + " " + count)) {
+          count++;
+        }
+      }
+      newMotion.name += " " + count;
+      movementData[currentMovementIndex].motionEntry.push(newMotion);
     } else {
+      //newMotion name will be the first one, no need to loop
+      newMotion.name += " 1";
       let movementEntry = {};
       movementEntry.dateEntry = date;
       movementEntry.motionEntry = [];
@@ -165,7 +219,8 @@ export default function App() {
     getFeelingsDate: getFeelingsDate,
     getCurrentMovementIndex: getCurrentMovementIndex,
     updateNote: updateNote,
-    getMovement: getMovement
+    getMovement: getMovement,
+    movementData: movementData
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>
