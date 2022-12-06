@@ -53,9 +53,11 @@ export default function ExerciseOverview({ route }) {
 
     function renderWords({ item }) {
         return (
-            <Text style={styles.feeling}>
-                {item}
-            </Text>
+            <View style={styles.centeredWord}>
+                <Text style={styles.feeling}>
+                    {item}
+                </Text>
+            </View>
         )
     }
 
@@ -126,6 +128,11 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'flex-start',
         backgroundColor: Themes.background
+    },
+    centeredWord: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     emotionLog: {
         width: 375,
