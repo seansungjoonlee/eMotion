@@ -6,6 +6,8 @@ import Emotion from '../components/Emotion';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import Movement from '../components/Movement';
+import { Ionicons } from '@expo/vector-icons'; 
+
 
 
 function changeDateFormat(inputDate){  // expects Y-m-d
@@ -31,6 +33,12 @@ export default function CalendarScreen() {
     const context = useContext(FeelingContext);
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.topBar}>
+                <Ionicons name="settings-sharp" size={30} color="black" onPress={() => navigator.navigate('ColorMenu')}/>
+            </View>
+            <Text style={styles.title}>
+                reflect
+            </Text>
             <Calendar
                 style={[styles.calendar, {height: 400}, {width: 300}]}
                 dayComponent={({date, state}) => {
@@ -58,14 +66,21 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: Themes.background,
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+    },
+    topBar: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        paddingHorizontal: 30,
+        paddingTop: 10,
+        width: '100%'
     },
     title: {
         fontSize: 30,
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 50
+        paddingTop: 20
     },
     date: {
         height: 40,

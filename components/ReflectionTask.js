@@ -13,6 +13,9 @@ import AddingMotion from '../screens/AddingMotion.js';
 import HowDoYouFeelAddMotion from '../screens/HowDoYouFeelAddMotion.js';
 import CareToElaborateAddMotion from '../screens/CareToElaborateAddMotion.js';
 import ExerciseOverviewEditable from '../screens/ExerciseOverviewEditable.js';
+import ColorMenu from '../screens/ColorMenu.js';
+import ColorSelection from '../screens/ColorSelection.js';
+
 
 export default function ReflectionTask({ navigation }) {
   const Stack = createStackNavigator();
@@ -36,6 +39,8 @@ export default function ReflectionTask({ navigation }) {
         <Stack.Screen options={{headerShown:false}} name="AddingMotion" component={AddingMotion} />
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeelAddMotion" component={HowDoYouFeelAddMotion} />
         <Stack.Screen options={{headerShown:false}} name="CareToElaborateAddMotion" component={CareToElaborateAddMotion} />
+        <Stack.Screen options={{headerShown:true}} name="ColorMenu" component={ColorMenu} />
+        <Stack.Screen options={{headerShown:true}} name="ColorSelection" component={ColorSelection} />
 
 
 
