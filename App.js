@@ -6,13 +6,14 @@ import { useState } from 'react';
 import { basicFeelings, basicToSecondary, colorMapping } from './assets/feelings.js';
 import Themes from './assets/Themes.js';
 import MainTask from './components/MainTask';
-import movementData from './utils/movementData';
+import hardcodedMovementData from './utils/movementData';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ReflectionTask from './components/ReflectionTask';
 import CommunityTask from './components/CommunityTask';
 import { FontAwesome } from '@expo/vector-icons';
 import { useIsFocused } from "@react-navigation/native"; 
 import { useNavigation } from './node_modules/@react-navigation/native';
+import context from 'react-context';
 
 
 export default function App() {
@@ -21,12 +22,11 @@ export default function App() {
   const [basic, setBasic] = useState([]);
   const [secondary, setSecondary] = useState([]);
   const [motion, setMotion] = useState({name:'', feelings:[], note:""});
+  const [movementData, setMovementData] = useState(hardcodedMovementData);
 
   const current = new Date();
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
   
-  let globalMovementData = movementData;
-
   function updateSecondary(newBasic) {
     let updated = [];
     for (let i = 0; i < newBasic.length; i++) {
@@ -48,48 +48,68 @@ export default function App() {
     return -1
   }
 
-  function updateCurrentFeelings() {
+  async function updateCurrentFeelings(bas, sec) {
     let updated = [];
-    for (let i = 0; i < basic.length; i++) {
+    for (let i = 0; i < bas.length; i++) {
       //basic feeling
-      updated.push(basic[i]);
+      updated.push(bas[i]);
     }
     
-    for (let i = 0; i < secondary.length; i++) {
+    for (let i = 0; i < sec.length; i++) {
       //basic feeling
-      updated.push(secondary[i]);
+      updated.push(sec[i]);
     }
-
     setCurrentFeelings(updated);
+    //setCurrentFeelings(updated);
+
   }
 
-  function updateNote(text) {
-    let updated = {...motion};
-    updated.note = text;
-    setMotion(updated);
-    console.log(motion);
-  }
 
-  function editNote(movementDate, motionName, text) {
-    let updated = {};
-    for (let i = 0; i < globalMovementData.length; i++) {
-      if (globalMovementData[i].dateEntry == movementDate) {
-        for (let j = 0; j < globalMovementData[i].motion.length; j++) {
-            if (globalMovementData[i].motion[j].motionEntry.name == motionName) {
-              globalMovementData[i].motion[j].motionEntry.note = text;
-            }
+  function editNote(status, movementDate, motionName, text) {
+    console.log('entered function');
+    if (status === 'motion') {
+      for (let i = 0; i < movementData.length; i++) {
+        if (movementData[i].dateEntry === movementDate) {
+          console.log('found movement')
+          for (let j = movementData[i].motionEntry.length - 1; j >= 0; j--) {
+              if (movementData[i].motionEntry[j].name.substring(0, movementData[i].motionEntry[j].name.length-2) === motionName) {
+                while (movementData[i].motionEntry[j-1].name.substring(0, movementData[i].motionEntry[j-1].name.length-2) === motionName) {
+                  j -= 1
+                }
+                console.log('found motion')
+                let updated = [...movementData];
+                updated[i].motionEntry[j].note = text;
+                setMovementData(updated);
+              }
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < movementData.length; i++) {
+        if (movementData[i].dateEntry === movementDate) {
+          console.log('found movement')
+          for (let j = 0; j < movementData[i].motionEntry.length; j++) {
+              if (movementData[i].motionEntry[j].name === motionName) {
+                console.log('found motion')
+                let updated = [...movementData];
+                updated[i].motionEntry[j].note = text;
+                setMovementData(updated);
+                console.log('updated motion');
+              }
+          }
         }
       }
     }
   }
 
   function editMotionFromReflection(movementDate, motionName, newFeelings) {
-    let updated = {};
-    for (let i = 0; i < globalMovementData.length; i++) {
-      if (globalMovementData[i].dateEntry == movementDate) {
-        for (let j = 0; j < globalMovementData[i].motion.length; j++) {
-            if (globalMovementData[i].motion[j].motionEntry.name == motionName) {
-              globalMovementData[i].motion[j].motionEntry.feelings = newFeelings;
+    for (let i = 0; i < movementData.length; i++) {
+      if (movementData[i].dateEntry === movementDate) {
+        for (let j = 0; j < movementData[i].motionEntry.length; j++) {
+            if (movementData[i].motionEntry[j].name === motionName) {
+              let updated = [...movementData];
+              updated[i].motionEntry[j].feelings = newFeelings;
+              setMovementData(updated);
             }
         }
       }
@@ -169,7 +189,9 @@ export default function App() {
     return feelings;
   }
 
-  function updateMovement(name, feelings) {
+  function updateMovement(name, feelings, movementDate) {
+    let updated = [...movementData];
+
     if (name == "") {
       name = getTime();
     }
@@ -178,30 +200,42 @@ export default function App() {
     
     newMotion.name = name;
     newMotion.feelings = feelings;
+    console.log(newMotion);
     newMotion.note = "";
     //if >=one motion for today has already been logged
-    let currentMovementIndex = getCurrentMovementIndex();
-    if (currentMovementIndex !== -1) {
+    let movementIndex = -1;
+    if (movementDate === date) {
+      movementIndex = getCurrentMovementIndex();
+    } else {
+      for (let i = 0; i < movementData.length; i++) {
+        if (movementData[i].dateEntry === movementDate) {
+          movementIndex = i;
+        }
+      }
+    }
+    if (movementIndex !== -1) {
       //add the correct number to the motion name
       let count = 1;
-      for (let i = 0; i < movementData[currentMovementIndex].motionEntry.length; i++) {
-        if (movementData[currentMovementIndex].motionEntry[i].name == (name + " " + count)) {
+      for (let i = 0; i < movementData[movementIndex].motionEntry.length; i++) {
+        if (movementData[movementIndex].motionEntry[i].name == (name + " " + count)) {
           count++;
         }
       }
       newMotion.name += " " + count;
-      movementData[currentMovementIndex].motionEntry.push(newMotion);
+      updated[movementIndex].motionEntry.push(newMotion);
+      console.log('changed')
+      setMovementData(updated);
     } else {
       //newMotion name will be the first one, no need to loop
       newMotion.name += " 1";
       let movementEntry = {};
-      movementEntry.dateEntry = date;
+      movementEntry.dateEntry = movementDate;
       movementEntry.motionEntry = [];
       movementEntry.motionEntry.push(newMotion);
-      movementData.push(movementEntry);
+      updated.push(movementEntry);
+      setMovementData(updated);
       //will this console log work when motionEntry is an array? check after hardcoding movements
     }
-
   }
 
   const feelingSettings = {
@@ -218,9 +252,11 @@ export default function App() {
     movementFeelings: movementFeelings,
     getFeelingsDate: getFeelingsDate,
     getCurrentMovementIndex: getCurrentMovementIndex,
-    updateNote: updateNote,
     getMovement: getMovement,
-    movementData: movementData
+    movementData: movementData,
+    date: date,
+    editNote: editNote,
+    editMotionFromReflection: editMotionFromReflection
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>

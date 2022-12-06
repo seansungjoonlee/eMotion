@@ -11,7 +11,7 @@ import { basicFeelings } from "../assets/feelings";
 
 export default function HowDoYouFeelAddMotion({ route }) {
     const navigator = useNavigation();
-    const { status, name, movement, feelings, date, note, allFeelings } = route.params;
+    const { status, name, movement, feelings, date, note, allFeelings, fullNames } = route.params;
     let newBasic = [];
     console.log(feelings);
     if (status === 'edit') {
@@ -29,7 +29,7 @@ export default function HowDoYouFeelAddMotion({ route }) {
             <TouchableOpacity 
                 style = {styles.selectButton} key={basic.length}
                 onPress={() => {
-                    navigator.navigate('CareToElaborateAddMotion', {status: status, basic: basic, movement: movement, name:name, feelings:feelings, allFeelings:allFeelings, date:date, note:note});
+                    navigator.navigate('CareToElaborateAddMotion', {status: status, basic: basic, movement: movement, name:name, feelings:feelings, allFeelings:allFeelings, date:date, note:note, fullNames: fullNames});
                 }}>
                 <Text style = {styles.buttonText}> select</Text>
             </TouchableOpacity>
@@ -44,7 +44,7 @@ export default function HowDoYouFeelAddMotion({ route }) {
                     navigator.navigate('MovementOverview', {date:movement.dateEntry})
                 }
                 else {
-                    navigator.navigate('ExerciseOverview', {date:movement.dateEntry, feelings:allFeelings, date:date, note:note, name:name})
+                    navigator.navigate('ExerciseOverview', {date:movement.dateEntry, feelings:allFeelings, date:date, note:note, name:name.substring(0, name.length-2), fullNames:fullNames})
                 }
             
             }}/>

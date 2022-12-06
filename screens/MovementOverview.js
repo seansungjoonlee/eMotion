@@ -21,7 +21,7 @@ export default function MovementOverview({ route }) {
     const { date } = route.params;
     const movement = context.getMovement(date);
     let displayedContent = [];
-    console.log(movement)
+    console.log(movement.motionEntry[4])
 
     if (movement === -1) {
         displayedContent = (

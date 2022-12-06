@@ -15,7 +15,7 @@ import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import context from 'react-context';
 
 
-export default function ExerciseOverview({ route }) {
+export default function ExerciseOverviewEditable({ route }) {
     const navigator = useNavigation();
     const [modalVisible, setModalVisible] = useState(false);
     const context = useContext(FeelingContext);
@@ -82,14 +82,15 @@ export default function ExerciseOverview({ route }) {
                 style={{padding: 10}}
                 fontSize={20}
                 defaultValue={note}
-                editable={false}
+                editable={true}
             />
         </View>
         <TouchableOpacity style={styles.button} onPress={() => {
-                navigator.navigate('ExerciseOverviewEditable', {date: date, name: name, fullNames: fullNames});
+                context.editNote('reflection', date, fullNames[0], newNote);
+                navigator.navigate('ExerciseOverview', {date: date, name: name, fullNames: fullNames})
             }}>
                 <Text>
-                    edit note
+                    save changes
                 </Text>
             </TouchableOpacity>
     </SafeAreaView>

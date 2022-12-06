@@ -27,7 +27,7 @@ export default function MotionSuggestion({ name, motionFeelings }) {
     return (
         <Pressable style={styles.motion} onPress={() => {
             context.updateMotion(name, context.currentFeelings);
-            context.updateMovement(name, context.currentFeelings);
+            context.updateMovement(name, context.currentFeelings, context.date);
             navigator.navigate('DuringMotion')}}>
             <Text style={styles.name}>{name}</Text>
             <View style={styles.basedOnText}>

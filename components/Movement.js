@@ -40,7 +40,7 @@ function getOutsideStops(movementFeelings, status) {
     colors.push('white');
     let stops = [];
     for(let i = 0; i < colors.length; i++){
-        const offset = 0.3 + (i + 1) * (0.7/(colors.length));
+        const offset = 0.2 + (i + 1) * (0.8/(colors.length));
         stops.push(
             <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
         );

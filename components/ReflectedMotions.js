@@ -6,10 +6,10 @@ import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useNavigation } from '@react-navigation/native';
 
 
-function PastMotion({name, motionFeelings, date, note}) {
+function PastMotion({name, motionFeelings, date, fullNames}) {
   const navigator = useNavigation();
   return (
-    <Pressable style={styles.motion} onPress={() => navigator.navigate('ExerciseOverview', {feelings: motionFeelings, date: date, name: name, note: note})}>
+    <Pressable style={styles.motion} onPress={() => navigator.navigate('ExerciseOverview', { date: date, name: name, fullNames: fullNames})}>
       <Text style={styles.name}>
         {name}
       </Text>
@@ -34,20 +34,20 @@ const renderMotion = ({ item, index }) => (
     name = {item.name}
     motionFeelings = {item.feelings}
     date = {item.date}
-    note = {item.note}
+    fullNames = {item.fullNames}
   />
 );
 
 function configureMotions(movement) {
   const motionEntry = movement.motionEntry;
   let motionsData = [];
-  motionsData.push({name: motionEntry[0].name, feelings: [motionEntry[0].feelings], date: movement.dateEntry, note:motionEntry[0].note})
+  motionsData.push({name: motionEntry[0].name.substring(0, motionEntry[0].name.length-2), feelings: [motionEntry[0].feelings], fullNames:[motionEntry[0].name], date: movement.dateEntry})
   for (let i = 1; i < motionEntry.length; i++) {
-    if (motionEntry[i].name != motionsData[motionsData.length-1].name) {
-      motionsData.push({name: motionEntry[i].name, feelings: [motionEntry[i].feelings], date: movement.dateEntry, note:motionEntry[i].note});
+    if (motionEntry[i].name.substring(0, motionEntry[i].name.length-2) !== motionsData[motionsData.length-1].name) {
+      motionsData.push({name: motionEntry[i].name.substring(0, motionEntry[i].name.length-2), feelings: [motionEntry[i].feelings], fullNames: [motionEntry[i].name], date: movement.dateEntry});
     } else {
       motionsData[motionsData.length-1].feelings.push(motionEntry[i].feelings);
-      motionsData[motionsData.length-1].note = motionEntry[i].note;
+      motionsData[motionsData.length-1].fullNames.push(motionEntry[i].name);
     }
   }
   return motionsData;

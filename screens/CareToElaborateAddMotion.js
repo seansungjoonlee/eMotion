@@ -11,10 +11,13 @@ import Themes from '../assets/Themes';
 import movementData from '../utils/movementData';
 import Movement from '../components/Movement';
 import { basicFeelings, basicToSecondary } from "../assets/feelings";
+import context from 'react-context';
+import MovementOverview from './MovementOverview';
 
 
 export default function CareToElaborateAddMotion({ route }) {
-    const { basic, movement, name, feelings, date, note, status, allFeelings } = route.params;
+    const { basic, movement, name, feelings, date, note, status, allFeelings, fullNames } = route.params;
+    const context = useContext(FeelingContext);
     let newSecondary = [];
     if (status === 'edit') {
         for (let i = 0; i < basicFeelings.length; i++) {
@@ -33,9 +36,10 @@ export default function CareToElaborateAddMotion({ route }) {
         <View style={styles.backArrowBox}>
             <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
                 if (status === 'add') {
+                    context.
                     navigator.navigate('HowDoYouFeelAddMotion', {status: status, name: name, movement:movement})
                 } else {
-                    navigator.navigate('HowDoYouFeelAddMotion', {status: status, name: name, movement:movement, feelings: feelings, allFeelings: allFeelings, date: date, note: note})
+                    navigator.navigate('HowDoYouFeelAddMotion', {status: status, name: name, movement:movement, feelings: feelings, allFeelings: allFeelings, date: date, note: note, fullNames: fullNames})
                 }
             }}/>
         </View>
@@ -60,11 +64,20 @@ export default function CareToElaborateAddMotion({ route }) {
                     updated.push(text);
                     setSecondary(updated);
                 }
+                let newFeelings = [];
+                for (let i = 0; i < basic.length; i++) {
+                    newFeelings.push(basic[i]);
+                } 
+                for (let i = 0; i < secondary.length; i++) {
+                    newFeelings.push(secondary[i]);
+                }
 
                 if (status === 'add') {
+                    context.updateMovement(name, newFeelings, movement.dateEntry);
                     navigator.navigate('MovementOverview', {date:movement.dateEntry});
                 } else {
-                    navigator.navigate('ExerciseOverview', {date:movement.dateEntry, feelings:allFeelings, date:date, note:note, name:name});
+                    context.editMotionFromReflection(date, name, newFeelings);
+                    navigator.navigate('ExerciseOverview', {date:movement.dateEntry, feelings:allFeelings, date:date, note:note, name:name.substring(0, name.length-2), fullNames: fullNames});
                 }
             }
             }>

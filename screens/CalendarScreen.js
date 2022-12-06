@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 import Themes from '../assets/Themes';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import Emotion from '../components/Emotion';
-import movementData from '../utils/movementData';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import Movement from '../components/Movement';

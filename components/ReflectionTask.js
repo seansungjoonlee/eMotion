@@ -12,6 +12,7 @@ import EditNote from '../screens/EditNote.js';
 import AddingMotion from '../screens/AddingMotion.js';
 import HowDoYouFeelAddMotion from '../screens/HowDoYouFeelAddMotion.js';
 import CareToElaborateAddMotion from '../screens/CareToElaborateAddMotion.js';
+import ExerciseOverviewEditable from '../screens/ExerciseOverviewEditable.js';
 
 export default function ReflectionTask({ navigation }) {
   const Stack = createStackNavigator();
@@ -30,6 +31,7 @@ export default function ReflectionTask({ navigation }) {
         <Stack.Screen options={{headerShown:false}} name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen options={{headerShown:false}} name="MovementOverview" component={MovementOverview} />
         <Stack.Screen options={{headerShown:false}} name="ExerciseOverview" component={ExerciseOverview} />
+        <Stack.Screen options={{headerShown:false}} name="ExerciseOverviewEditable" component={ExerciseOverviewEditable} />
         <Stack.Screen options={{headerShown:true}} name="EditNote" component={EditNote} />
         <Stack.Screen options={{headerShown:false}} name="AddingMotion" component={AddingMotion} />
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeelAddMotion" component={HowDoYouFeelAddMotion} />

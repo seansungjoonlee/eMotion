@@ -6,13 +6,11 @@ import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import HowDoYouFeel from './HowDoYouFeel';
 import Themes from '../assets/Themes';
-import movementData from '../utils/movementData';
 import Movement from '../components/Movement';
 
 export default function CurrentEmotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
-    console.log(movementData[context.getCurrentMovementIndex()]);
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>
@@ -20,7 +18,7 @@ export default function CurrentEmotion() {
             </Text>
             <View style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
-                <Movement movementFeelings={context.movementFeelings(movementData[context.getCurrentMovementIndex()])} status={'current'}/>
+                <Movement movementFeelings={context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])} status={'current'}/>
                 <Pressable style={styles.emotionBox} onPress = {() => {navigator.navigate('HowDoYouFeel')}}>
                     <Emotion feelings={context.currentFeelings}/>
                 </Pressable>

@@ -41,17 +41,25 @@ export default function CareToElaborate() {
                         updated.push(text);
                         context.setSecondary(updated);
                     }
-                    context.updateCurrentFeelings();
+                    context.updateCurrentFeelings(context.basic, context.secondary);
+                    let newFeelings = []
+                    for (let i = 0; i < context.basic.length; i++) {
+                        newFeelings.push(context.basic[i]);
+                    }
+                    for (let i = 0; i < context.secondary.length; i++) {
+                        newFeelings.push(context.secondary[i]);
+                    }
+
                     if (context.motion.name === '') {
-                        context.updateMovement(context.motion.name, context.currentFeelings);
+                        context.updateMovement(context.motion.name, newFeelings, context.date);
                         navigator.navigate('CurrentEmotion');
                     }
                     else if (context.motion.name === 'choosing') {
+                            context.updateMovement('', newFeelings, context.date);
                             navigator.navigate('ChooseMotion');
                     }
                     else {
-                        context.updateMovement(context.motion.name, context.currentFeelings);
-                        context.updateMotion(context.motion.name, context.currentFeelings);
+                        context.updateMovement(context.motion.name, newFeelings, context.date);
                         navigator.navigate('DuringMotion');
                     }
             }

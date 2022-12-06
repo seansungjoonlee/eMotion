@@ -7,15 +7,13 @@ import FeelingContext from '../components/FeelingContext';
 import { useContext } from 'react';
 import Themes from "../assets/Themes";
 import { Feather } from '@expo/vector-icons'; 
+import movementData from "../utils/movementData";
 
 export default function DuringMotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
 
-    const current = new Date();
-    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
   
-    let [currentMotion, updateCurrentMotion] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [note, setNote] = useState();
     return (
@@ -47,7 +45,8 @@ export default function DuringMotion() {
                         <Pressable
                         style={[styles.noteButton, styles.buttonClose]}
                         onPress={() => {
-                            context.updateNote(note);
+                            console.log(note);
+                            context.editNote('motion', context.date, context.motion.name, note);
                             setModalVisible(!modalVisible);
                             console.log(context.motion);
                         }}
