@@ -4,15 +4,34 @@ import MotionSuggestion from './MotionSuggestion';
 import Emotion from './Emotion';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons'; 
+import { useState } from 'react';
+
 
 
 function Notif({friend, message}) {
     const header = 'You and ' + friend + '...';
+    const [heart, setHeart] = useState('heart-outline')
+    const [color, setColor] = useState('black')
+
+    function toggleHeart() {
+        if (heart === 'heart-outline') {
+            setHeart('heart-sharp')
+            setColor('red')
+        } else {
+            setHeart('heart-outline')
+            setColor('black')
+        }
+    }
+
   return (
     <View style={styles.notif}>
-        <Text style={styles.header}>
-            {header}
-        </Text>
+        <View style={styles.notifTop}>
+            <Text style={styles.header}>
+                {header}
+            </Text>
+            <Ionicons name={heart} size={24} color={color} onPress={() => toggleHeart()}/>
+        </View>
          <Text style={styles.body}>
             {message}
         </Text>
@@ -29,9 +48,7 @@ const renderNotif = ({ item, index }) => (
 );
 
 
-export default function FeedList() {
-
-    const notifs = [{friend: "Devorah", message:'...both felt anxious and sad tonight. Try comforting each other.'}, {friend: "Ethan", message:'...both logged squats today. High five!'}, {friend: 'Hawi', message: '...both logged yoga today. Namaste!'}]
+export default function FeedList({ notifs }) {
   return (
     <View style={styles.container}>
       <FlatList
@@ -94,5 +111,11 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 15
+  },
+  notifTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    alignItems: 'center',
   }
 });

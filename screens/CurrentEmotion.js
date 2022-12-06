@@ -20,7 +20,7 @@ export default function CurrentEmotion() {
             </Text>
             <View style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
-                <Movement movementFeelings={context.movementFeelings(movementData[context.getCurrentMovementIndex()])}/>
+                <Movement movementFeelings={context.movementFeelings(movementData[context.getCurrentMovementIndex()])} status={'current'}/>
                 <Pressable style={styles.emotionBox} onPress = {() => {navigator.navigate('HowDoYouFeel')}}>
                     <Emotion feelings={context.currentFeelings}/>
                 </Pressable>
@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
      },
      emotionBox: {
-        height: 170,
-        width: 170,
+        height: 150,
+        width: 150,
         position: 'absolute'
      },
      bottomSection: {

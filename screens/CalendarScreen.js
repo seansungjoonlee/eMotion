@@ -6,6 +6,7 @@ import Emotion from '../components/Emotion';
 import movementData from '../utils/movementData';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
+import Movement from '../components/Movement';
 
 
 function changeDateFormat(inputDate){  // expects Y-m-d
@@ -35,9 +36,13 @@ export default function CalendarScreen() {
                 style={[styles.calendar, {height: 400}, {width: 300}]}
                 dayComponent={({date, state}) => {
                     const newDate = changeDateFormat(date.dateString);
+                    let movementFeelings = [];
+                    if (context.getMovement(newDate) !== -1) {
+                        movementFeelings = context.movementFeelings(context.getMovement(newDate));
+                    }
                     return (
                     <Pressable style={styles.date} onPress={() => navigator.navigate("MovementOverview", {date: newDate})}>
-                        <Emotion feelings = {context.getFeelingsDate(newDate)}/>
+                        <Movement movementFeelings={movementFeelings}/>
                         <Text style={styles.dayText}>{date.day}</Text>
                     </Pressable>
                     );
@@ -54,7 +59,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: Themes.background,
         flexDirection: 'column',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     title: {

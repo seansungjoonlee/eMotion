@@ -3,13 +3,22 @@ import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
 import { colorMapping, basicFeelings, basicToSecondary } from '../assets/feelings.js';
 
 
-function getOutsideStops(movementFeelings) {
+function getOutsideStops(movementFeelings, status) {
     let colors = ['white'];
     let outsideFeelings = [];
-    for (let i = 0; i < movementFeelings.length; i++) {
-        for (let j = 0; j < movementFeelings[i].length; j++)
-        {
-            outsideFeelings.push(movementFeelings[i][j]);
+    if (status === 'current') {
+        for (let i = 0; i < movementFeelings.length - 1; i++) {
+            for (let j = 0; j < movementFeelings[i].length; j++)
+            {
+                outsideFeelings.push(movementFeelings[i][j]);
+            }
+        } 
+    } else {
+        for (let i = 0; i < movementFeelings.length; i++) {
+            for (let j = 0; j < movementFeelings[i].length; j++)
+            {
+                outsideFeelings.push(movementFeelings[i][j]);
+            }
         }
     }
 
@@ -31,7 +40,7 @@ function getOutsideStops(movementFeelings) {
     colors.push('white');
     let stops = [];
     for(let i = 0; i < colors.length; i++){
-        const offset = 0.5 + (i + 1) * (0.5/(colors.length));
+        const offset = 0.3 + (i + 1) * (0.7/(colors.length));
         stops.push(
             <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
         );
@@ -39,8 +48,8 @@ function getOutsideStops(movementFeelings) {
     return stops;
 }
 
-export default function Movement({ movementFeelings } ) {
-    const outsideStops = getOutsideStops(movementFeelings, colorMapping);
+export default function Movement({ movementFeelings, status } ) {
+    const outsideStops = getOutsideStops(movementFeelings, status);
     return (
         <View style={styles.container}>
             <Svg height='100%' width="100%">

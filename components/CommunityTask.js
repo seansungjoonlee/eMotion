@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Themes from '../assets/Themes.js';
 import CommunityFeedScreen from '../screens/CommunityFeedScreen.js';
+import AddFriend from '../screens/AddFriend.js';
 
 export default function ReflectionTask({ navigation }) {
   const Stack = createStackNavigator();
@@ -18,7 +19,7 @@ export default function ReflectionTask({ navigation }) {
       cardStyleInterpolator: forFade,
    }}>
         <Stack.Screen options={{headerShown:false}} name="CommunityFeedScreen" component={CommunityFeedScreen} />
-
+        <Stack.Screen options={{headerShown:false}} name="AddFriend" component={AddFriend} />
 
 
     </Stack.Navigator>
