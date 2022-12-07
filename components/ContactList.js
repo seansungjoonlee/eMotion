@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import AddFriend from '../screens/AddFriend';
 import contactsData from '../utils/contactsData';
+import friendsData from '../utils/friendsData';
 
 
 
@@ -33,6 +34,8 @@ function addFriend(name, username) {
   let contact = {};
   contact.name = name;
   contact.username = username;
+  friendsData.push(contact);
+  console.log(friendsData);
   for (let i = 0; i < contactsData.length; i++) {
     if (contactsData[i].name == name) {
       contactsData.splice(i, 1);
