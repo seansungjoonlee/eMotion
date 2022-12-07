@@ -11,10 +11,10 @@ function Contact({name, username}) {
   return (
     <Pressable style={styles.contactBox}>
         <View style={styles.user}>
-            <Text>
+            <Text style={styles.nameText}>
                 {name}
             </Text>
-            <Text>
+            <Text style={styles.usernameText}>
                 {username}
             </Text>
         </View>
@@ -70,4 +70,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start'
   },
+  nameText: {
+    fontFamily: 'Avenir',
+    fontSize: 20,
+  },
+  usernameText: {
+    fontFamily: 'Avenir',
+    fontSize: 15
+  }
 });

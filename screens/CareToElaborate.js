@@ -80,47 +80,49 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     backArrowBox: {
-        height: 45,
+        height: '7%',
         width: '100%',
         paddingHorizontal: 15,
         justifyContent: 'center'
     },
     title: {
+        fontFamily: 'Avenir',
         fontSize: 30,
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 0
     },
     subtitle: {
+        fontFamily: 'Avenir',
         fontSize: 20,
         textAlign: 'center',
-        paddingTop: 5,
-        paddingBottom: 35
+        paddingTop: '1%',
+        paddingBottom: '7%'
     },
     // take out
     buttonText: {
+        fontFamily: 'Avenir',
         fontSize: 20,
     },  
     selectButton: {
         alignItems: 'center',
         justifyContent: 'center',
         //padding: 20,
-        marginTop: 25,
-        width: 175,
-        height: 50,
+        marginTop: '5%',
+        width: '45%',
+        height: '8%',
         borderRadius: 1000,
         borderWidth: 1
      },
      selector: {
-        height: 300,
+        height: '50%',
      },
      textBox: {
-        height: 40,
-        width: 250,
+        height: '7%',
+        width: '70%',
         borderWidth: 1,
-        borderRadius: 100,
+        borderRadius: 1000,
         justifyContent: 'center',
         paddingLeft: 10,
-        marginTop: 20
+        marginTop: '5%'
      }
 });

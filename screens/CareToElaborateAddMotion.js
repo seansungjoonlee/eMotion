@@ -36,7 +36,6 @@ export default function CareToElaborateAddMotion({ route }) {
         <View style={styles.backArrowBox}>
             <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
                 if (status === 'add') {
-                    context.
                     navigator.navigate('HowDoYouFeelAddMotion', {status: status, name: name, movement:movement})
                 } else {
                     navigator.navigate('HowDoYouFeelAddMotion', {status: status, name: name, movement:movement, feelings: feelings, allFeelings: allFeelings, date: date, note: note, fullNames: fullNames})
@@ -103,19 +102,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     title: {
-        fontSize: 30,
+        fontSize: 25,
+        fontFamily: 'Avenir',
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 0
     },
     subtitle: {
+        fontFamily: 'Avenir',
         fontSize: 20,
         textAlign: 'center',
-        paddingTop: 5,
-        paddingBottom: 35
+        paddingBottom: 42
     },
     // take out
     buttonText: {
+        fontFamily: 'Avenir',
         fontSize: 20,
     },  
     selectButton: {

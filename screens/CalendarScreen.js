@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 30,
+        fontFamily: 'Avenir',
         textAlign: 'center',
         fontWeight: 'bold',
         paddingTop: 20

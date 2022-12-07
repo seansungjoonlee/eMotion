@@ -37,7 +37,7 @@ export default function ExerciseOverviewBottom({ setEditable, editable, note, da
                     context.editNote('reflection', date, fullNames[0], newNote);
                     setEditable(!editable)
                 }}>
-                    <Text>
+                    <Text style={styles.buttonText}>
                         {text}
                     </Text>
                 </TouchableOpacity>
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     noteHeader: {
+        fontFamily: 'Avenir',
         fontSize: 25,
         marginHorizontal: 60
     },
@@ -89,5 +90,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20
+    },
+    buttonText: {
+        fontFamily: 'Avenir',
+        fontSize: 20
     }
 });

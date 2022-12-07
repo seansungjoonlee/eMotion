@@ -19,11 +19,11 @@ export default function AddingMotion({ route }) {
             <View style={styles.backArrowBox}>
                 <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('MovementOverview', {date: date})}/>
             </View>
-            <Text style={styles.title}>
-                adding motion:
-            </Text>
             <Text style={styles.date}>
                 {date}
+            </Text>
+            <Text style={styles.title}>
+                adding motion:
             </Text>
             <View style={styles.movementBox}>
                 <Movement movementFeelings={context.movementFeelings(movement)}/>
@@ -44,10 +44,13 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     title: {
-        fontSize: 25
+        fontFamily: 'Avenir',
+        fontWeight: 'bold',
+        fontSize: 30
     },
     date: {
-        fontSize: 25
+        fontFamily: 'Avenir',
+        fontSize: 30
     },
     movementBox: {
         alignItems: 'center',

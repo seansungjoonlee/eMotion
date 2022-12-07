@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, Image, FlatList, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import motionData from '../utils/motionData';
 import MotionSuggestion from './MotionSuggestion';
 import Emotion from './Emotion';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useNavigation } from '@react-navigation/native';
+import { FlatList } from 'react-native-gesture-handler';
 
 
 function PastMotion({name, motionFeelings, date, fullNames}) {
@@ -13,17 +14,21 @@ function PastMotion({name, motionFeelings, date, fullNames}) {
       <Text style={styles.name}>
         {name}
       </Text>
-      <FlatList
-            data={motionFeelings}
-            horizontal={true}
-            renderItem={({ item }) => (
-                <View>
-                    <View style={styles.emotionBox}>
-                        <Emotion feelings={item}/>
-                    </View>
-                </View>
-            )}
-            />
+      <View style={styles.emotionList}>
+        <FlatList
+              data={motionFeelings}
+              horizontal={true}
+              scrollEnabled={true}
+              nestedScrollEnabled={true}
+              renderItem={({ item }) => (
+                  <View>
+                      <View style={styles.emotionBox}>
+                          <Emotion feelings={item}/>
+                      </View>
+                  </View>
+              )}
+              />
+        </View>
     </Pressable>
   );
 }
@@ -61,6 +66,7 @@ export default function ReflectedMotions({ movement }) {
     <View style={styles.container}>
       <FlatList
         data={motions}
+        nestedScrollEnabled={true}
         renderItem={(item) => renderMotion(item)}
         keyExtractor={(item, index) => {
           return item.id;
@@ -85,9 +91,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: 250,
     marginVertical: 10,
-    flexDirection: 'column',
-    alignItems: 'left',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     padding: 10
 },
 emotions: {
@@ -96,7 +102,8 @@ emotions: {
   alignContent: 'center'
 },
 name: {
-    fontSize: 30,
+    fontFamily: 'Avenir',
+    fontSize: 20,
     paddingHorizontal: 5
 },
 basedOnText: {
@@ -108,5 +115,8 @@ emotionBox: {
     height: 60,
     width: 60,
     marginHorizontal: 5
+},
+emotionList: {
+  height: 60,
 }
 });

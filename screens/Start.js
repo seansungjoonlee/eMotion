@@ -30,17 +30,19 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
+        fontFamily: 'Avenir',
         fontSize: 30,
         textAlign: 'center',
         fontWeight: 'bold',
         paddingTop: 50
     },
     subtitle: {
+        fontFamily: 'Avenir',
         fontStyle:'italic',
         fontSize: 30,
         textAlign: 'center',
         paddingTop: 20,
-        paddingBottom: 50
+        paddingBottom: 20
     },
     button: {
         justifyContent: 'center',
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
     },
     // take out
     buttonText: {
+        fontFamily: 'Avenir',
         fontSize: 30,
         position: 'absolute',
     },    

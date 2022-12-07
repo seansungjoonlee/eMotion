@@ -41,7 +41,7 @@ export default function BasicSelection({ basic, setBasic }) {
             let weight = 'normal';
             let size = 16;
             if (pos !== -1) {
-                weight = 'bold';
+                weight = 'bolder';
                 size = 18;
             }
             const { labelCentroid, pieCentroid, data } = slice;
@@ -53,6 +53,7 @@ export default function BasicSelection({ basic, setBasic }) {
                     fill={'black'}
                     textAnchor={'middle'}
                     alignmentBaseline={'center'}
+                    fontFamily={'Avenir'}
                     fontSize={size}
                     fontWeight={weight}
                     stroke={'black'}

@@ -69,26 +69,27 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     title: {
+        fontFamily: 'Avenir',
         fontSize: 25,
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 10
     },
     subtitle: {
+        fontFamily: 'Avenir',
         fontSize: 20,
         textAlign: 'center',
-        paddingTop: 5,
-        paddingBottom: 35
+        paddingBottom: 10
     },
     // take out
     buttonText: {
+        fontFamily: 'Avenir',
         fontSize: 20
     },  
     selectButton: {
         alignItems: 'center',
         justifyContent: 'center',
         //padding: 20,
-        marginTop: 40,
+        marginTop: 83,
         width: 175,
         height: 50,
         borderRadius: 1000,

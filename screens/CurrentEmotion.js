@@ -14,7 +14,7 @@ export default function CurrentEmotion() {
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>
-                Today's Movement
+                Today's Feelings
             </Text>
             <View style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
@@ -28,7 +28,7 @@ export default function CurrentEmotion() {
                     context.updateMotion('choosing', [])
                     navigator.navigate('ChooseMotion')}
                 }>
-                    <Text style = {styles.buttonText}> new motion</Text>
+                    <Text style = {styles.buttonText}> new movement </Text>
                 </TouchableOpacity>
         </SafeAreaView>
     );
@@ -46,11 +46,12 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         textAlign: 'center',
+        paddingTop: '6%',
+        fontFamily: 'Avenir',
         fontWeight: 'bold',
-        paddingTop: 14,
-        fontFamily: 'Roboto-Bold'
     },
     buttonText: {
+        fontFamily: 'Avenir',
         fontSize: 20
     },  
     newMovement: {
@@ -58,33 +59,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: Themes.background,
         borderWidth: 1,
-        marginTop: 30,
-        marginBottom: 20,
-        width: 200,
-        height: 40,
+        marginTop: '8%',
+        width: '65%',
+        height: '8%',
         borderRadius: 1000
      },
      movementBox: {
-        marginTop: 10,
-        height: 350,
+        marginTop: '2%',
+        height: '58.5%',
         width: 350,
         position: 'relative',
         justifyContent: 'center',
         alignItems: 'center'
      },
      emotionBox: {
-        height: 150,
-        width: 150,
+        height: '40%',
+        width: '40%',
         position: 'absolute'
      },
-     bottomSection: {
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        alignItems: 'center'
-     },
-     eMotionText: {
-        position: 'absolute',
-        fontSize: 16,
-        top: -15
-     }
 });

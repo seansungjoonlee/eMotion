@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
       width: '100%',
     },
     title: {
+        fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: 30,
         marginTop: 5

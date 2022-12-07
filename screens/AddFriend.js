@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     title: {
+        fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: 30,
         marginTop: 5
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     select: {
+        fontFamily: 'Avenir',
         fontSize: 25,
     },
     contactDisplay: {
@@ -133,6 +135,7 @@ const styles = StyleSheet.create({
         paddingTop: 20
     },
     label: {
+        fontFamily: 'Avenir',
         fontSize: 15
     },
     contacts: {
@@ -156,10 +159,12 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     buttonText: {
-        fontSize: 15
+        fontFamily: 'Avenir',
+        fontSize: 20
     },
     inviteText: {
-        fontSize: 15,
+        fontFamily: 'Avenir',
+        fontSize: 20,
         marginBottom: 10
     }
   });

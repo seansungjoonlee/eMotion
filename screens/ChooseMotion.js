@@ -20,7 +20,7 @@ export default function ChooseMotion({ route }) {
         return (
             <View style={styles.optionsBox}>
                 <Text style={styles.label}>
-                    suggested motions:
+                    suggested movements:
                 </Text>
                 <View style={styles.suggestedBox}>
                     <SuggestedMotions currentFeelings={context.currentFeelings}/>
@@ -33,7 +33,7 @@ export default function ChooseMotion({ route }) {
         return (
             <View style={styles.optionsBox}>
                 <Text style={styles.label}>
-                    search for motion:
+                    search for movement:
                 </Text>
                 <View style={styles.textBox}>
                     <TextInput
@@ -72,7 +72,7 @@ export default function ChooseMotion({ route }) {
                 navigator.navigate('CurrentEmotion');
             }}/>
         </View>
-        <Text style={styles.heading}>
+        <Text style={styles.title}>
             current eMotion
         </Text>
         <View style={styles.guideSelectBox}>
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     },
     guideSelect: {
         fontSize: 25,
+        fontFamily: 'Avenir'
     },
     optionsBox: {
         height: '60%',
@@ -134,9 +135,11 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     label: {
+        fontFamily: 'Avenir',
         fontSize: 20
     },
     textBox: {
+        fontFamily: 'Avenir',
         height: 40,
         width: 250,
         borderWidth: 1,
@@ -149,8 +152,10 @@ const styles = StyleSheet.create({
         height: '54%',
         width: '100%',
     },
-    heading: {
+    title: {
         fontSize: 30,
-        marginBottom: 15
+        fontFamily: 'Avenir',
+        fontWeight: 'bold',
+        marginBottom: '3%'
     }
 });

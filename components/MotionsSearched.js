@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     name: {
+        fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: 20,
     },

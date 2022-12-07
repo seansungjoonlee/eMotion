@@ -103,8 +103,8 @@ export default function ExerciseOverview({ route }) {
             <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('MovementOverview', {date: date})}/>
             <Ionicons name="information-circle-outline" size={30} color="black" onPress={() => setDetails(!details)} />
         </View>
-        <Text style={styles.text}>{date}</Text>
-        <Text style={styles.text}>{name}</Text>
+        <Text style={styles.title}>{date}</Text>
+        <Text style={styles.motion}>{name}</Text>
         <View style={styles.list}>
             <SwiperFlatList
                 index={0}
@@ -146,10 +146,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    text: {
+    title: {
+        fontFamily: 'Avenir',
         fontSize: 30,
     },
+    motion: {
+        fontFamily: 'Avenir',
+        fontWeight: 'bold',
+        fontSize: 30
+    },
     feeling: {
+        fontFamily: 'Avenir',
         fontSize: 20,
     },
     list: {
@@ -218,6 +225,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     feelingHeader: {
+        fontFamily: 'Avenir',
         fontSize: 25
     },
     flatListBox: {

@@ -49,26 +49,29 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         textAlign: 'center',
+        fontFamily: 'Avenir',
         fontWeight: 'bold',
-        paddingTop: 50
+        paddingTop: '11%'
     },
     subtitle: {
         fontSize: 20,
+        fontFamily: 'Avenir',
         textAlign: 'center',
-        paddingTop: 5,
-        paddingBottom: 35
+        paddingTop: '1%',
+        paddingBottom: '7%'
     },
     // take out
     buttonText: {
+        fontFamily: 'Avenir',
         fontSize: 20
     },  
     selectButton: {
         alignItems: 'center',
         justifyContent: 'center',
         //padding: 20,
-        marginTop: 80,
-        width: 175,
-        height: 50,
+        marginTop: '21%',
+        width: '45%',
+        height: '8%',
         borderRadius: 1000,
         borderWidth: 1
      },   

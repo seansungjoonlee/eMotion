@@ -65,7 +65,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
     const LabelsInner = ({ slices, height, width }) => {
         return slices.map((slice, index) => {
             let pos = basic.indexOf(basicFeelings[index]);
-            let weight = 'bold';
+            let weight = 'bolder';
             let size = 14;
             const { labelCentroid, pieCentroid, data } = slice;
             return (
@@ -76,6 +76,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
                     fill={'black'}
                     textAnchor={'middle'}
                     alignmentBaseline={'center'}
+                    fontFamily={'Avenir'}
                     fontSize={size}
                     fontWeight={weight}
                     stroke={'black'}
@@ -91,10 +92,10 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
         return slices.map((slice, index) => {
             let pos = secondary.indexOf(outerFeelings[index]);
             let weight = 'normal';
-            let size = 10;
+            let size = 14;
             if (pos !== -1) {
-                weight = 'bold';
-                size = 12;
+                weight = 'bolder';
+                size = 16;
             }
             const { labelCentroid, pieCentroid, data } = slice;
             return (
@@ -105,6 +106,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
                     fill={'black'}
                     textAnchor={'middle'}
                     alignmentBaseline={'center'}
+                    fontFamily={'Avenir'}
                     fontSize={size}
                     fontWeight={weight}
                     stroke={'black'}

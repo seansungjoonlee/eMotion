@@ -51,7 +51,7 @@ export default function MovementOverview({ route }) {
                     <ReflectedMotions movement={movement}/>
                 </View>
                 <TouchableOpacity style={styles.addMotion} onPress={() => navigator.navigate('AddingMotion', {movement: movement})}>
-                    <Text>
+                    <Text style={styles.textButton}>
                         + add motion
                     </Text>
                 </TouchableOpacity>
@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
         margin: 15
     },      
     date: {
-        fontSize: 40,
+        fontFamily: 'Avenir',
+        fontSize: 30,
     },
     backArrowBox: {
         height: 45,
@@ -103,5 +104,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 20
+    },
+    textButton: {
+        fontFamily: 'Avenir',
+        fontSize: 20
     }
 });

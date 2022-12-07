@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
         width: 80,
     },
     feelingName: {
+        fontFamily: 'Avenir',
         fontSize: 25
     }
 });

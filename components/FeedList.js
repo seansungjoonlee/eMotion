@@ -97,11 +97,13 @@ const styles = StyleSheet.create({
     padding: 10
   },
   header: {
+    fontFamily: 'Avenir',
     fontWeight: 'bold',
     fontSize: 20,
     marginBottom: 10
   },
   body: {
+    fontFamily: 'Avenir',
     fontSize: 15
   },
   footer: {
@@ -110,6 +112,7 @@ const styles = StyleSheet.create({
     marginTop: 15
   },
   footerText: {
+    fontFamily: 'Avenir',
     fontSize: 15
   },
   notifTop: {

@@ -51,13 +51,13 @@ export default function DuringMotion() {
                             console.log(context.motion);
                         }}
                         >
-                            <Text style={styles.textStyle}>Save Note</Text>
+                            <Text style={styles.buttonText}>save note</Text>
                         </Pressable>
                     </View>
                 </View>
             </Modal>
-            <Text style={styles.header}>
-                current motion:
+            <Text style={styles.title}>
+                current movement:
             </Text>
             <Text style={styles.motion}>
                 {context.motion.name}
@@ -70,14 +70,14 @@ export default function DuringMotion() {
                 {
                     setModalVisible(!modalVisible)
                 }}>
-                        <Text>add note</Text>
+                        <Text style={styles.buttonText}>add note</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => 
                     {
                         context.updateMotion('', []);
                         navigator.navigate('CurrentEmotion')
                     }}>
-                    <Text>end motion</Text>
+                    <Text style={styles.buttonText}>end movement</Text>
                 </TouchableOpacity>
         </SafeAreaView>
     );
@@ -92,11 +92,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         backgroundColor: Themes.background
     },
-    header: {
+    title: {
+        fontFamily: 'Avenir',
         fontSize: 30,
         marginTop: 40,
     },
     motion: {
+        fontFamily: 'Avenir',
+        fontWeight: 'bold',
         fontSize: 30,
     },
     emotionBox: {
@@ -164,5 +167,10 @@ const styles = StyleSheet.create({
         height: '7%',
         width: '100%',
         paddingHorizontal: 30
+    },
+    buttonText: {
+        fontFamily: 'Avenir',
+        fontSize: 20
+
     }
 });
