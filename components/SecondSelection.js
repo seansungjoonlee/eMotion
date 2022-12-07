@@ -66,7 +66,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
         return slices.map((slice, index) => {
             let pos = basic.indexOf(basicFeelings[index]);
             let weight = 'bolder';
-            let size = 14;
+            let size = (6 + 12 * (1 / context.basic.length)) * 1.15;
             const { labelCentroid, pieCentroid, data } = slice;
             return (
                 <Text
@@ -92,10 +92,10 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
         return slices.map((slice, index) => {
             let pos = secondary.indexOf(outerFeelings[index]);
             let weight = 'normal';
-            let size = 14;
+            let size = 7 + 9 * (1 / context.basic.length);
             if (pos !== -1) {
                 weight = 'bolder';
-                size = 16;
+                size = size * 1.15;
             }
             const { labelCentroid, pieCentroid, data } = slice;
             return (

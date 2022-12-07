@@ -11,7 +11,8 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
     let insideFeelings = [];
     let colors = [];
     let stops = [];
-    let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
+    //let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
+    let firstEmotion = false;
     if (status === 'current') {
         for (let i = 0; i < movementFeelings.length - 1; i++) {
             for (let j = 0; j < movementFeelings[i].length; j++)
