@@ -8,11 +8,13 @@ import ContactList from "../components/ContactList";
 export default function AddFriend() {
     const navigator = useNavigation();
     const [method, setMethod] = useState('contacts');
-    const contacts = [{name: 'Hawi', username: '@hawia'},
-                        {name: 'Ethan', username: '@ethanf'},
-                        {name: 'Linda', username: '@lindad'},
-                        {name: 'Devorah', username: '@devorahs'},
-                        {name: 'James', username: '@proflanday'}]
+    // const contacts = [{name: 'Hawi', username: '@hawia'},
+    //                     {name: 'Ethan', username: '@ethanf'},
+    //                     {name: 'Linda', username: '@lindad'},
+    //                     {name: 'Devorah', username: '@devorahs'},
+    //                     {name: 'James', username: '@proflanday'}]
+
+    const contacts = contactsData;
 
     function contactDisplay() {
         return (
