@@ -11,15 +11,35 @@ import Movement from '../components/Movement';
 export default function CurrentEmotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
+    let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
+    
+    function Visualization() {
+        if (firstEmotion) {
+            return (
+                <View style={styles.movementBox}>
+                    <Pressable style={styles.emotionBox} onPress = {() => {
+                navigator.navigate('HowDoYouFeel')}}>
+                        <Emotion feelings={context.currentFeelings}/>
+                    </Pressable>
+                </View>
+            )
+        } else {
+            return (
+                <Pressable style={styles.movementBox} onPress = {() => {
+                    navigator.navigate('HowDoYouFeel')}}>
+                    <Movement movementFeelings={context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])} status={'current'}/>
+                </Pressable>
+            )
+        }
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>
                 Today's Feelings
             </Text>
-            <Pressable style={styles.movementBox} onPress = {() => {
-                navigator.navigate('HowDoYouFeel')}}>
-                <Movement movementFeelings={context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])} status={'current'}/>
-            </Pressable>
+
+            <Visualization/>
 
                 <TouchableOpacity style = {styles.newMovement} onPress={() => {
                     context.updateMotion('choosing', [])
@@ -70,8 +90,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
      },
      emotionBox: {
-        height: '40%',
-        width: '40%',
+        height: 180,
+        width: 180,
         position: 'absolute'
      },
 });

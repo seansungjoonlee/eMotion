@@ -19,7 +19,7 @@ export default function CommunityFeedScreen() {
                 <FontAwesome5 name="user-plus" size={24} color="black" onPress={() => navigator.navigate('AddFriend')}/>
             </View>
             <Text style={styles.title}>
-                friends
+                community
             </Text>
             <FeedList notifs={notifs}/>
         </SafeAreaView>

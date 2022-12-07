@@ -4,30 +4,34 @@ import Themes from "../assets/Themes";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { useState } from "react";
 import ContactList from "../components/ContactList";
+import FriendList from "../components/FriendList";
 
 export default function AddFriend() {
     const navigator = useNavigation();
-    const [method, setMethod] = useState('contacts');
+    const [method, setMethod] = useState('add');
     const contacts = [{name: 'Hawi', username: '@hawia'},
                         {name: 'Ethan', username: '@ethanf'},
                         {name: 'Linda', username: '@lindad'},
                         {name: 'Devorah', username: '@devorahs'},
                         {name: 'James', username: '@proflanday'}]
 
-    function contactDisplay() {
+    const friends = [{name: 'Billy', username: '@billyb'},
+                    {name: 'Bob', username: '@bobs'},
+                    {name: 'Joe', username: '@joem'},
+                    {name: 'Anna', username: '@annas'},
+                    {name: 'Sally', username: '@sallr'}]
+
+    function friendDisplay() {
         return (
             <View style={styles.contactDisplay}>
-                <Text style={styles.label}>
-                    These contacts are already on eMotion!
-                </Text>
-                <View style={styles.contacts}>
-                    <ContactList contacts={contacts}/>
+                <View style={styles.friends}>
+                    <FriendList friends={friends}/>
                 </View>
             </View>
         )
     };
 
-    function inviteDisplay() {
+    function addDisplay() {
         const copyInviteAlert = () =>
             Alert.alert(
             "invite link copied",
@@ -41,38 +45,36 @@ export default function AddFriend() {
                 { text: "OK", onPress: () => console.log("OK Pressed") }
             ]
             );
-
         return (
-            <View style={styles.inviteDisplay}>
-                <Text style={styles.inviteText}>
-                    Invite someone to join eMotion!
-                </Text>
+            <View style={styles.contactDisplay}> 
                 <TouchableOpacity style={styles.button} onPress={copyInviteAlert}>
                     <Text style={styles.buttonText}>
                         copy invite link
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>
-                        send invite text
-                    </Text>
-                </TouchableOpacity>
+                <Text style={styles.orText}>
+                    contacts already on eMotion:
+                </Text>
+                <View style={styles.contacts}>
+                    <ContactList contacts={contacts}/>
+                </View>
             </View>
         )
     };
 
-    let Display = contactDisplay;
-    let contactsUnderline = 'underline';
-    let inviteUnderline = 'none';
+    let Display = addDisplay;
+    let addUnderline = 'underline';
+    let friendsUnderline = 'none'
 
-    if (method === 'contacts') {
-        Display = contactDisplay;
-        contactsUnderline = 'underline';
-        inviteUnderline = 'none';
+    if (method === 'add') {
+        Display = addDisplay;
+        addUnderline = 'underline';
+        friendsUnderline = 'none';
     } else {
-        Display = inviteDisplay;
-        contactsUnderline= 'none';
-        inviteUnderline = 'underline';
+        Display = friendDisplay;
+        friendsUnderline = 'underline';
+        addUnderline = 'none'
+
     }
     return (
         <SafeAreaView style={styles.container}>
@@ -80,14 +82,14 @@ export default function AddFriend() {
                 <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('CommunityFeedScreen')}/>
             </View>
             <Text style={styles.title}>
-                add a friend
+                community
             </Text>
             <View style={styles.methodSelectBox}>
-            <Text style={[styles.select, {textDecorationLine: contactsUnderline}]} onPress={() => setMethod('contacts')}>
-                contacts
+            <Text style={[styles.select, {textDecorationLine: friendsUnderline}]} onPress={() => setMethod('friends')}>
+                friends
             </Text>
-            <Text style={[styles.select, {textDecorationLine: inviteUnderline}]} onPress={() => setMethod('invite')}>
-                invite
+            <Text style={[styles.select, {textDecorationLine: addUnderline}]} onPress={() => setMethod('add')}>
+                add
             </Text>
         </View>
             <Display/>
@@ -115,13 +117,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: 30,
-        marginTop: 5
     },
     methodSelectBox: {
         height: '9%',
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         paddingHorizontal: 50,
         alignItems: 'center',
     },
@@ -140,7 +141,11 @@ const styles = StyleSheet.create({
     },
     contacts: {
         width: '100%',
-        height: '83%'
+        height: '65%'
+    },
+    friends: {
+        width: '100%',
+        height: '86%'
     },
     inviteDisplay: {
         justifyContent: 'center',
@@ -150,13 +155,12 @@ const styles = StyleSheet.create({
     },
     button: {
         height: 50,
-        width: 250,
+        width: 200,
         backgroundColor: Themes.background,
         borderRadius: 1000,
         borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
     },
     buttonText: {
         fontFamily: 'Avenir',
@@ -164,8 +168,13 @@ const styles = StyleSheet.create({
     },
     inviteText: {
         fontFamily: 'Avenir',
-        fontSize: 20,
-        marginBottom: 10
+        fontSize: 15,
+        marginBottom: 5
+    },
+    orText: {
+        fontFamily: 'Avenir',
+        fontSize: '25',
+        margin: 15
     }
   });
   
