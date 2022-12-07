@@ -1,15 +1,21 @@
-import { StyleSheet, Text, View, Image, FlatList, Pressable, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList, Pressable, Dimensions, NativeModules } from 'react-native';
 import motionData from '../utils/motionData';
 import MotionSuggestion from './MotionSuggestion';
 import Emotion from './Emotion';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons'; 
+import AddFriend from '../screens/AddFriend';
+import contactsData from '../utils/contactsData';
+
 
 
 
 function Contact({name, username}) {
   return (
-    <Pressable style={styles.contactBox}>
+    <Pressable style={styles.contactBox} onPress={() => {
+      addFriend(name, username);
+      console.log(name);
+      }}>
         <View style={styles.user}>
             <Text style={styles.nameText}>
                 {name}
@@ -21,6 +27,20 @@ function Contact({name, username}) {
         <MaterialIcons name="add" size={24} color="black" />
     </Pressable>
   );
+}
+
+function addFriend(name, username) {
+  let contact = {};
+  contact.name = name;
+  contact.username = username;
+  for (let i = 0; i < contactsData.length; i++) {
+    if (contactsData[i].name == name) {
+      contactsData.splice(i, 1);
+      console.log(i);
+    }
+  }
+  console.log(contactsData);
+  //console.log("name is " + name);
 }
 
 
