@@ -13,13 +13,14 @@ export default function HowDoYouFeelAddMotion({ route }) {
     const navigator = useNavigation();
     const { status, name, movement, feelings, date, note, allFeelings, fullNames } = route.params;
     let newBasic = [];
-    console.log(feelings);
+    let displayedName = name;    
     if (status === 'edit') {
         for (let i = 0; i < basicFeelings.length; i++) {
             if (feelings.indexOf(basicFeelings[i]) !== -1) {
                 newBasic.push(basicFeelings[i]);
             }
         }
+        displayedName = name.substring(0, name.length-2);
     }
     const [basic, setBasic] = useState(newBasic);
 
@@ -49,7 +50,7 @@ export default function HowDoYouFeelAddMotion({ route }) {
             
             }}/>
         </View>
-        <Text style={styles.title}> How did you feel during {name}? </Text>
+        <Text style={styles.title}> How did you feel during {displayedName}? </Text>
         <Text style={styles.subtitle}> (select all that apply) </Text>
         {/* replace with emotion component */}
         <BasicSelection basic={basic} setBasic={setBasic}/>

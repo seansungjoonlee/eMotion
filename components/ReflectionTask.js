@@ -33,12 +33,11 @@ export default function ReflectionTask({ navigation }) {
         <Stack.Screen options={{headerShown:false}} name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen options={{headerShown:false}} name="MovementOverview" component={MovementOverview} />
         <Stack.Screen options={{headerShown:false}} name="ExerciseOverview" component={ExerciseOverview} />
-        <Stack.Screen options={{headerShown:true}} name="EditNote" component={EditNote} />
         <Stack.Screen options={{headerShown:false}} name="AddingMotion" component={AddingMotion} />
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeelAddMotion" component={HowDoYouFeelAddMotion} />
         <Stack.Screen options={{headerShown:false}} name="CareToElaborateAddMotion" component={CareToElaborateAddMotion} />
-        <Stack.Screen options={{headerShown:true}} name="ColorMenu" component={ColorMenu} />
-        <Stack.Screen options={{headerShown:true}} name="ColorSelection" component={ColorSelection} />
+        <Stack.Screen options={{headerShown:false}} name="ColorMenu" component={ColorMenu} />
+        <Stack.Screen options={{headerShown:false}} name="ColorSelection" component={ColorSelection} />
 
 
 

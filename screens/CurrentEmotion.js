@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 14
+        paddingTop: 14,
+        fontFamily: 'Roboto-Bold'
     },
     buttonText: {
         fontSize: 20

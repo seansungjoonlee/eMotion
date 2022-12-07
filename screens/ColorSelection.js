@@ -6,6 +6,8 @@ import Emotion from '../components/Emotion';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import { ColorPicker } from 'react-native-color-picker';
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 
 
 
@@ -15,11 +17,18 @@ export default function ColorSelection({ route }) {
     const context = useContext(FeelingContext);
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.backArrowBox}>
+                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('ColorMenu')}/>
+            </View>
+            <Text style={styles.title}>
+                select color for: {feeling}
+            </Text>
             <View style={styles.picker}>
                 <ColorPicker
                     onColorSelected={color => {
-                        context.updateColorMapping(feeling, color)
-                        alert(`Color selected: ${color}`)
+                        context.updateColorMapping(feeling, color);
+                        navigator.navigate('ColorMenu');
+                        alert(`Color selected: ${color}`);
                     }}
                     style={{flex: 1}}
                 />
@@ -41,5 +50,15 @@ const styles = StyleSheet.create({
     picker: {
         height: 250,
         width: 250,
-    }
+    },
+    title: {
+        fontSize: 25,
+        marginBottom: 50
+    },
+    backArrowBox: {
+        height: 45,
+        width: '100%',
+        paddingHorizontal: 15,
+        justifyContent: 'center',
+    },
 });
