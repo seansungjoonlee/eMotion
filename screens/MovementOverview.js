@@ -52,7 +52,7 @@ export default function MovementOverview({ route }) {
                 </View>
                 <TouchableOpacity style={styles.addMotion} onPress={() => navigator.navigate('AddingMotion', {movement: movement})}>
                     <Text style={styles.textButton}>
-                        + add motion
+                        add movement
                     </Text>
                 </TouchableOpacity>
             </SafeAreaView>

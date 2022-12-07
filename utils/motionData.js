@@ -35,6 +35,14 @@ const motionData = [
         name: 'pistol squats',
         feelings: ['aggressive', 'angry', 'eager'],
     },
+    {
+        name: 'breathing',
+        feelings: ['sad', 'melancholy', 'discouraged', 'small'],
+    },
+    {
+        name: 'yoga',
+        feelings: ['sad', 'melancholy', 'discouraged', 'small'],
+    },
 ]
 
 export default motionData;

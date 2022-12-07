@@ -23,7 +23,7 @@ export default function AddingMotion({ route }) {
                 {date}
             </Text>
             <Text style={styles.title}>
-                adding motion:
+                adding movement:
             </Text>
             <View style={styles.movementBox}>
                 <Movement movementFeelings={context.movementFeelings(movement)}/>

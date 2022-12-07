@@ -117,6 +117,6 @@ emotionBox: {
     marginHorizontal: 5
 },
 emotionList: {
-  height: 60,
+  height: 60
 }
 });

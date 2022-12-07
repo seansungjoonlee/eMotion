@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     textBox: {
-        fontFamily: 'Avenir',
         height: 40,
         width: 250,
         borderWidth: 1,
