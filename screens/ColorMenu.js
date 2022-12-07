@@ -18,6 +18,12 @@ export default function ColorMenu() {
             <View style={styles.backArrowBox}>
                 <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('CalendarScreen')}/>
             </View>
+            <Text style={styles.title}>
+                color menu
+            </Text>
+            <Text style={styles.subtitle}>
+                select an emotion to customize its color
+            </Text>
             <View style={styles.section}>
                 <Text style={styles.feelingName}>
                     joyful: 
@@ -72,8 +78,17 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
+    title: {
+        fontFamily: 'Avenir',
+        fontWeight: 'bold',
+        fontSize: 30
+    },
+    subtitle: {
+        fontFamily: 'Avenir',
+        fontSize: 20
+    },
     section: {
-        height: '15%',
+        height: '13%',
         margin: '2%',
         width: '100%',
         justifyContent: 'space-evenly',

@@ -6,16 +6,21 @@ import { useContext } from 'react';
 
 
 function getOutsideStops(movementFeelings, status, colorMapping) {
-    let colors = ['white'];
     let outsideFeelings = [];
+    let insideFeelings = [];
+    let colors = [];
+    let stops = [];
     if (status === 'current') {
         for (let i = 0; i < movementFeelings.length - 1; i++) {
             for (let j = 0; j < movementFeelings[i].length; j++)
             {
                 outsideFeelings.push(movementFeelings[i][j]);
             }
-        } 
+        }
+        insideFeelings = movementFeelings[movementFeelings.length-1];
+        
     } else {
+        colors = ['white'];
         for (let i = 0; i < movementFeelings.length; i++) {
             for (let j = 0; j < movementFeelings[i].length; j++)
             {
@@ -24,25 +29,37 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
         }
     }
 
-    if (outsideFeelings.length === 1) {
-        colors.push(colorMapping[outsideFeelings[0]]);
+
+    for(let i = 0; i < basicFeelings.length; i++){
+        if (insideFeelings.indexOf(basicFeelings[i]) > -1) {
+                colors.push(colorMapping[basicFeelings[i]]);
+            for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
+                if (insideFeelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
+                    colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
+                }
+            }
+        }
     }
-    else {
-        for(let i = 0; i < basicFeelings.length; i++){
-            if (outsideFeelings.indexOf(basicFeelings[i]) > -1) {
-                    colors.push(colorMapping[basicFeelings[i]]);
-                for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
-                    if (outsideFeelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
-                        colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
-                    }
+    for(let i = 0; i < insideFeelings.length; i++){
+        const offset = (i+1) * (0.4/(colors.length));
+        stops.push(
+            <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
+        );
+    }
+
+    for(let i = 0; i < basicFeelings.length; i++){
+        if (outsideFeelings.indexOf(basicFeelings[i]) > -1) {
+                colors.push(colorMapping[basicFeelings[i]]);
+            for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
+                if (outsideFeelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
+                    colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
                 }
             }
         }
     }
     colors.push('white');
-    let stops = [];
-    for(let i = 0; i < colors.length; i++){
-        const offset = 0.2 + (i + 1) * (0.8/(colors.length));
+    for(let i = insideFeelings.length; i < colors.length; i++){
+        const offset = 0.4 + (i+1) * (0.6/(colors.length));
         stops.push(
             <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
         );

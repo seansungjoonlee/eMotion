@@ -16,13 +16,10 @@ export default function CurrentEmotion() {
             <Text style={styles.title}>
                 Today's Feelings
             </Text>
-            <View style={styles.movementBox} onPress = {() => {
+            <Pressable style={styles.movementBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
                 <Movement movementFeelings={context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])} status={'current'}/>
-                <Pressable style={styles.emotionBox} onPress = {() => {navigator.navigate('HowDoYouFeel')}}>
-                    <Emotion feelings={context.currentFeelings}/>
-                </Pressable>
-            </View>
+            </Pressable>
 
                 <TouchableOpacity style = {styles.newMovement} onPress={() => {
                     context.updateMotion('choosing', [])
@@ -66,7 +63,7 @@ const styles = StyleSheet.create({
      },
      movementBox: {
         marginTop: '2%',
-        height: '58.5%',
+        height: 350,
         width: 350,
         position: 'relative',
         justifyContent: 'center',
