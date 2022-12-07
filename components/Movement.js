@@ -6,10 +6,12 @@ import { useContext } from 'react';
 
 
 function getOutsideStops(movementFeelings, status, colorMapping) {
+    const context = useContext(FeelingContext);
     let outsideFeelings = [];
     let insideFeelings = [];
     let colors = [];
     let stops = [];
+    let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
     if (status === 'current') {
         for (let i = 0; i < movementFeelings.length - 1; i++) {
             for (let j = 0; j < movementFeelings[i].length; j++)
@@ -59,7 +61,10 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
     }
     colors.push('white');
     for(let i = insideFeelings.length; i < colors.length; i++){
-        const offset = 0.4 + (i+1) * (0.6/(colors.length));
+        let offset = 0.4 + (i) * (0.6/(colors.length));
+        if (firstEmotion) {
+            offset = (i) * (0.7/(colors.length));
+        }
         stops.push(
             <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
         );
