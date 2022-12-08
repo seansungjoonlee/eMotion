@@ -21,7 +21,6 @@ const layoutAnimConfig = {
 };
 
 
-
 export default function FriendList() {
   const context = useContext(FeelingContext);
   const [updated, setUpdated] = useState(context.contacts);
@@ -39,8 +38,8 @@ export default function FriendList() {
   function Friend({name, username, id}) { 
     return (
       <GestureRecognizer style={styles.contactBox} onSwipeLeft={() => {
-        removeItem(id)
-        console.log('swiped')
+        context.removeFriend(name, username);
+        removeItem(id);
       }}>
           <View style={styles.user}>
               <Text style={styles.nameText}>

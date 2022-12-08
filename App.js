@@ -34,6 +34,24 @@ export default function App() {
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
 
 
+
+
+  function removeFriend(name, username) {
+    let updatedFriends = friends;
+    let updatedContacts = contacts;
+    let friend = {};
+    friend.name = name;
+    friend.username = username;
+    updatedContacts.push(friend);
+    for (let i = 0; i < friends.length; i++) {
+      if (friends[i].name == name) {
+        updatedFriends.splice(i, 1);
+      }
+    }
+    setFriends(updatedFriends);
+    setContacts(updatedContacts);
+  }
+
   function addFriend(name, username) {
     let updatedFriends = friends;
     let updatedContacts = contacts;
@@ -292,6 +310,7 @@ export default function App() {
     friends: friends,
     contacts: contacts,
     addFriend: addFriend,
+    removeFriend: removeFriend,
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>
