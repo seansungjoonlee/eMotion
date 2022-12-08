@@ -35,14 +35,11 @@ function addFriend(name, username) {
   contact.name = name;
   contact.username = username;
   friendsData.push(contact);
-  console.log("from addFriend function in ContactList.js: " + friendsData);
   for (let i = 0; i < contactsData.length; i++) {
     if (contactsData[i].name == name) {
       contactsData.splice(i, 1);
     }
   }
-  console.log("from addFriend function in ContactList.js: " + contactsData);
-  //console.log("name is " + name);
 }
 
 function removeFriend(name, username) {
@@ -50,13 +47,11 @@ function removeFriend(name, username) {
   friend.name = name;
   friend.username = username;
   contactsData.push(friend);
-  console.log("from removeFriend function in ContactList.js: " + contactsData);
   for (let i = 0; i < friendsData.length; i++) {
     if (friendsData[i].name == name) {
       friendsData.splice(i, 1);
     }
   }
-  console.log("from removeFriend function in ContactList.js: " + friendsData);
 }
 
 
