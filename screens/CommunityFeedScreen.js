@@ -23,9 +23,11 @@ export default function CommunityFeedScreen() {
                 <FontAwesome5 name="user-plus" size={24} color="black" onPress={() => navigator.navigate('AddFriend')}/>
             </View>
             <Text style={styles.title}>
-                friends
+                community
             </Text>
-            <FeedList notifs={notifs}/>
+            <View style={styles.notifsContainer}>
+                <FeedList notifs={notifs}/>
+            </View>
         </SafeAreaView>
     );
 }
@@ -118,5 +120,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         paddingHorizontal: 30,
         marginTop: 10
+    },
+    notifsContainer: {
+        height: '83%'
     }
   });

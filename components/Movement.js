@@ -12,7 +12,6 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
     let colors = [];
     let stops = [];
     //let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
-    let firstEmotion = false;
     if (status === 'current') {
         for (let i = 0; i < movementFeelings.length - 1; i++) {
             for (let j = 0; j < movementFeelings[i].length; j++)
@@ -44,7 +43,8 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
         }
     }
     for(let i = 0; i < insideFeelings.length; i++){
-        const offset = (i+1) * (0.4/(colors.length));
+        const offset = (i + 1) * (0.35/(colors.length));
+        console.log(offset);
         stops.push(
             <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
         );
@@ -61,15 +61,13 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
         }
     }
     colors.push('white');
-    for(let i = insideFeelings.length; i < colors.length; i++){
-        let offset = 0.4 + (i) * (0.6/(colors.length));
-        if (firstEmotion) {
-            offset = (i) * (0.7/(colors.length));
-        }
+    for(let i = 0; i < (colors.length - insideFeelings.length); i++){
+        let offset = 0.35 + (i + 1) * (0.6/(colors.length - insideFeelings.length));
         stops.push(
-            <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
+            <Stop offset={offset} stopColor={colors[i + insideFeelings.length]} stopOpacity="1" key={i}/>
         );
     }
+    console.log(stops);
     return stops;
 }
 
