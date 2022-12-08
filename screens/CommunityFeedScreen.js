@@ -89,6 +89,7 @@ function generateNotifs() {
             }
         }  
     }
+    notifs = notifs.sort(() => Math.random() - 0.5)
     return notifs;
 }
 
