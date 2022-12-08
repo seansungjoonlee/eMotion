@@ -12,6 +12,18 @@ import { useContext } from 'react';
 import React from 'react';
 import { useState } from 'react';
 
+function removeFriend(name, username) {
+  let friend = {};
+  friend.name = name;
+  friend.username = username;
+  contactsData.push(friend);
+  for (let i = 0; i < friendsData.length; i++) {
+    if (friendsData[i].name == name) {
+      friendsData.splice(i, 1);
+    }
+  }
+}
+
 const layoutAnimConfig = {
   duration: 300,
   update: {
@@ -59,15 +71,17 @@ export default function ContactList({ contacts }) {
       </Pressable>
     );
   }
-  
-  
-  const renderContact = ({ item, index }) => (
-    <Contact
-      name = {item.name}
-      username = {item.username}
-      id = {item.id}
-    />
-  );
+  console.log(contactsData);
+  //console.log("name is " + name);
+}
+
+
+const renderContact = ({ item, index }) => (
+  <Contact
+    name = {item.name}
+    username = {item.username}
+  />
+);
 
 
   return (

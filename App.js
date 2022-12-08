@@ -296,10 +296,26 @@ export default function App() {
   return (  
     <FeelingContext.Provider value={feelingSettings}>
       <NavigationContainer>
-        <Tab.Navigator initialRouteName={'Movement'} tabBarOptions={{
-          labelStyle: { fontSize: 14 },
-        }}
-        screenOptions={({ route }) => ({
+        <Tab.Navigator initialRouteName={'Movement'}
+        // tabBarOptions={{
+        //   labelStyle: { fontSize: 14 },
+        // }}
+
+        
+        screenOptions={
+          
+          ({ route }) => ({
+            
+              tabBarLabelStyle: {
+                "fontSize": 14
+              },
+              tabBarStyle: [
+                {
+                  "display": "flex"
+                },
+                null
+              ],
+            
           tabBarIcon: ({ focused }) => {
             let iconName;
             let size;

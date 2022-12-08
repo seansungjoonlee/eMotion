@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import Themes from "../assets/Themes";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { useState } from "react";
-import ContactList from "../components/ContactList";
+//import ContactList from "../components/ContactList";
 import FriendList from "../components/FriendList";
 import contactsData from "../utils/contactsData";
 import friendsData from "../utils/friendsData";
@@ -13,9 +13,13 @@ import { useContext } from "react";
 export default function AddFriend() {
     const navigator = useNavigation();
     const [method, setMethod] = useState('contacts');
-    const context = useContext(FeelingContext);
-    const friends = context.friends;
-    const contacts = context.contacts;
+    // const contacts = [{name: 'Hawi', username: '@hawia'},
+    //                     {name: 'Ethan', username: '@ethanf'},
+    //                     {name: 'Linda', username: '@lindad'},
+    //                     {name: 'Devorah', username: '@devorahs'},
+    //                     {name: 'James', username: '@proflanday'}]
+
+    const contacts = contactsData;
 
     function friendDisplay() {
         return (
