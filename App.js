@@ -14,6 +14,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useIsFocused } from "@react-navigation/native"; 
 import { useNavigation } from './node_modules/@react-navigation/native';
 import context from 'react-context';
+import friendsData from './utils/friendsData';
+import contactsData from './utils/contactsData';
 
 
 export default function App() {
@@ -25,9 +27,28 @@ export default function App() {
   const [movementData, setMovementData] = useState(hardcodedMovementData);
   const [basicMapping, setBasicMapping] = useState(basicColorMapping);
   const [colorMapping, setColorMapping] = useState(mapAllColors(basicColorMapping));
+  const [friends, setFriends] = useState(friendsData);
+  const [contacts, setContacts] = useState(contactsData);
 
   const current = new Date();
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
+
+
+  function addFriend(name, username) {
+    let updatedFriends = friends;
+    let updatedContacts = contacts;
+    let contact = {};
+    contact.name = name;
+    contact.username = username;
+    updatedFriends.push(contact);
+    for (let i = 0; i < contacts.length; i++) {
+      if (contacts[i].name == name) {
+        updatedContacts.splice(i, 1);
+      }
+    }
+    setFriends(updatedFriends);
+    setContacts(updatedContacts);
+  }
 
   function updateColorMapping(basicFeeling, newColor) {
     let updated = {...basicMapping};
@@ -267,7 +288,10 @@ export default function App() {
     editNote: editNote,
     editMotionFromReflection: editMotionFromReflection,
     colorMapping: colorMapping,
-    updateColorMapping: updateColorMapping
+    updateColorMapping: updateColorMapping,
+    friends: friends,
+    contacts: contacts,
+    addFriend: addFriend,
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, FlatList, Pressable, Dimensions, NativeModules } from 'react-native';
+import { StyleSheet, LayoutAnimation, UIManager, Text, View, Image, FlatList, Pressable, Dimensions, NativeModules } from 'react-native';
 import motionData from '../utils/motionData';
 import MotionSuggestion from './MotionSuggestion';
 import Emotion from './Emotion';
@@ -7,55 +7,69 @@ import { MaterialIcons } from '@expo/vector-icons';
 import AddFriend from '../screens/AddFriend';
 import contactsData from '../utils/contactsData';
 import friendsData from '../utils/friendsData';
+import FeelingContext from './FeelingContext';
+import { useContext } from 'react';
+import React from 'react';
+import { useState } from 'react';
 
+const layoutAnimConfig = {
+  duration: 300,
+  update: {
+    type: LayoutAnimation.Types.easeInEaseOut, 
+  },
+  delete: {
+    duration: 100,
+    type: LayoutAnimation.Types.easeInEaseOut,
+    property: LayoutAnimation.Properties.opacity,
+  },
+};
 
-
-
-function Contact({name, username}) {
-  return (
-    <Pressable style={styles.contactBox} onPress={() => {
-      addFriend(name, username);
-      console.log(name);
-      }}>
-        <View style={styles.user}>
-            <Text style={styles.nameText}>
-                {name}
-            </Text>
-            <Text style={styles.usernameText}>
-                {username}
-            </Text>
-        </View>
-        <MaterialIcons name="add" size={24} color="black" />
-    </Pressable>
-  );
-}
-
-function addFriend(name, username) {
-  let contact = {};
-  contact.name = name;
-  contact.username = username;
-  friendsData.push(contact);
-  console.log(friendsData);
-  for (let i = 0; i < contactsData.length; i++) {
-    if (contactsData[i].name == name) {
-      contactsData.splice(i, 1);
-      console.log(i);
-    }
-  }
-  console.log(contactsData);
-  //console.log("name is " + name);
-}
-
-
-const renderContact = ({ item, index }) => (
-  <Contact
-    name = {item.name}
-    username = {item.username}
-  />
-);
 
 
 export default function ContactList({ contacts }) {
+  const context = useContext(FeelingContext);
+  const [updated, setUpdated] = useState(context.contacts);
+
+  const removeItem = (id) => {
+    let arr = updated.filter(function(item) {
+      return item.id !== id
+    })
+    setUpdated(arr);
+    LayoutAnimation.configureNext(layoutAnimConfig)
+  };
+
+
+  function Contact({name, username, id}) {
+    const context = useContext(FeelingContext);
+  
+    return (
+      <Pressable style={styles.contactBox} onPress={() => {
+        context.addFriend(name, username);
+        removeItem(id)
+        }}>
+          <View style={styles.user}>
+              <Text style={styles.nameText}>
+                  {name}
+              </Text>
+              <Text style={styles.usernameText}>
+                  {username}
+              </Text>
+          </View>
+          <MaterialIcons name="add" size={24} color="black" />
+      </Pressable>
+    );
+  }
+  
+  
+  const renderContact = ({ item, index }) => (
+    <Contact
+      name = {item.name}
+      username = {item.username}
+      id = {item.id}
+    />
+  );
+
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -64,6 +78,7 @@ export default function ContactList({ contacts }) {
         keyExtractor={(item, index) => {
           return item.id;
         }} 
+        extraData={updated}
         />
     </View>
   )

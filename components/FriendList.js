@@ -1,42 +1,73 @@
-import { StyleSheet, Text, View, Image, FlatList, Pressable, Dimensions } from 'react-native';
+import { StyleSheet, LayoutAnimation, UIManager, Text, View, Image, FlatList, Pressable, Dimensions, NativeModules } from 'react-native';
 import motionData from '../utils/motionData';
 import MotionSuggestion from './MotionSuggestion';
 import Emotion from './Emotion';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import FeelingContext from './FeelingContext';
+import { useContext, useState } from 'react';
+
+const layoutAnimConfig = {
+  duration: 300,
+  update: {
+    type: LayoutAnimation.Types.easeInEaseOut, 
+  },
+  delete: {
+    duration: 100,
+    type: LayoutAnimation.Types.easeInEaseOut,
+    property: LayoutAnimation.Properties.opacity,
+  },
+};
 
 
 
-function Friend({name, username}) {
-  return (
-    <GestureRecognizer style={styles.contactBox} onSwipeLeft={() => console.log("swiped")}>
-        <View style={styles.user}>
-            <Text style={styles.nameText}>
-                {name}
-            </Text>
-            <Text style={styles.usernameText}>
-                {username}
-            </Text>
-        </View>
-    </GestureRecognizer>
+export default function FriendList() {
+  const context = useContext(FeelingContext);
+  const [updated, setUpdated] = useState(context.contacts);
+
+
+  const removeItem = (id) => {
+    let arr = updated.filter(function(item) {
+      return item.id !== id
+    })
+    setUpdated(arr);
+    LayoutAnimation.configureNext(layoutAnimConfig)
+  };
+
+
+  function Friend({name, username, id}) { 
+    return (
+      <GestureRecognizer style={styles.contactBox} onSwipeLeft={() => {
+        removeItem(id)
+        console.log('swiped')
+      }}>
+          <View style={styles.user}>
+              <Text style={styles.nameText}>
+                  {name}
+              </Text>
+              <Text style={styles.usernameText}>
+                  {username}
+              </Text>
+          </View>
+      </GestureRecognizer>
+    );
+  }
+  
+  
+  const renderFriend = ({ item, index }) => (
+    <Friend
+      name = {item.name}
+      username = {item.username}
+      id = {item.id}
+    />
   );
-}
 
 
-const renderFriend = ({ item, index }) => (
-  <Friend
-    name = {item.name}
-    username = {item.username}
-  />
-);
-
-
-export default function FriendList({ friends }) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={friends}
+        data={context.friends}
         renderItem={(item) => renderFriend(item)}
         keyExtractor={(item, index) => {
           return item.id;

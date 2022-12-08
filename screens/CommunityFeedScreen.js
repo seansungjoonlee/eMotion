@@ -5,11 +5,14 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import movementData from '../utils/movementData';
 import friendsData from '../utils/friendsData';
+import FeelingContext from "../components/FeelingContext";
+import { useContext } from "react";
 
 
 
 export default function CommunityFeedScreen() {
     const navigator = useNavigation();
+    const context = useContext(FeelingContext);
 
     // const notifs = [{friend: "Devorah", message:'...both felt anxious and sad tonight. Try comforting each other.'}, 
     //                 {friend: "Ethan", message:'...both logged squats today. High five!'}, 
@@ -39,6 +42,7 @@ function randomNumber(min, max) {
 }
 
 function generateNotifs() {
+    const context = useContext(FeelingContext)
     console.log("generating!");
     let notifs = [];
     const affirmations = ["High five!", "Way to go!", "Nice going!", "Nice work!", "Super fun!", "How cool!", "Nice!"];
@@ -47,7 +51,8 @@ function generateNotifs() {
     const positives = ["surprised", "amazed", "joyful", "powerful", "playful", "content", "peaceful", "eager", "interested", "excited"];
     const negatives = ["frightened", "shocked", "stunned", "angry", "frustrated", "bored", "aggressive", "dismayed", "sad", "small", "melancholy", "discouraged", "hurt", "anxious", "stressed"];
     //THIS SHOULD BE TODAY NOT LAST
-    let movement = movementData[movementData.length - 1];
+    let movement = context.movementData[context.movementData.length - 1];
+    console.log(movement.dateEntry)
     for (let friendIndex = 0; friendIndex < friendsData.length; friendIndex++) {
         let notif = {};
         let shouldWe = randomNumber(0, 99);
