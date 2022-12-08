@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import Themes from "../assets/Themes";
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { useState } from "react";
-import ContactList from "../components/ContactList";
+//import ContactList from "../components/ContactList";
 import FriendList from "../components/FriendList";
 import contactsData from '../utils/contactsData';
 import friendsData from '../utils/friendsData';
