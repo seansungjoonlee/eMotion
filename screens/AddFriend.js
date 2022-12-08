@@ -5,6 +5,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useState } from "react";
 import ContactList from "../components/ContactList";
 import FriendList from "../components/FriendList";
+import contactsData from '../utils/contactsData';
+import friendsData from '../utils/friendsData';
 
 export default function AddFriend() {
     const navigator = useNavigation();
@@ -16,6 +18,7 @@ export default function AddFriend() {
     //                     {name: 'James', username: '@proflanday'}]
 
     const contacts = contactsData;
+    const friends = friendsData;
 
     function friendDisplay() {
         return (
