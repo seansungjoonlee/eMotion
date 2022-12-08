@@ -53,7 +53,7 @@ function generateNotifs() {
         for (let friendIndex = 0; friendIndex < friendsData.length; friendIndex++) {
             let notif = {};
             let shouldWe = randomNumber(0, 99);
-            if (shouldWe < 80) {
+            if (shouldWe < 60) {
                 let friend = friendsData[friendIndex];
                 notif.friend = friend.name;
                 let randMotion = randomNumber(0, movement.motionEntry.length - 1);
