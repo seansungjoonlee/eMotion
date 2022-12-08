@@ -7,6 +7,10 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { useState } from 'react';
 
+const {
+  width: SCREEN_WIDTH,
+  height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 
 function Notif({friend, message}) {
@@ -30,7 +34,7 @@ function Notif({friend, message}) {
             <Text style={styles.header}>
                 {header}
             </Text>
-            <Ionicons name={heart} size={24} color={color} onPress={() => toggleHeart()}/>
+            <Ionicons name={heart} size={SCREEN_HEIGHT * 0.036} color={color} onPress={() => toggleHeart()}/>
         </View>
          <Text style={styles.body}>
             {message}
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
    notif: {
-    width: 300,
+    width: SCREEN_WIDTH * 0.8,
     borderWidth: 1,
     borderRadius: 10,
     marginVertical: 10,
@@ -99,21 +103,21 @@ const styles = StyleSheet.create({
   header: {
     fontFamily: 'Avenir',
     fontWeight: 'bold',
-    fontSize: 20,
-    marginBottom: 10
+    fontSize: SCREEN_HEIGHT * 0.03,
+    marginBottom: '4%'
   },
   body: {
     fontFamily: 'Avenir',
-    fontSize: 15
+    fontSize: SCREEN_HEIGHT * 0.0225
   },
   footer: {
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 15
+    marginTop: '5%'
   },
   footerText: {
     fontFamily: 'Avenir',
-    fontSize: 15
+    fontSize: SCREEN_HEIGHT * 0.0225
   },
   notifTop: {
     flexDirection: 'row',

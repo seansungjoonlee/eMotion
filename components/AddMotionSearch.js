@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Dimensions } from 'react-native';
 import Themes from '../assets/Themes';
 import SearchedMotionsReflection from './SearchedMotionsReflection';
 import { useState } from 'react';
+
 
 export default function AddMotionSearch({ movement }) {
     const [text, setText] = useState("");
@@ -32,16 +33,16 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     textBox: {
-        height: 40,
-        width: 250,
+        height: '15.5%',
+        width: '67%',
         borderWidth: 1,
-        borderRadius: 100,
+        borderRadius: 1000,
         justifyContent: 'center',
         paddingLeft: 10,
-        marginTop: 20
+        marginTop: '4%'
      },
      searchedBox: {
-        height: '54%',
+        height: '80%',
         width: '100%',
      }
 

@@ -1,14 +1,16 @@
-import { View, Text, SafeAreaView, Pressable, StyleSheet } from "react-native";
+import { View, Text, SafeAreaView, Dimensions, StyleSheet } from "react-native";
 import Themes from "../assets/Themes";
 import FeedList from "../components/FeedList";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { useNavigation } from "@react-navigation/native";
-import movementData from '../utils/movementData';
 import friendsData from '../utils/friendsData';
 import FeelingContext from "../components/FeelingContext";
 import { useContext } from "react";
 
-
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 
 export default function CommunityFeedScreen() {
@@ -20,7 +22,7 @@ export default function CommunityFeedScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
-                <FontAwesome5 name="user-plus" size={24} color="black" onPress={() => navigator.navigate('AddFriend')}/>
+                <FontAwesome5 name="user-plus" size={30} color="black" onPress={() => navigator.navigate('AddFriend')}/>
             </View>
             <Text style={styles.title}>
                 community
@@ -39,7 +41,6 @@ function randomNumber(min, max) {
 function generateNotifs() {
     const context = useContext(FeelingContext);
 
-    console.log("generating!");
     let notifs = [];
     const affirmations = ["High five!", "Way to go!", "Nice going!", "Nice work!", "Super fun!", "How cool!", "Nice!"];
     const negative = "Maybe reach out?";
@@ -51,7 +52,6 @@ function generateNotifs() {
         return notifs;
     } else {
         let movement = context.movementData[today];
-        console.log(movement.dateEntry);
         for (let friendIndex = 0; friendIndex < friendsData.length; friendIndex++) {
             let notif = {};
             let shouldWe = randomNumber(0, 99);
@@ -65,10 +65,8 @@ function generateNotifs() {
                 if (motionOrEmotion == 1) {
                     //it's a motion  
                     if (!isNaN(parseInt(motion.name.slice(0,1)))) {
-                        console.log("was a time " + motion.name);
                         continue;
                     } else {
-                        console.log("not a time " + motion.name);
                     }
                     let randAffirmation = randomNumber(0, affirmations.length - 1);
                     let affirmation = affirmations[randAffirmation];
@@ -85,8 +83,7 @@ function generateNotifs() {
                         notif.message = 'both felt ' + feeling + ' today.';
                     }
                 }   
-            // console.log(notif.friend);
-            // console.log(notif.message);   
+ 
             notifs.push(notif);
             }
         }  
@@ -110,18 +107,17 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'Avenir',
         fontWeight: 'bold',
-        fontSize: 30,
-        marginTop: 5
+        fontSize: SCREEN_HEIGHT * 0.045,
     },
     topBar: {
-        height: '5%',
+        height: '7.5%',
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        paddingHorizontal: 30,
-        marginTop: 10
+        alignItems: 'center',
+        paddingHorizontal: '7%',
     },
     notifsContainer: {
-        height: '83%'
+        height: '86%',
     }
   });

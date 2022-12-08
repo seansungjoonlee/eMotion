@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { PieChart } from 'react-native-svg-charts'
 import { G, Circle, Text } from 'react-native-svg';
 import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
 import FeelingContext from './FeelingContext.js';
 import { useContext } from 'react';
+
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 const data = [1, 1, 1, 1, 1];
 
@@ -39,10 +44,10 @@ export default function BasicSelection({ basic, setBasic }) {
         return slices.map((slice, index) => {
             let pos = basic.indexOf(basicFeelings[index]);
             let weight = 'normal';
-            let size = 16;
+            let size = SCREEN_HEIGHT*.024;
             if (pos !== -1) {
                 weight = 'bolder';
-                size = 18;
+                size = size * 1.15;
             }
             const { labelCentroid, pieCentroid, data } = slice;
             return (
@@ -66,14 +71,16 @@ export default function BasicSelection({ basic, setBasic }) {
     }
 
     return (
-        <PieChart 
-            style={{ height: 300, width: 300 }} 
-            outerRadius={'4%'}
-            innerRadius={150}
-            data={pieData}
-        >
-            <Labels/>
-        </PieChart>
+        <View style={styles.container}>
+            <PieChart 
+                style={{ width: '80%', aspectRatio: 1 }} 
+                outerRadius={'4%'}
+                innerRadius={'100%'}
+                data={pieData}
+            >
+                <Labels/>
+            </PieChart>
+        </View>
     )
 };
 
@@ -81,8 +88,7 @@ const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 24,
       width: '100%',
-      height: '100%'
+      height: '100%',
     },
   });

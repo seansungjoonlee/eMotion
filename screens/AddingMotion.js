@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Pressable, StyleSheet } from 'react-native';
+import { View, Text, SafeAreaView, Pressable, StyleSheet, Dimensions } from 'react-native';
 import Themes from '../assets/Themes';
 import Movement from '../components/Movement';
 import { useContext } from 'react';
@@ -6,6 +6,11 @@ import FeelingContext from '../components/FeelingContext';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import AddMotionSearch from '../components/AddMotionSearch';
+
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+  } = Dimensions.get('window');
 
 
 export default function AddingMotion({ route }) {
@@ -22,13 +27,15 @@ export default function AddingMotion({ route }) {
             <Text style={styles.date}>
                 {date}
             </Text>
-            <Text style={styles.title}>
-                adding movement:
-            </Text>
             <View style={styles.movementBox}>
                 <Movement movementFeelings={context.movementFeelings(movement)}/>
             </View>
-            <AddMotionSearch movement={movement}/>
+            <Text style={styles.title}>
+                adding movement:
+            </Text>
+            <View style={styles.searchContainer}>
+                <AddMotionSearch movement={movement}/>
+            </View>
         </SafeAreaView>
     )
 }
@@ -46,23 +53,27 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'Avenir',
         fontWeight: 'bold',
-        fontSize: 30
+        fontSize: SCREEN_HEIGHT * 0.045
     },
     date: {
         fontFamily: 'Avenir',
-        fontSize: 30
+        fontSize: SCREEN_HEIGHT * 0.045
     },
     movementBox: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 150,
-        height: 150,
-        margin: 15,
-    },      
+        height: '25%',
+        aspectRatio: 1,
+        margin: '4%'
+    },    
     backArrowBox: {
-        height: 45,
         width: '100%',
-        paddingHorizontal: 15,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: '7.5%',
+        paddingHorizontal: '4%',
     },
+    searchContainer: {
+        width: '100%',
+        height: '48%'
+    }
 });

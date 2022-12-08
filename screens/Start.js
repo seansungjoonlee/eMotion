@@ -3,6 +3,11 @@ import { useNavigation } from '@react-navigation/native';
 import Emotion from '../components/Emotion';
 import Themes from '../assets/Themes';
 
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
+
 export default function Start() {
     const navigator = useNavigation();
 
@@ -31,38 +36,29 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Avenir',
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 50
+        paddingTop: '12%'
     },
     subtitle: {
         fontFamily: 'Avenir',
         fontStyle:'italic',
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
         textAlign: 'center',
-        paddingTop: 20,
-        paddingBottom: 20
+        paddingTop: '6%',
+        paddingBottom: '5%'
     },
-    button: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'grey',
-        width: 300,
-        height: 300,
-        borderRadius: 300 / 2,
-     },
     emotionBox: {
-        height: 300,
-        width: 300,
+        aspectRatio: 1,
+        height: '50%',
         position: 'relative',
         justifyContent: 'center',
         alignItems: 'center'
     },
-    // take out
     buttonText: {
         fontFamily: 'Avenir',
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
         position: 'absolute',
     },    
 });

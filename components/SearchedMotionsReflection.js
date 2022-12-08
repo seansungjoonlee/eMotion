@@ -1,8 +1,13 @@
-import { StyleSheet, Text, View, Image, FlatList, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, FlatList, Pressable } from 'react-native';
 import motionData from '../utils/motionData';
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 import FeelingContext from './FeelingContext';
+
+const {
+  width: SCREEN_WIDTH,
+  height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 
 
@@ -70,7 +75,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 15,
-    width: 275,
+    width: SCREEN_WIDTH * 0.75,
     marginVertical: 5,
     flexDirection: 'column',
     alignItems: 'left',
@@ -80,6 +85,6 @@ const styles = StyleSheet.create({
 name: {
     fontFamily: 'Avenir',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: SCREEN_HEIGHT * 0.03,
 },
 });

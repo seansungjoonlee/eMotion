@@ -5,6 +5,11 @@ import Emotion from './Emotion';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useNavigation } from '@react-navigation/native';
 
+const {
+  width: SCREEN_WIDTH,
+  height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
+
 
 function Feeling({feeling}) {
   return (
@@ -25,7 +30,6 @@ const renderMotion = ({ item, index }) => (
 
 
 export default function EmotionList({ feelings }) {
-    console.log(feelings);
 
   return (
     <View style={styles.container}>
@@ -54,6 +58,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   feeling: {
-    fontSize: 20
+    fontSize: SCREEN_HEIGHT * 0.03
   },
 });

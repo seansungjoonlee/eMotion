@@ -1,12 +1,15 @@
-import { StyleSheet, Text, View, SafeAreaView, Pressable } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Pressable, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Themes from '../assets/Themes';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import Emotion from '../components/Emotion';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 
 
@@ -81,11 +84,11 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'Avenir',
         fontWeight: 'bold',
-        fontSize: 30
+        fontSize: SCREEN_HEIGHT * 0.045
     },
     subtitle: {
         fontFamily: 'Avenir',
-        fontSize: 20
+        fontSize: SCREEN_WIDTH * 0.05
     },
     section: {
         height: '13%',
@@ -96,17 +99,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     backArrowBox: {
-        height: 45,
         width: '100%',
-        paddingHorizontal: 15,
         justifyContent: 'center',
+        height: '7.5%',
+        paddingHorizontal: '4%',
     },
     orbBox: {
-        height: 80,
-        width: 80,
+        aspectRatio: 1,
+        height: '90%'
     },
     feelingName: {
         fontFamily: 'Avenir',
-        fontSize: 25
+        fontSize: SCREEN_HEIGHT * 0.0375
     }
 });

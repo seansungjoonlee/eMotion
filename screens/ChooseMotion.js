@@ -1,5 +1,4 @@
 import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
-import BasicSelection from '../components/BasicSelection';
 import { useState } from 'react';
 import { TabRouter, useNavigation } from '@react-navigation/native';
 import Emotion from '../components/Emotion';
@@ -9,6 +8,11 @@ import React, { useContext } from 'react';
 import Themes from '../assets/Themes';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import SearchedMotions from '../components/SearchedMotions';
+
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 export default function ChooseMotion({ route }) {
     const context = useContext(FeelingContext);
@@ -72,9 +76,11 @@ export default function ChooseMotion({ route }) {
                 navigator.navigate('CurrentEmotion');
             }}/>
         </View>
-        <Text style={styles.title}>
-            current eMotion
-        </Text>
+        <View style={styles.titleContainer}>
+            <Text style={styles.title}>
+                current eMotion
+            </Text>
+        </View>
         <View style={styles.guideSelectBox}>
             <Text style={[styles.guideSelect, {textDecorationLine: guidedUnderline}]} onPress={() => setGuided(true)}>
                 guided
@@ -104,57 +110,61 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     backArrowBox: {
-        height: 45,
         width: '100%',
-        paddingHorizontal: 15,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: '7.5%',
+        paddingHorizontal: '4%',
+
     },
     guideSelectBox: {
         height: '9%',
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 50,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingHorizontal: '14%'
     },
     emotionBox: {
-        height: 170,
-        width: 170,
+        aspectRatio: 1,
+        height: '30%'
     },
     guideSelect: {
-        fontSize: 25,
+        fontSize: SCREEN_HEIGHT * 0.0375,
         fontFamily: 'Avenir'
     },
     optionsBox: {
-        height: '60%',
+        height: '44%',
         width: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     suggestedBox: {
-        height: '73%',
-        width: '100%'
+        height: '90%',
+        width: '100%',
     },
     label: {
         fontFamily: 'Avenir',
-        fontSize: 20
+        fontSize: SCREEN_HEIGHT * 0.03
     },
     textBox: {
-        height: 40,
-        width: 250,
+        height: '15.5%',
+        width: '67%',
         borderWidth: 1,
-        borderRadius: 100,
+        borderRadius: 1000,
         justifyContent: 'center',
         paddingLeft: 10,
-        marginTop: 20
+        marginTop: '4%'
      },
      searchedBox: {
-        height: '54%',
+        height: '69%',
         width: '100%',
     },
     title: {
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
         fontFamily: 'Avenir',
         fontWeight: 'bold',
         marginBottom: '3%'
+    },
+    titleContainer: {
+        height: '9%'
     }
 });

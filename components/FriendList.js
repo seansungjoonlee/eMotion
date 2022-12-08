@@ -1,12 +1,12 @@
-import { StyleSheet, LayoutAnimation, UIManager, Text, View, Image, FlatList, Pressable, Dimensions, NativeModules } from 'react-native';
-import motionData from '../utils/motionData';
-import MotionSuggestion from './MotionSuggestion';
-import Emotion from './Emotion';
-import { useNavigation } from '@react-navigation/native';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { StyleSheet, LayoutAnimation, Text, View, Image, FlatList, Pressable, Dimensions, NativeModules } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import FeelingContext from './FeelingContext';
 import { useContext, useState } from 'react';
+
+const {
+  width: SCREEN_WIDTH,
+  height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 const layoutAnimConfig = {
   duration: 300,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderWidth: 1,
-    width: 270,
+    width: SCREEN_WIDTH * 0.75,
     padding: 10,
     marginTop: 10,
     borderRadius: 15
@@ -102,10 +102,10 @@ const styles = StyleSheet.create({
   },
   nameText: {
     fontFamily: 'Avenir',
-    fontSize: 20,
+    fontSize: SCREEN_HEIGHT * 0.03,
   },
   usernameText: {
     fontFamily: 'Avenir',
-    fontSize: 15
+    fontSize: SCREEN_HEIGHT * 0.0225
   }
 });

@@ -44,7 +44,6 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
     }
     for(let i = 0; i < insideFeelings.length; i++){
         const offset = (i + 1) * (0.35/(colors.length));
-        console.log(offset);
         stops.push(
             <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
         );
@@ -67,7 +66,6 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
             <Stop offset={offset} stopColor={colors[i + insideFeelings.length]} stopOpacity="1" key={i}/>
         );
     }
-    console.log(stops);
     return stops;
 }
 

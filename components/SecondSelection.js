@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { PieChart } from 'react-native-svg-charts'
 import { G, Circle, Text } from 'react-native-svg';
 import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
 import FeelingContext from './FeelingContext.js';
 import { useContext } from 'react';
 
-
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 function check(value) {
         return value !== this;
@@ -66,7 +69,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
         return slices.map((slice, index) => {
             let pos = basic.indexOf(basicFeelings[index]);
             let weight = 'bolder';
-            let size = (6 + 12 * (1 / context.basic.length)) * 1.15;
+            let size = SCREEN_HEIGHT * (6 + 12 * (1 / basic.length)) * 1.15 * 0.0015;
             const { labelCentroid, pieCentroid, data } = slice;
             return (
                 <Text
@@ -92,7 +95,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
         return slices.map((slice, index) => {
             let pos = secondary.indexOf(outerFeelings[index]);
             let weight = 'normal';
-            let size = 7 + 9 * (1 / context.basic.length);
+            let size =  SCREEN_HEIGHT * (7 + 9 * (1 / basic.length)) * 0.0015;
             if (pos !== -1) {
                 weight = 'bolder';
                 size = size * 1.15;
@@ -123,7 +126,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
             <PieChart 
                 style={styles.outerRing} 
                 outerRadius={'42%'}
-                innerRadius={150}
+                innerRadius={'100%'}
                 data={outerPieData}
             >
                 <LabelsOuter/>
@@ -131,7 +134,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
             <PieChart 
                 style={styles.innerRing} 
                 outerRadius={'1.5%'}
-                innerRadius={58}
+                innerRadius={'37%'}
                 data={innerPieData}
             >
                 <LabelsInner/>
@@ -144,18 +147,17 @@ const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 24,
       width: '100%',
-      height: '100%'
+      height: '100%',
     },
     innerRing: {
-        height: 300,
-        width: 300,
-        position: 'relative'
+        width: '80%',
+        aspectRatio: 1, 
+        position: 'relative',
     },
     outerRing: {
-        height: 300,
-        width: 300,
+        width: '80%',
+        aspectRatio: 1,
         position: 'absolute',
         x: 0,
         y: 0

@@ -16,6 +16,13 @@ import { useNavigation } from './node_modules/@react-navigation/native';
 import context from 'react-context';
 import friendsData from './utils/friendsData';
 import contactsData from './utils/contactsData';
+import { LogBox } from 'react-native';
+
+
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
+
+console.disableYellowBox = true;
 
 
 export default function App() {
@@ -71,7 +78,6 @@ export default function App() {
   function updateColorMapping(basicFeeling, newColor) {
     let updated = {...basicMapping};
     updated[basicFeeling] = newColor;
-    console.log(newColor);
     setBasicMapping(updated);
     setColorMapping(mapAllColors(updated));
   }
@@ -109,7 +115,6 @@ export default function App() {
       updated.push(sec[i]);
     }
     setCurrentFeelings(updated);
-    //setCurrentFeelings(updated);
 
   }
 
@@ -118,13 +123,11 @@ export default function App() {
     if (status === 'motion') {
       for (let i = 0; i < movementData.length; i++) {
         if (movementData[i].dateEntry === movementDate) {
-          console.log('found movement')
           for (let j = movementData[i].motionEntry.length - 1; j >= 0; j--) {
               if (movementData[i].motionEntry[j].name.substring(0, movementData[i].motionEntry[j].name.length-2) === motionName) {
                 while (movementData[i].motionEntry[j-1].name.substring(0, movementData[i].motionEntry[j-1].name.length-2) === motionName) {
                   j -= 1
                 }
-                console.log('found motion')
                 let updated = [...movementData];
                 updated[i].motionEntry[j].note = text;
                 setMovementData(updated);
@@ -135,14 +138,11 @@ export default function App() {
     } else {
       for (let i = 0; i < movementData.length; i++) {
         if (movementData[i].dateEntry === movementDate) {
-          console.log('found movement')
           for (let j = 0; j < movementData[i].motionEntry.length; j++) {
               if (movementData[i].motionEntry[j].name === motionName) {
-                console.log('found motion')
                 let updated = [...movementData];
                 updated[i].motionEntry[j].note = text;
                 setMovementData(updated);
-                console.log('updated motion');
               }
           }
         }
@@ -172,7 +172,6 @@ export default function App() {
     } else {
       time += ':' + newDate.getMinutes();
     }
-    console.log("time is now " + time);
     return time;
   }
 
@@ -248,7 +247,6 @@ export default function App() {
     
     newMotion.name = name;
     newMotion.feelings = feelings;
-    console.log(newMotion);
     newMotion.note = "";
     //if >=one motion for today has already been logged
     let movementIndex = -1;
@@ -271,7 +269,6 @@ export default function App() {
       }
       newMotion.name += " " + count;
       updated[movementIndex].motionEntry.push(newMotion);
-      console.log('changed')
       setMovementData(updated);
     } else {
       //newMotion name will be the first one, no need to loop
@@ -282,7 +279,6 @@ export default function App() {
       movementEntry.motionEntry.push(newMotion);
       updated.push(movementEntry);
       setMovementData(updated);
-      //will this console log work when motionEntry is an array? check after hardcoding movements
     }
   }
 

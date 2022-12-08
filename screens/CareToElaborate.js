@@ -1,14 +1,16 @@
-import { TextInput, View, StyleSheet, Text, SafeAreaView, TouchableOpacity} from 'react-native';
-import Emotion from '../components/Emotion';
+import { TextInput, View, StyleSheet, Text, Dimensions, SafeAreaView, TouchableOpacity} from 'react-native';
 import SecondSelection from '../components/SecondSelection';
-import BasicSelection from '../components/BasicSelection';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import Themes from '../assets/Themes';
-import movementData from '../utils/movementData';
+
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 
 export default function CareToElaborate() {
@@ -38,7 +40,6 @@ export default function CareToElaborate() {
             onPress={() => {
                     let secondary = [...context.secondary];
                     if (text) {
-                        console.log('entered')
                         secondary.push(text);
                         context.setSecondary(secondary);
                     }
@@ -80,20 +81,20 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     backArrowBox: {
-        height: '7%',
         width: '100%',
-        paddingHorizontal: 15,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: '7.5%',
+        paddingHorizontal: '4%',
     },
     title: {
         fontFamily: 'Avenir',
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
         textAlign: 'center',
         fontWeight: 'bold',
     },
     subtitle: {
         fontFamily: 'Avenir',
-        fontSize: 20,
+        fontSize: SCREEN_HEIGHT * 0.03,
         textAlign: 'center',
         paddingTop: '1%',
         paddingBottom: '7%'
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     // take out
     buttonText: {
         fontFamily: 'Avenir',
-        fontSize: 20,
+        fontSize: SCREEN_HEIGHT * 0.03,
     },  
     selectButton: {
         alignItems: 'center',

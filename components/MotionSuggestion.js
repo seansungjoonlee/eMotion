@@ -4,6 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 import FeelingContext from './FeelingContext';
 
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
+
 function separateEmotions(motionFeelings) {
     const context = useContext(FeelingContext);
     let emotions = [];
@@ -44,17 +49,17 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderWidth: 1,
         borderRadius: 15,
-        width: 275,
+        width: SCREEN_WIDTH * 0.75,
         marginVertical: 10,
         flexDirection: 'column',
         alignItems: 'left',
         justifyContent: 'center',
-        padding: 10
+        padding: '3%'
     },
     name: {
         fontFamily: 'Avenir',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: SCREEN_HEIGHT * 0.03,
     },
     basedOn: {
         flexDirection: 'row',
@@ -62,11 +67,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     emotionBox: {
-        height: 40,
-        width: 40,
+        height: SCREEN_HEIGHT * 0.06,
+        aspectRatio: 1,
     },
     basedOnText: {
         fontFamily: 'Avenir',
-        fontSize: 15
+        fontSize: SCREEN_HEIGHT * 0.0225
     }
 });

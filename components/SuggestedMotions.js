@@ -38,6 +38,7 @@ const renderMotionSuggestion = ({ item, index }) => (
 
 
 export default function SuggestedMotions({ currentFeelings }) {
+
   const motions = getMotions(motionData, currentFeelings);
   return (
     <View style={styles.container}>

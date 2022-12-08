@@ -1,4 +1,4 @@
-import { TextInput, TouchableOpacity, Modal, Pressable, SafeAreaView, View, Text, StyleSheet } from "react-native";
+import { TextInput, TouchableOpacity, Modal, Pressable, SafeAreaView, View, Text, StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Emotion from "../components/Emotion";
 import React from "react";
@@ -7,7 +7,11 @@ import FeelingContext from '../components/FeelingContext';
 import { useContext } from 'react';
 import Themes from "../assets/Themes";
 import { Feather } from '@expo/vector-icons'; 
-import movementData from "../utils/movementData";
+
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 export default function DuringMotion() {
     const navigator = useNavigation();
@@ -39,16 +43,14 @@ export default function DuringMotion() {
                                 numberOfLines={4}
                                 onChangeText={note => setNote(note)}
                                 style={{padding: 10}}
-                                fontSize={30}
+                                fontSize={SCREEN_HEIGHT * 0.045}
                             />
                         </View>
                         <Pressable
                         style={[styles.noteButton, styles.buttonClose]}
                         onPress={() => {
-                            console.log(note);
                             context.editNote('motion', context.date, context.motion.name, note);
                             setModalVisible(!modalVisible);
-                            console.log(context.motion);
                         }}
                         >
                             <Text style={styles.buttonText}>save note</Text>
@@ -56,12 +58,14 @@ export default function DuringMotion() {
                     </View>
                 </View>
             </Modal>
-            <Text style={styles.title}>
-                current movement:
-            </Text>
-            <Text style={styles.motion}>
-                {context.motion.name}
-            </Text>
+            <View style={styles.headerContainer}>
+                <Text style={styles.title}>
+                    current movement:
+                </Text>
+                <Text style={styles.motion}>
+                    {context.motion.name}
+                </Text>
+            </View>
             <Pressable style={styles.emotionBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
                     <Emotion feelings={context.currentFeelings}/>
@@ -94,41 +98,33 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Avenir',
-        fontSize: 30,
-        marginTop: 40,
+        fontSize: SCREEN_HEIGHT * 0.045,
+        marginTop: '11%',
     },
     motion: {
         fontFamily: 'Avenir',
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
     },
     emotionBox: {
-        width: 170,
-        height: 170,
-        marginTop: 38,
-        marginBottom: 50
-    },
-    buttonRow: {
-        height: '10%',
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        marginTop: 50
+        aspectRatio: 1,
+        marginTop: '8%',
+        height: '30%',
+        marginBottom: '8%'
     },
     button: {
-        height: 50,
-        width: 250,
-        backgroundColor: Themes.background,
-        borderRadius: 1000,
-        borderWidth: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
-    },
+        justifyContent: 'center',
+        backgroundColor: Themes.background,
+        borderWidth: 1,
+        marginTop: '6%',
+        width: '65%',
+        height: '8%',
+        borderRadius: 1000
+     },
     noteButton: {
-        height: 50,
-        width: 150,
+        height: '9%',
+        width: '50%',
         backgroundColor: Themes.background,
         borderRadius: 1000,
         borderWidth: 1,
@@ -158,7 +154,7 @@ const styles = StyleSheet.create({
         height: '80%',
         width: '80%',
         borderWidth: 1,
-        marginBottom: 10
+        marginBottom: '3%'
     },
     topBar: {
         flexDirection: 'row',
@@ -166,11 +162,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: '7%',
         width: '100%',
-        paddingHorizontal: 30
+        paddingHorizontal: '10%'
     },
     buttonText: {
         fontFamily: 'Avenir',
-        fontSize: 20
+        fontSize: SCREEN_HEIGHT * 0.03
 
+    },
+    headerContainer: {
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        height: '21%'
     }
 });

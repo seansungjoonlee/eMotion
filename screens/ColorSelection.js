@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View, SafeAreaView, Pressable } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Themes from '../assets/Themes';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import Emotion from '../components/Emotion';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import { ColorPicker } from 'react-native-color-picker';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 
 export default function ColorSelection({ route }) {
@@ -47,19 +48,20 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
+    
     picker: {
-        height: 250,
-        width: 250,
+        aspectRatio: 1,
+        width: '80%',
     },
     title: {
         fontFamily: 'Avenir',
-        fontSize: 25,
-        marginBottom: 50
+        fontSize: SCREEN_HEIGHT * 0.0375,
+        marginBottom: SCREEN_HEIGHT * 0.075
     },
     backArrowBox: {
-        height: 45,
         width: '100%',
-        paddingHorizontal: 15,
         justifyContent: 'center',
+        height: '7.5%',
+        paddingHorizontal: '4%',
     },
 });

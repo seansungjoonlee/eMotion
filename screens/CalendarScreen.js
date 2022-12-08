@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View, SafeAreaView, Pressable } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Pressable, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Themes from '../assets/Themes';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import Emotion from '../components/Emotion';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import Movement from '../components/Movement';
 import { Ionicons } from '@expo/vector-icons'; 
+
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 
 
@@ -34,29 +38,30 @@ export default function CalendarScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
-                <Ionicons name="settings-sharp" size={30} color="black" onPress={() => navigator.navigate('ColorMenu')}/>
+                <Ionicons name="settings-sharp" size={35} color="black" onPress={() => navigator.navigate('ColorMenu')}/>
             </View>
             <Text style={styles.title}>
                 reflect
             </Text>
-            <Calendar
-                style={[styles.calendar, {height: 400}, {width: 300}]}
-                dayComponent={({date, state}) => {
-                    const newDate = changeDateFormat(date.dateString);
-                    let movementFeelings = [];
-                    if (context.getMovement(newDate) !== -1) {
-                        movementFeelings = context.movementFeelings(context.getMovement(newDate));
-                    }
-                    return (
-                    <Pressable style={styles.date} onPress={() => navigator.navigate("MovementOverview", {date: newDate})}>
-                        <Movement movementFeelings={movementFeelings}/>
-                        <Text style={styles.dayText}>{date.day}</Text>
-                    </Pressable>
-                    );
-                }}
-            />
+            <View style={styles.calendarContainer}>
+                <Calendar
+                    style={[styles.calendar]}
+                    dayComponent={({date, state}) => {
+                        const newDate = changeDateFormat(date.dateString);
+                        let movementFeelings = [];
+                        if (context.getMovement(newDate) !== -1) {
+                            movementFeelings = context.movementFeelings(context.getMovement(newDate));
+                        }
+                        return (
+                        <Pressable style={styles.date} onPress={() => navigator.navigate("MovementOverview", {date: newDate})}>
+                            <Movement movementFeelings={movementFeelings}/>
+                            <Text style={styles.dayText}>{date.day}</Text>
+                        </Pressable>
+                        );
+                    }}
+                />
+            </View>
         </SafeAreaView>
-
     );
 }
 
@@ -72,25 +77,33 @@ const styles = StyleSheet.create({
     topBar: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        paddingHorizontal: 30,
-        paddingTop: 10,
+        height: '7.5%',
+        paddingHorizontal: '7%',
         width: '100%'
     },
     title: {
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
         fontFamily: 'Avenir',
         textAlign: 'center',
         fontWeight: 'bold',
-        paddingTop: 20
+        paddingTop: '5%'
     },
     date: {
-        height: 40,
-        width: 40,
+        width: '100%',
+        aspectRatio: 1,
         position: 'relative',
         justifyContent: 'center',
         alignItems: 'center'
     },
     dayText: {
         position: 'absolute'
+    },
+    calendar: {
+        height: '100%',
+        width: '100%',
+    },
+    calendarContainer: {
+        width: '90%',
+        height: '70%'
     }
 });

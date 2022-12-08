@@ -1,18 +1,17 @@
-import { TextInput, View, StyleSheet, Text, SafeAreaView, TouchableOpacity, DatePickerAndroid} from 'react-native';
-import Emotion from '../components/Emotion';
+import { TextInput, View, StyleSheet, Text, SafeAreaView, TouchableOpacity, Dimensions} from 'react-native';
 import SecondSelection from '../components/SecondSelection';
-import BasicSelection from '../components/BasicSelection';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import Themes from '../assets/Themes';
-import movementData from '../utils/movementData';
-import Movement from '../components/Movement';
 import { basicFeelings, basicToSecondary } from "../assets/feelings";
-import context from 'react-context';
-import MovementOverview from './MovementOverview';
+
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+  } = Dimensions.get('window');
 
 
 export default function CareToElaborateAddMotion({ route }) {
@@ -96,48 +95,49 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     backArrowBox: {
-        height: 45,
         width: '100%',
-        paddingHorizontal: 15,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: '7.5%',
+        paddingHorizontal: '4%',
     },
     title: {
-        fontSize: 25,
         fontFamily: 'Avenir',
+        fontSize: SCREEN_HEIGHT * 0.0375,
         textAlign: 'center',
         fontWeight: 'bold',
     },
     subtitle: {
         fontFamily: 'Avenir',
-        fontSize: 20,
+        fontSize: SCREEN_HEIGHT * 0.03,
         textAlign: 'center',
-        paddingBottom: 42
+        paddingTop: '1%',
+        paddingBottom: '12.6%'
     },
     // take out
     buttonText: {
         fontFamily: 'Avenir',
-        fontSize: 20,
+        fontSize: SCREEN_HEIGHT * 0.03,
     },  
     selectButton: {
         alignItems: 'center',
         justifyContent: 'center',
         //padding: 20,
-        marginTop: 25,
-        width: 175,
-        height: 50,
+        marginTop: '5%',
+        width: '45%',
+        height: '8%',
         borderRadius: 1000,
         borderWidth: 1
      },
      selector: {
-        height: 300,
+        height: '50%',
      },
      textBox: {
-        height: 40,
-        width: 250,
+        height: '7%',
+        width: '70%',
         borderWidth: 1,
-        borderRadius: 100,
+        borderRadius: 1000,
         justifyContent: 'center',
         paddingLeft: 10,
-        marginTop: 20
+        marginTop: '5%'
      }
 });

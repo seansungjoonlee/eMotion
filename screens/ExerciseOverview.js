@@ -1,22 +1,20 @@
-import { TextInput, Modal, ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
-import BasicSelection from '../components/BasicSelection';
+import { TextInput, Modal, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
 import { useState } from 'react';
-import { TabRouter, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Emotion from '../components/Emotion';
 import SuggestedMotions from '../components/SuggestedMotions';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext, useEffect } from 'react';
 import Themes from '../assets/Themes';
 import { MaterialIcons } from '@expo/vector-icons'; 
-import SearchedMotions from '../components/SearchedMotions';
-import { Feather } from '@expo/vector-icons'; 
-import EmotionList from '../components/EmotionList';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
-import context from 'react-context';
 import ExerciseOverviewBottom from '../components/ExerciseOverviewBottom'
 import { FlatList } from 'react-native-gesture-handler';
-import { Ionicons } from '@expo/vector-icons'; 
 
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
 
 
 export default function ExerciseOverview({ route }) {
@@ -101,7 +99,9 @@ export default function ExerciseOverview({ route }) {
     <SafeAreaView style={styles.container}>
         <View style={styles.backArrowBox}>
             <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('MovementOverview', {date: date})}/>
-            <Ionicons name="information-circle-outline" size={30} color="black" onPress={() => setDetails(!details)} />
+            <Text style={styles.dots} onPress={() => setDetails(!details)}>
+                ...
+            </Text>
         </View>
         <Text style={styles.title}>{date}</Text>
         <Text style={styles.motion}>{name}</Text>
@@ -135,29 +135,29 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     emotionLog: {
-        width: 375,
+        width: SCREEN_WIDTH,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     emotionLogDetails: {
-        width: 375,
-        paddingLeft: 50,
+        width: SCREEN_WIDTH,
+        paddingLeft: '12%',
         flexDirection: 'row',
         alignItems: 'center',
     },
     title: {
         fontFamily: 'Avenir',
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
     },
     motion: {
         fontFamily: 'Avenir',
         fontWeight: 'bold',
-        fontSize: 30
+        fontSize: SCREEN_HEIGHT * 0.045
     },
     feeling: {
         fontFamily: 'Avenir',
-        fontSize: 20,
+        fontSize: SCREEN_HEIGHT * 0.03,
     },
     list: {
         height: '35%',
@@ -168,48 +168,25 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
-        fontSize: 20
+        fontSize: SCREEN_HEIGHT * 0.03
     },
     emotionBox: {
-        height: 150,
-        width: 150,
-        margin: 20,
-    },
-    note: {
-        padding: 10,
-        alignItems: 'left',
-        justifyContent: 'flex-start',
-        width: 300,
-        height: '20%',
-        backgroundColor: "grey",
-        borderWidth: 1,
-        borderRadius: 10,
-        backgroundColor: Themes.background
+        aspectRatio: 1,
+        height: '60%',
+        margin: '6%'
     },
     backArrowBox: {
-        height: 45,
+        height: '7.5%',
         width: '100%',
-        paddingHorizontal: 15,
+        paddingHorizontal: '4%',
         justifyContent: 'space-between',
         flexDirection: 'row',
         alignItems: 'center'
     },
-    button: {
-        height: 50,
-        width: 250,
-        backgroundColor: Themes.background,
-        borderRadius: 1000,
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20
-    },
-    centeredView: {
-        height: '100%',
-        width: '100%',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
+    dots: {
+        fontFamily: 'Avenir',
+        fontSize: SCREEN_HEIGHT * 0.045,
+        fontWeight: 'bold'
     },
     topBar: {
         flexDirection: 'row',
@@ -226,7 +203,7 @@ const styles = StyleSheet.create({
     },
     feelingHeader: {
         fontFamily: 'Avenir',
-        fontSize: 25
+        fontSize: SCREEN_HEIGHT * 0.0375
     },
     flatListBox: {
         height: '50%'

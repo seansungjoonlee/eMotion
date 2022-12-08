@@ -1,8 +1,13 @@
-import { View, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Dimensions, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import Themes from '../assets/Themes';
 import { useState } from 'react';
 import { useContext } from 'react';
 import FeelingContext from './FeelingContext';
+
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+  } = Dimensions.get('window');
 
 export default function ExerciseOverviewBottom({ setEditable, editable, note, date, fullNames }) {
     
@@ -28,7 +33,7 @@ export default function ExerciseOverviewBottom({ setEditable, editable, note, da
                     numberOfLines={4}
                     onChangeText={newNote => setNewNote(newNote)}
                     style={{padding: 10}}
-                    fontSize={20}
+                    fontSize={SCREEN_HEIGHT * 0.03}
                     defaultValue={note}
                     editable={editable}
                 />
@@ -61,14 +66,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
-        fontSize: 20
+        fontSize: SCREEN_HEIGHT * 0.03
     },
 
     note: {
         padding: 10,
         alignItems: 'left',
         justifyContent: 'flex-start',
-        width: 300,
+        width: '80%',
         height: '20%',
         backgroundColor: "grey",
         borderWidth: 1,
@@ -77,22 +82,21 @@ const styles = StyleSheet.create({
     },
     noteHeader: {
         fontFamily: 'Avenir',
-        fontSize: 25,
-        marginHorizontal: 60
+        fontSize: SCREEN_HEIGHT * 0.0375,
+        marginHorizontal: '14%'
     },
-
     button: {
-        height: 50,
-        width: 250,
-        backgroundColor: Themes.background,
-        borderRadius: 1000,
-        borderWidth: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
-    },
+        justifyContent: 'center',
+        backgroundColor: Themes.background,
+        borderWidth: 1,
+        marginTop: '5%',
+        width: '65%',
+        height: '8%',
+        borderRadius: 1000
+     },
     buttonText: {
         fontFamily: 'Avenir',
-        fontSize: 20
+        fontSize: SCREEN_HEIGHT * 0.03
     }
 });

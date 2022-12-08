@@ -1,14 +1,19 @@
-import { TextInput, StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity, Pressable} from 'react-native';
+import { TextInput, StyleSheet, Text, Dimensions, View, SafeAreaView, Image, TouchableOpacity, Pressable} from 'react-native';
 import Emotion from '../components/Emotion';
-import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
-import HowDoYouFeel from './HowDoYouFeel';
 import Themes from '../assets/Themes';
 import Movement from '../components/Movement';
 
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
+
+
 export default function CurrentEmotion() {
+
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
     let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
@@ -35,18 +40,19 @@ export default function CurrentEmotion() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>
-                Today's Feelings
-            </Text>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>
+                    Today's Feelings
+                </Text>
+            </View>
 
             <Visualization/>
-
-                <TouchableOpacity style = {styles.newMovement} onPress={() => {
-                    context.updateMotion('choosing', [])
-                    navigator.navigate('ChooseMotion')}
-                }>
-                    <Text style = {styles.buttonText}> new movement </Text>
-                </TouchableOpacity>
+            <TouchableOpacity style = {styles.button} onPress={() => {
+                context.updateMotion('choosing', [])
+                navigator.navigate('ChooseMotion')}
+            }>
+                <Text style = {styles.buttonText}> new movement </Text>
+            </TouchableOpacity>
         </SafeAreaView>
     );
 }
@@ -61,17 +67,17 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     title: {
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
         textAlign: 'center',
-        paddingTop: '6%',
+        paddingTop: '7%',
         fontFamily: 'Avenir',
         fontWeight: 'bold',
     },
     buttonText: {
         fontFamily: 'Avenir',
-        fontSize: 20
+        fontSize: SCREEN_HEIGHT * 0.03
     },  
-    newMovement: {
+    button: {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: Themes.background,
@@ -82,16 +88,18 @@ const styles = StyleSheet.create({
         borderRadius: 1000
      },
      movementBox: {
-        marginTop: '2%',
-        height: 350,
-        width: 350,
         position: 'relative',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        aspectRatio: 1,
+        height: '58%'
      },
      emotionBox: {
-        height: 180,
-        width: 180,
+        aspectRatio: 1,
+        height: '50%',
         position: 'absolute'
+     },
+     titleContainer: {
+        height: '11%'
      },
 });

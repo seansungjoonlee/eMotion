@@ -1,12 +1,16 @@
-import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import BasicSelection from '../components/BasicSelection';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import Themes from '../assets/Themes';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { basicFeelings } from "../assets/feelings";
+
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+  } = Dimensions.get('window');
 
 
 export default function HowDoYouFeelAddMotion({ route }) {
@@ -52,8 +56,9 @@ export default function HowDoYouFeelAddMotion({ route }) {
         </View>
         <Text style={styles.title}> How did you feel during {displayedName}? </Text>
         <Text style={styles.subtitle}> (select all that apply) </Text>
-        {/* replace with emotion component */}
-        <BasicSelection basic={basic} setBasic={setBasic}/>
+        <View style={styles.selector}>
+            <BasicSelection basic={basic} setBasic={setBasic}/>
+        </View>
         {button}
     </SafeAreaView>
 
@@ -69,36 +74,41 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     title: {
-        fontFamily: 'Avenir',
-        fontSize: 25,
+        fontSize: SCREEN_HEIGHT * 0.0375,
         textAlign: 'center',
+        fontFamily: 'Avenir',
         fontWeight: 'bold',
     },
     subtitle: {
+        fontSize: SCREEN_HEIGHT * 0.03,
         fontFamily: 'Avenir',
-        fontSize: 20,
         textAlign: 'center',
-        paddingBottom: 10
+        paddingTop: '1%',
+        paddingBottom: '4%'
     },
     // take out
     buttonText: {
         fontFamily: 'Avenir',
-        fontSize: 20
+        fontSize: SCREEN_HEIGHT * 0.03,
     },  
     selectButton: {
         alignItems: 'center',
         justifyContent: 'center',
-        //padding: 20,
-        marginTop: 83,
-        width: 175,
-        height: 50,
+        marginTop: '21%',
+        width: '45%',
+        height: '8%',
         borderRadius: 1000,
         borderWidth: 1
-     }, 
+     },   
      backArrowBox: {
-        height: 45,
         width: '100%',
-        paddingHorizontal: 15,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: '7.5%',
+        paddingHorizontal: '4%',
     },
+    selector: {
+        height: '50%',
+    },
+    
+    
 })

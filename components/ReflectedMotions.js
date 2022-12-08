@@ -6,6 +6,11 @@ import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
+const {
+  width: SCREEN_WIDTH,
+  height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
+
 
 function PastMotion({name, motionFeelings, date, fullNames}) {
   const navigator = useNavigation();
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 15,
-    width: 250,
+    width: SCREEN_WIDTH * 0.75,
     marginVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
@@ -113,7 +118,7 @@ emotions: {
 },
 name: {
     fontFamily: 'Avenir',
-    fontSize: 20,
+    fontSize: SCREEN_HEIGHT * 0.03,
     paddingHorizontal: 5
 },
 basedOnText: {
@@ -122,12 +127,9 @@ basedOnText: {
     alignItems: 'center',
 },
 emotionBox: {
-    height: 60,
-    width: 60,
-    marginHorizontal: 5
-},
-emotionList: {
-  height: 60
+    aspectRatio: 1,
+    height: SCREEN_HEIGHT * 0.09,
+    marginHorizontal: 5,
 },
 border: {
   flexDirection: 'row',

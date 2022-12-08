@@ -1,4 +1,4 @@
-import { SafeAreaView, Alert, View, Text, Pressable, TouchableOpacity, StyleSheet } from "react-native";
+import { SafeAreaView, Alert, View, Text, Pressable, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Themes from "../assets/Themes";
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -8,15 +8,16 @@ import FriendList from "../components/FriendList";
 import FeelingContext from "../components/FeelingContext";
 import { useContext } from "react";
 
+const {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+  } = Dimensions.get('window');
+
 export default function AddFriend() {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
     const [method, setMethod] = useState('contacts');
-    // const contacts = [{name: 'Hawi', username: '@hawia'},
-    //                     {name: 'Ethan', username: '@ethanf'},
-    //                     {name: 'Linda', username: '@lindad'},
-    //                     {name: 'Devorah', username: '@devorahs'},
-    //                     {name: 'James', username: '@proflanday'}]
+
 
     const contacts = context.contacts;;
     const friends = context.friends
@@ -108,40 +109,41 @@ const styles = StyleSheet.create({
       width: '100%',
     },
     backArrowBox: {
-        height: 45,
         width: '100%',
-        paddingHorizontal: 15,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: '7.6%',
+        paddingHorizontal: '4%',
     },
     title: {
         fontFamily: 'Avenir',
         fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: SCREEN_HEIGHT * 0.045,
     },
     methodSelectBox: {
         height: '9%',
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        paddingHorizontal: 50,
+        paddingHorizontal: '10%',
         alignItems: 'center',
     },
     select: {
         fontFamily: 'Avenir',
-        fontSize: 25,
+        fontSize: SCREEN_HEIGHT * 0.0375,
     },
     contactDisplay: {
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingTop: 20
+        paddingTop: '2%',
+        width: '100%'
     },
     label: {
         fontFamily: 'Avenir',
-        fontSize: 15
+        fontSize: SCREEN_HEIGHT * 0.0225
     },
     contacts: {
         width: '100%',
-        height: '65%'
+        height: '61%'
     },
     friends: {
         width: '100%',
@@ -154,27 +156,23 @@ const styles = StyleSheet.create({
         height: '60%'
     },
     button: {
-        height: 50,
-        width: 200,
-        backgroundColor: Themes.background,
-        borderRadius: 1000,
-        borderWidth: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-    },
+        justifyContent: 'center',
+        backgroundColor: Themes.background,
+        borderWidth: 1,
+        marginTop: '8%',
+        width: '65%',
+        height: '8%',
+        borderRadius: 1000
+     },
     buttonText: {
         fontFamily: 'Avenir',
-        fontSize: 20
-    },
-    inviteText: {
-        fontFamily: 'Avenir',
-        fontSize: 15,
-        marginBottom: 5
+        fontSize: SCREEN_HEIGHT * 0.03
     },
     orText: {
         fontFamily: 'Avenir',
         fontSize: '25',
-        margin: 15
+        margin: SCREEN_HEIGHT * 0.0225
     }
   });
   
