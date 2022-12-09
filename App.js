@@ -311,15 +311,13 @@ export default function App() {
   return (  
     <FeelingContext.Provider value={feelingSettings}>
       <NavigationContainer>
-        <Tab.Navigator initialRouteName={'Movement'}
-        // tabBarOptions={{
-        //   labelStyle: { fontSize: 14 },
-        // }}
-
-        
+        <Tab.Navigator 
+        initialRouteName={'movement'}
         screenOptions={
           
           ({ route }) => ({
+
+            tabBarActiveTintColor: 'black',
             
               tabBarLabelStyle: {
                 "fontSize": 14
@@ -334,13 +332,13 @@ export default function App() {
           tabBarIcon: ({ focused }) => {
             let iconName;
             let size;
-            if (route.name === 'Reflection') {
+            if (route.name === 'reflection') {
               iconName = 'user';
               size = focused ? 30: 20;
-            } else if (route.name === 'Movement') {
+            } else if (route.name === 'movement') {
               iconName = 'dot-circle-o';
               size = focused ? 30: 20;
-            } else if (route.name === 'Community') {
+            } else if (route.name === 'community') {
               iconName = 'users';
               size = focused ? 30: 20;
             }
@@ -348,9 +346,9 @@ export default function App() {
           }
         })}>
 
-          <Tab.Screen options={{headerShown:false}} name="Reflection" component={ReflectionTask} />
-          <Tab.Screen options={{headerShown:false}} name="Movement" component={MainTask} />
-          <Tab.Screen options={{headerShown:false}} name="Community" component={CommunityTask} />
+          <Tab.Screen options={{headerShown:false}} name="reflection" component={ReflectionTask} />
+          <Tab.Screen options={{headerShown:false}} name="movement" component={MainTask} />
+          <Tab.Screen options={{headerShown:false}} name="community" component={CommunityTask} />
         </Tab.Navigator>
       </NavigationContainer>
     </FeelingContext.Provider>

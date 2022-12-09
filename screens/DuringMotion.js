@@ -7,6 +7,8 @@ import FeelingContext from '../components/FeelingContext';
 import { useContext } from 'react';
 import Themes from "../assets/Themes";
 import { Feather } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 
 const {
     width: SCREEN_WIDTH,
@@ -58,6 +60,12 @@ export default function DuringMotion() {
                     </View>
                 </View>
             </Modal>
+
+            <View style={styles.backArrowBox}>
+                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
+                context.updateMotion('choosing', [])
+                navigator.navigate('ChooseMotion')}}/>
+            </View>
             <View style={styles.headerContainer}>
                 <Text style={styles.title}>
                     current movement:
@@ -99,7 +107,6 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
-        marginTop: '11%',
     },
     motion: {
         fontFamily: 'Avenir',
@@ -108,7 +115,6 @@ const styles = StyleSheet.create({
     },
     emotionBox: {
         aspectRatio: 1,
-        marginTop: '7%',
         height: '30%',
         marginBottom: '8%'
     },
@@ -172,6 +178,12 @@ const styles = StyleSheet.create({
     headerContainer: {
         justifyContent: 'flex-start',
         alignItems: 'center',
-        height: '21%'
-    }
+        height: '18%'
+    },
+    backArrowBox: {
+        width: '100%',
+        justifyContent: 'center',
+        height: '7.5%',
+        paddingHorizontal: '4%',
+    },
 });

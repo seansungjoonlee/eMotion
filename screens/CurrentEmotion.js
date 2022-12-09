@@ -19,8 +19,8 @@ const {
 
 export default function CurrentEmotion() {
 
-    const options = ["Today's Feelings", "current eMotion"];
-    const [selected, setSelected] = useState("Today's Feelings");
+    const options = ["today's feelings", "current eMotion"];
+    const [selected, setSelected] = useState("today's feelings");
 
     console.log(selected);
     const navigator = useNavigation();

@@ -26,7 +26,7 @@ export default function MainTask({ navigation }) {
   React.useEffect(() => {
     const pressMovement = navigation.addListener('tabPress', (e) => {
       e.preventDefault();
-      navigation.jumpTo('Movement');
+      navigation.jumpTo('movement');
     });
 
     return pressMovement;
