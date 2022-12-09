@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     },
     emotionBox: {
         aspectRatio: 1,
-        marginTop: '8%',
+        marginTop: '7%',
         height: '30%',
         marginBottom: '8%'
     },

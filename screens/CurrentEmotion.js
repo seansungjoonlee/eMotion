@@ -1,10 +1,15 @@
-import { TextInput, StyleSheet, Text, Dimensions, View, SafeAreaView, Image, TouchableOpacity, Pressable} from 'react-native';
+import { TextInput, Modal, StyleSheet, Text, Dimensions, View, SafeAreaView, Image, TouchableOpacity, Pressable} from 'react-native';
 import Emotion from '../components/Emotion';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Themes from '../assets/Themes';
 import Movement from '../components/Movement';
+import SelectDropdown from 'react-native-select-dropdown'
+import { FontAwesome } from '@expo/vector-icons'; 
+
+
+
 
 const {
     width: SCREEN_WIDTH,
@@ -14,12 +19,17 @@ const {
 
 export default function CurrentEmotion() {
 
+    const options = ["Today's Feelings", "current eMotion"];
+    const [selected, setSelected] = useState("Today's Feelings");
+
+    console.log(selected);
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
+
     let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
     
     function Visualization() {
-        if (firstEmotion) {
+        if (firstEmotion || selected === "current eMotion") {
             return (
                 <View style={styles.movementBox}>
                     <Pressable style={styles.emotionBox} onPress = {() => {
@@ -40,11 +50,32 @@ export default function CurrentEmotion() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>
-                    Today's Feelings
-                </Text>
-            </View>
+
+            <SelectDropdown
+                data={options}
+                onSelect={(selectedItem, index) => {
+                    setSelected(selectedItem);
+                }}
+                buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem
+                }}
+                rowTextForSelection={(item, index) => {
+                    // text represented for each item in dropdown
+                    // if data array is an array of objects then return item.property to represent item in dropdown
+                    return item
+                }}
+                defaultValue={options[0]}
+                buttonStyle ={styles.titleContainer}
+                buttonTextStyle={styles.title}
+                rowTextStyle={styles.optionText}
+                dropdownStyle={{backgroundColor: Themes.background}}
+                renderDropdownIcon={isOpened => {
+                    return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#444'} size={20} />;
+                  }}
+
+            />
 
             <Visualization/>
             <TouchableOpacity style = {styles.button} onPress={() => {
@@ -92,7 +123,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         aspectRatio: 1,
-        height: '58%'
+        height: '58%',
      },
      emotionBox: {
         aspectRatio: 1,
@@ -100,6 +131,13 @@ const styles = StyleSheet.create({
         position: 'absolute'
      },
      titleContainer: {
-        height: '11%'
+        height: '11%',
+        justifyContent: 'center',
+        width: '90%',
+        backgroundColor: Themes.background
      },
+     optionText: {
+        fontFamily: 'Avenir',
+        fontSize: 20
+     }
 });

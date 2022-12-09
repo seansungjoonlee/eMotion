@@ -43,6 +43,30 @@ const motionData = [
         name: 'yoga',
         feelings: ['sad', 'melancholy', 'discouraged', 'small'],
     },
+    {
+        name: 'push ups',
+        feelings: ['eager', 'frustrated', 'angry', 'anxious'],
+    },
+    {
+        name: 'dumbell rows',
+        feelings: ['powerful', 'stunned', 'shocked', 'surprised'],
+    },
+    {
+        name: 'jog',
+        feelings: ['interested', 'hurt', 'frightened'],
+    },
+    {
+        name: 'stair runs',
+        feelings: ['playful', 'dismayed', 'frustrated', 'surprised'],
+    },
+    {
+        name: 'dead bugs',
+        feelings: ['peaceful', 'content', 'stunned', 'amazed'],
+    },
+    {
+        name: 'bear crawls',
+        feelings: ['playful', 'bored', 'discouraged'],
+    },
 ]
 
 export default motionData;
