@@ -1,4 +1,4 @@
-import { TextInput, TouchableOpacity, Modal, Pressable, SafeAreaView, View, Text, StyleSheet, Dimensions } from "react-native";
+import { TextInput, TouchableOpacity, Modal, KeyboardAvoidingView, Pressable, SafeAreaView, View, Text, StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Emotion from "../components/Emotion";
 import React from "react";
@@ -19,9 +19,22 @@ export default function DuringMotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
 
+    const movement = context.movementData[context.getCurrentMovementIndex()];
+
+    let temp = '';
+    
+    if (context.motion.name !== '' && context.motion.name !=='choosing') {
+        let i = movement.motionEntry.length - 1;
+        while (movement.motionEntry[i].name.substring(0, movement.motionEntry[i].name.length - 2) === context.motion.name) {
+            i -= 1
+        }
+        i = i + 1;
+        temp = movement.motionEntry[i].note
+    }
+
   
     const [modalVisible, setModalVisible] = useState(false);
-    const [note, setNote] = useState();
+    const [note, setNote] = useState(temp);
     return (
         <SafeAreaView style={styles.container}>
             <Modal
@@ -34,21 +47,13 @@ export default function DuringMotion() {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.notesSheet}>
-                        <Pressable style={styles.topBar} onPress={() => {
+                        <View style={styles.topBar}>
+                            <Pressable onPress={() => {
                             setModalVisible(!modalVisible);
-                        }}>
-                            <Feather name="x" size={36} color="black"/>
-                        </Pressable>
-                        <View style={styles.noteBox}>
-                            <TextInput
-                                multiline={true}
-                                numberOfLines={4}
-                                onChangeText={note => setNote(note)}
-                                style={{padding: 10}}
-                                fontSize={SCREEN_HEIGHT * 0.045}
-                            />
-                        </View>
-                        <Pressable
+                            }}>
+                                <Feather name="x" size={36} color="black"/>
+                            </Pressable>
+                            <Pressable
                         style={[styles.noteButton, styles.buttonClose]}
                         onPress={() => {
                             context.editNote('motion', context.date, context.motion.name, note);
@@ -57,6 +62,17 @@ export default function DuringMotion() {
                         >
                             <Text style={styles.buttonText}>save note</Text>
                         </Pressable>
+                        </View>
+                        <View style={styles.noteBox}>
+                            <TextInput
+                                multiline={true}
+                                numberOfLines={4}
+                                defaultValue={note}
+                                onChangeText={note => setNote(note)}
+                                style={{padding: 10}}
+                                fontSize={SCREEN_HEIGHT * 0.045}
+                            />
+                        </View>
                     </View>
                 </View>
             </Modal>
@@ -129,7 +145,7 @@ const styles = StyleSheet.create({
         borderRadius: 1000
      },
     noteButton: {
-        height: '9%',
+        height: '100%',
         width: '50%',
         backgroundColor: Themes.background,
         borderRadius: 1000,
@@ -164,11 +180,12 @@ const styles = StyleSheet.create({
     },
     topBar: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        height: '7%',
+        height: '10%',
         width: '100%',
-        paddingHorizontal: '10%'
+        paddingVertical: '2%',
+        paddingHorizontal: '10%',
     },
     buttonText: {
         fontFamily: 'Avenir',

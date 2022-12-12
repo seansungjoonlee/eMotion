@@ -1,4 +1,4 @@
-import { View, Dimensions, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Dimensions, StyleSheet, KeyboardAvoidingView, Text, TextInput, TouchableOpacity } from 'react-native';
 import Themes from '../assets/Themes';
 import { useState } from 'react';
 import { useContext } from 'react';

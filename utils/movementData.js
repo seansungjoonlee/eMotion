@@ -16,7 +16,7 @@ let movementData = [{dateEntry: "11/4/2022", motionEntry: [{feelings: ["anxious"
 {dateEntry: "11/27/2022", motionEntry: [{feelings: ["joyful", "sad"], name: "11:30 1", note: ""}, {feelings: ["angry", "sad"], name: "lunges 1", note: "These are a good warm up!"}, {feelings: ["anxious", "surprised"], name: "lunges 2", note: ""}]},
 {dateEntry: "11/29/2022", motionEntry: [{feelings: ["angry", "sad"], name: "11:30 1", note: ""}, {feelings: ["angry", "sad", "discouraged", "aggressive"], name: "squats 1", note: "Feeling these squats!"}, {feelings: ["anxious", "surprised", "eager"], name: "squats 2", note: ""}]},
 {dateEntry: "12/2/2022", motionEntry: [{feelings: ["sad", "discouraged"], name: "11:33 1", note: ""}, {feelings: ["angry", "aggressive", "frustrated"], name: "yoga 1", note: "Yoga was a great warm up!"}, {feelings: ["anxious", "excited"], name: "yoga 2", note: ""}]},
-{dateEntry: "12/5/2022", motionEntry: [{feelings: ["joyful"], name: "11:33 1", note: ""}, {feelings: ["joyful"], name: "treadmill 1", note: "Reader for the rest of my workout!"}, {feelings: ["anxious", "eager"], name: "treadmill 2", note: ""}]},
+{dateEntry: "12/5/2022", motionEntry: [{feelings: ["joyful"], name: "11:33 1", note: ""}, {feelings: ["joyful"], name: "treadmill 1", note: "Ready for the rest of my workout!"}, {feelings: ["anxious", "eager"], name: "treadmill 2", note: ""}]},
 {dateEntry: "11/6/2022", motionEntry: [{feelings: ["surprised", "stunned"], name: "11:33 1", note: ""}, {feelings: ["surprised", "stunned"], name: "bear crawls 1", note: "Feeling these in my core"}, {feelings: ["joyful", "playful"], name: "bear crawls 2", note: ""}]},
 
 

@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "eMotion",
+    "owner": "teammovement",
     "slug": "eMotion",
     "version": "1.0.0",
     "orientation": "portrait",

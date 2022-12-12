@@ -1,4 +1,4 @@
-import { TextInput, Modal, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { TextInput, Modal, StyleSheet, KeyboardAvoidingView, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Emotion from '../components/Emotion';
@@ -96,7 +96,7 @@ export default function ExerciseOverview({ route }) {
 
 
     return (
-    <SafeAreaView style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <View style={styles.backArrowBox}>
             <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('MovementOverview', {date: date})}/>
             <Text style={styles.dots} onPress={() => setDetails(!details)}>
@@ -116,7 +116,7 @@ export default function ExerciseOverview({ route }) {
             />
         </View>
         <ExerciseOverviewBottom setEditable={setEditable} editable={editable} note={newNote} date={date} fullNames={fullNames}/>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
     );
 }
 
@@ -176,7 +176,8 @@ const styles = StyleSheet.create({
         margin: '6%'
     },
     backArrowBox: {
-        height: '7.5%',
+        height: '10.5%',
+        paddingTop: '5%',
         width: '100%',
         paddingHorizontal: '4%',
         justifyContent: 'space-between',

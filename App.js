@@ -175,7 +175,7 @@ export default function App() {
     return time;
   }
 
-  function updateMotion(name, feelings) {
+  function updateMotion(name, feelings, note) {
     let updated = {};
     if (motion.name !== name) {
       updated.name = name;
