@@ -1,10 +1,10 @@
-import { ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text,View, SafeAreaView, TouchableOpacity, Dimensions, TextInput } from 'react-native';
 import BasicSelection from '../components/BasicSelection';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Themes from '../assets/Themes';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons, AntDesign } from '@expo/vector-icons'; 
 
 
 const {
@@ -16,7 +16,7 @@ const {
 export default function HowDoYouFeel() {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
-
+    const [text, setText] = useState('')
 
     let button = [];
     if (context.basic.length > 0) {
@@ -55,6 +55,19 @@ export default function HowDoYouFeel() {
         <View style={styles.selector}>
             <BasicSelection basic={context.basic} setBasic={context.setBasic}/>
         </View>
+        <Text style={styles.smallText}>Can't find the right emotion?</Text>
+
+        <View style={styles.input}>
+            <TextInput
+                onChangeText={setText}
+                value={text}
+                placeholder={'Enter new emotion'}
+                style={styles.textInput}
+                />
+            <TouchableOpacity onPress={() => text.length > 0 && navigator.navigate('TestColorPage', {newWord: text})} style={[styles.icon, {backgroundColor: text.length > 0 ? '#58afff' : '#ddd'}]}>
+                <AntDesign name="arrowup" size={24} color="white" />
+            </TouchableOpacity>
+        </View>
         {button}
     </SafeAreaView>
 
@@ -70,7 +83,7 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     title: {
-        fontSize: SCREEN_HEIGHT * 0.045,
+        fontSize: SCREEN_HEIGHT * 0.035,
         textAlign: 'center',
         fontFamily: 'Avenir',
         fontWeight: 'bold',
@@ -91,7 +104,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         //padding: 20,
-        marginTop: '21%',
+        marginTop: 10,
         width: '45%',
         height: '8%',
         borderRadius: 1000,
@@ -104,6 +117,25 @@ const styles = StyleSheet.create({
         paddingHorizontal: '4%',
     },
     selector: {
-        height: '50%',
+        height: 450
     },
+    input: {
+        borderColor: 'black',
+        borderWidth: 2,
+        borderRadius: 7,
+        width: '70%',
+        padding: 10,
+        flexDirection: 'row'
+    },
+    textInput: {
+        width: '90%'
+    },
+    smallText: {
+        fontSize: 13
+    },
+    icon: {
+        borderRadius: 30,
+        padding: 2,
+        backgroundColor: '#ddd'
+    }
 });

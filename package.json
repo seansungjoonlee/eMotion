@@ -22,7 +22,10 @@
     "react-context": "^0.0.3",
     "react-native": "0.70.5",
     "react-native-calendars": "^1.1291.1",
+    "react-native-canvas": "^0.1.38",
+    "react-native-color-panel": "^1.0.1",
     "react-native-color-picker": "^0.6.0",
+    "react-native-draggable": "^3.3.0",
     "react-native-dropdown-picker": "^5.4.3",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-gradients": "^2.0.1",
@@ -33,7 +36,9 @@
     "react-native-svg": "13.4.0",
     "react-native-svg-charts": "^5.4.0",
     "react-native-swipe-gestures": "^1.0.5",
-    "react-native-swiper-flatlist": "^3.0.17"
+    "react-native-swiper-flatlist": "^3.0.17",
+    "react-native-webview": "^11.26.0",
+    "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

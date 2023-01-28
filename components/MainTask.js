@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import DuringMotion from '../screens/DuringMotion';
 import ChooseMotion from '../screens/ChooseMotion';
 import CurrentEmotion from '../screens/CurrentEmotion';
+import TestColorPage from './TestColorPage';
 import React from 'react';
 import FeelingContext from '../components/FeelingContext';
 import { useState } from 'react';
@@ -43,6 +44,7 @@ export default function MainTask({ navigation }) {
         <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
         <Stack.Screen options={{headerShown: false}} name="ChooseMotion" component={ChooseMotion} />
         <Stack.Screen options={{headerShown: false}} name="DuringMotion" component={DuringMotion} />
+        <Stack.Screen options={{headerShown: false}} name="TestColorPage" component={TestColorPage}/>
     </Stack.Navigator>
   );
 }
