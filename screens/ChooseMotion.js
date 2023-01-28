@@ -46,14 +46,9 @@ export default function ChooseMotion({ route }) {
                         onSubmitEditing={(event) => 
                             {
                                 setText( event.nativeEvent.text)
-<<<<<<< HEAD
                                 console.log("context.basic " + context.basic);
                                 context.updateMovement(text, context.basic, context.date);
                                 context.updateMotion(text, context.basic);
-=======
-                                context.updateMovement(text, context.currentFeelings, context.date);
-                                context.updateMotion(text, context.currentFeelings);
->>>>>>> 0e3e022707294ba447c651d3107e9e713a9525bc
                             navigator.navigate('DuringMotion')
 
                             }

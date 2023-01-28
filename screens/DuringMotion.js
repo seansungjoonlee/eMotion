@@ -21,7 +21,6 @@ export default function DuringMotion() {
     
     const movement = context.movementData[context.getCurrentMovementIndex()];
     // console.log(`${movement}: movement`)
-<<<<<<< HEAD
     console.log(movement.motionEntry);
     console.log(movement.dateEntry);
     console.log("feelings: " + context.basic);
@@ -37,21 +36,6 @@ export default function DuringMotion() {
     //     console.log(movement.motionEntry)
     //     temp = movement.motionEntry[i].note
     // }
-=======
-    console.log(movement.motionEntry)
-    console.log("movement")
-    let temp = '';
-    
-    if (context.motion.name !== '' && context.motion.name !=='choosing') {
-        let i = movement.motionEntry.length - 1;
-        while (movement.motionEntry[i].name.substring(0, movement.motionEntry[i].name.length - 2) === context.motion.name) {
-            i -= 1
-        }
-        i = i + 1;
-        console.log(movement.motionEntry)
-        temp = movement.motionEntry[i].note
-    }
->>>>>>> 0e3e022707294ba447c651d3107e9e713a9525bc
 
   
     const [modalVisible, setModalVisible] = useState(false);
