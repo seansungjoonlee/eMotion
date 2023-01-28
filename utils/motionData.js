@@ -1,42 +1,42 @@
 const motionData = [
     {
-        name: 'squats',
+        name: 'walk to University Ave',
         feelings: ['joyful', 'anxious', 'content'],
     },
     {
-        name: 'lunges',
+        name: 'dance class at Roble Gym',
         feelings: ['joyful', 'sad', 'peaceful'],
     },
     {
-        name: 'step-ups',
+        name: 'hike with friends',
         feelings: ['angry', 'surprised', 'amazed'],
     },
     {
-        name: 'stationary bike',
+        name: 'solo hike',
         feelings: ['angry', 'anxious', 'frustrated'],
     },
     {
-        name: 'treadmill',
+        name: 'strength training',
         feelings: ['joyful', 'peaceful', 'playful'],
     },
     {
-        name: 'med-ball slams',
+        name: 'lifting',
         feelings: ['angry', 'anxious', 'aggressive'],
     },
     {
-        name: 'squat jumps',
+        name: 'cardio',
         feelings: ['surprised', 'sad', 'discouraged'],
     },
     {
-        name: 'banded squats',
+        name: 'jog around Lake Lag',
         feelings: ['shocked', 'surprised', 'joyful'],
     },
     {
-        name: 'pistol squats',
+        name: 'bike up and down El Camino',
         feelings: ['aggressive', 'angry', 'eager'],
     },
     {
-        name: 'breathing',
+        name: 'walk down Palm Drive',
         feelings: ['sad', 'melancholy', 'discouraged', 'small'],
     },
     {
@@ -44,27 +44,27 @@ const motionData = [
         feelings: ['sad', 'melancholy', 'discouraged', 'small'],
     },
     {
-        name: 'push ups',
+        name: 'meditate',
         feelings: ['eager', 'frustrated', 'angry', 'anxious'],
     },
     {
-        name: 'dumbell rows',
+        name: 'swim',
         feelings: ['powerful', 'stunned', 'shocked', 'surprised'],
     },
     {
-        name: 'jog',
+        name: 'play tennis with Ethan',
         feelings: ['interested', 'hurt', 'frightened'],
     },
     {
-        name: 'stair runs',
+        name: 'go bowling',
         feelings: ['playful', 'dismayed', 'frustrated', 'surprised'],
     },
     {
-        name: 'dead bugs',
+        name: 'go climbing at Farrillaga',
         feelings: ['peaceful', 'content', 'stunned', 'amazed'],
     },
     {
-        name: 'bear crawls',
+        name: 'dance around the room',
         feelings: ['playful', 'bored', 'discouraged'],
     },
 ]
