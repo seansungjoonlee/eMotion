@@ -13,6 +13,8 @@ const {
 } = Dimensions.get('window');
 
 
+
+
 export default function CareToElaborate() {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();

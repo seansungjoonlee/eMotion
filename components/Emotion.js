@@ -6,14 +6,15 @@ import FeelingContext from './FeelingContext.js';
 import { useContext } from 'react';
 
 function getStops(feelings, colorMapping) {
-    console.log(colorMapping);
-    console.log(feelings);
+    console.log("feelings: " + feelings);
+    console.log("basic feelings: " + basicFeelings);
     let colors = [];
-    if (feelings[0] === "startScreen") {
+    if (feelings.length == 0) {
+        console.log("here");
         colors = ['#d1d1d1', '#bfbfbf', '#c7c7c7', '#a3a3a3', '#b0b0b0']
     }
     else if (feelings.length === 1) {
-        colors.push(colorMapping[feelings[0]]);
+        colors.push(colorMapping[feelings]);
         
     }
     else {
@@ -27,7 +28,7 @@ function getStops(feelings, colorMapping) {
         //         }
         //     }
         // }
-        for(let i = 0; i < feelings.length; i++){
+        for(let i = 1; i < feelings.length; i++){
             // if (feelings.indexOf(feelings[i]) > -1) {
                 colors.push(colorMapping[feelings[i]]);
                 // for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {

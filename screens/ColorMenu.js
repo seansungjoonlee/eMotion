@@ -11,7 +11,16 @@ const {
     height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
-
+function getTime() {
+    let newDate = new Date();
+    let time = newDate.getHours();
+    if(newDate.getMinutes() < 10) {
+      time += ':0' + newDate.getMinutes();
+    } else {
+      time += ':' + newDate.getMinutes();
+    }
+    return time;
+  }
 
 export default function ColorMenu() {
     const navigator = useNavigation();
@@ -19,7 +28,10 @@ export default function ColorMenu() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.backArrowBox}>
-                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('CalendarScreen')}/>
+                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
+                    console.log("TRACK: exited out of settings: " + getTime());
+                    navigator.navigate('CalendarScreen');
+                }}/>
             </View>
             <Text style={styles.title}>
                 color menu

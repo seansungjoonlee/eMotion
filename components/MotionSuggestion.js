@@ -30,8 +30,8 @@ export default function MotionSuggestion({ name, motionFeelings }) {
     let emotions = separateEmotions(motionFeelings);
     return (
         <Pressable style={styles.motion} onPress={() => {
-            context.updateMotion(name, context.currentFeelings);
-            context.updateMovement(name, context.currentFeelings, context.date);
+            context.updateMotion(name, context.basic);
+            context.updateMovement(name, context.basic, context.date);
             navigator.navigate('DuringMotion')}}>
             <Text style={styles.name}>{name}</Text>
             <View style={styles.basedOn}>

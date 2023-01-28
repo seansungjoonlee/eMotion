@@ -22,9 +22,11 @@ function Notif({friend, message}) {
         if (heart === 'heart-outline') {
             setHeart('heart-sharp')
             setColor('red')
+            console.log("TRACK: liked");
         } else {
             setHeart('heart-outline')
             setColor('black')
+            console.log("TRACK: unliked");
         }
     }
 

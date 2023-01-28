@@ -12,6 +12,16 @@ const {
     height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
+function getTime() {
+    let newDate = new Date();
+    let time = newDate.getHours();
+    if(newDate.getMinutes() < 10) {
+      time += ':0' + newDate.getMinutes();
+    } else {
+      time += ':' + newDate.getMinutes();
+    }
+    return time;
+  }
 
 export default function CommunityFeedScreen() {
     const navigator = useNavigation();
@@ -22,7 +32,10 @@ export default function CommunityFeedScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
-                <FontAwesome5 name="user-plus" size={30} color="black" onPress={() => navigator.navigate('AddFriend')}/>
+                <FontAwesome5 name="user-plus" size={30} color="black" onPress={() => {
+                    navigator.navigate('AddFriend');
+                    console.log("TRACK: adding friend at " + getTime());
+                    }}/>
             </View>
             <Text style={styles.title}>
                 community

@@ -12,6 +12,17 @@ const {
     height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
+function getTime() {
+    let newDate = new Date();
+    let time = newDate.getHours();
+    if(newDate.getMinutes() < 10) {
+      time += ':0' + newDate.getMinutes();
+    } else {
+      time += ':' + newDate.getMinutes();
+    }
+    return time;
+  }
+
 
 export default function HowDoYouFeel() {
     const context = useContext(FeelingContext);
@@ -25,7 +36,8 @@ export default function HowDoYouFeel() {
                 style = {styles.selectButton} key={context.basic.length}
                 onPress={() => {
                     // context.updateSecondary(context.basic);
-                    console.log(context.basic);
+                    let time = getTime();
+                    console.log("TRACK: finished selecting feelings: " + getTime());
                     navigator.navigate('ChooseMotion');
                 }}>
                 <Text style = {styles.buttonText}> select</Text>
@@ -74,7 +86,6 @@ export default function HowDoYouFeel() {
 
     );
 }
-
 
 const styles = StyleSheet.create({
     container:{

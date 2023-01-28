@@ -18,19 +18,24 @@ const {
 export default function DuringMotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
-
+    
     const movement = context.movementData[context.getCurrentMovementIndex()];
-
+    // console.log(`${movement}: movement`)
+    console.log(movement.motionEntry);
+    console.log(movement.dateEntry);
+    console.log("feelings: " + context.basic);
     let temp = '';
     
-    if (context.motion.name !== '' && context.motion.name !=='choosing') {
-        let i = movement.motionEntry.length - 1;
-        while (movement.motionEntry[i].name.substring(0, movement.motionEntry[i].name.length - 2) === context.motion.name) {
-            i -= 1
-        }
-        i = i + 1;
-        temp = movement.motionEntry[i].note
-    }
+    //wtf is this. is this just for notes?
+    // if (context.motion.name !== '' && context.motion.name !=='choosing') {
+    //     let i = movement.motionEntry.length - 1;
+    //     while (movement.motionEntry[i].name.substring(0, movement.motionEntry[i].name.length - 2) === context.motion.name) {
+    //         i -= 1
+    //     }
+    //     i = i + 1;
+    //     console.log(movement.motionEntry)
+    //     temp = movement.motionEntry[i].note
+    // }
 
   
     const [modalVisible, setModalVisible] = useState(false);
