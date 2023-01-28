@@ -2,26 +2,40 @@ import { Text, View, StyleSheet, Image, SafeAreaView } from 'react-native';
 import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
 import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
 import FeelingContext from './FeelingContext.js';
+
 import { useContext } from 'react';
 
 function getStops(feelings, colorMapping) {
+    console.log(colorMapping);
+    console.log(feelings);
     let colors = [];
     if (feelings[0] === "startScreen") {
         colors = ['#d1d1d1', '#bfbfbf', '#c7c7c7', '#a3a3a3', '#b0b0b0']
     }
     else if (feelings.length === 1) {
         colors.push(colorMapping[feelings[0]]);
+        
     }
     else {
-        for(let i = 0; i < basicFeelings.length; i++){
-            if (feelings.indexOf(basicFeelings[i]) > -1) {
-                colors.push(colorMapping[basicFeelings[i]]);
-                for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
-                    if (feelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
-                        colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
-                    }
-                }
-            }
+        // for(let i = 0; i < basicFeelings.length; i++){
+        //     if (feelings.indexOf(basicFeelings[i]) > -1) {
+        //         colors.push(colorMapping[basicFeelings[i]]);
+        //         for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
+        //             if (feelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
+        //                 colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
+        //             }
+        //         }
+        //     }
+        // }
+        for(let i = 0; i < feelings.length; i++){
+            // if (feelings.indexOf(feelings[i]) > -1) {
+                colors.push(colorMapping[feelings[i]]);
+                // for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
+                //     if (feelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
+                //         colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
+                //     }
+                // }
+            // }
         }
     }
     colors.push('white');
@@ -38,7 +52,10 @@ function getStops(feelings, colorMapping) {
 
 export default function Emotion({ feelings }) {
     const context = useContext(FeelingContext);
-    const stops = getStops(feelings, context.colorMapping);
+    console.log("2");
+    console.log(context.basic);
+    const stops = getStops(context.basic, context.colorMapping);
+
     return (
         <View style={styles.container}>
             <Svg height='100%' width="100%">
@@ -61,6 +78,7 @@ export default function Emotion({ feelings }) {
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
   container: {

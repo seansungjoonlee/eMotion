@@ -24,8 +24,9 @@ export default function HowDoYouFeel() {
             <TouchableOpacity 
                 style = {styles.selectButton} key={context.basic.length}
                 onPress={() => {
-                    context.updateSecondary(context.basic);
-                    navigator.navigate('CareToElaborate');
+                    // context.updateSecondary(context.basic);
+                    console.log(context.basic);
+                    navigator.navigate('ChooseMotion');
                 }}>
                 <Text style = {styles.buttonText}> select</Text>
             </TouchableOpacity>
@@ -74,6 +75,7 @@ export default function HowDoYouFeel() {
     );
 }
 
+
 const styles = StyleSheet.create({
     container:{
         height: '100%',
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: '4%',
     },
     selector: {
-        height: 450
+        height: 400
     },
     input: {
         borderColor: 'black',
