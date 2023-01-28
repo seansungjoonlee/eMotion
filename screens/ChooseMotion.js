@@ -120,7 +120,7 @@ export default function ChooseMotion({ route }) {
         <Pressable style={styles.emotionBox} onPress={() => {
             navigator.navigate('HowDoYouFeel');
             }}>
-            <Emotion feelings={context.currentFeelings}/>
+            <Emotion feelings={context.basic}/>
         </Pressable>
         <Options/>
         

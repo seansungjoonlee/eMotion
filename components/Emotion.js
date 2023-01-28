@@ -28,7 +28,8 @@ function getStops(feelings, colorMapping) {
         //         }
         //     }
         // }
-        for(let i = 1; i < feelings.length; i++){
+        for(let i = 0; i < feelings.length; i++){
+            console.log("here: " + feelings[i]);
             // if (feelings.indexOf(feelings[i]) > -1) {
                 colors.push(colorMapping[feelings[i]]);
                 // for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
@@ -43,6 +44,8 @@ function getStops(feelings, colorMapping) {
     let stops = [];
     for(let i = 0; i < colors.length; i++){
         const offset = (i+1) * (1/(colors.length));
+        console.log("stops colors: " + colors[i]);
+
         stops.push(
             <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
         );

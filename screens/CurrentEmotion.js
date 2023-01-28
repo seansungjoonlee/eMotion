@@ -34,7 +34,7 @@ export default function CurrentEmotion() {
                 <View style={styles.movementBox}>
                     <Pressable style={styles.emotionBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
-                        <Emotion feelings={context.currentFeelings}/>
+                        <Emotion feelings={context.basic}/>
                     </Pressable>
                 </View>
             )

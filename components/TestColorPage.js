@@ -116,6 +116,7 @@ export default function TestColorPage(props) {
     })
     return (
         <View>
+            <View style={{height: 100}}></View>
                 <View style={styles.topBar}>
                     <View style={styles.backArrowBox}>
                         <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
