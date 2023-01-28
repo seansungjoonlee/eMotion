@@ -4,6 +4,7 @@ import Emotion from "../components/Emotion";
 import React from "react";
 import { useState } from "react";
 import FeelingContext from '../components/FeelingContext';
+import feelingsData from '../utils/feelingsData';
 import { useContext } from 'react';
 import Themes from "../assets/Themes";
 import { Feather } from '@expo/vector-icons'; 
@@ -97,6 +98,16 @@ export default function DuringMotion() {
                 <TouchableOpacity style={styles.button} onPress={() =>
                 {
                     setModalVisible(!modalVisible)
+                    //THIS PART GETS FEELING COLORS FROM CURRENT EMOTION
+                    console.log(context.currentFeelings);
+                    const colors = [];
+                    for (let i = 0; i < context.currentFeelings.length; i++) {
+                        let color = feelingsData.find(({ name }) => name === context.currentFeelings[i]);
+                        console.log("color's color: " + color.color);
+                        colors.push(color.color);
+                    }
+                    console.log(colors);
+                    //COLORS[] IS FULLY PROPAGATED BY NOW
                 }}>
                         <Text style={styles.buttonText}>add note</Text>
                 </TouchableOpacity>
