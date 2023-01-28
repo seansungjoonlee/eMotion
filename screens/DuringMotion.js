@@ -2,12 +2,13 @@ import { TextInput, TouchableOpacity, Modal, KeyboardAvoidingView, Pressable, Sa
 import { useNavigation } from "@react-navigation/native";
 import Emotion from "../components/Emotion";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FeelingContext from '../components/FeelingContext';
 import { useContext } from 'react';
 import Themes from "../assets/Themes";
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 const {
@@ -19,30 +20,47 @@ export default function DuringMotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
     
+    const [colors, setColors] = useState([])
     const movement = context.movementData[context.getCurrentMovementIndex()];
     // console.log(`${movement}: movement`)
-    console.log(movement.motionEntry);
-    console.log(movement.dateEntry);
+    // console.log(movement.motionEntry);
+    // console.log(movement.dateEntry);
     console.log("feelings: " + context.basic);
     let temp = '';
+
+    const colorList = [
+        {offset: '0%', color: '#231557', opacity: '1'},
+        {offset: '29%', color: '#44107A', opacity: '1'},
+        {offset: '67%', color: '#FF1361', opacity: '1'},
+        {offset: '100%', color: '#FFF800', opacity: '1'}
+      ]
+    useEffect(() => {
+        var tempColors = []
+        for (var i = 0; i < context.basic.length; i++) {
+            tempColors.push(context.colorMapping[context.basic[i]])
+        }
+        setColors(tempColors)
+        console.log(tempColors)
+    }, [])
     
     //wtf is this. is this just for notes?
-    // if (context.motion.name !== '' && context.motion.name !=='choosing') {
-    //     let i = movement.motionEntry.length - 1;
+    if (context.motion.name !== '' && context.motion.name !=='choosing') {
+        let i = movement.motionEntry.length - 1;
     //     while (movement.motionEntry[i].name.substring(0, movement.motionEntry[i].name.length - 2) === context.motion.name) {
     //         i -= 1
     //     }
     //     i = i + 1;
     //     console.log(movement.motionEntry)
-    //     temp = movement.motionEntry[i].note
-    // }
+        temp = movement.motionEntry[i].note
+    }
+
 
   
     const [modalVisible, setModalVisible] = useState(false);
     const [note, setNote] = useState(temp);
     return (
         <SafeAreaView style={styles.container}>
-            <Modal
+            {/* <Modal
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
@@ -56,9 +74,34 @@ export default function DuringMotion() {
                             <Pressable onPress={() => {
                             setModalVisible(!modalVisible);
                             }}>
-                                <Feather name="x" size={36} color="black"/>
+                                <Feather name="x" size={36} color="black"/> */}
+                                <LinearGradient style={{height: '100%', width: '100%'}} colors={colors}>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.notesSheet}>
+                            <View style={styles.topBar}>
+                                <Pressable onPress={() => {
+                                setModalVisible(!modalVisible);
+                                }}>
+                                    <Feather name="x" size={36} color="black"/>
+                                </Pressable>
+                                <Pressable
+                            style={[styles.noteButton, styles.buttonClose]}
+                            onPress={() => {
+                                context.editNote('motion', context.date, context.motion.name, note);
+                                setModalVisible(!modalVisible);
+                            }}
+                            >
+                                <Text style={styles.buttonText}>save note</Text>
                             </Pressable>
-                            <Pressable
+                            {/* <Pressable
                         style={[styles.noteButton, styles.buttonClose]}
                         onPress={() => {
                             context.editNote('motion', context.date, context.motion.name, note);
@@ -76,13 +119,24 @@ export default function DuringMotion() {
                                 onChangeText={note => setNote(note)}
                                 style={{padding: 10}}
                                 fontSize={SCREEN_HEIGHT * 0.045}
-                            />
+                            /> */}
+                             </View>
+                            <View style={styles.noteBox}>
+                                <TextInput
+                                    multiline={true}
+                                    numberOfLines={4}
+                                    defaultValue={note}
+                                    onChangeText={note => setNote(note)}
+                                    style={{padding: 10}}
+                                    fontSize={SCREEN_HEIGHT * 0.045}
+                                />
+                            </View>
                         </View>
                     </View>
-                </View>
+                {/* </View> */}
             </Modal>
 
-            <View style={styles.backArrowBox}>
+            {/* <View style={styles.backArrowBox}>
                 <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
                 context.updateMotion('choosing', [])
                 navigator.navigate('ChooseMotion')}}/>
@@ -105,18 +159,44 @@ export default function DuringMotion() {
                 }}>
                         <Text style={styles.buttonText}>add note</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => 
+                <TouchableOpacity style={styles.button} onPress={() =>  */}
+                <View style={styles.backArrowBox}>
+                    <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
+                    context.updateMotion('choosing', [])
+                    navigator.navigate('ChooseMotion')}}/>
+                </View>
+                <View style={styles.headerContainer}>
+                    <Text style={styles.motion}>
+                        {context.motion.name}
+                    </Text>
+                </View>
+                    <TouchableOpacity style={styles.button} onPress={() =>
                     {
-                        context.updateMotion('', []);
-                        navigator.navigate('CurrentEmotion')
+                        // context.updateMotion('', []);
+                        // navigator.navigate('CurrentEmotion')
+                        setModalVisible(!modalVisible)
+
                     }}>
-                    <Text style={styles.buttonText}>end movement</Text>
-                </TouchableOpacity>
+                    {/* <Text style={styles.buttonText}>end movement</Text>
+                </TouchableOpacity> */}
+                 <Text style={styles.buttonText}>add note</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => 
+                        {
+                            context.updateMotion('', []);
+                            navigator.navigate('CurrentEmotion')
+                        }}>
+                        <Text style={styles.buttonText}>end movement</Text>
+                    </TouchableOpacity>
+            </LinearGradient>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    background: {
+        position: 'absolute'
+    },
     container:{
         width: '100%',
         height: '100%',

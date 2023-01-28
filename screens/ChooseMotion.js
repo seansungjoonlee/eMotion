@@ -43,12 +43,22 @@ export default function ChooseMotion({ route }) {
                     <TextInput
                         style={styles.buttonText}
                         placeholder="search:"
+                        // onSubmitEditing={(event) => 
+                        //     {
+                        //         setText( event.nativeEvent.text)
+                        //         console.log("context.basic " + context.basic);
+                        //         context.updateMovement(text, context.basic, context.date);
+                        //         context.updateMotion(text, context.basic);
+                        //     navigator.navigate('DuringMotion')
+
+                        //     }
+                        // }
                         onSubmitEditing={(event) => 
                             {
                                 setText( event.nativeEvent.text)
                                 console.log("context.basic " + context.basic);
-                                context.updateMovement(text, context.basic, context.date);
-                                context.updateMotion(text, context.basic);
+                                context.updateMovement(event.nativeEvent.text, context.basic, context.date); //NOT CONSISTENT
+                                context.updateMotion(event.nativeEvent.text, context.basic);
                             navigator.navigate('DuringMotion')
 
                             }
