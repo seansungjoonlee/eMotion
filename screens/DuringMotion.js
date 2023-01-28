@@ -18,9 +18,11 @@ const {
 export default function DuringMotion() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
-
+    
     const movement = context.movementData[context.getCurrentMovementIndex()];
-
+    // console.log(`${movement}: movement`)
+    console.log(movement.motionEntry)
+    console.log("movement")
     let temp = '';
     
     if (context.motion.name !== '' && context.motion.name !=='choosing') {
@@ -29,6 +31,7 @@ export default function DuringMotion() {
             i -= 1
         }
         i = i + 1;
+        console.log(movement.motionEntry)
         temp = movement.motionEntry[i].note
     }
 

@@ -37,19 +37,36 @@ export default function ChooseMotion({ route }) {
         return (
             <View style={styles.optionsBox}>
                 <Text style={styles.label}>
-                    search for movement:
+                    Enter your motion:
                 </Text>
                 <View style={styles.textBox}>
                     <TextInput
                         style={styles.buttonText}
                         placeholder="search:"
-                        onSubmitEditing={(event) => setText( event.nativeEvent.text
-                        )}
+                        onSubmitEditing={(event) => 
+                            {
+                                setText( event.nativeEvent.text)
+                                context.updateMovement(text, context.currentFeelings, context.date);
+                                context.updateMotion(text, context.currentFeelings);
+                            navigator.navigate('DuringMotion')
+
+                            }
+                        }
                     />
                 </View>
-                <View style={styles.searchedBox}>
+                {/* <View style={styles.searchedBox}>
                     <SearchedMotions searched={text}/>
-                </View>
+                </View> */}
+                {/* <TouchableOpacity onPress={() => {
+                    console.log('adding motion')
+                    console.log(text)
+                    console.log(context.movement)
+                    
+                    console.log(context.movement)
+                    navigator.navigate('DuringMotion')
+                    // console.log('adding motion')
+                    // console.log(text)
+                }}><Text>Add Motion</Text></TouchableOpacity> */}
             </View>
         )
     };
