@@ -6,8 +6,11 @@ import FeelingContext from './FeelingContext.js';
 import { useContext } from 'react';
 
 function getStops(feelings, colorMapping) {
+<<<<<<< HEAD
     console.log("feelings: " + feelings);
     console.log("basic feelings: " + basicFeelings);
+=======
+>>>>>>> 0e3e022707294ba447c651d3107e9e713a9525bc
     let colors = [];
     if (feelings.length == 0) {
         console.log("here");
@@ -53,8 +56,6 @@ function getStops(feelings, colorMapping) {
 
 export default function Emotion({ feelings }) {
     const context = useContext(FeelingContext);
-    console.log("2");
-    console.log(context.basic);
     const stops = getStops(context.basic, context.colorMapping);
 
     return (

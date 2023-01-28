@@ -237,6 +237,8 @@ export default function App() {
   }
 
   function updateMovement(name, feelings, movementDate) {
+    console.log('updating movement')
+    console.log(name)
     let updated = [...movementData];
 
     if (name == "") {

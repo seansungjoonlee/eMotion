@@ -120,8 +120,6 @@ export default function TestColorPage(props) {
                     <View style={styles.backArrowBox}>
                         <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
                             var hex = rgbToHex(Math.floor(selectedColor[0]), Math.floor(selectedColor[1]), Math.floor(selectedColor[2]))
-                            console.log(hex)
-                            console.log(context.colorMapping)
                             context.updateColorMapping(newEmotion, hex);
                             navigator.navigate('HowDoYouFeel')}}/>
                     </View>
