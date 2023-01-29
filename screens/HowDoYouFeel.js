@@ -36,7 +36,6 @@ export default function HowDoYouFeel() {
                 style = {styles.selectButton} key={context.basic.length}
                 onPress={() => {
                     // context.updateSecondary(context.basic);
-                    let time = getTime();
                     console.log("TRACK: finished selecting feelings: " + getTime());
                     navigator.navigate('ChooseMotion');
                 }}>

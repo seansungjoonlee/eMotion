@@ -229,6 +229,7 @@ export default function App() {
   }
 
   function movementFeelings(term) {
+    console.log("inside movement feelings");
     let feelings = [];
     for (let i = 0; i < term.motionEntry.length; i++) {
       feelings.push(term.motionEntry[i].feelings);

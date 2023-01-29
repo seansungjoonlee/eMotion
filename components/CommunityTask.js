@@ -4,7 +4,6 @@ import Themes from '../assets/Themes.js';
 import CommunityFeedScreen from '../screens/CommunityFeedScreen.js';
 import AddFriend from '../screens/AddFriend.js';
 
-window.onload = function(){console.log("hello")};
 
 export default function ReflectionTask({ navigation }) {
   const Stack = createStackNavigator();

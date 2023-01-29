@@ -9,13 +9,14 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-native-community/slider": "^4.3.3",
+    "@react-native-community/slider": "4.2.4",
     "@react-native-picker/picker": "^2.4.8",
     "@react-navigation/bottom-tabs": "^6.4.1",
     "@react-navigation/drawer": "^6.5.1",
     "@react-navigation/native": "^6.0.14",
     "@react-navigation/stack": "^6.3.5",
     "expo": "~47.0.5",
+    "expo-cli": "^6.2.1",
     "expo-linear-gradient": "~12.0.1",
     "expo-status-bar": "~1.4.2",
     "expo-updates": "~0.15.6",
@@ -38,7 +39,7 @@
     "react-native-svg-charts": "^5.4.0",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-swiper-flatlist": "^3.0.17",
-    "react-native-webview": "^11.26.0",
+    "react-native-webview": "11.23.1",
     "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {

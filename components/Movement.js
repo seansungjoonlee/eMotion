@@ -6,6 +6,7 @@ import { useContext } from 'react';
 
 
 function getOutsideStops(movementFeelings, status, colorMapping) {
+    console.log("made it in");
     const context = useContext(FeelingContext);
     let outsideFeelings = [];
     let insideFeelings = [];
@@ -13,13 +14,17 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
     let stops = [];
     //let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
     if (status === 'current') {
+        console.log("status was current");
         for (let i = 0; i < movementFeelings.length - 1; i++) {
+            console.log(movementFeelings[i]);
             for (let j = 0; j < movementFeelings[i].length; j++)
             {
+                console.log(movementFeelings[i][j]);
                 outsideFeelings.push(movementFeelings[i][j]);
             }
         }
         insideFeelings = movementFeelings[movementFeelings.length-1];
+        console.log("insideFeelings: " + insideFeelings);
         
     } else {
         colors = ['white'];
@@ -44,9 +49,13 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
     }
     for(let i = 0; i < insideFeelings.length; i++){
         const offset = (i + 1) * (0.35/(colors.length));
-        stops.push(
-            <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
-        );
+        console.log("pushing to stops: " + colors[i]);
+        if (colors[i] !== undefined) {
+            stops.push(
+                <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
+            );
+        }
+        
     }
 
     for(let i = 0; i < basicFeelings.length; i++){
@@ -62,6 +71,8 @@ function getOutsideStops(movementFeelings, status, colorMapping) {
     colors.push('white');
     for(let i = 0; i < (colors.length - insideFeelings.length); i++){
         let offset = 0.35 + (i + 1) * (0.6/(colors.length - insideFeelings.length));
+        console.log("pushing to stops plus insideFeelings length: " + colors[i + insideFeelings.length]);
+
         stops.push(
             <Stop offset={offset} stopColor={colors[i + insideFeelings.length]} stopOpacity="1" key={i}/>
         );
