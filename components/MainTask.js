@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import Start from '../screens/Start';
 import HowDoYouFeel from '../screens/HowDoYouFeel';
 import CareToElaborate from '../screens/CareToElaborate';

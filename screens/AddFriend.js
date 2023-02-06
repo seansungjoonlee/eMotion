@@ -14,6 +14,17 @@ const {
     height: SCREEN_HEIGHT,
   } = Dimensions.get('window');
 
+  function getTime() {
+    let newDate = new Date();
+    let time = newDate.getHours();
+    if(newDate.getMinutes() < 10) {
+      time += ':0' + newDate.getMinutes();
+    } else {
+      time += ':' + newDate.getMinutes();
+    }
+    return time;
+  }
+
 export default function AddFriend() {
     const context = useContext(FeelingContext);
     const navigator = useNavigation();
@@ -81,7 +92,10 @@ export default function AddFriend() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.backArrowBox}>
-                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('CommunityFeedScreen')}/>
+                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
+                    navigator.navigate('CommunityFeedScreen');
+                    console.log("TRACK: exiting addFriend: " + getTime());
+                }}/>
             </View>
             <Text style={styles.title}>
                 community

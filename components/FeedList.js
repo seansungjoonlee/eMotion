@@ -101,13 +101,13 @@ const styles = StyleSheet.create({
     padding: 10
   },
   header: {
-    // fontFamily: 'Avenir',
+    fontFamily: 'Avenir',
     fontWeight: 'bold',
     fontSize: SCREEN_HEIGHT * 0.03,
     marginBottom: '4%'
   },
   body: {
-    // fontFamily: 'Avenir',
+    fontFamily: 'Avenir',
     fontSize: SCREEN_HEIGHT * 0.0225
   },
   footer: {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     marginTop: '5%'
   },
   footerText: {
-    // fontFamily: 'Avenir',
+    fontFamily: 'Avenir',
     fontSize: SCREEN_HEIGHT * 0.0225
   },
   notifTop: {

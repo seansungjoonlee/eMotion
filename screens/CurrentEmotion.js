@@ -29,25 +29,31 @@ export default function CurrentEmotion() {
     const context = useContext(FeelingContext);
 
     let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
-    
+    console.log("*********************************************previsualization");
     function Visualization() {
+
         if (firstEmotion || selected === "current eMotion") {
             return (
                 <View style={styles.movementBox}>
                     <Pressable style={styles.emotionBox} onPress = {() => {
                 navigator.navigate('HowDoYouFeel')}}>
-                        <Emotion feelings={context.currentFeelings}/>
+                        <Emotion feelings={context.basic}/>
                     </Pressable>
                 </View>
             )
         } else {
+            console.log("*******" + context.movementFeelings(context.movementData[context.getCurrentMovementIndex()]));
+            
             return (
                 <Pressable style={styles.movementBox} onPress = {() => {
                     navigator.navigate('HowDoYouFeel')}}>
                     <Movement movementFeelings={context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])} status={'current'}/>
+                    
+                    {/* <Emotion feelings={context.basic}/> */}
                 </Pressable>
             )
         }
+
     }
 
     return (

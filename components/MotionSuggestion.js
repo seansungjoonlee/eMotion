@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         padding: '3%'
     },
     name: {
-        // fontFamily: 'Avenir',
+        fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.03,
     },
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         aspectRatio: 1,
     },
     basedOnText: {
-        // fontFamily: 'Avenir',
+        fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.0225
     }
 });

@@ -67,6 +67,10 @@ const feelingsData = [
         name: 'tired',
         color: '#11D4FF',
     },
+    {
+        name: 'surprised',
+        color: '#11D4FF',
+    },
 
 
 ]

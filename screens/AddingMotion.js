@@ -9,11 +9,11 @@ import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import AddMotionSearch from '../components/AddMotionSearch';
 
+
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
   } = Dimensions.get('window');
-
 
 export default function AddingMotion({ route }) {
     const { movement } = route.params;

@@ -230,6 +230,7 @@ export default function App() {
   }
 
   function movementFeelings(term) {
+    console.log("inside movement feelings");
     let feelings = [];
     for (let i = 0; i < term.motionEntry.length; i++) {
       feelings.push(term.motionEntry[i].feelings);
@@ -238,6 +239,8 @@ export default function App() {
   }
 
   function updateMovement(name, feelings, movementDate) {
+    console.log('updating movement')
+    console.log(name)
     let updated = [...movementData];
 
     if (name == "") {

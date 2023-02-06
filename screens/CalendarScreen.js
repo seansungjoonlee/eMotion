@@ -33,6 +33,16 @@ function changeDateFormat(inputDate){  // expects Y-m-d
 }
 
 
+function getTime() {
+    let newDate = new Date();
+    let time = newDate.getHours();
+    if(newDate.getMinutes() < 10) {
+      time += ':0' + newDate.getMinutes();
+    } else {
+      time += ':' + newDate.getMinutes();
+    }
+    return time;
+  }
 
 export default function CalendarScreen() {
     const navigator = useNavigation();
@@ -40,7 +50,10 @@ export default function CalendarScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
-                <Ionicons name="settings-sharp" size={35} color="black" onPress={() => navigator.navigate('ColorMenu')}/>
+                <Ionicons name="settings-sharp" size={35} color="black" onPress={() => {
+                    navigator.navigate('ColorMenu');
+                    console.log("TRACK: opened settings: " + getTime());
+                }}/>
             </View>
             <Text style={styles.title}>
                 reflect

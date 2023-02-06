@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Themes from '../assets/Themes.js';
 import CommunityFeedScreen from '../screens/CommunityFeedScreen.js';

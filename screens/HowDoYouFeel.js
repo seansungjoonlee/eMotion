@@ -1,6 +1,4 @@
-import { ImageBackground, StyleSheet, Text, Button, Image, View, TouchableOpacity, Dimensions } from 'react-native';
-import { SafeAreaView } from "react-native-safe-area-context";
-
+import { ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
 import BasicSelection from '../components/BasicSelection';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
@@ -74,19 +72,19 @@ const styles = StyleSheet.create({
     title: {
         fontSize: SCREEN_HEIGHT * 0.045,
         textAlign: 'center',
-        // fontFamily: 'Avenir',
+        fontFamily: 'Avenir',
         fontWeight: 'bold',
     },
     subtitle: {
         fontSize: SCREEN_HEIGHT * 0.03,
-        // fontFamily: 'Avenir',
+        fontFamily: 'Avenir',
         textAlign: 'center',
         paddingTop: '1%',
         paddingBottom: '7%'
     },
     // take out
     buttonText: {
-        // fontFamily: 'Avenir',
+        fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03,
     },  
     selectButton: {
