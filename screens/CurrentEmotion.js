@@ -1,4 +1,6 @@
-import { TextInput, Modal, StyleSheet, Text, Dimensions, View, SafeAreaView, Image, TouchableOpacity, Pressable} from 'react-native';
+import { TextInput, Modal, StyleSheet, Text, Dimensions, View, Image, TouchableOpacity, Pressable} from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import Emotion from '../components/Emotion';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
@@ -101,11 +103,11 @@ const styles = StyleSheet.create({
         fontSize: SCREEN_HEIGHT * 0.045,
         textAlign: 'center',
         paddingTop: '7%',
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
     },
     buttonText: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03
     },  
     button: {
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
      },
      optionText: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: 20
      }
 });

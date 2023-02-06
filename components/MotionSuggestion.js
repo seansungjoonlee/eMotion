@@ -52,26 +52,26 @@ const styles = StyleSheet.create({
         width: SCREEN_WIDTH * 0.75,
         marginVertical: 10,
         flexDirection: 'column',
-        alignItems: 'left',
-        justifyContent: 'center',
+        // alignItems: 'left',
+        // justifyContent: 'center',
         padding: '3%'
     },
     name: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.03,
     },
     basedOn: {
         flexDirection: 'row',
-        justifyContent: 'left',
-        alignItems: 'center',
+        // justifyContent: 'left',
+        // alignItems: 'center',
     },
     emotionBox: {
         height: SCREEN_HEIGHT * 0.06,
         aspectRatio: 1,
     },
     basedOnText: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.0225
     }
 });

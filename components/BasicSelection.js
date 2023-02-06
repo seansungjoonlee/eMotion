@@ -58,7 +58,7 @@ export default function BasicSelection({ basic, setBasic }) {
                     fill={'black'}
                     textAnchor={'middle'}
                     alignmentBaseline={'center'}
-                    fontFamily={'Avenir'}
+                    // fontFamily={'Avenir'}
                     fontSize={size}
                     fontWeight={weight}
                     stroke={'black'}

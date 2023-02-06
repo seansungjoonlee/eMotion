@@ -117,7 +117,7 @@ emotions: {
   alignContent: 'center'
 },
 name: {
-    fontFamily: 'Avenir',
+    // fontFamily: 'Avenir',
     fontSize: SCREEN_HEIGHT * 0.03,
     paddingHorizontal: 5
 },

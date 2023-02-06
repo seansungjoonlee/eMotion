@@ -1,4 +1,6 @@
-import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useState } from 'react';
 import { TabRouter, useNavigation } from '@react-navigation/native';
 import Emotion from '../components/Emotion';
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
     },
     guideSelect: {
         fontSize: SCREEN_HEIGHT * 0.0375,
-        fontFamily: 'Avenir'
+        // fontFamily: 'Avenir'
     },
     optionsBox: {
         height: '44%',
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     label: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03
     },
     textBox: {
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: SCREEN_HEIGHT * 0.045,
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         marginBottom: '3%'
     },

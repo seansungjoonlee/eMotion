@@ -1,4 +1,6 @@
-import { Text, View, SafeAreaView, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import BasicSelection from '../components/BasicSelection';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -76,19 +78,19 @@ const styles = StyleSheet.create({
     title: {
         fontSize: SCREEN_HEIGHT * 0.0375,
         textAlign: 'center',
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
     },
     subtitle: {
         fontSize: SCREEN_HEIGHT * 0.03,
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         textAlign: 'center',
         paddingTop: '1%',
         paddingBottom: '4%'
     },
     // take out
     buttonText: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03,
     },  
     selectButton: {

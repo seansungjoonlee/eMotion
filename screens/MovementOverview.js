@@ -1,4 +1,6 @@
-import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
         margin: '4%'
     },      
     date: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
     },
     backArrowBox: {
@@ -96,7 +98,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: '4%',
     },
     textButton: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03
     },
     button: {

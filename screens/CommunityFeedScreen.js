@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Dimensions, StyleSheet } from "react-native";
+import { View, Text, Dimensions, StyleSheet } from "react-native";
 import Themes from "../assets/Themes";
 import FeedList from "../components/FeedList";
 import { FontAwesome5 } from '@expo/vector-icons'; 
@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import friendsData from '../utils/friendsData';
 import FeelingContext from "../components/FeelingContext";
 import { useContext } from "react";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
       width: '100%',
     },
     title: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.045,
     },

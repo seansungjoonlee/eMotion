@@ -1,4 +1,6 @@
-import { TextInput, Modal, StyleSheet, KeyboardAvoidingView, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { TextInput, Modal, StyleSheet, KeyboardAvoidingView, Text, Button, Image, View, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Emotion from '../components/Emotion';
@@ -147,16 +149,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
     },
     motion: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.045
     },
     feeling: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03,
     },
     list: {
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     dots: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
         fontWeight: 'bold'
     },
@@ -203,7 +205,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     feelingHeader: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.0375
     },
     flatListBox: {

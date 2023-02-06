@@ -1,4 +1,6 @@
-import { StyleSheet, Text, View, SafeAreaView, Pressable, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useNavigation } from '@react-navigation/native';
 import Themes from '../assets/Themes';
 import Emotion from '../components/Emotion';
@@ -82,12 +84,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.045
     },
     subtitle: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_WIDTH * 0.05
     },
     section: {
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
         height: '90%'
     },
     feelingName: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.0375
     }
 });

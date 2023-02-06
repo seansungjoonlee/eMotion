@@ -1,4 +1,6 @@
-import { View, Text, SafeAreaView, Pressable, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Dimensions } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import Themes from '../assets/Themes';
 import Movement from '../components/Movement';
 import { useContext } from 'react';
@@ -51,12 +53,12 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     title: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.045
     },
     date: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045
     },
     movementBox: {

@@ -17,6 +17,7 @@ import context from 'react-context';
 import friendsData from './utils/friendsData';
 import contactsData from './utils/contactsData';
 import { LogBox } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -310,6 +311,7 @@ export default function App() {
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>
+    <SafeAreaProvider>
       <NavigationContainer>
         <Tab.Navigator 
         initialRouteName={'movement'}
@@ -351,6 +353,7 @@ export default function App() {
           <Tab.Screen options={{headerShown:false}} name="community" component={CommunityTask} />
         </Tab.Navigator>
       </NavigationContainer>
+      </SafeAreaProvider>
     </FeelingContext.Provider>
   );
 }

@@ -79,7 +79,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
                     fill={'black'}
                     textAnchor={'middle'}
                     alignmentBaseline={'center'}
-                    fontFamily={'Avenir'}
+                    // fontFamily={'Avenir'}
                     fontSize={size}
                     fontWeight={weight}
                     stroke={'black'}
@@ -109,7 +109,7 @@ export default function SecondSelection({ basic, secondary, setSecondary }){
                     fill={'black'}
                     textAnchor={'middle'}
                     alignmentBaseline={'center'}
-                    fontFamily={'Avenir'}
+                    // fontFamily={'Avenir'}
                     fontSize={size}
                     fontWeight={weight}
                     stroke={'black'}
