@@ -3,25 +3,36 @@ import Svg, { Defs, RadialGradient, Stop, Ellipse } from "react-native-svg";
 import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
 import FeelingContext from './FeelingContext.js';
 import { useContext } from 'react';
+import {PulseAnimation} from 'react-native-animated-pulse';
 
 function getStops(feelings, colorMapping) {
     let colors = [];
+    console.log('feelings')
+    console.log(feelings)
+    console.log('basicFeelings')
+    console.log(basicFeelings)
+    console.log('basicToSecondary')
+    console.log(basicToSecondary)
+    console.log(colorMapping)
     if (feelings[0] === "startScreen") {
         colors = ['#d1d1d1', '#bfbfbf', '#c7c7c7', '#a3a3a3', '#b0b0b0']
     }
-    else if (feelings.length === 1) {
-        colors.push(colorMapping[feelings[0]]);
-    }
+    // else if (feelings.length === 1) {
+    //     colors.push(colorMapping[feelings[0]]);
+    // }
     else {
-        for(let i = 0; i < basicFeelings.length; i++){
-            if (feelings.indexOf(basicFeelings[i]) > -1) {
-                colors.push(colorMapping[basicFeelings[i]]);
-                for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
-                    if (feelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
-                        colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
-                    }
-                }
-            }
+        // for(let i = 0; i < basicFeelings.length; i++){
+        //     if (feelings.indexOf(basicFeelings[i]) > -1) {
+        //         colors.push(colorMapping[basicFeelings[i]]);
+        //         for (let j=0; j < basicToSecondary[basicFeelings[i]].length; j++) {
+        //             if (feelings.indexOf(basicToSecondary[basicFeelings[i]][j]) > -1) {
+        //                 colors.push(colorMapping[basicToSecondary[basicFeelings[i]][j]]);
+        //             }
+        //         }
+        //     }
+        // }
+        for (let i = 0; i < feelings.length; i++) {
+            colors.push(colorMapping[feelings[i]]);
         }
     }
     colors.push('white');
@@ -29,20 +40,21 @@ function getStops(feelings, colorMapping) {
     for(let i = 0; i < colors.length; i++){
         const offset = (i+1) * (1/(colors.length));
         stops.push(
-            <Stop offset={offset} stopColor={colors[i]} stopOpacity="1" key={i}/>
+            <Stop offset={offset} stopColor={colors[i]} stopOpacity={i == colors.length -1 ? 0.2 : 1} key={i}/>
         );
     }
     
     return stops;
 }
-
 export default function Emotion({ feelings }) {
     const context = useContext(FeelingContext);
     const stops = getStops(feelings, context.colorMapping);
     return (
         <View style={styles.container}>
+            <PulseAnimation style={styles.pulse} color={context.colorMapping[feelings[feelings.length-1]]} numPulses={12} duration={1000} speed={12000} initialDiameter={300} diameter={250}/>
+        
             <Svg height='100%' width="100%">
-                <Defs>
+                <Defs >
                 <RadialGradient
                     id="grad"
                     cx="50%"
@@ -56,7 +68,7 @@ export default function Emotion({ feelings }) {
                     {stops}
                 </RadialGradient>
                 </Defs>
-                <Ellipse cx="50%" cy="50%" rx="50%" ry="50%" fill="url(#grad)" />
+                <Ellipse cx="50%" cy="50%" rx="50%" ry="50%" fill="url(#grad)"/>
             </Svg>
         </View>
     );
@@ -69,4 +81,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
+  pulse: {
+    position: 'absolute',
+  }
 });
