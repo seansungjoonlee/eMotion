@@ -24,6 +24,7 @@
     "react-context": "^0.0.3",
     "react-native": "0.70.5",
     "react-native-animated-pulse": "^1.0.1",
+    "react-native-autocomplete-input": "^5.2.0",
     "react-native-calendars": "^1.1291.1",
     "react-native-canvas": "^0.1.38",
     "react-native-color-panel": "^1.0.1",

@@ -37,7 +37,7 @@ export default function App() {
   const [colorMapping, setColorMapping] = useState(mapAllColors(basicColorMapping));
   const [friends, setFriends] = useState(friendsData);
   const [contacts, setContacts] = useState(contactsData);
-
+  const [currentEmotions, setCurrentEmotions] = useState([])
   const current = new Date();
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
 
@@ -230,7 +230,6 @@ export default function App() {
   }
 
   function movementFeelings(term) {
-    console.log("inside movement feelings");
     let feelings = [];
     for (let i = 0; i < term.motionEntry.length; i++) {
       feelings.push(term.motionEntry[i].feelings);
@@ -239,8 +238,6 @@ export default function App() {
   }
 
   function updateMovement(name, feelings, movementDate) {
-    console.log('updating movement')
-    console.log(name)
     let updated = [...movementData];
 
     if (name == "") {
@@ -311,6 +308,8 @@ export default function App() {
     contacts: contacts,
     addFriend: addFriend,
     removeFriend: removeFriend,
+    currentEmotions: currentEmotions,
+    setCurrentEmotions: setCurrentEmotions
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>

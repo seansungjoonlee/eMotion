@@ -1640,7 +1640,7 @@
 "@react-native/assets@1.0.0":
   "version" "1.0.0"
 
-"@react-native/normalize-color@^2.0.0":
+"@react-native/normalize-color@*", "@react-native/normalize-color@^2.0.0":
   "version" "2.1.0"
 
 "@react-native/normalize-color@2.0.0":
@@ -3581,6 +3581,15 @@
   "resolved" "https://registry.npmjs.org/depd/-/depd-2.0.0.tgz"
   "version" "2.0.0"
 
+"deprecated-react-native-prop-types@^2.3.0":
+  "integrity" "sha512-pWD0voFtNYxrVqvBMYf5gq3NA2GCpfodS1yNynTPc93AYA/KEMGeWDqqeUB6R2Z9ZofVhks2aeJXiuQqKNpesA=="
+  "resolved" "https://registry.npmjs.org/deprecated-react-native-prop-types/-/deprecated-react-native-prop-types-2.3.0.tgz"
+  "version" "2.3.0"
+  dependencies:
+    "@react-native/normalize-color" "*"
+    "invariant" "*"
+    "prop-types" "*"
+
 "destroy@~1.0.4":
   "integrity" "sha512-3NdhDuEXnfun/z7x9GOElY49LoqVHoGScmOKwmxhsS8N5Y+Z8KyPPDnaSzqWgYt/ji4mqwfTS34Htrk0zPIXVg=="
   "resolved" "https://registry.npmjs.org/destroy/-/destroy-1.0.4.tgz"
@@ -4964,7 +4973,7 @@
     "default-gateway" "^4.2.0"
     "ipaddr.js" "^1.9.0"
 
-"invariant@^2.2.4", "invariant@2.2.4":
+"invariant@*", "invariant@^2.2.4", "invariant@2.2.4":
   "version" "2.2.4"
   dependencies:
     "loose-envify" "^1.0.0"
@@ -6895,7 +6904,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.5.10", "prop-types@^15.6.0", "prop-types@^15.6.1", "prop-types@^15.7.2":
+"prop-types@*", "prop-types@^15.5.10", "prop-types@^15.6.0", "prop-types@^15.6.1", "prop-types@^15.7.2":
   "version" "15.8.1"
   dependencies:
     "loose-envify" "^1.4.0"
@@ -7039,6 +7048,21 @@
 "react-is@^16.7.0":
   "version" "16.13.1"
 
+"react-native-animated-pulse@^1.0.1":
+  "integrity" "sha512-V/SpIRHu/vOpl/Dv4BgcXfgDOBAmN5FCsGzIHW1zua5Xbj0Aut8/kj6RBPqWqZ4kaQozyeKRtEcJFfljsyNsJw=="
+  "resolved" "https://registry.npmjs.org/react-native-animated-pulse/-/react-native-animated-pulse-1.0.1.tgz"
+  "version" "1.0.1"
+  dependencies:
+    "react" ">=16.9.0"
+    "react-native" ">=0.60.0"
+
+"react-native-autocomplete-input@^5.2.0":
+  "integrity" "sha512-fme1UmYdYbPO8hnxnou5Nis0ZSWYEQiFyLdlyx779VBCDdYOmQVGQaD6JZLIk0P7B5Ulnov/axjEMWDC2iS/yA=="
+  "resolved" "https://registry.npmjs.org/react-native-autocomplete-input/-/react-native-autocomplete-input-5.2.0.tgz"
+  "version" "5.2.0"
+  dependencies:
+    "deprecated-react-native-prop-types" "^2.3.0"
+
 "react-native-calendars@^1.1291.1":
   "version" "1.1291.1"
   dependencies:
@@ -7158,7 +7182,7 @@
     "escape-string-regexp" "2.0.0"
     "invariant" "2.2.4"
 
-"react-native@0.70.5":
+"react-native@>=0.60.0", "react-native@0.70.5":
   "version" "0.70.5"
   dependencies:
     "@jest/create-cache-key-function" "^29.0.3"
@@ -7208,7 +7232,7 @@
   dependencies:
     "envify" "^3.0.0"
 
-"react@18.1.0":
+"react@>=16.9.0", "react@18.1.0":
   "version" "18.1.0"
   dependencies:
     "loose-envify" "^1.1.0"

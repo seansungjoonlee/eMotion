@@ -46,16 +46,3 @@ export default function MainTask({ navigation }) {
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Themes.background,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%',
-    borderWidth: 3,
-    borderColor: 'red'
-  },
-});

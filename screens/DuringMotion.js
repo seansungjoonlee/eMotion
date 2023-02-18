@@ -11,73 +11,87 @@ import Themes from "../assets/Themes";
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
-
+import Autocomplete from 'react-native-autocomplete-input';
+import motionData from "../utils/motionData";
 
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
-export default function DuringMotion() {
+export default function DuringMotion({route}) {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
-    
     const [colors, setColors] = useState([])
-    const movement = context.movementData[context.getCurrentMovementIndex()];
-    // console.log(`${movement}: movement`)
-    // console.log(movement.motionEntry);
-    // console.log(movement.dateEntry);
-    console.log("feelings: " + context.basic);
-    let temp = '';
-
-    const colorList = [
-        {offset: '0%', color: '#231557', opacity: '1'},
-        {offset: '29%', color: '#44107A', opacity: '1'},
-        {offset: '67%', color: '#FF1361', opacity: '1'},
-        {offset: '100%', color: '#FFF800', opacity: '1'}
-      ]
+    const [note, setNote] = useState('')
+    const [movement, setMovement] = useState(route.params.selectedMovement)
+    const [text, setText] = useState('')
+    const [modalVisible, setModalVisible] = useState(false);
+    const [motions, setMotions] = useState([])
     useEffect(() => {
+        const currentEmotions = context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])[0]
         var tempColors = []
-        for (var i = 0; i < context.basic.length; i++) {
-            tempColors.push(context.colorMapping[context.basic[i]])
+        tempColors.push('white')
+        for (var i = 0; i <  currentEmotions.length; i++) {
+            tempColors.push(context.colorMapping[currentEmotions[i]])
         }
         setColors(tempColors)
-        console.log(tempColors)
+        setMotions(getMotions(motionData, context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])[0]));
     }, [])
-    
-    //wtf is this. is this just for notes?
-    if (context.motion.name !== '' && context.motion.name !=='choosing') {
-        let i = movement.motionEntry.length - 1;
-    //     while (movement.motionEntry[i].name.substring(0, movement.motionEntry[i].name.length - 2) === context.motion.name) {
-    //         i -= 1
-    //     }
-    //     i = i + 1;
-    //     console.log(movement.motionEntry)
-        temp = movement.motionEntry[i].note
+
+    const getMotions = (motionData, currentFeelings) => {
+        let motions = {};
+          for (let i = 0; i < motionData.length; i++) {
+            let motion = motionData[i];
+            for (let j = 0; j < currentFeelings.length; j++) {
+              let pos = motion['feelings'].indexOf(currentFeelings[j]);
+              if (pos !== -1){
+                if (motion['name'] in motions) {
+                  motions[motion['name']].push(currentFeelings[j]);
+                }
+                else {
+                  motions[motion['name']] = [currentFeelings[j]];
+                }
+              }
+            }
+          }
+        let motionList = [];
+        for (const motion in motions) {
+          motionList.push({
+            name: motion,
+            motionFeelings: motions[motion],
+          });
+        }
+        return motionList;
     }
-
-
-  
-    const [modalVisible, setModalVisible] = useState(false);
-    const [note, setNote] = useState(temp);
+    const filterData = (data) => {
+        var filteredList = []
+        if (text.length == 0){
+            return []
+        }
+        else {
+            for (var motion of data){
+                if (motion.name == text){
+                    return []
+                }
+                if (motion.name.includes(text)){
+                    filteredList.push(motion.name)
+                }
+            }
+            return filteredList
+        }
+    }
+    const renderItem = (item) => {
+        console.log(item)
+        return(
+            <TouchableOpacity onPress={() => setText(item.item)}>
+                <Text style={styles.itemText}>{item.item}</Text>
+            </TouchableOpacity>
+        )
+    }
     return (
-        <SafeAreaView style={styles.container}>
-            {/* <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                setModalVisible(!modalVisible);
-                }}
-            >
-                <View style={styles.centeredView}>
-                    <View style={styles.notesSheet}>
-                        <View style={styles.topBar}>
-                            <Pressable onPress={() => {
-                            setModalVisible(!modalVisible);
-                            }}>
-                                <Feather name="x" size={36} color="black"/> */}
-                                <LinearGradient style={{height: '100%', width: '100%'}} colors={colors}>
+        <SafeAreaView>
+            <LinearGradient style={styles.container} colors={colors}>
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -103,25 +117,6 @@ export default function DuringMotion() {
                             >
                                 <Text style={styles.buttonText}>save note</Text>
                             </Pressable>
-                            {/* <Pressable
-                        style={[styles.noteButton, styles.buttonClose]}
-                        onPress={() => {
-                            context.editNote('motion', context.date, context.motion.name, note);
-                            setModalVisible(!modalVisible);
-                        }}
-                        >
-                            <Text style={styles.buttonText}>save note</Text>
-                        </Pressable>
-                        </View>
-                        <View style={styles.noteBox}>
-                            <TextInput
-                                multiline={true}
-                                numberOfLines={4}
-                                defaultValue={note}
-                                onChangeText={note => setNote(note)}
-                                style={{padding: 10}}
-                                fontSize={SCREEN_HEIGHT * 0.045}
-                            /> */}
                              </View>
                             <View style={styles.noteBox}>
                                 <TextInput
@@ -132,55 +127,35 @@ export default function DuringMotion() {
                                     style={{padding: 10}}
                                     fontSize={SCREEN_HEIGHT * 0.045}
                                 />
+                                
                             </View>
                         </View>
                     </View>
-                {/* </View> */}
+
             </Modal>
 
-            {/* <View style={styles.backArrowBox}>
-                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
-                context.updateMotion('choosing', [])
-                navigator.navigate('ChooseMotion')}}/>
-            </View>
-            <View style={styles.headerContainer}>
-                <Text style={styles.title}>
-                    current movement:
-                </Text>
-                <Text style={styles.motion}>
-                    {context.motion.name}
-                </Text>
-            </View>
-            <Pressable style={styles.emotionBox} onPress = {() => {
-                navigator.navigate('HowDoYouFeel')}}>
-                    <Emotion feelings={context.currentFeelings}/>
-            </Pressable>
-                <TouchableOpacity style={styles.button} onPress={() =>
-                {
-                    setModalVisible(!modalVisible)
-                }}>
-                        <Text style={styles.buttonText}>add note</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() =>  */}
                 <View style={styles.backArrowBox}>
                     <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
-                    context.updateMotion('choosing', [])
-                    navigator.navigate('ChooseMotion')}}/>
+                    navigator.goBack()}}/>
                 </View>
-                <View style={styles.headerContainer}>
-                    <Text style={styles.motion}>
-                        {context.motion.name}
-                    </Text>
-                </View>
+        {movement.length > 0 && <Text style={styles.motion}>{movement}</Text>}
+        {movement.length == 0 && 
+            motions.length > 0 && 
+            <View style={styles.autocompleteContainer}>
+                <Autocomplete
+                    data={filterData(motions)}
+                    value={text}
+                    onChangeText={setText}
+                    flatListProps={{
+                    keyExtractor: (_, idx) => idx,
+                    renderItem: renderItem}}
+                    />
+            </View>}
                     <TouchableOpacity style={styles.button} onPress={() =>
                     {
-                        // context.updateMotion('', []);
-                        // navigator.navigate('CurrentEmotion')
                         setModalVisible(!modalVisible)
 
                     }}>
-                    {/* <Text style={styles.buttonText}>end movement</Text>
-                </TouchableOpacity> */}
                  <Text style={styles.buttonText}>add note</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={() => 
@@ -202,17 +177,15 @@ const styles = StyleSheet.create({
     container:{
         width: '100%',
         height: '100%',
+        display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        backgroundColor: Themes.background
+        justifyContent: 'center',
     },
     title: {
-        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
     },
     motion: {
-        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.045,
     },
@@ -274,11 +247,26 @@ const styles = StyleSheet.create({
         paddingVertical: '2%',
         paddingHorizontal: '10%',
     },
+    listElement: {
+        backgroundColor: 'pink',
+        fontSize: 20,
+        padding: 20,
+        color: 'black'
+    },
     buttonText: {
         // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03
 
     },
+    autocompleteContainer: {
+        flex: 1,
+        left: '10%',
+        position: 'absolute',
+        top: 100,
+        zIndex: 1,
+        backgroundColor: 'white',
+        width: '80%'
+      },
     headerContainer: {
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -289,5 +277,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: '7.5%',
         paddingHorizontal: '4%',
+        position: 'absolute',
+        top: 0
     },
+    movementInput: {
+        fontSize: 30
+    }
 });
