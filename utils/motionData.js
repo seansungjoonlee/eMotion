@@ -1,72 +1,107 @@
-const motionData = [
-    {
-        name: 'walk to University Ave',
-        feelings: ['joyful', 'anxious', 'content'],
+const motionData = {
+    "joyful": {
+       "walk to University Ave": 5,
+       "dance class at Roble Gym": 4,
+       "strength training": 3,
+       "jog around Lake Lag": 2,
     },
-    {
-        name: 'dance class at Roble Gym',
-        feelings: ['joyful', 'sad', 'peaceful'],
+    "anxious": {
+        "walk to University Ave": 5,
+        "solo hike": 4,
+        "lifting": 3,
+        "meditate": 2,
     },
-    {
-        name: 'hike with friends',
-        feelings: ['angry', 'surprised', 'amazed'],
+    "content": {
+        "walk to University Ave": 5,
+        "go climbing at Farrillaga": 4,
     },
-    {
-        name: 'solo hike',
-        feelings: ['angry', 'anxious', 'frustrated'],
+    "sad": {
+        "dance class at Roble Gym": 5,
+        "cardio": 4,
+        "walk down Palm Drive": 3,
+        "yoga": 2,
     },
-    {
-        name: 'strength training',
-        feelings: ['joyful', 'peaceful', 'playful'],
+    "peaceful": {
+        "dance class at Roble Gym": 5,
+        "strength training": 4,
+        "go climbing at Farrillaga": 3,
     },
-    {
-        name: 'lifting',
-        feelings: ['angry', 'anxious', 'aggressive'],
+    "angry": {
+        "hike with friends": 5,
+        "solo hike" : 4,
+        "lifting": 3,
+        "bike up and down El Camino": 2,
+        "meditate": 1,
     },
-    {
-        name: 'cardio',
-        feelings: ['surprised', 'sad', 'discouraged'],
+    "surprised": {
+        "hike with friends": 5,
+        "cardio": 4,
+        "jog around Lake Lag": 3,
+        "swim": 2,
+        "go bowling": 1,
     },
-    {
-        name: 'jog around Lake Lag',
-        feelings: ['shocked', 'surprised', 'joyful'],
+    "amazed": {
+        "hike with friends": 5,
+        "go climbing at Farrillaga": 4,
     },
-    {
-        name: 'bike up and down El Camino',
-        feelings: ['aggressive', 'angry', 'eager'],
+    "frustrated": {
+        "solo hike": 5,
+        "meditate": 4,
+        "go bowling": 3,
     },
-    {
-        name: 'walk down Palm Drive',
-        feelings: ['sad', 'melancholy', 'discouraged', 'small'],
+    "playful": {
+        "strength training": 5,
+        "go bowling": 4,
+        "dance around the room": 3,
     },
-    {
-        name: 'yoga',
-        feelings: ['sad', 'melancholy', 'discouraged', 'small'],
+    "aggressive": {
+        "lifting": 5,
+        "bike up and down El Camino": 4,
     },
-    {
-        name: 'meditate',
-        feelings: ['eager', 'frustrated', 'angry', 'anxious'],
+    "discouraged": {
+        "cardio": 5,
+        "walk down Palm Drive": 4,
+        "yoga": 3,
+        "dance around the room": 2,
     },
-    {
-        name: 'swim',
-        feelings: ['powerful', 'stunned', 'shocked', 'surprised'],
+    "shocked": {
+        "jog around Lake Lag": 5,
+        "swim": 4,
     },
-    {
-        name: 'play tennis with Ethan',
-        feelings: ['interested', 'hurt', 'frightened'],
+    "eager": {
+        "bike up and down El Camino": 5,
+        "meditate": 4,
     },
-    {
-        name: 'go bowling',
-        feelings: ['playful', 'dismayed', 'frustrated', 'surprised'],
+    "melancholy": {
+        "walk down Palm Drive": 5,
+        "yoga": 4,
     },
-    {
-        name: 'go climbing at Farrillaga',
-        feelings: ['peaceful', 'content', 'stunned', 'amazed'],
+    "small": {
+        "walk down Palm Drive": 5,
+        "yoga": 4,
     },
-    {
-        name: 'dance around the room',
-        feelings: ['playful', 'bored', 'discouraged'],
+    "powerful": {
+        "swim": 5,
     },
-]
+    "stunned": {
+        "swim": 5,
+        "go climbing at Farrillaga": 4,
+    },
+    "interested": {
+        "play tennis with Ethan": 5,
+    },
+    "hurt": {
+        "play tennis with Ethan": 5,
+    },
+    "frightened": {
+        "play tennis with Ethan": 5,
+    },
+    "dismayed": {
+        "go bowling": 5,
+    },
+    "bored": {
+        "dance around the room": 5,
+    },
+}
 
 export default motionData;
