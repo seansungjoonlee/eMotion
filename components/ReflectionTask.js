@@ -34,11 +34,6 @@ export default function ReflectionTask({ navigation }) {
         <Stack.Screen options={{headerShown:false}} name="AddingMotion" component={AddingMotion} />
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeelAddMotion" component={HowDoYouFeelAddMotion} />
         <Stack.Screen options={{headerShown:false}} name="CareToElaborateAddMotion" component={CareToElaborateAddMotion} />
-        <Stack.Screen options={{headerShown:false}} name="ColorMenu" component={ColorMenu} />
-        <Stack.Screen options={{headerShown:false}} name="ColorSelection" component={ColorSelection} />
-
-
-
     </Stack.Navigator>
   );
 }

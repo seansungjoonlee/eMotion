@@ -6,7 +6,7 @@ import Themes from '../assets/Themes';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
-import Movement from '../components/Movement';
+import Emotion from '../components/Emotion';
 import { Ionicons } from '@expo/vector-icons'; 
 
 const {
@@ -50,10 +50,6 @@ export default function CalendarScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
-                <Ionicons name="settings-sharp" size={35} color="black" onPress={() => {
-                    navigator.navigate('ColorMenu');
-                    console.log("TRACK: opened settings: " + getTime());
-                }}/>
             </View>
             <Text style={styles.title}>
                 reflect
@@ -61,15 +57,23 @@ export default function CalendarScreen() {
             <View style={styles.calendarContainer}>
                 <Calendar
                     style={[styles.calendar]}
-                    dayComponent={({date, state}) => {
+                    dayComponent={({date, _}) => {
                         const newDate = changeDateFormat(date.dateString);
                         let movementFeelings = [];
                         if (context.getMovement(newDate) !== -1) {
-                            movementFeelings = context.movementFeelings(context.getMovement(newDate));
+                            var nestedFeelings = context.movementFeelings(context.getMovement(newDate));
+                            var temp = []
+                            for (var i = nestedFeelings.length-1; i >= 0; i--){
+                                for (var k = nestedFeelings[i].length-1; k >= 0; k--){
+                                    temp.push(nestedFeelings[i][k])
+                                }
+                            }
+                            movementFeelings = temp
                         }
                         return (
-                        <Pressable style={styles.date} onPress={() => navigator.navigate("MovementOverview", {date: newDate})}>
-                            <Movement movementFeelings={movementFeelings}/>
+                        <Pressable style={styles.date} onPress={() => navigator.navigate("MovementOverview", {date: newDate, feelings: movementFeelings})}>
+                            {movementFeelings.length > 0 &&
+                            <Emotion feelings={movementFeelings} noPulse={true}/>}
                             <Text style={styles.dayText}>{date.day}</Text>
                         </Pressable>
                         );

@@ -2,11 +2,13 @@ import { TextInput, Modal, StyleSheet, Text, Dimensions, View, Image, TouchableO
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Emotion from '../components/Emotion';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext, useState, useEffect } from 'react';
 import SuggestedMoves from '../components/SuggestedMoves';
 import RecentMovements from '../components/RecentMovements';
+import EmotionBreakdown from '../components/EmotionBreakdown';
+import motionData from '../utils/motionData'
 
 const {
     width: SCREEN_WIDTH,
@@ -14,31 +16,81 @@ const {
 } = Dimensions.get('window');
 
 export default function CurrentEmotion() {
-    const options = ["today's feelings", "current eMotion"];
-    const [selected, setSelected] = useState("today's feelings");
+    const isFocused = useIsFocused();
+    const [showBreakdown, setShowBreakdown] = useState(false)
     const [movementFeelings, setMovementFeelings] = useState([])
-    const navigator = useNavigation();
     const context = useContext(FeelingContext);
-    const staticListMotions = ['Stretch', 'Walk to University Ave', 'Hike with Friends', 'Yoga']
-    const [suggestedMovementsList, setSuggestedMovementsList] = useState(staticListMotions)
-    useEffect(() => {
-        var nestedFeelings = context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])
-        var temp = []
-        for (var i = nestedFeelings.length-1; i >= 0; i--){
-            for (var k = nestedFeelings[i].length-1; k >= 0; k--){
-                temp.push(nestedFeelings[i][k])
+    const navigator = useNavigation();
+    const staticListMotions = [{'name': 'Stretch', 'motionFeelings': null}, {'name': 'Walk to University Ave', 'motionFeelings': null}, {'name': 'Hike with Friends', 'motionFeelings': null}, {'name': 'Yoga', 'motionFeelings': null}]
+    const [suggestedMotions, setSuggestionMotions] = useState([])
+    function getMotions (currentFeelings) {
+        let motions = {};
+        let suggestions = [[]]; //sparse 2D array, index indicates instance (so later in the array is higher association)
+        console.log(currentFeelings)
+        for (let i = 0; i < currentFeelings.length; i++) { //for every feeling that the user feels right now, get matching movements
+            let currentFeeling = currentFeelings[i];
+            if (motionData[currentFeeling]){
+                let associatedMovements = motionData[currentFeeling]; //does this work? associatedMovements is now an object containing movement key and instance value
+                for (const movement in associatedMovements) {
+                    console.log(currentFeeling)
+                    console.log(movement)
+                    let suggestion = {};
+                    suggestion.movementName = movement;
+                    suggestion.feeling = currentFeeling;
+                    let index = associatedMovements[movement];
+                    suggestions[index].push(suggestion);
+                }
             }
         }
-        setMovementFeelings(temp)
-    }, [])
+        //suggestions is now populated in reverse order of all movements associated with feelings (higher index = stronger association)
+        //TODO: some math so that indices can add if a movement is associated with multiple feelings
+        for (let i = suggestions.length - 1; i > -1; i--) {
+            for (let j = 0; j < suggestions[i].length; j++) {
+                if (suggestions[i][j].movementName in motions) {
+                    motions[suggestions[i][j].movementName].push(suggestions[i][j].feeling);
+                } else {
+                    motions[suggestions[i][j].movementName] = [suggestions[i][j].feeling];
+                }
+            }
+        }
+        let motionList = [];
+        for (const motion in motions) {
+            motionList.push({
+                name: motion,
+                motionFeelings: motions[motion],
+            });
+        }
+        console.log(motionList)
+        return motionList
+    }
+
+    useEffect(() => {
+        if (context.getCurrentMovementIndex() == -1){
+            setMovementFeelings(['startScreen'])
+            setSuggestionMotions(staticListMotions)
+        }
+        else {
+            var nestedFeelings = context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])
+            var temp = []
+            for (var i = nestedFeelings.length-1; i >= 0; i--){
+                for (var k = nestedFeelings[i].length-1; k >= 0; k--){
+                    temp.push(nestedFeelings[i][k])
+                }
+            }
+            setMovementFeelings(temp)
+            setSuggestionMotions(getMotions(temp))
+        }
+    }, [isFocused])
 
     return (
         <SafeAreaView style={styles.container}>
-            <Pressable style={styles.movementBox} onPress = {() => {
-                navigator.navigate('HowDoYouFeel')}}>
+            <Pressable style={styles.movementBox} onLongPress={() => setShowBreakdown(true)} onPress = {() => {
+                navigator.navigate('HowDoYouFeel', {movement: ''})
+                }}>
                 <Emotion feelings={movementFeelings} />
             </Pressable>
-            <SuggestedMoves style={styles.suggested} suggestedMovementsList={suggestedMovementsList}/>
+            {showBreakdown && <EmotionBreakdown panel={showBreakdown} setPanel={() => setShowBreakdown(!showBreakdown)}/>}
+            <SuggestedMoves style={styles.suggested} suggestedMovementsList={staticListMotions}/>
             <RecentMovements />
         </SafeAreaView>
     );
@@ -46,6 +98,7 @@ export default function CurrentEmotion() {
 
 const styles = StyleSheet.create({
     container: {
+        display: 'flex',
         flexDirection: 'column',
         height: '100%',
         width: '100%',
@@ -56,7 +109,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         textAlign: 'center',
-        // paddingTop: '7%',
         fontWeight: 'bold',
     },
     buttonText: {
@@ -69,9 +121,6 @@ const styles = StyleSheet.create({
         aspectRatio: 1,
         height: '30%',
         margin: 10
-     },
-     suggested: {
-        backgroundColor: 'pink'
      },
      emotionBox: {
         aspectRatio: 1,

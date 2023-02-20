@@ -6,7 +6,7 @@ import React, { useContext, useState } from 'react';
 import Themes from '../assets/Themes';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
+import { basicFeelings } from '../assets/feelings.js';
 import { AntDesign } from '@expo/vector-icons';
 
 const {
@@ -15,10 +15,11 @@ const {
 } = Dimensions.get('window');
 
 
-export default function HowDoYouFeel() {
+export default function HowDoYouFeel({route}) {
     const context = useContext(FeelingContext);
     const [currentEmotions, setCurrentEmotions] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('all')
+    const movement = route.params.movement
     const navigator = useNavigation();
     const positions = [[40, 20], [150, 20], [0, 125], [92, 190], [185, 125]]
     const bigFeelingPositions = { 'joyful': [0, 0], 'anxious': [180, 0], 'angry': [0, 0], 'sad': [80,0], 'surprised': [180,0]}
@@ -28,7 +29,7 @@ export default function HowDoYouFeel() {
             <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => { navigator.goBack()}}/>
         </View>
         {selectedCategory == 'all' && <View style={styles.feelingsContainer}>
-            {basicFeelings.map((feeling, idx) => {
+            {Object.keys(context.emotionsData).map((feeling, idx) => {
                 return (
                     <TouchableOpacity style={[styles.bubble, {position: 'absolute', backgroundColor: context.colorMapping[feeling], top: positions[idx][1], left: positions[idx][0]}]}
                         onPress={() => {
@@ -45,7 +46,7 @@ export default function HowDoYouFeel() {
                 <Text>{selectedCategory}</Text>
             </TouchableOpacity>
             <View style={styles.secondaryContainer}>
-                {basicToSecondary[selectedCategory].map(secondaryFeeling => {
+                {context.emotionsData[selectedCategory].map(secondaryFeeling => {
                     return(
                         <TouchableOpacity style={[styles.bubble, currentEmotions.indexOf(secondaryFeeling) >= 0 && styles.selected, styles.secondaryBubbles, {backgroundColor: context.colorMapping[secondaryFeeling]}]}
                             onPress={() => {
@@ -79,7 +80,7 @@ export default function HowDoYouFeel() {
         </View>
         {currentEmotions.length > 0 && 
             <TouchableOpacity style={styles.selectButton} onPress={() => {
-                context.updateMovement('', currentEmotions, context.date); 
+                context.updateMovement(movement, currentEmotions, context.date); 
                 navigator.navigate('CurrentEmotion')
             }}>
                 <Text>select {currentEmotions.length} emotions</Text>

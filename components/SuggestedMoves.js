@@ -6,17 +6,12 @@ import { useContext } from 'react';
 export default function SuggestedMoves({suggestedMovementsList}) {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
-    const renderSuggestedMovements = suggestedMovementsList.map(movementName => {
+    const renderSuggestedMovements = suggestedMovementsList.map(movement => {
         return (
             <Pressable style={styles.card} onPress={() => {
-                if (context.movementFeelings(context.movementData[context.getCurrentMovementIndex()]).length > 0){
-                    navigator.navigate('DuringMotion', {selectedMovement: movementName})
-                }
-                else {
-                    navigator.navigate('HowDoYouFeel')
-                }
+                    navigator.navigate('DuringMotion', {selectedMovement: movement.name})
                 }}>
-                <Text style={styles.cardText}>{movementName}</Text>
+                <Text style={styles.cardText}>{movement.name}</Text>
             </Pressable>
         )
     })
@@ -25,12 +20,7 @@ export default function SuggestedMoves({suggestedMovementsList}) {
             <Text style={styles.title}>Let's start moving again.</Text>
             <ScrollView horizontal style={styles.cardContainer}>
                 <Pressable style={styles.card} onPress={() => {
-                    if (context.movementFeelings(context.movementData[context.getCurrentMovementIndex()]).length > 0){
                         navigator.navigate('DuringMotion', {selectedMovement: ''})
-                    }
-                    else {
-                        navigator.navigate('HowDoYouFeel')
-                    }
                     }}>
                     <Text style={styles.plus}>+</Text>
                 </Pressable>

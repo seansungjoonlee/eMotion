@@ -26,7 +26,7 @@ export default function MainTask({ navigation }) {
   React.useEffect(() => {
     const pressMovement = navigation.addListener('tabPress', (e) => {
       e.preventDefault();
-      navigation.jumpTo('movement');
+      navigation.jumpTo('Home');
     });
 
     return pressMovement;
@@ -37,10 +37,10 @@ export default function MainTask({ navigation }) {
       headerShown: false,
       cardStyleInterpolator: forFade,
    }}>
+        <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
         <Stack.Screen options={{headerShown:false}} name="Start" component={Start} />
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />
         <Stack.Screen options={{headerShown: false}} name="CareToElaborate" component={CareToElaborate} />
-        <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
         <Stack.Screen options={{headerShown: false}} name="ChooseMotion" component={ChooseMotion} />
         <Stack.Screen options={{headerShown: false}} name="DuringMotion" component={DuringMotion} />
     </Stack.Navigator>

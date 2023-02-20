@@ -11,7 +11,6 @@ const basicColorMapping = {
 function mapAllColors(basicColorMapping) {
   colorMapping = basicColorMapping;
 
-  // colorMapping["content"] = blend_colors(colorMapping["joyful"], colorMapping["surprised"], 0.3);
   colorMapping["content"] = '#ffd97a';
   colorMapping["peaceful"] = "#ffea7a";
   colorMapping["playful"] = "#ffe67c";
