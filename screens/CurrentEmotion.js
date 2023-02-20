@@ -26,30 +26,33 @@ export default function CurrentEmotion() {
     function getMotions (currentFeelings) {
         let motions = {};
         let suggestions = [[]]; //sparse 2D array, index indicates instance (so later in the array is higher association)
-        console.log(currentFeelings)
         for (let i = 0; i < currentFeelings.length; i++) { //for every feeling that the user feels right now, get matching movements
             let currentFeeling = currentFeelings[i];
             if (motionData[currentFeeling]){
                 let associatedMovements = motionData[currentFeeling]; //does this work? associatedMovements is now an object containing movement key and instance value
                 for (const movement in associatedMovements) {
-                    console.log(currentFeeling)
-                    console.log(movement)
                     let suggestion = {};
                     suggestion.movementName = movement;
                     suggestion.feeling = currentFeeling;
                     let index = associatedMovements[movement];
+                    if (suggestions[index] == undefined){
+                        suggestions[index] = []
+                    }
                     suggestions[index].push(suggestion);
                 }
             }
         }
+        console.log(suggestions)
         //suggestions is now populated in reverse order of all movements associated with feelings (higher index = stronger association)
         //TODO: some math so that indices can add if a movement is associated with multiple feelings
         for (let i = suggestions.length - 1; i > -1; i--) {
-            for (let j = 0; j < suggestions[i].length; j++) {
-                if (suggestions[i][j].movementName in motions) {
-                    motions[suggestions[i][j].movementName].push(suggestions[i][j].feeling);
-                } else {
-                    motions[suggestions[i][j].movementName] = [suggestions[i][j].feeling];
+            if (suggestions[i]){
+                for (let j = 0; j < suggestions[i].length; j++) {
+                    if (suggestions[i][j].movementName in motions) {
+                        motions[suggestions[i][j].movementName].push(suggestions[i][j].feeling);
+                    } else {
+                        motions[suggestions[i][j].movementName] = [suggestions[i][j].feeling];
+                    }
                 }
             }
         }
@@ -90,7 +93,7 @@ export default function CurrentEmotion() {
                 <Emotion feelings={movementFeelings} />
             </Pressable>
             {showBreakdown && <EmotionBreakdown panel={showBreakdown} setPanel={() => setShowBreakdown(!showBreakdown)}/>}
-            <SuggestedMoves style={styles.suggested} suggestedMovementsList={staticListMotions}/>
+            <SuggestedMoves style={styles.suggested} suggestedMovementsList={suggestedMotions}/>
             <RecentMovements />
         </SafeAreaView>
     );

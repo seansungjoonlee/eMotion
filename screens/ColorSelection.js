@@ -21,7 +21,7 @@ export default function ColorSelection({ route }) {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
     const boxWidth = Dimensions.get('window').width / 42;
-    const boxHeight = (Dimensions.get('window').height-100) / 87;
+    const boxHeight = (Dimensions.get('window').height) / 87;
     const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
         const hex = x.toString(16)
         return hex.length === 1 ? '0' + hex : hex
@@ -152,11 +152,11 @@ export default function ColorSelection({ route }) {
                     y={100}
                     renderSize={40}
                     onDragRelease={(event) => {
-                    var xCoord = event.nativeEvent.pageX / boxWidth
-                    var yCoord = (event.nativeEvent.pageY - 100) / boxHeight
-                    if (event.nativeEvent.pageY > 100){
+                        console.log(event.nativeEvent.pageX)
+                        console.log(event.nativeEvent.pageY)
+                        var xCoord = event.nativeEvent.pageX / boxWidth
+                        var yCoord = (event.nativeEvent.pageY) / boxHeight
                         setSelectedColor(colorMatrix[Math.floor(yCoord)][Math.floor(xCoord)])
-                    }
                     }}
                     isCircle
                 />
@@ -165,7 +165,7 @@ export default function ColorSelection({ route }) {
     );
 }
 const boxWidth = Dimensions.get('window').width / 42;
-const boxHeight = (Dimensions.get('window').height-100) / 87;
+const boxHeight = (Dimensions.get('window').height) / 87;
 const styles = StyleSheet.create({
     colorBox: {
         width: boxWidth, 

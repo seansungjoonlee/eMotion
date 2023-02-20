@@ -23,11 +23,12 @@ export default function HowDoYouFeel({route}) {
     const navigator = useNavigation();
     const positions = [[40, 20], [150, 20], [0, 125], [92, 190], [185, 125]]
     const bigFeelingPositions = { 'joyful': [0, 0], 'anxious': [180, 0], 'angry': [0, 0], 'sad': [80,0], 'surprised': [180,0]}
+    const smallFeelingPositions = { 'joyful': 270, 'anxious': 20, 'angry': 270, 'sad': 20, 'surprised': 20}
     return (
     <SafeAreaView style={styles.container}>
-        <View style={styles.backArrowBox}>
+        {selectedCategory == 'all' && <View style={styles.backArrowBox}>
             <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => { navigator.goBack()}}/>
-        </View>
+        </View>}
         {selectedCategory == 'all' && <View style={styles.feelingsContainer}>
             {Object.keys(context.emotionsData).map((feeling, idx) => {
                 return (
@@ -42,7 +43,14 @@ export default function HowDoYouFeel({route}) {
         </View>}
         {selectedCategory != 'all' &&
         <View style={styles.feelingsContainer}>
-            <TouchableOpacity style={[styles.bigBubble, {position: 'absolute', backgroundColor: context.colorMapping[selectedCategory], top: bigFeelingPositions[selectedCategory][1], left: bigFeelingPositions[selectedCategory][0]}]} onPress={() => setSelectedCategory('all')}>
+            <TouchableOpacity style={[currentEmotions.indexOf(selectedCategory) >= 0 && styles.selected, styles.bigBubble, {position: 'absolute', backgroundColor: context.colorMapping[selectedCategory], top: bigFeelingPositions[selectedCategory][1], left: bigFeelingPositions[selectedCategory][0]}]} onPress={() => {
+                if (currentEmotions.indexOf(selectedCategory) < 0) {
+                    setCurrentEmotions(currentEmotions => [...currentEmotions, selectedCategory])
+                }
+                else {
+                    setCurrentEmotions(currentEmotions => currentEmotions.filter(item => item != selectedCategory))
+                }
+            }}>
                 <Text>{selectedCategory}</Text>
             </TouchableOpacity>
             <View style={styles.secondaryContainer}>
@@ -85,6 +93,15 @@ export default function HowDoYouFeel({route}) {
             }}>
                 <Text>select {currentEmotions.length} emotions</Text>
             </TouchableOpacity>}
+        {selectedCategory != 'all' && <TouchableOpacity style={[styles.circleBack, {left: smallFeelingPositions[selectedCategory]}]} onPress={() => setSelectedCategory('all')}>
+            <View style={[{left: 10, backgroundColor: context.colorMapping['joyful']}, styles.miniCircle]}></View>
+            <View style={[{left: 40, backgroundColor: context.colorMapping['anxious']}, styles.miniCircle]}></View>
+            <View style={[{left: 0, top: 28, backgroundColor: context.colorMapping['angry']}, styles.miniCircle]}></View>
+            <View style={[{top:45, left:25, backgroundColor: context.colorMapping['sad']}, styles.miniCircle]}></View>
+            <View style={[{top:28, left: 50, backgroundColor: context.colorMapping['surprised']}, styles.miniCircle]}></View>
+            <MaterialIcons style={{left: 10, top: 10}} name="keyboard-backspace" size={50} color="black"/>
+            
+        </TouchableOpacity>}
     </SafeAreaView>
 
     );
@@ -97,6 +114,19 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: Themes.background
+    },
+    circleBack: {
+        position: 'absolute',
+        width: 80,
+        height: 80,
+        left: 20,
+        top: 70,
+    },
+    miniCircle: {
+        position: 'absolute',
+        width: 30,
+        height: 30,
+        borderRadius: 40
     },
     secondaryBubbles: {
         margin: 10

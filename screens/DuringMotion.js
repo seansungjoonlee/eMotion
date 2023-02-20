@@ -75,6 +75,8 @@ export default function DuringMotion({route}) {
                             data={filterData(motions)}
                             value={text}
                             onChangeText={setText}
+                            placeholder="Type a movement"
+                            inputContainerStyle={styles.inputText}
                             flatListProps={{
                             keyExtractor: (_, idx) => idx,
                             renderItem: renderItem}}
@@ -120,6 +122,10 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'center',
         padding: 20
+    },
+    inputText: {
+        fontSize: 40,
+        fontWeight: '400'
     },
     title: {
         fontSize: SCREEN_HEIGHT * 0.045,

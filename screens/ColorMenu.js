@@ -17,6 +17,8 @@ export default function ColorMenu({route}) {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
     const [newFeeling, setNewFeeling] = useState('')
+    const isFocused = useIsFocused();
+
     const [showInputFeeling, setShowInputFeeling] = useState('')
     const [localColorMapping, setLocalColorMapping] = useState(context.colorMapping)
     useEffect(() => {
@@ -28,6 +30,10 @@ export default function ColorMenu({route}) {
         setShowInputFeeling('')
         setNewFeeling('')
     }, [context.colorMapping]);
+    useEffect(() => {
+        setNewFeeling('')
+        setShowInputFeeling('')
+    }, [isFocused])
     return (
         <SafeAreaView style={styles.container}>
             <View><Text style={styles.title}>Edit Colour & Emotion</Text></View>

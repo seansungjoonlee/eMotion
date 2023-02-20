@@ -2,6 +2,7 @@ import { ImageBackground, StyleSheet, Text, ScrollView, Pressable, View } from '
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
 import { useContext } from 'react';
+import Emotion from './Emotion';
 
 export default function SuggestedMoves({suggestedMovementsList}) {
     const navigator = useNavigation();
@@ -11,6 +12,10 @@ export default function SuggestedMoves({suggestedMovementsList}) {
             <Pressable style={styles.card} onPress={() => {
                     navigator.navigate('DuringMotion', {selectedMovement: movement.name})
                 }}>
+                {movement.motionFeelings && 
+                    <View style={styles.emotion}>
+                        <Emotion feelings={movement.motionFeelings} noPulse={true} />
+                    </View>}
                 <Text style={styles.cardText}>{movement.name}</Text>
             </Pressable>
         )
@@ -35,15 +40,20 @@ const styles = StyleSheet.create({
         overflow: 'scroll'
     },
     container: {
-        height: 150
+        height: 200
     },
     title: {
         margin: 10,
         fontWeight: "800" 
     },
+    emotion: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+    },
     card: {
-        width: 80,
-        height: 80,
+        width: 100,
+        height: 100,
         borderRadius: 20,
         margin: 10,
         backgroundColor: 'white',
