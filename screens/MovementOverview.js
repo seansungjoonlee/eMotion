@@ -22,8 +22,18 @@ export default function MovementOverview({ route }) {
     const [text, setText] = useState("");
     const { date, feelings } = route.params;
     console.log(route.params.feelings)
+    const [uniqueFeelings, setUniqueFeelings] = useState([])
     const movement = context.getMovement(date);
     let displayedContent = [];
+    useEffect(() => {
+        var temp = []
+        for (var feeling of feelings){
+            if (temp.indexOf(feeling) < 0){
+                temp.push(feeling)
+            }
+        }
+        setUniqueFeelings(temp)
+    }, [])
     if (movement === -1) {
         displayedContent = (
             <SafeAreaView style={styles.container}>
@@ -49,6 +59,14 @@ export default function MovementOverview({ route }) {
                 <Pressable style={styles.movementBox}>
                     <Emotion feelings={feelings} noPulse={true}/>
                 </Pressable>
+                <View style={styles.feelingsText}>
+                <Text>You were feeling </Text>
+                    {uniqueFeelings.map((feeling) => {
+                        return (
+                            <Text>{feeling},  </Text>
+                        )
+                    })}
+                </View>
                 <View style={styles.motionsList}>
                     <ReflectedMotions movement={movement}/>
                 </View>
@@ -82,6 +100,12 @@ const styles = StyleSheet.create({
         aspectRatio: 1,
         margin: '4%'
     },      
+    feelingsText:{
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        margin: 20
+    },
     date: {
         // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,

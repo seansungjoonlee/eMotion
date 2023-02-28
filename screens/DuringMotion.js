@@ -127,6 +127,17 @@ const styles = StyleSheet.create({
         fontSize: 40,
         fontWeight: '400'
     },
+    startMovingContainer: {
+        borderRadius: 20,
+        borderWidth: 1,
+        padding: 10,
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.2,
+        elevation: 20,
+        backgroundColor: 'white',
+        shadowRadius: 3,
+    },
     title: {
         fontSize: SCREEN_HEIGHT * 0.045,
     },

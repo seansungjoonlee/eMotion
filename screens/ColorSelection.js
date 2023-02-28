@@ -148,8 +148,8 @@ export default function ColorSelection({ route }) {
                         <Text style={{color: 'white'}}>select color</Text>
                     </TouchableOpacity>
                 <Draggable
-                    x={0}
-                    y={100}
+                    x={100}
+                    y={400}
                     renderSize={40}
                     onDragRelease={(event) => {
                         console.log(event.nativeEvent.pageX)

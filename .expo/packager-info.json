@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": null,
-  "packagerPort": null,
+  "packagerPort": 19000,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://6s-9mb.ssilverst.emotion.exp.direct",
+  "packagerNgrokUrl": "https://packager.6s-9mb.ssilverst.emotion.exp.direct",
+  "ngrokPid": 40066,
   "webpackServerPort": null
 }
