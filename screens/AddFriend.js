@@ -1,4 +1,4 @@
-import { SafeAreaView, Alert, View, Text, Pressable, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
+import { Alert, View, Text, Pressable, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Themes from "../assets/Themes";
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -7,11 +7,23 @@ import ContactList from "../components/ContactList";
 import FriendList from "../components/FriendList";
 import FeelingContext from "../components/FeelingContext";
 import { useContext } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
   } = Dimensions.get('window');
+
+  function getTime() {
+    let newDate = new Date();
+    let time = newDate.getHours();
+    if(newDate.getMinutes() < 10) {
+      time += ':0' + newDate.getMinutes();
+    } else {
+      time += ':' + newDate.getMinutes();
+    }
+    return time;
+  }
 
 export default function AddFriend() {
     const context = useContext(FeelingContext);
@@ -80,7 +92,10 @@ export default function AddFriend() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.backArrowBox}>
-                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('CommunityFeedScreen')}/>
+                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
+                    navigator.navigate('CommunityFeedScreen');
+                    console.log("TRACK: exiting addFriend: " + getTime());
+                }}/>
             </View>
             <Text style={styles.title}>
                 community
@@ -115,7 +130,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: '4%',
     },
     title: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.045,
     },
@@ -128,7 +143,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     select: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.0375,
     },
     contactDisplay: {
@@ -138,7 +153,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     label: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.0225
     },
     contacts: {
@@ -166,11 +181,11 @@ const styles = StyleSheet.create({
         borderRadius: 1000
      },
     buttonText: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03
     },
     orText: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: '25',
         margin: SCREEN_HEIGHT * 0.0225
     }

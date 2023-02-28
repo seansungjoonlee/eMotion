@@ -1,4 +1,6 @@
-import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useState } from 'react';
 import { TabRouter, useNavigation } from '@react-navigation/native';
 import Emotion from '../components/Emotion';
@@ -27,7 +29,7 @@ export default function ChooseMotion({ route }) {
                     suggested movements:
                 </Text>
                 <View style={styles.suggestedBox}>
-                    <SuggestedMotions currentFeelings={context.currentFeelings}/>
+                    <SuggestedMotions currentFeelings={context.basic}/>
                 </View>
             </View>
         )
@@ -46,27 +48,12 @@ export default function ChooseMotion({ route }) {
                         onSubmitEditing={(event) => 
                             {
                                 setText( event.nativeEvent.text)
-                                context.updateMovement(text, context.currentFeelings, context.date);
-                                context.updateMotion(text, context.currentFeelings);
-                            navigator.navigate('DuringMotion')
-
-                            }
+                                context.updateMovement(event.nativeEvent.text, context.basic, context.date); //NOT CONSISTENT
+                                context.updateMotion(event.nativeEvent.text, context.basic);
+                            navigator.navigate('DuringMotion', {selectedMovement: event.nativeEvent.text})}
                         }
                     />
                 </View>
-                {/* <View style={styles.searchedBox}>
-                    <SearchedMotions searched={text}/>
-                </View> */}
-                {/* <TouchableOpacity onPress={() => {
-                    console.log('adding motion')
-                    console.log(text)
-                    console.log(context.movement)
-                    
-                    console.log(context.movement)
-                    navigator.navigate('DuringMotion')
-                    // console.log('adding motion')
-                    // console.log(text)
-                }}><Text>Add Motion</Text></TouchableOpacity> */}
             </View>
         )
     };
@@ -109,7 +96,7 @@ export default function ChooseMotion({ route }) {
         <Pressable style={styles.emotionBox} onPress={() => {
             navigator.navigate('HowDoYouFeel');
             }}>
-            <Emotion feelings={context.currentFeelings}/>
+            <Emotion feelings={context.basic}/>
         </Pressable>
         <Options/>
         
@@ -147,7 +134,7 @@ const styles = StyleSheet.create({
     },
     guideSelect: {
         fontSize: SCREEN_HEIGHT * 0.0375,
-        fontFamily: 'Avenir'
+        // fontFamily: 'Avenir'
     },
     optionsBox: {
         height: '44%',
@@ -159,7 +146,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     label: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03
     },
     textBox: {
@@ -177,7 +164,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: SCREEN_HEIGHT * 0.045,
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         marginBottom: '3%'
     },

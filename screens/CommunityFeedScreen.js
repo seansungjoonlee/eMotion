@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Dimensions, StyleSheet } from "react-native";
+import { View, Text, Dimensions, StyleSheet } from "react-native";
 import Themes from "../assets/Themes";
 import FeedList from "../components/FeedList";
 import { FontAwesome5 } from '@expo/vector-icons'; 
@@ -6,12 +6,22 @@ import { useNavigation } from "@react-navigation/native";
 import friendsData from '../utils/friendsData';
 import FeelingContext from "../components/FeelingContext";
 import { useContext } from "react";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
+function getTime() {
+    let newDate = new Date();
+    let time = newDate.getHours();
+    if(newDate.getMinutes() < 10) {
+      time += ':0' + newDate.getMinutes();
+    } else {
+      time += ':' + newDate.getMinutes();
+    }
+    return time;
+  }
 
 export default function CommunityFeedScreen() {
     const navigator = useNavigation();
@@ -22,7 +32,10 @@ export default function CommunityFeedScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.topBar}>
-                <FontAwesome5 name="user-plus" size={30} color="black" onPress={() => navigator.navigate('AddFriend')}/>
+                <FontAwesome5 name="user-plus" size={30} color="black" onPress={() => {
+                    navigator.navigate('AddFriend');
+                    console.log("TRACK: adding friend at " + getTime());
+                    }}/>
             </View>
             <Text style={styles.title}>
                 community
@@ -105,7 +118,7 @@ const styles = StyleSheet.create({
       width: '100%',
     },
     title: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.045,
     },

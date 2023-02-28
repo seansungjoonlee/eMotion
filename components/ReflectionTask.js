@@ -1,5 +1,5 @@
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Themes from '../assets/Themes.js';
@@ -34,11 +34,6 @@ export default function ReflectionTask({ navigation }) {
         <Stack.Screen options={{headerShown:false}} name="AddingMotion" component={AddingMotion} />
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeelAddMotion" component={HowDoYouFeelAddMotion} />
         <Stack.Screen options={{headerShown:false}} name="CareToElaborateAddMotion" component={CareToElaborateAddMotion} />
-        <Stack.Screen options={{headerShown:false}} name="ColorMenu" component={ColorMenu} />
-        <Stack.Screen options={{headerShown:false}} name="ColorSelection" component={ColorSelection} />
-
-
-
     </Stack.Navigator>
   );
 }

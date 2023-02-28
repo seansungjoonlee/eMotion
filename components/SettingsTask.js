@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Themes from '../assets/Themes.js';
-import CommunityFeedScreen from '../screens/CommunityFeedScreen.js';
-import AddFriend from '../screens/AddFriend.js';
+import ColorMenu from '../screens/ColorMenu.js';
+import ColorSelection from '../screens/ColorSelection.js';
 
-export default function ReflectionTask({ navigation }) {
+export default function SettingsTask({ navigation }) {
   const Stack = createStackNavigator();
 
   const forFade = ({ current }) => ({
@@ -18,8 +18,8 @@ export default function ReflectionTask({ navigation }) {
       headerShown: false,
       cardStyleInterpolator: forFade,
    }}>
-        <Stack.Screen options={{headerShown:false}} name="CommunityFeedScreen" component={CommunityFeedScreen} />
-        <Stack.Screen options={{headerShown:false}} name="AddFriend" component={AddFriend} />
+        <Stack.Screen options={{headerShown:false}} name="ColorMenu" component={ColorMenu} />
+        <Stack.Screen options={{headerShown:false}} name="ColorSelection" component={ColorSelection} />
 
 
     </Stack.Navigator>

@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background
     },
     noteHeader: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.0375,
         marginHorizontal: '14%'
     },
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         borderRadius: 1000
      },
     buttonText: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03
     }
 });

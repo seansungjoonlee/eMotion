@@ -1,141 +1,138 @@
-import { TextInput, TouchableOpacity, Modal, KeyboardAvoidingView, Pressable, SafeAreaView, View, Text, StyleSheet, Dimensions } from "react-native";
+import { TextInput, TouchableOpacity, Modal, KeyboardAvoidingView, Pressable, View, Text, StyleSheet, Dimensions } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useNavigation } from "@react-navigation/native";
-import Emotion from "../components/Emotion";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FeelingContext from '../components/FeelingContext';
 import { useContext } from 'react';
 import Themes from "../assets/Themes";
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
-
-
+import Autocomplete from 'react-native-autocomplete-input';
+import motionData from "../utils/motionData";
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
-export default function DuringMotion() {
+export default function DuringMotion({route}) {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
-    
-    const movement = context.movementData[context.getCurrentMovementIndex()];
-    // console.log(`${movement}: movement`)
-    console.log(movement.motionEntry)
-    console.log("movement")
-    let temp = '';
-    
-    if (context.motion.name !== '' && context.motion.name !=='choosing') {
-        let i = movement.motionEntry.length - 1;
-        while (movement.motionEntry[i].name.substring(0, movement.motionEntry[i].name.length - 2) === context.motion.name) {
-            i -= 1
-        }
-        i = i + 1;
-        console.log(movement.motionEntry)
-        temp = movement.motionEntry[i].note
-    }
+    const [movementStarted, setMovementStarted] = useState(false)
+    const [movement, setMovement] = useState(route.params.selectedMovement)
+    const [text, setText] = useState('')
+    const [motions, setMotions] = useState([])
+    useEffect(() => {
+        setMotions(getMotions(motionData));
 
-  
-    const [modalVisible, setModalVisible] = useState(false);
-    const [note, setNote] = useState(temp);
+    }, [])
+
+    const getMotions = (motionData) => {
+        var motionList = []
+        for (var feeling of Object.keys(motionData)){
+            for (var motion of Object.keys(motionData[feeling])){
+                if (motionList.indexOf(motion) < 0){
+                    motionList.push(motion)
+                }
+            }
+        }
+        console.log(motionList)
+        return motionList;
+    }
+    const filterData = (data) => {
+        var filteredList = []
+        if (text.length == 0){
+            return []
+        }
+        else {
+            for (var motion of data){
+                if (motion.toLowerCase() == text.toLowerCase()){
+                    return []
+                }
+                if (motion.toLowerCase().includes(text.toLowerCase())){
+                    filteredList.push(motion)
+                }
+            }
+            return filteredList
+        }
+    }
+    const renderItem = (item) => {
+        return(
+            <TouchableOpacity onPress={() => setText(item.item)}>
+                <Text style={styles.itemText}>{item.item}</Text>
+            </TouchableOpacity>
+        )
+    }
     return (
         <SafeAreaView style={styles.container}>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                setModalVisible(!modalVisible);
-                }}
-            >
-                <View style={styles.centeredView}>
-                    <View style={styles.notesSheet}>
-                        <View style={styles.topBar}>
-                            <Pressable onPress={() => {
-                            setModalVisible(!modalVisible);
-                            }}>
-                                <Feather name="x" size={36} color="black"/>
-                            </Pressable>
-                            <Pressable
-                        style={[styles.noteButton, styles.buttonClose]}
-                        onPress={() => {
-                            context.editNote('motion', context.date, context.motion.name, note);
-                            setModalVisible(!modalVisible);
-                        }}
-                        >
-                            <Text style={styles.buttonText}>save note</Text>
-                        </Pressable>
-                        </View>
-                        <View style={styles.noteBox}>
-                            <TextInput
-                                multiline={true}
-                                numberOfLines={4}
-                                defaultValue={note}
-                                onChangeText={note => setNote(note)}
-                                style={{padding: 10}}
-                                fontSize={SCREEN_HEIGHT * 0.045}
+            <View style={styles.movementContainer}>
+                {movement.length > 0 && <Text style={styles.motion}>{movement}</Text>}
+                {movement.length == 0 && 
+                    motions.length > 0 && 
+                    <View style={styles.autocompleteContainer}>
+                        <Autocomplete
+                            data={filterData(motions)}
+                            value={text}
+                            onChangeText={setText}
+                            placeholder="Type a movement"
+                            inputContainerStyle={styles.inputText}
+                            flatListProps={{
+                            keyExtractor: (_, idx) => idx,
+                            renderItem: renderItem}}
                             />
-                        </View>
-                    </View>
+                    </View>}
+            </View>
+            {!movementStarted && (movement.length > 0 || text.length > 0) && 
+                <View style={styles.bottomViewContainer}>
+                    <TouchableOpacity style={styles.startMovingContainer} onPress={() => {
+                            setMovementStarted(true)
+                            if (text.length > 0) setMovement(text)
+                        }}>
+                        <Text style={styles.bottomText}>Start Moving</Text>
+                    </TouchableOpacity>
                 </View>
-            </Modal>
-
+                }
+            {movementStarted && 
+            <View style={styles.bottomViewContainer}>
+                <TouchableOpacity style={styles.startMovingContainer} onPress={() => 
+                    {
+                        context.updateMotion(text.length > 0 ? text : movement, []);
+                        navigator.navigate('HowDoYouFeel', {movement: text.length > 0 ? text : movement})
+                    }}>
+                    <Text style={styles.bottomText}>End movement</Text>
+                </TouchableOpacity>
+            </View>}
             <View style={styles.backArrowBox}>
                 <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
-                context.updateMotion('choosing', [])
-                navigator.navigate('ChooseMotion')}}/>
+                navigator.goBack()}}/>
             </View>
-            <View style={styles.headerContainer}>
-                <Text style={styles.title}>
-                    current movement:
-                </Text>
-                <Text style={styles.motion}>
-                    {context.motion.name}
-                </Text>
-            </View>
-            <Pressable style={styles.emotionBox} onPress = {() => {
-                navigator.navigate('HowDoYouFeel')}}>
-                    <Emotion feelings={context.currentFeelings}/>
-            </Pressable>
-                <TouchableOpacity style={styles.button} onPress={() =>
-                {
-                    setModalVisible(!modalVisible)
-                }}>
-                        <Text style={styles.buttonText}>add note</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => 
-                    {
-                        context.updateMotion('', []);
-                        navigator.navigate('CurrentEmotion')
-                    }}>
-                    <Text style={styles.buttonText}>end movement</Text>
-                </TouchableOpacity>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container:{
+        display: 'flex',
+    },
+    movementContainer:{
         width: '100%',
-        height: '100%',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        backgroundColor: Themes.background
+        height: '75%',
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        padding: 20
+    },
+    inputText: {
+        fontSize: 40,
+        fontWeight: '400'
     },
     title: {
-        fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
     },
     motion: {
-        fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.045,
-    },
-    emotionBox: {
-        aspectRatio: 1,
-        height: '30%',
-        marginBottom: '8%'
     },
     button: {
         alignItems: 'center',
@@ -144,7 +141,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginTop: '6%',
         width: '65%',
-        height: '8%',
         borderRadius: 1000
      },
     noteButton: {
@@ -190,11 +186,25 @@ const styles = StyleSheet.create({
         paddingVertical: '2%',
         paddingHorizontal: '10%',
     },
-    buttonText: {
-        fontFamily: 'Avenir',
-        fontSize: SCREEN_HEIGHT * 0.03
-
+    bottomText: {
+        fontSize: 24,
+        fontWeight: '200'
     },
+    bottomViewContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        height: '25%',
+        backgroundColor:' pink'
+    },
+    autocompleteContainer: {
+        flex: 1,
+        left: '10%',
+        position: 'absolute',
+        top: 100,
+        zIndex: 1,
+        backgroundColor: 'white',
+        width: '80%'
+      },
     headerContainer: {
         justifyContent: 'flex-start',
         alignItems: 'center',
@@ -205,5 +215,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: '7.5%',
         paddingHorizontal: '4%',
+        position: 'absolute',
+        top: 20
     },
+    movementInput: {
+        fontSize: 30
+    }
 });

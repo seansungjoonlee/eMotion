@@ -32,7 +32,7 @@ export default function MotionSuggestion({ name, motionFeelings }) {
         <Pressable style={styles.motion} onPress={() => {
             context.updateMotion(name, context.currentFeelings);
             context.updateMovement(name, context.currentFeelings, context.date);
-            navigator.navigate('DuringMotion')}}>
+            navigator.navigate('DuringMotion', { selectedMovement: name})}}>
             <Text style={styles.name}>{name}</Text>
             <View style={styles.basedOn}>
                 <Text style={styles.basedOnText}>based on: </Text>
@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
         width: SCREEN_WIDTH * 0.75,
         marginVertical: 10,
         flexDirection: 'column',
-        alignItems: 'left',
-        justifyContent: 'center',
+        // alignItems: 'left',
+        // justifyContent: 'center',
         padding: '3%'
     },
     name: {
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
     },
     basedOn: {
         flexDirection: 'row',
-        justifyContent: 'left',
-        alignItems: 'center',
+        // justifyContent: 'left',
+        // alignItems: 'center',
     },
     emotionBox: {
         height: SCREEN_HEIGHT * 0.06,

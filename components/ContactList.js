@@ -107,11 +107,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start'
   },
   nameText: {
-    fontFamily: 'Avenir',
+    // fontFamily: 'Avenir',
     fontSize: SCREEN_HEIGHT * 0.03,
   },
   usernameText: {
-    fontFamily: 'Avenir',
+    // fontFamily: 'Avenir',
     fontSize: SCREEN_HEIGHT * 0.0225
   }
 });

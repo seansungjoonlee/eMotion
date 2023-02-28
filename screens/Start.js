@@ -1,8 +1,9 @@
-import { ImageBackground, StyleSheet, Text, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { ImageBackground, StyleSheet, Text, Dimensions, Pressable } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useNavigation } from '@react-navigation/native';
 import Emotion from '../components/Emotion';
 import Themes from '../assets/Themes';
-
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
@@ -14,8 +15,6 @@ export default function Start() {
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}> eMotion </Text>
-            <Text style={styles.subtitle}> feel your workouts! </Text>
-            {/* replace with emotion component */}
             <Pressable style={styles.emotionBox} onPress={() => navigator.navigate('HowDoYouFeel')}>
                 <Emotion feelings={['startScreen']}/>
                 <Text style={styles.buttonText}>click to begin</Text>
@@ -35,14 +34,14 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
         textAlign: 'center',
         fontWeight: 'bold',
         paddingTop: '12%'
     },
     subtitle: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontStyle:'italic',
         fontSize: SCREEN_HEIGHT * 0.045,
         textAlign: 'center',
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonText: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
         position: 'absolute',
     },    

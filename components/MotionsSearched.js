@@ -17,7 +17,7 @@ export default function MotionsSearched({ name }) {
         <Pressable style={styles.motion} onPress={() => {
             context.updateMovement(name, context.currentFeelings, context.date);
             context.updateMotion(name, context.currentFeelings);
-            navigator.navigate('DuringMotion')}}>
+            navigator.navigate('DuringMotion', {selectedMovement: name})}}>
             <Text style={styles.name}>{name}</Text>
         </Pressable>
     );
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         padding: '3%'
     },
     name: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.03,
     },

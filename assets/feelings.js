@@ -11,30 +11,30 @@ const basicColorMapping = {
 function mapAllColors(basicColorMapping) {
   colorMapping = basicColorMapping;
 
-  colorMapping["content"] = blend_colors(colorMapping["joyful"], colorMapping["surprised"], 0.3);
-  colorMapping["peaceful"] = blend_colors(colorMapping["joyful"], colorMapping["surprised"], 0.1);
-  colorMapping["playful"] = blend_colors(colorMapping["joyful"], colorMapping["anxious"], 0.1);
-  colorMapping["powerful"] = blend_colors(colorMapping["joyful"], colorMapping["anxious"], 0.3);
+  colorMapping["content"] = '#ffd97a';
+  colorMapping["peaceful"] = "#ffea7a";
+  colorMapping["playful"] = "#ffe67c";
+  colorMapping["powerful"] = "#ffce7f";
 
-  colorMapping["stressed"] = blend_colors(colorMapping["anxious"], colorMapping["joyful"], 0.3);
-  colorMapping["eager"] = blend_colors(colorMapping["anxious"], colorMapping["joyful"], 0.1);
-  colorMapping["interested"] = blend_colors(colorMapping["anxious"], colorMapping["angry"], 0.1);
-  colorMapping["excited"] = blend_colors(colorMapping["anxious"], colorMapping["angry"], 0.3);
+  colorMapping["stressed"] = "#ff9e87";
+  colorMapping["eager"] = "#ff868a";
+  colorMapping["interested"] = "#fa7a98";
+  colorMapping["excited"] = "#ef7aaf";
 
-  colorMapping["dismayed"] = blend_colors(colorMapping["angry"], colorMapping["anxious"], 0.3);
-  colorMapping["aggressive"] = blend_colors(colorMapping["angry"], colorMapping["anxious"], 0.1);
-  colorMapping["bored"] = blend_colors(colorMapping["angry"], colorMapping["sad"], 0.1);
-  colorMapping["frustrated"] = blend_colors(colorMapping["angry"], colorMapping["sad"], 0.3);
+  colorMapping["dismayed"] = "#da7add";
+  colorMapping["aggressive"] = "#cf7af4";
+  colorMapping["bored"] = "#c287f4";
+  colorMapping["frustrated"] = "#b2a2dd";
 
-  colorMapping["hurt"] = blend_colors(colorMapping["sad"], colorMapping["angry"], 0.3);
-  colorMapping["discouraged"] = blend_colors(colorMapping["sad"], colorMapping["angry"], 0.1);
-  colorMapping["melancholy"] = blend_colors(colorMapping["sad"], colorMapping["surprised"], 0.1);
-  colorMapping["small"] = blend_colors(colorMapping["sad"], colorMapping["surprised"], 0.3);
+  colorMapping["hurt"] = "#92d7af";
+  colorMapping["discouraged"] = "#82f298";
+  colorMapping["melancholy"] = "#87f68a";
+  colorMapping["small"] = "#a2e387";
 
-  colorMapping["amazed"] = blend_colors(colorMapping["surprised"], colorMapping["sad"], 0.3);
-  colorMapping["stunned"] = blend_colors(colorMapping["surprised"], colorMapping["sad"], 0.1);
-  colorMapping["shocked"] = blend_colors(colorMapping["surprised"], colorMapping["joyful"], 0.1);
-  colorMapping["frightened"] = blend_colors(colorMapping["surprised"], colorMapping["joyful"], 0.3);
+  colorMapping["amazed"] = "#d7bd7f";
+  colorMapping["stunned"] = "#f2aa7c";
+  colorMapping["shocked"] = "#ffa87a";
+  colorMapping["frightened"] = "#ffb97a";
   
   return colorMapping;
 }

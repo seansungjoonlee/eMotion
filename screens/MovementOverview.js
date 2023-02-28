@@ -1,5 +1,7 @@
-import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, SafeAreaView, TouchableOpacity, Dimensions, Pressable } from 'react-native';
-import { useState } from 'react';
+import { TextInput, ImageBackground, StyleSheet, Text, Button, Image, View, TouchableOpacity, Dimensions, Pressable } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
@@ -7,7 +9,7 @@ import Themes from '../assets/Themes';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import Movement from '../components/Movement';
 import ReflectedMotions from '../components/ReflectedMotions';
-
+import Emotion from '../components/Emotion';
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
@@ -18,10 +20,10 @@ export default function MovementOverview({ route }) {
     const navigator = useNavigation();
     const [guided, setGuided] = useState(true);
     const [text, setText] = useState("");
-    const { date } = route.params;
+    const { date, feelings } = route.params;
+    console.log(route.params.feelings)
     const movement = context.getMovement(date);
     let displayedContent = [];
-
     if (movement === -1) {
         displayedContent = (
             <SafeAreaView style={styles.container}>
@@ -45,16 +47,11 @@ export default function MovementOverview({ route }) {
                     </Text>
                 </View>
                 <Pressable style={styles.movementBox}>
-                    <Movement movementFeelings={context.movementFeelings(movement)}/>
+                    <Emotion feelings={feelings} noPulse={true}/>
                 </Pressable>
                 <View style={styles.motionsList}>
                     <ReflectedMotions movement={movement}/>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => navigator.navigate('AddingMotion', {movement: movement})}>
-                    <Text style={styles.textButton}>
-                        add movement
-                    </Text>
-                </TouchableOpacity>
             </SafeAreaView>
         )
     }
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
         margin: '4%'
     },      
     date: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
     },
     backArrowBox: {
@@ -96,7 +93,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: '4%',
     },
     textButton: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03
     },
     button: {

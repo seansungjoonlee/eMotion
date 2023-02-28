@@ -1,30 +1,30 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarnpkg add @react-navigatoin/bottom-tabs
+  /Users/samsilverstein/.nvm/versions/node/v18.7.0/bin/node /usr/local/bin/yarnpkg add react-native-gesture-handler.
 
 PATH: 
-  /Users/ethanfoster/Documents/CS47/eMotion/node_modules/.bin:/Users/ethanfoster/Documents/CS47/node_modules/.bin:/Users/ethanfoster/Documents/node_modules/.bin:/Users/ethanfoster/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/Users/ethanfoster/Documents/CS47/eMotion/node_modules/.bin:/Users/ethanfoster/opt/anaconda3/bin:/Users/ethanfoster/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
+  /Users/samsilverstein/.nvm/versions/node/v18.7.0/bin:/Users/samsilverstein/Library/Android/sdk/platform-tools:/Users/samsilverstein/.poetry/bin:/Users/samsilverstein/opt/anaconda3/bin:/Users/samsilverstein/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands
 
 Yarn version: 
-  1.22.19
+  1.22.10
 
 Node version: 
-  16.15.0
+  18.7.0
 
 Platform: 
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@react-navigatoin%2fbottom-tabs: Not found
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66145:18)
-      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140890:22)
-      at Request.emit (node:events:527:28)
-      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141862:10)
-      at Request.emit (node:events:527:28)
-      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141784:12)
-      at Object.onceWrapper (node:events:641:28)
-      at IncomingMessage.emit (node:events:539:35)
-      at endReadableNT (node:internal/streams/readable:1345:12)
-      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+  Error: https://registry.yarnpkg.com/react-native-gesture-handler.: Not found
+      at params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
+      at self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
+      at Request.emit (node:events:513:28)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141634:10)
+      at Request.emit (node:events:513:28)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141556:12)
+      at Object.onceWrapper (node:events:627:28)
+      at IncomingMessage.emit (node:events:525:35)
+      at endReadableNT (node:internal/streams/readable:1359:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
 
 npm manifest: 
   {
@@ -38,16 +38,32 @@ npm manifest:
       "web": "expo start --web"
     },
     "dependencies": {
+      "@react-native-community/slider": "^4.3.3",
+      "@react-native-picker/picker": "^2.4.8",
+      "@react-navigation/bottom-tabs": "^6.4.1",
+      "@react-navigation/drawer": "^6.5.1",
       "@react-navigation/native": "^6.0.14",
       "@react-navigation/stack": "^6.3.5",
       "expo": "~47.0.5",
       "expo-status-bar": "~1.4.2",
+      "expo-updates": "~0.15.6",
       "react": "18.1.0",
       "react-context": "^0.0.3",
       "react-native": "0.70.5",
+      "react-native-calendars": "^1.1291.1",
+      "react-native-color-picker": "^0.6.0",
+      "react-native-draggable": "^3.3.0",
+      "react-native-dropdown-picker": "^5.4.3",
+      "react-native-gesture-handler": "~2.8.0",
       "react-native-gradients": "^2.0.1",
+      "react-native-reanimated": "~2.12.0",
+      "react-native-safe-area-context": "^4.4.1",
+      "react-native-screens": "~3.18.0",
+      "react-native-select-dropdown": "^3.1.0",
       "react-native-svg": "13.4.0",
-      "react-native-svg-charts": "^5.4.0"
+      "react-native-svg-charts": "^5.4.0",
+      "react-native-swipe-gestures": "^1.0.5",
+      "react-native-swiper-flatlist": "^3.0.17"
     },
     "devDependencies": {
       "@babel/core": "^7.12.9"
@@ -97,7 +113,7 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.20.1.tgz"
     "version" "7.20.1"
   
-  "@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.12.0", "@babel/core@^7.12.9", "@babel/core@^7.13.0", "@babel/core@^7.13.16", "@babel/core@^7.14.0", "@babel/core@^7.4.0-0":
+  "@babel/core@^7.12.9", "@babel/core@^7.13.16", "@babel/core@^7.14.0":
     "integrity" "sha512-w7DbG8DtMrJcFOi4VrLm+8QM4az8Mo+PuLBKLp2zrYRCow8W/f9xiXm5sN53C8HksCyDQwCKha9JiDoIyPjT2g=="
     "resolved" "https://registry.npmjs.org/@babel/core/-/core-7.20.2.tgz"
     "version" "7.20.2"
@@ -816,6 +832,13 @@ Lockfile:
     dependencies:
       "@babel/helper-plugin-utils" "^7.18.6"
   
+  "@babel/plugin-transform-object-assign@^7.16.7":
+    "integrity" "sha512-mQisZ3JfqWh2gVXvfqYCAAyRs6+7oev+myBsTwW5RnPhYXOTuCEw2oe3YgxlXMViXUS53lG8koulI7mJ+8JE+A=="
+    "resolved" "https://registry.npmjs.org/@babel/plugin-transform-object-assign/-/plugin-transform-object-assign-7.18.6.tgz"
+    "version" "7.18.6"
+    dependencies:
+      "@babel/helper-plugin-utils" "^7.18.6"
+  
   "@babel/plugin-transform-object-super@^7.0.0", "@babel/plugin-transform-object-super@^7.18.6":
     "integrity" "sha512-uvGz6zk+pZoS1aTZrOvrbj6Pp/kK2mp45t2B+bTDre2UgsZZ8EZLSJtUg7m/no0zOJUWgFONpB7Zv9W2tSaFlA=="
     "resolved" "https://registry.npmjs.org/@babel/plugin-transform-object-super/-/plugin-transform-object-super-7.18.6.tgz"
@@ -957,7 +980,7 @@ Lockfile:
       "@babel/helper-create-regexp-features-plugin" "^7.18.6"
       "@babel/helper-plugin-utils" "^7.18.6"
   
-  "@babel/preset-env@^7.1.6", "@babel/preset-env@^7.12.9":
+  "@babel/preset-env@^7.12.9":
     "integrity" "sha512-1G0efQEWR1EHkKvKHqbG+IN/QdgwfByUpM5V5QroDzGV2t3S/WXNQd693cHiHTlCFMpr9B6FkPFXDA2lQcKoDg=="
     "resolved" "https://registry.npmjs.org/@babel/preset-env/-/preset-env-7.20.2.tgz"
     "version" "7.20.2"
@@ -1058,7 +1081,7 @@ Lockfile:
       "@babel/types" "^7.4.4"
       "esutils" "^2.0.2"
   
-  "@babel/preset-typescript@^7.13.0":
+  "@babel/preset-typescript@^7.13.0", "@babel/preset-typescript@^7.16.7":
     "integrity" "sha512-s9ik86kXBAnD760aybBucdpnLsAt0jK1xqJn2juOn9lkOvSHV60os5hxoVJsPzMQxvnUJFAlkont2DvvaYEBtQ=="
     "resolved" "https://registry.npmjs.org/@babel/preset-typescript/-/preset-typescript-7.18.6.tgz"
     "version" "7.18.6"
@@ -1207,6 +1230,14 @@ Lockfile:
     "integrity" "sha512-vnPHFjwOqxQ1VLztktY+fYCfwvLzjqpzKn09rchcQE7Sdf0wtW5fFtIZBEFOOY5wasp8tXSnp627zrAwazPHzg=="
     "resolved" "https://registry.npmjs.org/@expo/code-signing-certificates/-/code-signing-certificates-0.0.2.tgz"
     "version" "0.0.2"
+    dependencies:
+      "node-forge" "^1.2.1"
+      "nullthrows" "^1.1.1"
+  
+  "@expo/code-signing-certificates@0.0.5":
+    "integrity" "sha512-BNhXkY1bblxKZpltzAx98G2Egj9g1Q+JRcvR7E99DOj862FTCX+ZPsAUtPTr7aHxwtrL7+fL3r0JSmM9kBm+Bw=="
+    "resolved" "https://registry.npmjs.org/@expo/code-signing-certificates/-/code-signing-certificates-0.0.5.tgz"
+    "version" "0.0.5"
     dependencies:
       "node-forge" "^1.2.1"
       "nullthrows" "^1.1.1"
@@ -1756,6 +1787,16 @@ Lockfile:
       "prompts" "^2.4.0"
       "semver" "^6.3.0"
   
+  "@react-native-community/slider@^4.3.3":
+    "integrity" "sha512-eVhMaVR08wWlseVWlDS7zgdhbVY0n2i7BF1qRxK+2N1VIKd7NsTIRzL57sFLgHVjbUmu/+hHfxCzLHmEaGxIQg=="
+    "resolved" "https://registry.npmjs.org/@react-native-community/slider/-/slider-4.3.3.tgz"
+    "version" "4.3.3"
+  
+  "@react-native-picker/picker@^2.4.8":
+    "integrity" "sha512-5NQ5XPo1B03YNqKFrV6h9L3CQaHlB80wd4ETHUEABRP2iLh7FHLVObX2GfziD+K/VJb8G4KZcZ23NFBFP1f7bg=="
+    "resolved" "https://registry.npmjs.org/@react-native-picker/picker/-/picker-2.4.8.tgz"
+    "version" "2.4.8"
+  
   "@react-native/assets@1.0.0":
     "integrity" "sha512-KrwSpS1tKI70wuKl68DwJZYEvXktDHdZMG0k2AXD/rJVSlB23/X2CB2cutVR0HwNMJIal9HOUOBB2rVfa6UGtQ=="
     "resolved" "https://registry.npmjs.org/@react-native/assets/-/assets-1.0.0.tgz"
@@ -1776,6 +1817,15 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/@react-native/polyfills/-/polyfills-2.0.0.tgz"
     "version" "2.0.0"
   
+  "@react-navigation/bottom-tabs@^6.4.1":
+    "integrity" "sha512-nkuHJ31mEyrZZPswfMAHZgUTEm11ohN9Fy54wao2HFk1VM4eplijX6pFGycA4yhKy73A/aesKhghVPzR+FaSmg=="
+    "resolved" "https://registry.npmjs.org/@react-navigation/bottom-tabs/-/bottom-tabs-6.4.3.tgz"
+    "version" "6.4.3"
+    dependencies:
+      "@react-navigation/elements" "^1.3.9"
+      "color" "^4.2.3"
+      "warn-once" "^0.1.0"
+  
   "@react-navigation/core@^6.4.1":
     "integrity" "sha512-M1rTS+qaw84ZItvObwFTjuvXfrJRnXL2uJJeiDVwSvu7/30Wp6bkL3/MfLUEA6I4CzJhL74iRSfCKSVe7kVhlw=="
     "resolved" "https://registry.npmjs.org/@react-navigation/core/-/core-6.4.1.tgz"
@@ -1788,12 +1838,21 @@ Lockfile:
       "react-is" "^16.13.0"
       "use-latest-callback" "^0.1.5"
   
-  "@react-navigation/elements@^1.3.7":
-    "integrity" "sha512-OZg2N/dd2tl6qkfrWvmUjFsYsbEyHEv4NbZSBuT+CR+d1pzmexN2IeVmi4cEMoR7U7GwhFcHRevF36yBsjU/dw=="
-    "resolved" "https://registry.npmjs.org/@react-navigation/elements/-/elements-1.3.7.tgz"
-    "version" "1.3.7"
+  "@react-navigation/drawer@^6.5.1":
+    "integrity" "sha512-5HP3aTH/yL/F8WS7S8Pa3CUGeRZ7sqAMjWatV6Z0nMBpQ0xRiobpds3jXkiedlPejUVZYcbU6YoJ1XQXHRaOkg=="
+    "resolved" "https://registry.npmjs.org/@react-navigation/drawer/-/drawer-6.5.3.tgz"
+    "version" "6.5.3"
+    dependencies:
+      "@react-navigation/elements" "^1.3.9"
+      "color" "^4.2.3"
+      "warn-once" "^0.1.0"
   
-  "@react-navigation/native@^6.0.0", "@react-navigation/native@^6.0.14":
+  "@react-navigation/elements@^1.3.7", "@react-navigation/elements@^1.3.9":
+    "integrity" "sha512-V9aIZN19ufaKWlXT4UcM545tDiEt9DIQS+74pDgbnzoQcDypn0CvSqWopFhPACMdJatgmlZUuOrrMfTeNrBWgA=="
+    "resolved" "https://registry.npmjs.org/@react-navigation/elements/-/elements-1.3.9.tgz"
+    "version" "1.3.9"
+  
+  "@react-navigation/native@^6.0.14":
     "integrity" "sha512-Z95bJrRkZerBJq6Qc/xjA/kibPpB+UvPeMWS1CBhRF8FaX1483UdHqPqSbW879tPwjP2R4XfoA4dtoEHswrOjA=="
     "resolved" "https://registry.npmjs.org/@react-navigation/native/-/native-6.0.14.tgz"
     "version" "6.0.14"
@@ -1853,6 +1912,11 @@ Lockfile:
     "integrity" "sha512-ewXv/ceBaJprikMcxCmWU1FKyMAQ2X7a9Gtmzw8fcg2kIePI1crERDM818W+XYrxqdBBOdlf2rm137bU+BltCA=="
     "resolved" "https://registry.npmjs.org/@types/hammerjs/-/hammerjs-2.0.41.tgz"
     "version" "2.0.41"
+  
+  "@types/invariant@^2.2.35":
+    "integrity" "sha512-DxX1V9P8zdJPYQat1gHyY0xj3efl8gnMVjiM9iCY6y27lj+PoQWkgjt8jDqmovPqULkKVpKRg8J36iQiA+EtEg=="
+    "resolved" "https://registry.npmjs.org/@types/invariant/-/invariant-2.2.35.tgz"
+    "version" "2.2.35"
   
   "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
     "integrity" "sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g=="
@@ -2367,7 +2431,7 @@ Lockfile:
     dependencies:
       "fill-range" "^7.0.1"
   
-  "browserslist@^4.21.3", "browserslist@^4.21.4", "browserslist@>= 4.21.0":
+  "browserslist@^4.21.3", "browserslist@^4.21.4":
     "integrity" "sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw=="
     "resolved" "https://registry.npmjs.org/browserslist/-/browserslist-4.21.4.tgz"
     "version" "4.21.4"
@@ -2792,6 +2856,11 @@ Lockfile:
     dependencies:
       "browserslist" "^4.21.4"
   
+  "core-js@^1.0.0":
+    "integrity" "sha512-ZiPp9pZlgxpWRu0M+YWbm6+aQ84XEfH1JRXvfOc/fILWI0VKhLC2LX13X1NYq4fULzLMq7Hfh43CSo2/aIaUPA=="
+    "resolved" "https://registry.npmjs.org/core-js/-/core-js-1.2.7.tgz"
+    "version" "1.2.7"
+  
   "core-util-is@~1.0.0":
     "integrity" "sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ=="
     "resolved" "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.3.tgz"
@@ -3151,6 +3220,13 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/encodeurl/-/encodeurl-1.0.2.tgz"
     "version" "1.0.2"
   
+  "encoding@^0.1.11":
+    "integrity" "sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A=="
+    "resolved" "https://registry.npmjs.org/encoding/-/encoding-0.1.13.tgz"
+    "version" "0.1.13"
+    dependencies:
+      "iconv-lite" "^0.6.2"
+  
   "end-of-stream@^1.1.0":
     "integrity" "sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q=="
     "resolved" "https://registry.npmjs.org/end-of-stream/-/end-of-stream-1.4.4.tgz"
@@ -3315,6 +3391,11 @@ Lockfile:
       "@expo/config" "~7.0.2"
       "uuid" "^3.3.2"
   
+  "expo-eas-client@~0.4.0":
+    "integrity" "sha512-bIj2rm6lw/iZAOAW5CSAxshSXi2oY+ORpHRp4ZdqSDuwA0RIa9jGyMm1Jhostjjz5y9k2uur5vtVqq6P3Bwx/Q=="
+    "resolved" "https://registry.npmjs.org/expo-eas-client/-/expo-eas-client-0.4.1.tgz"
+    "version" "0.4.1"
+  
   "expo-error-recovery@~4.0.1":
     "integrity" "sha512-wceptnRX+N3qCSVTNbIchUFu3GmY30onRH5L66OF8HMLpAIQfrZMLxJfz7SAMJTcr3jxsJ11vSa2l2RaPKgHsQ=="
     "resolved" "https://registry.npmjs.org/expo-error-recovery/-/expo-error-recovery-4.0.1.tgz"
@@ -3334,12 +3415,24 @@ Lockfile:
     dependencies:
       "fontfaceobserver" "^2.1.0"
   
+  "expo-json-utils@~0.4.0":
+    "integrity" "sha512-lK6gjea72XTYafpKNNJaMrBK5dYAX8LFLXrp/M1MKJU4Zy7EHd2rKrLwop3GZts8VdwLHeVcMko79SAbhe3i5Q=="
+    "resolved" "https://registry.npmjs.org/expo-json-utils/-/expo-json-utils-0.4.0.tgz"
+    "version" "0.4.0"
+  
   "expo-keep-awake@~11.0.1":
     "integrity" "sha512-44ZjgLE4lnce2d40Pv8xsjMVc6R5GvgHOwZfkLYtGmgYG9TYrEJeEj5UfSeweXPL3pBFhXKfFU8xpGYMaHdP0A=="
     "resolved" "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-11.0.1.tgz"
     "version" "11.0.1"
   
-  "expo-modules-autolinking@>=0.8.1", "expo-modules-autolinking@1.0.0":
+  "expo-manifests@~0.4.0":
+    "integrity" "sha512-IdZjIYDxx4nH0Gb3X4T4/2YknmR/jSLxymAS0m7SfJ9V7Vlu/y0p3lNwUys9/JzihxX9PDIuOi/Y4/uqL6TlXg=="
+    "resolved" "https://registry.npmjs.org/expo-manifests/-/expo-manifests-0.4.0.tgz"
+    "version" "0.4.0"
+    dependencies:
+      "expo-json-utils" "~0.4.0"
+  
+  "expo-modules-autolinking@1.0.0":
     "integrity" "sha512-MoRRkOVMoGUH/Lr8XS6UmBIZT/qrwbRt2IzUBALcM6MWZKtDn9Uct9XgMRxue82FJhRCfy9p1xZJVKHBRo4zEA=="
     "resolved" "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-1.0.0.tgz"
     "version" "1.0.0"
@@ -3363,7 +3456,35 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.4.2.tgz"
     "version" "1.4.2"
   
-  "expo@*", "expo@~47.0.5":
+  "expo-structured-headers@~3.0.0":
+    "integrity" "sha512-x6hkzuQL5HJoyB+xQyBf9M04ZUmrjFWqEW7gzIYWN/6LA+dgyaV4fF6U9++Re+GgGjF03vHJFqR1xYaosKKZYQ=="
+    "resolved" "https://registry.npmjs.org/expo-structured-headers/-/expo-structured-headers-3.0.1.tgz"
+    "version" "3.0.1"
+  
+  "expo-updates-interface@~0.8.0":
+    "integrity" "sha512-1TPFCTQFHMZbltFGnxig3PbN/b6nO4T0RyL8XqdmYvQY0ElOCprZXQQ8vNDqeLYHgausG1lD4OyJwFzh2SNBSA=="
+    "resolved" "https://registry.npmjs.org/expo-updates-interface/-/expo-updates-interface-0.8.1.tgz"
+    "version" "0.8.1"
+  
+  "expo-updates@~0.15.6":
+    "integrity" "sha512-g5BuCmWdyiLqFaVkVz+m7r6U7MHJrLKvqybs04H6ArMNpTEf6FhUwSzmnCyOkSSP35KFNkC/I0dYlgW3Vcf1sw=="
+    "resolved" "https://registry.npmjs.org/expo-updates/-/expo-updates-0.15.6.tgz"
+    "version" "0.15.6"
+    dependencies:
+      "@expo/code-signing-certificates" "0.0.5"
+      "@expo/config" "~7.0.2"
+      "@expo/config-plugins" "~5.0.3"
+      "@expo/metro-config" "~0.5.0"
+      "arg" "4.1.0"
+      "expo-eas-client" "~0.4.0"
+      "expo-manifests" "~0.4.0"
+      "expo-structured-headers" "~3.0.0"
+      "expo-updates-interface" "~0.8.0"
+      "fbemitter" "^3.0.0"
+      "resolve-from" "^5.0.0"
+      "uuid" "^3.4.0"
+  
+  "expo@~47.0.5":
     "integrity" "sha512-eOnB+PIjx0ZSPA2NGybNfUdFdCOmIrL+e10LGHKZUTOh7DNCE9g6IuCr5zqaQ3G/GYzjRr70lc4z7ipLtydMGQ=="
     "resolved" "https://registry.npmjs.org/expo/-/expo-47.0.5.tgz"
     "version" "47.0.5"
@@ -3463,6 +3584,19 @@ Lockfile:
     "integrity" "sha512-b2XGFAFdWZWg0phtAWLHCk836A1Xann+I+Dgd3Gk64MHKZO44FfoD1KxyvbSh0qZsIoXQGGlVztIY+oitJPpRQ=="
     "resolved" "https://registry.npmjs.org/fbjs-css-vars/-/fbjs-css-vars-1.0.2.tgz"
     "version" "1.0.2"
+  
+  "fbjs@^0.8.9":
+    "integrity" "sha512-EQaWFK+fEPSoibjNy8IxUtaFOMXcWsY0JaVrQoZR9zC8N2Ygf9iDITPWjUTVIax95b6I742JFLqASHfsag/vKA=="
+    "resolved" "https://registry.npmjs.org/fbjs/-/fbjs-0.8.18.tgz"
+    "version" "0.8.18"
+    dependencies:
+      "core-js" "^1.0.0"
+      "isomorphic-fetch" "^2.1.1"
+      "loose-envify" "^1.0.0"
+      "object-assign" "^4.1.0"
+      "promise" "^7.1.1"
+      "setimmediate" "^1.0.5"
+      "ua-parser-js" "^0.7.30"
   
   "fbjs@^3.0.0":
     "integrity" "sha512-ucV0tDODnGV3JCnnkmoszb5lf4bNpzjv80K41wd4k798Etq+UYD0y0TIfalLjZoKgjive6/adkRnszwapiDgBQ=="
@@ -3777,7 +3911,7 @@ Lockfile:
     dependencies:
       "tslib" "^2.1.0"
   
-  "graphql@^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0", "graphql@^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "graphql@^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "graphql@^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "graphql@15.8.0":
+  "graphql@15.8.0":
     "integrity" "sha512-5gghUc24tP9HRznNpV2+FIoq3xKkj5dTQqf4v0CpdPbFVwFkWoxOM+o+2OC9ZSvjEMTjfmG9QT+gcvggTwW1zw=="
     "resolved" "https://registry.npmjs.org/graphql/-/graphql-15.8.0.tgz"
     "version" "15.8.0"
@@ -3849,7 +3983,7 @@ Lockfile:
     dependencies:
       "source-map" "^0.7.3"
   
-  "hoist-non-react-statics@^3.3.0":
+  "hoist-non-react-statics@^3.3.0", "hoist-non-react-statics@^3.3.1":
     "integrity" "sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw=="
     "resolved" "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz"
     "version" "3.3.2"
@@ -3900,6 +4034,13 @@ Lockfile:
     dependencies:
       "safer-buffer" ">= 2.1.2 < 3"
   
+  "iconv-lite@^0.6.2":
+    "integrity" "sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw=="
+    "resolved" "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.6.3.tgz"
+    "version" "0.6.3"
+    dependencies:
+      "safer-buffer" ">= 2.1.2 < 3.0.0"
+  
   "ieee754@^1.1.13":
     "integrity" "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA=="
     "resolved" "https://registry.npmjs.org/ieee754/-/ieee754-1.2.1.tgz"
@@ -3914,6 +4055,11 @@ Lockfile:
     "integrity" "sha512-47xSUiQioGaB96nqtp5/q55m0aBQSQdyIloMOc/x+QVTDZLNmXE892IIDrJ0hM1A5vcNUDD5tDffkSP5lCaIIA=="
     "resolved" "https://registry.npmjs.org/image-size/-/image-size-0.6.3.tgz"
     "version" "0.6.3"
+  
+  "immutable@^4.0.0-rc.12":
+    "integrity" "sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ=="
+    "resolved" "https://registry.npmjs.org/immutable/-/immutable-4.1.0.tgz"
+    "version" "4.1.0"
   
   "import-fresh@^2.0.0":
     "integrity" "sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg=="
@@ -4166,7 +4312,7 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/is-root/-/is-root-2.1.0.tgz"
     "version" "2.1.0"
   
-  "is-stream@^1.1.0":
+  "is-stream@^1.0.1", "is-stream@^1.1.0":
     "integrity" "sha512-uQPm8kcs47jx38atAcWTVxyltQYoPT68y9aWYdV6yWXSyW8mzSat0TL6CiWdZeCdF3KrAvpVtnHbTv4RN+rqdQ=="
     "resolved" "https://registry.npmjs.org/is-stream/-/is-stream-1.1.0.tgz"
     "version" "1.1.0"
@@ -4226,6 +4372,14 @@ Lockfile:
     "integrity" "sha512-WhB9zCku7EGTj/HQQRz5aUQEUeoQZH2bWcltRErOpymJ4boYE6wL9Tbr23krRPSZ+C5zqNSrSw+Cc7sZZ4b7vg=="
     "resolved" "https://registry.npmjs.org/isobject/-/isobject-3.0.1.tgz"
     "version" "3.0.1"
+  
+  "isomorphic-fetch@^2.1.1":
+    "integrity" "sha512-9c4TNAKYXM5PRyVcwUZrF3W09nQ+sO7+jydgs4ZGW9dhsLG2VOlISJABombdQqQRXCwuYG3sYV/puGf5rp0qmA=="
+    "resolved" "https://registry.npmjs.org/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz"
+    "version" "2.2.1"
+    dependencies:
+      "node-fetch" "^1.0.1"
+      "whatwg-fetch" ">=0.10.0"
   
   "jest-get-type@^26.3.0":
     "integrity" "sha512-TpfaviN1R2pQWkIihlfEanwOXK0zcxrKEE4MlU6Tn7keoXdN6/3gK/xl0yEh8DOunn5pOVGKf8hB4R9gVh04ig=="
@@ -4504,10 +4658,15 @@ Lockfile:
     dependencies:
       "p-locate" "^5.0.0"
   
-  "lodash.debounce@^4.0.8":
+  "lodash.debounce@^4.0.8", "lodash.debounce@4.0.8":
     "integrity" "sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow=="
     "resolved" "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
     "version" "4.0.8"
+  
+  "lodash.isequal@^4.5.0":
+    "integrity" "sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ=="
+    "resolved" "https://registry.npmjs.org/lodash.isequal/-/lodash.isequal-4.5.0.tgz"
+    "version" "4.5.0"
   
   "lodash.throttle@^4.1.1":
     "integrity" "sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ=="
@@ -4519,7 +4678,7 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
     "version" "3.10.1"
   
-  "lodash@^4.17.13", "lodash@^4.17.21", "lodash@^4.17.4":
+  "lodash@^4.17.13", "lodash@^4.17.15", "lodash@^4.17.21", "lodash@^4.17.4":
     "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
     "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
     "version" "4.17.21"
@@ -4629,7 +4788,7 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz"
     "version" "0.3.0"
   
-  "memoize-one@^5.0.0":
+  "memoize-one@^5.0.0", "memoize-one@^5.2.1":
     "integrity" "sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q=="
     "resolved" "https://registry.npmjs.org/memoize-one/-/memoize-one-5.2.1.tgz"
     "version" "5.2.1"
@@ -5056,6 +5215,11 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
     "version" "1.0.4"
   
+  "moment@^2.24.0":
+    "integrity" "sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w=="
+    "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz"
+    "version" "2.29.4"
+  
   "ms@^2.1.1", "ms@2.1.2":
     "integrity" "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
     "resolved" "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
@@ -5147,6 +5311,14 @@ Lockfile:
     "version" "0.1.17"
     dependencies:
       "minimatch" "^3.0.2"
+  
+  "node-fetch@^1.0.1":
+    "integrity" "sha512-NhZ4CsKx7cYm2vSrBAr2PvFOe6sWDf0UYLRqA6svUYg7+/TSfVAu49jYC4BvQ4Sms9SZgdqGBgroqfDhJdTyKQ=="
+    "resolved" "https://registry.npmjs.org/node-fetch/-/node-fetch-1.7.3.tgz"
+    "version" "1.7.3"
+    dependencies:
+      "encoding" "^0.1.11"
+      "is-stream" "^1.0.1"
   
   "node-fetch@^2.2.0", "node-fetch@^2.6.0", "node-fetch@^2.6.1", "node-fetch@^2.6.7", "node-fetch@2.6.7":
     "integrity" "sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ=="
@@ -5584,7 +5756,7 @@ Lockfile:
       "kleur" "^3.0.3"
       "sisteransi" "^1.0.5"
   
-  "prop-types@^15.6.0", "prop-types@^15.7.2":
+  "prop-types@^15.5.10", "prop-types@^15.6.0", "prop-types@^15.7.2":
     "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
     "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
     "version" "15.8.1"
@@ -5592,6 +5764,13 @@ Lockfile:
       "loose-envify" "^1.4.0"
       "object-assign" "^4.1.1"
       "react-is" "^16.13.1"
+  
+  "prop-types@15.5.8":
+    "integrity" "sha512-QiDx7s0lWoAVxmEmOYnn3rIZGduup2PZgj3rta5O5y0NfPKu3ApWi+GdMfTto7PmO/5+p4yamSLMZkj0jaTL4A=="
+    "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.5.8.tgz"
+    "version" "15.5.8"
+    dependencies:
+      "fbjs" "^0.8.9"
   
   "pump@^3.0.0":
     "integrity" "sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww=="
@@ -5702,6 +5881,22 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
     "version" "16.13.1"
   
+  "react-native-calendars@^1.1291.1":
+    "integrity" "sha512-L2MK2t3kbnDg2RoU12UAoQyNrUpDYdj2MyIfg13YrwVb8BuI/gc0q/VpEinY3iz5ETHiFsTLkCsAFwSj7xbZWw=="
+    "resolved" "https://registry.npmjs.org/react-native-calendars/-/react-native-calendars-1.1291.1.tgz"
+    "version" "1.1291.1"
+    dependencies:
+      "hoist-non-react-statics" "^3.3.1"
+      "immutable" "^4.0.0-rc.12"
+      "lodash" "^4.17.15"
+      "memoize-one" "^5.2.1"
+      "prop-types" "^15.5.10"
+      "react-native-swipe-gestures" "^1.0.5"
+      "recyclerlistview" "^3.0.5"
+      "xdate" "^0.8.0"
+    optionalDependencies:
+      "moment" "^2.24.0"
+  
   "react-native-codegen@^0.70.6":
     "integrity" "sha512-kdwIhH2hi+cFnG5Nb8Ji2JwmcCxnaOOo9440ov7XDzSvGfmUStnCzl+MCW8jLjqHcE4icT7N9y+xx4f50vfBTw=="
     "resolved" "https://registry.npmjs.org/react-native-codegen/-/react-native-codegen-0.70.6.tgz"
@@ -5712,7 +5907,27 @@ Lockfile:
       "jscodeshift" "^0.13.1"
       "nullthrows" "^1.1.1"
   
-  "react-native-gesture-handler@>= 1.0.0":
+  "react-native-color-picker@^0.6.0":
+    "integrity" "sha512-CptAssfTEGww97ev5GfaGTwu3IMBbBFi9ZDai1fgYRurQ7oQTcDp00lOoFIgLXr/acHNME2PjL7Ks/c+leVKFg=="
+    "resolved" "https://registry.npmjs.org/react-native-color-picker/-/react-native-color-picker-0.6.0.tgz"
+    "version" "0.6.0"
+    dependencies:
+      "prop-types" "^15.5.10"
+      "tinycolor2" "^1.4.1"
+  
+  "react-native-draggable@^3.3.0":
+    "integrity" "sha512-aU20CaKBmzXrwE9eTJZ+GDOr52mXLchg5Vydbx5rz8nYXlN+ppHIoTPgyXduyWNwpZ/DR6tyFtMwdgUHpuN6oA=="
+    "resolved" "https://registry.npmjs.org/react-native-draggable/-/react-native-draggable-3.3.0.tgz"
+    "version" "3.3.0"
+    dependencies:
+      "prop-types" "^15.7.2"
+  
+  "react-native-dropdown-picker@^5.4.3":
+    "integrity" "sha512-cwZzFcpyx/Stw3lZH2bvXxcsgwkR8c3rRZtOnlvyuN5pAplzA/9AiAxYlnJuspP9VvyU1XMePKOpgcHce6iyhA=="
+    "resolved" "https://registry.npmjs.org/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.3.tgz"
+    "version" "5.4.3"
+  
+  "react-native-gesture-handler@~2.8.0":
     "integrity" "sha512-poOSfz/w0IyD6Qwq7aaIRRfEaVTl1ecQFoyiIbpOpfNTjm2B1niY2FLrdVQIOtIOe+K9nH55Qal04nr4jGkHdQ=="
     "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.8.0.tgz"
     "version" "2.8.0"
@@ -5735,18 +5950,36 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz"
     "version" "0.70.3"
   
-  "react-native-safe-area-context@>= 3.0.0":
+  "react-native-reanimated@~2.12.0":
+    "integrity" "sha512-nrlPyw+Hx9u4iJhZk9PoTvDo/QmVAd+bo7OK9Tv3hveNEF9++5oig/g3Uv9V93shy9avTYGsUprUvAEt/xdzeQ=="
+    "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.12.0.tgz"
+    "version" "2.12.0"
+    dependencies:
+      "@babel/plugin-transform-object-assign" "^7.16.7"
+      "@babel/preset-typescript" "^7.16.7"
+      "@types/invariant" "^2.2.35"
+      "invariant" "^2.2.4"
+      "lodash.isequal" "^4.5.0"
+      "setimmediate" "^1.0.5"
+      "string-hash-64" "^1.0.3"
+  
+  "react-native-safe-area-context@^4.4.1":
     "integrity" "sha512-N9XTjiuD73ZpVlejHrUWIFZc+6Z14co1K/p1IFMkImU7+avD69F3y+lhkqA2hN/+vljdZrBSiOwXPkuo43nFQA=="
     "resolved" "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.4.1.tgz"
     "version" "4.4.1"
   
-  "react-native-screens@>= 3.0.0":
+  "react-native-screens@~3.18.0":
     "integrity" "sha512-ANUEuvMUlsYJ1QKukEhzhfrvOUO9BVH9Nzg+6eWxpn3cfD/O83yPBOF8Mx6x5H/2+sMy+VS5x/chWOOo/U7QJw=="
     "resolved" "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.18.2.tgz"
     "version" "3.18.2"
     dependencies:
       "react-freeze" "^1.0.0"
       "warn-once" "^0.1.0"
+  
+  "react-native-select-dropdown@^3.1.0":
+    "integrity" "sha512-M3urU+Q3H5KbJfkvB6adatTm0s5vsIly+cq6StGzr6AoQMoXa//4KZ+kgKtQ06r3t1O0A6Vx51xDSZw813xilw=="
+    "resolved" "https://registry.npmjs.org/react-native-select-dropdown/-/react-native-select-dropdown-3.1.0.tgz"
+    "version" "3.1.0"
   
   "react-native-svg-charts@^5.4.0":
     "integrity" "sha512-5TaIGSihJaHCGFj32Tc07hZrqqTpvdyAx89PIrW2nLf2tijd61+3UE3jtsiHOvfeAyDgSTWjv6s9qG9d2di7Pw=="
@@ -5759,7 +5992,7 @@ Lockfile:
       "d3-shape" "^1.0.6"
       "prop-types" "^15.6.0"
   
-  "react-native-svg@^6.2.1||^7.0.3", "react-native-svg@>=13.2.0", "react-native-svg@13.4.0":
+  "react-native-svg@>=13.2.0", "react-native-svg@13.4.0":
     "integrity" "sha512-B3TwK+H0+JuRhYPzF21AgqMt4fjhCwDZ9QUtwNstT5XcslJBXC0FoTkdZo8IEb1Sv4suSqhZwlAY6lwOv3tHag=="
     "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-13.4.0.tgz"
     "version" "13.4.0"
@@ -5767,7 +6000,17 @@ Lockfile:
       "css-select" "^5.1.0"
       "css-tree" "^1.1.3"
   
-  "react-native@*", "react-native@>=0.46.0", "react-native@0.70.5":
+  "react-native-swipe-gestures@^1.0.5":
+    "integrity" "sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw=="
+    "resolved" "https://registry.npmjs.org/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz"
+    "version" "1.0.5"
+  
+  "react-native-swiper-flatlist@^3.0.17":
+    "integrity" "sha512-4sWHzMHhXohiePBtJcVwt/fYVLpKFab7H1bvUH8TI3iMFYTOlMaW2PerlTDqGSO1eLRc4BX1z3X6e1NYPoakMA=="
+    "resolved" "https://registry.npmjs.org/react-native-swiper-flatlist/-/react-native-swiper-flatlist-3.0.17.tgz"
+    "version" "3.0.17"
+  
+  "react-native@0.70.5":
     "integrity" "sha512-5NZM80LC3L+TIgQX/09yiyy48S73wMgpIgN5cCv3XTMR394+KpDI3rBZGH4aIgWWuwijz31YYVF5504+9n2Zfw=="
     "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.70.5.tgz"
     "version" "0.70.5"
@@ -5818,19 +6061,19 @@ Lockfile:
       "object-assign" "^4.1.1"
       "react-is" "^16.12.0 || ^17.0.0 || ^18.0.0"
   
-  "react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@>=16.0.0-alpha.12", "react@>=17.0.0", "react@18.1.0":
-    "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
-    "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
-    "version" "18.1.0"
-    dependencies:
-      "loose-envify" "^1.1.0"
-  
   "react@^0.13.3":
     "integrity" "sha512-f9bivPvgNqGmcxjSuKCkY27YVKi1RlDm4TlPUNjLDH7lN6gnMQp9lJ9PpTVbo9kNEBr2BIZLz1kI/RFh9Cq2Kg=="
     "resolved" "https://registry.npmjs.org/react/-/react-0.13.3.tgz"
     "version" "0.13.3"
     dependencies:
       "envify" "^3.0.0"
+  
+  "react@18.1.0":
+    "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
+    "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
+    "version" "18.1.0"
+    dependencies:
+      "loose-envify" "^1.1.0"
   
   "reactcss@^0.3.2":
     "integrity" "sha512-aDX4JSAOKM8pV0IeT9HLJC4Wt2Mm5Fr2AeLLi6jwHRtzf7bUPhrn112rCO5mp2HMiZvF27/5StSEGDNbfSJoAw=="
@@ -5886,6 +6129,15 @@ Lockfile:
       "esprima" "~4.0.0"
       "source-map" "~0.6.1"
       "tslib" "^2.0.1"
+  
+  "recyclerlistview@^3.0.5":
+    "integrity" "sha512-JVHz13u520faEsbVqFrJOMuJjc4mJlOXODe5QdqAJHdl5/IpyYeo83uiHrpzxyLb8QtJ0889JMlDik+Z1Ed0QQ=="
+    "resolved" "https://registry.npmjs.org/recyclerlistview/-/recyclerlistview-3.0.5.tgz"
+    "version" "3.0.5"
+    dependencies:
+      "lodash.debounce" "4.0.8"
+      "prop-types" "15.5.8"
+      "ts-object-utils" "0.0.5"
   
   "regenerate-unicode-properties@^10.1.0":
     "integrity" "sha512-d1VudCLoIGitcU/hEg2QqvyGZQmdC0Lf8BqdOMXGFSvJP4bNV1+XqbPQeHHLD51Jh4QJJ225dlIFvY4Ly6MXmQ=="
@@ -6106,7 +6358,7 @@ Lockfile:
     dependencies:
       "ret" "~0.1.10"
   
-  "safer-buffer@>= 2.1.2 < 3":
+  "safer-buffer@>= 2.1.2 < 3", "safer-buffer@>= 2.1.2 < 3.0.0":
     "integrity" "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg=="
     "resolved" "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
     "version" "2.1.2"
@@ -6459,6 +6711,11 @@ Lockfile:
     dependencies:
       "safe-buffer" "~5.1.0"
   
+  "string-hash-64@^1.0.3":
+    "integrity" "sha512-D5OKWKvDhyVWWn2x5Y9b+37NUllks34q1dCDhk/vYcso9fmhs+Tl3KR/gE4v5UNj2UA35cnX4KdVVGkG1deKqw=="
+    "resolved" "https://registry.npmjs.org/string-hash-64/-/string-hash-64-1.0.3.tgz"
+    "version" "1.0.3"
+  
   "string-width@^4.1.0", "string-width@^4.2.0":
     "integrity" "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g=="
     "resolved" "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
@@ -6674,6 +6931,11 @@ Lockfile:
       "readable-stream" "~2.3.6"
       "xtend" "~4.0.1"
   
+  "tinycolor2@^1.4.1":
+    "integrity" "sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA=="
+    "resolved" "https://registry.npmjs.org/tinycolor2/-/tinycolor2-1.4.2.tgz"
+    "version" "1.4.2"
+  
   "tmp@^0.0.33":
     "integrity" "sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw=="
     "resolved" "https://registry.npmjs.org/tmp/-/tmp-0.0.33.tgz"
@@ -6747,6 +7009,11 @@ Lockfile:
     "integrity" "sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA=="
     "resolved" "https://registry.npmjs.org/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz"
     "version" "0.1.13"
+  
+  "ts-object-utils@0.0.5":
+    "integrity" "sha512-iV0GvHqOmilbIKJsfyfJY9/dNHCs969z3so90dQWsO1eMMozvTpnB1MEaUbb3FYtZTGjv5sIy/xmslEz0Rg2TA=="
+    "resolved" "https://registry.npmjs.org/ts-object-utils/-/ts-object-utils-0.0.5.tgz"
+    "version" "0.0.5"
   
   "tslib@^2.0.1", "tslib@^2.1.0", "tslib@^2.4.0":
     "integrity" "sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA=="
@@ -7005,7 +7272,7 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
     "version" "3.0.1"
   
-  "whatwg-fetch@^3.0.0":
+  "whatwg-fetch@^3.0.0", "whatwg-fetch@>=0.10.0":
     "integrity" "sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA=="
     "resolved" "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz"
     "version" "3.6.2"
@@ -7091,6 +7358,11 @@ Lockfile:
     dependencies:
       "simple-plist" "^1.1.0"
       "uuid" "^7.0.3"
+  
+  "xdate@^0.8.0":
+    "integrity" "sha512-sNBlLfOC8S3V0vLDEUianQOXcTsc9j4lfeKU/klHe0RjHAYn0CXsSttumTot8dzalboV8gZbH38B+WcCIBjhFQ=="
+    "resolved" "https://registry.npmjs.org/xdate/-/xdate-0.8.2.tgz"
+    "version" "0.8.2"
   
   "xml2js@0.4.23":
     "integrity" "sha512-ySPiMjM0+pLDftHgXY4By0uswI3SPKLDw/i3UXbnO8M/p28zqexCUoPmQFrYD+/1BzhGJSs2i1ERWKJAtiLrug=="

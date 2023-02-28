@@ -13,32 +13,28 @@ const {
 
 
 function PastMotion({name, motionFeelings, date, fullNames}) {
-  const navigator = useNavigation();
   return (
     <View style={styles.motion}>
-          <Pressable onPress={() => navigator.navigate('ExerciseOverview', { date: date, name: name, fullNames: fullNames})}>
-          <Pressable style={styles.scrollable} onPress={() => navigator.navigate('ExerciseOverview', { date: date, name: name, fullNames: fullNames})}>
-            <FlatList
-              data={motionFeelings}
-              horizontal={true}
-              scrollEnabled={true}
-              nestedScrollEnabled={true}
-              renderItem={({ item }) => (
-                  <Pressable onPress={() => navigator.navigate('ExerciseOverview', { date: date, name: name, fullNames: fullNames})}>
-                      <View style={styles.emotionBox}>
-                          <Emotion feelings={item}/>
-                      </View>
-                  </Pressable>
-              )}
-              ListHeaderComponent={
-                <Text style={styles.name}>
-                  {name}
-                </Text>
-              }
-              ListHeaderComponentStyle={{justifyContent: 'center', alignItems: 'center'}}
-              />
-            </Pressable>
-            </Pressable>
+      <FlatList
+        data={motionFeelings}
+        horizontal={true}
+        scrollEnabled={true}
+        nestedScrollEnabled={true}
+        renderItem={({ item }) => (
+            <View>
+                <View style={styles.emotionBox}>
+                    <Emotion feelings={item} noPulse={true}/>
+                    
+                </View>
+            </View>
+        )}
+        ListHeaderComponent={
+          <Text style={styles.name}>
+            {name}
+          </Text>
+        }
+        ListHeaderComponentStyle={{justifyContent: 'center', alignItems: 'center'}}
+        />
     </View>
   );
 }
@@ -117,7 +113,7 @@ emotions: {
   alignContent: 'center'
 },
 name: {
-    fontFamily: 'Avenir',
+    // fontFamily: 'Avenir',
     fontSize: SCREEN_HEIGHT * 0.03,
     paddingHorizontal: 5
 },

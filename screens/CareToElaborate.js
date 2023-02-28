@@ -1,4 +1,6 @@
-import { TextInput, View, StyleSheet, Text, Dimensions, SafeAreaView, TouchableOpacity} from 'react-native';
+import { TextInput, View, StyleSheet, Text, Dimensions, TouchableOpacity} from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import SecondSelection from '../components/SecondSelection';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
@@ -11,6 +13,8 @@ const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
+
+
 
 
 export default function CareToElaborate() {
@@ -62,11 +66,11 @@ export default function CareToElaborate() {
                     }
                     else {
                         context.updateMovement(context.motion.name, newFeelings, context.date);
-                        navigator.navigate('DuringMotion');
+                        navigator.navigate('DuringMotion', { selectedMovement: context.motion.name});
                     }
             }
             }>
-            <Text style = {styles.buttonText}> select</Text>
+            <Text style = {styles.buttonText}>select</Text>
         </TouchableOpacity>
     </SafeAreaView>
     );
@@ -87,13 +91,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: '4%',
     },
     title: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.045,
         textAlign: 'center',
         fontWeight: 'bold',
     },
     subtitle: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03,
         textAlign: 'center',
         paddingTop: '1%',
@@ -101,7 +105,7 @@ const styles = StyleSheet.create({
     },
     // take out
     buttonText: {
-        fontFamily: 'Avenir',
+        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03,
     },  
     selectButton: {

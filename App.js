@@ -10,13 +10,15 @@ import hardcodedMovementData from './utils/movementData';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ReflectionTask from './components/ReflectionTask';
 import CommunityTask from './components/CommunityTask';
-import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { useIsFocused } from "@react-navigation/native"; 
 import { useNavigation } from './node_modules/@react-navigation/native';
 import context from 'react-context';
 import friendsData from './utils/friendsData';
 import contactsData from './utils/contactsData';
 import { LogBox } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import SettingsTask from './components/SettingsTask';
 
 
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -32,11 +34,11 @@ export default function App() {
   const [secondary, setSecondary] = useState([]);
   const [motion, setMotion] = useState({name:'', feelings:[], note:""});
   const [movementData, setMovementData] = useState(hardcodedMovementData);
-  const [basicMapping, setBasicMapping] = useState(basicColorMapping);
   const [colorMapping, setColorMapping] = useState(mapAllColors(basicColorMapping));
   const [friends, setFriends] = useState(friendsData);
   const [contacts, setContacts] = useState(contactsData);
-
+  const [emotionsData, setEmotionsData] = useState(basicToSecondary)
+  const [currentEmotions, setCurrentEmotions] = useState([])
   const current = new Date();
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
 
@@ -75,25 +77,13 @@ export default function App() {
     setContacts(updatedContacts);
   }
 
-  function updateColorMapping(basicFeeling, newColor) {
-    let updated = {...basicMapping};
-    updated[basicFeeling] = newColor;
-    setBasicMapping(updated);
-    setColorMapping(mapAllColors(updated));
+  function updateColorMapping(feeling, parent, newColor) {
+    if (parent) {
+      addEmotionToData(parent, feeling)
+    }
+    colorMapping[feeling] = newColor
   }
   
-  function updateSecondary(newBasic) {
-    let updated = [];
-    for (let i = 0; i < newBasic.length; i++) {
-      for (let j = 0; j < basicToSecondary[newBasic[i]].length; j++) {
-        if (secondary.indexOf(basicToSecondary[newBasic[i]][j]) !== -1) {
-          updated.push(basicToSecondary[newBasic[i]][j]);
-        }
-      }
-    }
-    setSecondary(updated);
-  }
-
   function getCurrentMovementIndex() {
     for (let i = 0; i < movementData.length; i++) {
       if (movementData[i].dateEntry === date) {
@@ -106,7 +96,6 @@ export default function App() {
   async function updateCurrentFeelings(bas, sec) {
     let updated = [];
     for (let i = 0; i < bas.length; i++) {
-      //basic feeling
       updated.push(bas[i]);
     }
     
@@ -235,10 +224,10 @@ export default function App() {
     }
     return feelings;
   }
-
+  function addEmotionToData (basic, secondary) {
+    emotionsData[basic].push(secondary)
+  }
   function updateMovement(name, feelings, movementDate) {
-    console.log('updating movement')
-    console.log(name)
     let updated = [...movementData];
 
     if (name == "") {
@@ -289,7 +278,6 @@ export default function App() {
     setBasic: setBasic,
     secondary: secondary,
     setSecondary: setSecondary,
-    updateSecondary: updateSecondary,
     currentFeelings: currentFeelings,
     updateCurrentFeelings: updateCurrentFeelings,
     motion: motion,
@@ -309,12 +297,18 @@ export default function App() {
     contacts: contacts,
     addFriend: addFriend,
     removeFriend: removeFriend,
+    currentEmotions: currentEmotions,
+    setCurrentEmotions: setCurrentEmotions,
+    emotionsData: emotionsData,
+    addEmotionToData: addEmotionToData
+
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>
+    <SafeAreaProvider>
       <NavigationContainer>
         <Tab.Navigator 
-        initialRouteName={'movement'}
+        initialRouteName={'Home'}
         screenOptions={
           
           ({ route }) => ({
@@ -330,29 +324,31 @@ export default function App() {
                 },
                 null
               ],
-            
+          
           tabBarIcon: ({ focused }) => {
             let iconName;
-            let size;
-            if (route.name === 'reflection') {
-              iconName = 'user';
-              size = focused ? 30: 20;
-            } else if (route.name === 'movement') {
-              iconName = 'dot-circle-o';
-              size = focused ? 30: 20;
-            } else if (route.name === 'community') {
-              iconName = 'users';
-              size = focused ? 30: 20;
+            let color;
+            if (route.name === 'Reflect') {
+              iconName = 'calendar';
+              color = focused ? 'black': '#AFB7C2';
+            } else if (route.name === 'Home') {
+              iconName = 'home-sharp';
+              color = focused ? 'black': '#AFB7C2';
+            } else if (route.name === 'Settings') {
+              iconName = 'settings';
+              color = focused ? 'black': '#AFB7C2';
             }
-            return <FontAwesome name={iconName} size={size} color="black" />;
-          }
+            return <Ionicons name={iconName} size={25} color={color} />;
+          }, 
+          tabBarLabelStyle: {fontSize: 10}
         })}>
 
-          <Tab.Screen options={{headerShown:false}} name="reflection" component={ReflectionTask} />
-          <Tab.Screen options={{headerShown:false}} name="movement" component={MainTask} />
-          <Tab.Screen options={{headerShown:false}} name="community" component={CommunityTask} />
+          <Tab.Screen options={{headerShown:false}} name="Home" component={MainTask} />
+          <Tab.Screen options={{headerShown:false}} name="Reflect" component={ReflectionTask} />
+          <Tab.Screen options={{headerShown:false}} name="Settings" component={SettingsTask} />
         </Tab.Navigator>
       </NavigationContainer>
+      </SafeAreaProvider>
     </FeelingContext.Provider>
   );
 }
