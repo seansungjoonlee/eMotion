@@ -8,9 +8,12 @@ import DuringMotion from '../screens/DuringMotion';
 import ChooseMotion from '../screens/ChooseMotion';
 import CurrentEmotion from '../screens/CurrentEmotion';
 import React from 'react';
-import Onboarding from '../screens/Onboarding';
+import FeelingContext from '../components/FeelingContext';
+import { useState } from 'react';
+import { basicFeelings, basicToSecondary } from '../assets/feelings.js';
+import Themes from '../assets/Themes.js';
 
-export default function MainTask({ navigation }) {
+export default function StartEmotionTask({ navigation }) {
   const Stack = createStackNavigator();
 
   const forFade = ({ current }) => ({
@@ -33,10 +36,9 @@ export default function MainTask({ navigation }) {
       headerShown: false,
       cardStyleInterpolator: forFade,
    }}>
-        <Stack.Screen options={{headerShown: false}} name="Onboarding" component={Onboarding}/>
+        <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />
         <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
         <Stack.Screen options={{headerShown:false}} name="Start" component={Start} />
-        <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />
         <Stack.Screen options={{headerShown: false}} name="CareToElaborate" component={CareToElaborate} />
         <Stack.Screen options={{headerShown: false}} name="ChooseMotion" component={ChooseMotion} />
         <Stack.Screen options={{headerShown: false}} name="DuringMotion" component={DuringMotion} />

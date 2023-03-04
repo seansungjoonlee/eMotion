@@ -6,7 +6,6 @@ import React, { useContext, useState } from 'react';
 import Draggable from 'react-native-draggable'
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { GestureDetector } from 'react-native-gesture-handler';
 
 const {
     width: SCREEN_WIDTH,

@@ -3,32 +3,22 @@ import { NavigationContainer, NavigationHelpersContext } from './node_modules/@r
 import React from 'react';
 import FeelingContext from './components/FeelingContext';
 import { useState } from 'react';
-import { basicFeelings, basicToSecondary, basicColorMapping, mapAllColors } from './assets/feelings.js';
-import Themes from './assets/Themes.js';
-import MainTask from './components/MainTask';
+import { basicToSecondary, basicColorMapping, mapAllColors } from './assets/feelings.js';
 import hardcodedMovementData from './utils/movementData';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ReflectionTask from './components/ReflectionTask';
-import CommunityTask from './components/CommunityTask';
-import { Ionicons } from '@expo/vector-icons';
-import { useIsFocused } from "@react-navigation/native"; 
-import { useNavigation } from './node_modules/@react-navigation/native';
-import context from 'react-context';
+
 import friendsData from './utils/friendsData';
 import contactsData from './utils/contactsData';
 import { LogBox } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import SettingsTask from './components/SettingsTask';
-
-
+import TabNavigator from './TabNavigator';
+import {TabContextProvider} from './utils/TabContext';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs();//Ignore all log notifications
+LogBox.ignoreAllLogs();//Ignore all log notificationss
 
 console.disableYellowBox = true;
 
 
 export default function App() {
-  const Tab = createBottomTabNavigator();
   const [currentFeelings, setCurrentFeelings] = useState([]);
   const [basic, setBasic] = useState([]);
   const [secondary, setSecondary] = useState([]);
@@ -228,8 +218,10 @@ export default function App() {
     emotionsData[basic].push(secondary)
   }
   function updateMovement(name, feelings, movementDate) {
+    console.log(name)
+    console.log(feelings)
+    console.log(movementDate)
     let updated = [...movementData];
-
     if (name == "") {
       name = getTime();
     }
@@ -306,62 +298,12 @@ export default function App() {
   return (  
     <FeelingContext.Provider value={feelingSettings}>
     <SafeAreaProvider>
+    <TabContextProvider>
       <NavigationContainer>
-        <Tab.Navigator 
-        initialRouteName={'Home'}
-        screenOptions={
-          
-          ({ route }) => ({
-
-            tabBarActiveTintColor: 'black',
-            
-              tabBarLabelStyle: {
-                "fontSize": 14
-              },
-              tabBarStyle: [
-                {
-                  "display": "flex"
-                },
-                null
-              ],
-          
-          tabBarIcon: ({ focused }) => {
-            let iconName;
-            let color;
-            if (route.name === 'Reflect') {
-              iconName = 'calendar';
-              color = focused ? 'black': '#AFB7C2';
-            } else if (route.name === 'Home') {
-              iconName = 'home-sharp';
-              color = focused ? 'black': '#AFB7C2';
-            } else if (route.name === 'Settings') {
-              iconName = 'settings';
-              color = focused ? 'black': '#AFB7C2';
-            }
-            return <Ionicons name={iconName} size={25} color={color} />;
-          }, 
-          tabBarLabelStyle: {fontSize: 10}
-        })}>
-
-          <Tab.Screen options={{headerShown:false}} name="Home" component={MainTask} />
-          <Tab.Screen options={{headerShown:false}} name="Reflect" component={ReflectionTask} />
-          <Tab.Screen options={{headerShown:false}} name="Settings" component={SettingsTask} />
-        </Tab.Navigator>
+        <TabNavigator />
       </NavigationContainer>
+    </TabContextProvider>
       </SafeAreaProvider>
     </FeelingContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Themes.background,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%',
-    borderWidth: 3,
-    borderColor: 'red'
-  },
-});

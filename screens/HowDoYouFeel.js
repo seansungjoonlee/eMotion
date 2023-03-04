@@ -19,13 +19,14 @@ export default function HowDoYouFeel({route}) {
     const context = useContext(FeelingContext);
     const [currentEmotions, setCurrentEmotions] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('all')
-    const movement = route.params.movement
+    const movement = route?.params.movement
     const navigator = useNavigation();
     const positions = [[40, 20], [150, 20], [0, 125], [92, 190], [185, 125]]
     const bigFeelingPositions = { 'joyful': [0, 0], 'anxious': [180, 0], 'angry': [0, 0], 'sad': [80,0], 'surprised': [180,0]}
     const smallFeelingPositions = { 'joyful': 270, 'anxious': 20, 'angry': 270, 'sad': 20, 'surprised': 20}
     return (
     <SafeAreaView style={styles.container}>
+    <View style={styles.questionView}><Text style={styles.question}>How are you feeling?</Text></View>
         {selectedCategory == 'all' && <View style={styles.backArrowBox}>
             <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => { navigator.goBack()}}/>
         </View>}
@@ -113,7 +114,17 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: Themes.background
+        justifyContent: 'center',
+        backgroundColor: 'white'
+    },
+    question: {
+        fontSize: 30,
+        fontWeight: '500',
+    },
+    questionView: {
+        height: 150,
+        justifyContent: 'flex-end',
+        padding: 20
     },
     circleBack: {
         position: 'absolute',
@@ -195,6 +206,8 @@ const styles = StyleSheet.create({
         borderWidth: 1
      },   
      backArrowBox: {
+        position: 'absolute',
+        top: 20,
         width: '100%',
         justifyContent: 'center',
         height: '7.5%',
