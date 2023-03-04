@@ -1,19 +1,11 @@
 import { ImageBackground, StyleSheet, Text, Button, ScrollView, View, TouchableOpacity, Dimensions } from 'react-native';
-import BasicSelection from '../components/BasicSelection';
 import { useNavigation } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext, useState } from 'react';
 import Themes from '../assets/Themes';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { basicFeelings } from '../assets/feelings.js';
 import { AntDesign } from '@expo/vector-icons';
-
-const {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-} = Dimensions.get('window');
-
 
 export default function HowDoYouFeel({route}) {
     const context = useContext(FeelingContext);
@@ -120,11 +112,6 @@ const styles = StyleSheet.create({
     question: {
         fontSize: 30,
         fontWeight: '500',
-    },
-    questionView: {
-        height: 150,
-        justifyContent: 'flex-end',
-        padding: 20
     },
     circleBack: {
         position: 'absolute',
