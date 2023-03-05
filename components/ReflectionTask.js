@@ -9,6 +9,7 @@ import HowDoYouFeelAddMotion from '../screens/HowDoYouFeelAddMotion.js';
 import CareToElaborateAddMotion from '../screens/CareToElaborateAddMotion.js';
 import ReflectPage from '../screens/ReflectPage.js';
 import Patterns from '../screens/Patterns.js';
+import ColorBreakdown from '../screens/ColorBreakdown.js';
 export default function ReflectionTask({ navigation }) {
   const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export default function ReflectionTask({ navigation }) {
    }}>
         <Stack.Screen options={{headerShown:false}} name="ReflectPage" component={ReflectPage} />
         <Stack.Screen options={{headerShown:false}} name="Patterns" component={Patterns} />
+        <Stack.Screen options={{headerShown:false}} name="ColorBreakdown" component={ColorBreakdown} />
         <Stack.Screen options={{headerShown:false}} name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen options={{headerShown:false}} name="MovementOverview" component={MovementOverview} />
         <Stack.Screen options={{headerShown:false}} name="ExerciseOverview" component={ExerciseOverview} />
