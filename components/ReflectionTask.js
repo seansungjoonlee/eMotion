@@ -1,19 +1,14 @@
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Themes from '../assets/Themes.js';
-import { useNavigation } from '@react-navigation/native';
 import CalendarScreen from "../screens/CalendarScreen";
 import MovementOverview from '../screens/MovementOverview.js';
 import ExerciseOverview from '../screens/ExerciseOverview.js';
 import AddingMotion from '../screens/AddingMotion.js';
 import HowDoYouFeelAddMotion from '../screens/HowDoYouFeelAddMotion.js';
 import CareToElaborateAddMotion from '../screens/CareToElaborateAddMotion.js';
-import ColorMenu from '../screens/ColorMenu.js';
-import ColorSelection from '../screens/ColorSelection.js';
-
-
+import ReflectPage from '../screens/ReflectPage.js';
+import Patterns from '../screens/Patterns.js';
 export default function ReflectionTask({ navigation }) {
   const Stack = createStackNavigator();
 
@@ -28,6 +23,8 @@ export default function ReflectionTask({ navigation }) {
       headerShown: false,
       cardStyleInterpolator: forFade,
    }}>
+        <Stack.Screen options={{headerShown:false}} name="ReflectPage" component={ReflectPage} />
+        <Stack.Screen options={{headerShown:false}} name="Patterns" component={Patterns} />
         <Stack.Screen options={{headerShown:false}} name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen options={{headerShown:false}} name="MovementOverview" component={MovementOverview} />
         <Stack.Screen options={{headerShown:false}} name="ExerciseOverview" component={ExerciseOverview} />

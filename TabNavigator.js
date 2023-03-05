@@ -13,7 +13,7 @@ const TabNavigator = () => {
   const {opened, toggleOpened} = useTabMenu()
   return (
     <Tab.Navigator
-    initialRouteName={'Home'}
+    initialRouteName={'Colors'}
     screenOptions={{
         headerShown: false,
         tabBarShowLabel: true,
@@ -46,7 +46,7 @@ const TabNavigator = () => {
     }}
      name="Reflect" component={ReflectionTask} />
     <Tab.Screen options={{
-      tabBarButton: (props) => {
+      tabBarButton: () => {
         return (<NewMotionButton opened={opened} toggleOpened={toggleOpened} />)
       }
     }}

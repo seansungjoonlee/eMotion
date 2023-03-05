@@ -8,7 +8,7 @@ import DuringMotion from '../screens/DuringMotion';
 import ChooseMotion from '../screens/ChooseMotion';
 import CurrentEmotion from '../screens/CurrentEmotion';
 import React from 'react';
-import Onboarding from '../screens/Onboarding';
+
 
 export default function MainTask({ navigation }) {
   const Stack = createStackNavigator();
@@ -33,7 +33,6 @@ export default function MainTask({ navigation }) {
       headerShown: false,
       cardStyleInterpolator: forFade,
    }}>
-        <Stack.Screen options={{headerShown: false}} name="Onboarding" component={Onboarding}/>
         <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
         <Stack.Screen options={{headerShown:false}} name="Start" component={Start} />
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />

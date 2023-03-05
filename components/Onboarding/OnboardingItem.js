@@ -15,7 +15,7 @@ export default function OnboardingItem ({item, navigator}) {
                     )
                 })}
             </View>
-            <TouchableOpacity style={styles.skip} onPress={() => navigator.navigate('CurrentEmotion')}><Text style={styles.description}>Get Started</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.skip} onPress={() => navigator.navigate('ColorMenu')}><Text style={styles.description}>Get Started</Text></TouchableOpacity>
         </View>
     )
 }

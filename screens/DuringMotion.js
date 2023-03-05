@@ -1,4 +1,4 @@
-import { Image, TouchableOpacity, Modal, KeyboardAvoidingView, Pressable, View, Text, StyleSheet, Dimensions } from "react-native";
+import { Image, TouchableOpacity, Modal, TextInput, Pressable, View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useNavigation } from "@react-navigation/native";
@@ -9,7 +9,6 @@ import { useContext } from 'react';
 import Themes from "../assets/Themes";
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
-import Autocomplete from 'react-native-autocomplete-input';
 import motionData from "../utils/motionData";
 import startMovingComplete from '../assets/icons/start_movement_complete.png'
 import startMovingIncomplete from '../assets/icons/start_movement_incomplete.png'
@@ -31,7 +30,6 @@ export default function DuringMotion({route}) {
     const [motions, setMotions] = useState([])
     useEffect(() => {
         setMotions(getMotions(motionData));
-
     }, [])
 
     const getMotions = (motionData) => {
@@ -63,13 +61,11 @@ export default function DuringMotion({route}) {
             return filteredList
         }
     }
-    const renderItem = (item) => {
-        return(
-            <TouchableOpacity onPress={() => setText(item.item)}>
-                <Text style={styles.itemText}>{item.item}</Text>
-            </TouchableOpacity>
+    const renderOptions = filterData(motions).map((motion) => {
+        return (
+            <TouchableOpacity onPress={() => setText(motion)} style={styles.option}><Text style={{color: 'white'}}>{motion}</Text></TouchableOpacity>
         )
-    }
+    })
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.movementContainer}>
@@ -77,16 +73,8 @@ export default function DuringMotion({route}) {
                 {movement.length == 0 && 
                     motions.length > 0 && 
                     <View style={styles.autocompleteContainer}>
-                        <Autocomplete
-                            data={filterData(motions)}
-                            value={text}
-                            onChangeText={setText}
-                            placeholder="Type a movement"
-                            inputContainerStyle={styles.inputText}
-                            flatListProps={{
-                            keyExtractor: (_, idx) => idx,
-                            renderItem: renderItem}}
-                            />
+                        <View style={{height: 70}}><ScrollView horizontal style={styles.optionView}>{renderOptions}</ScrollView></View>
+                        <TextInput style={styles.textinput} onChangeText={setText} value={text} placeholder="Type a movement..." />
                     </View>}
             </View>
             <View style={styles.progressBar}>
@@ -168,6 +156,12 @@ const styles = StyleSheet.create({
         width: '65%',
         borderRadius: 1000
      },
+     option: {
+        backgroundColor: 'black',
+        borderRadius: 10,
+        padding: 10, 
+        margin: 10
+     },
     noteButton: {
         height: '100%',
         width: '50%',
@@ -176,6 +170,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    textinput: {
+        fontSize: 30
     },
     notesSheet: {
         width: '85%',
@@ -223,12 +220,10 @@ const styles = StyleSheet.create({
     },
     autocompleteContainer: {
         flex: 1,
-        left: '10%',
+        left: '5%',
         position: 'absolute',
         top: 100,
         zIndex: 1,
-        backgroundColor: 'white',
-        width: '80%'
       },
     headerContainer: {
         justifyContent: 'flex-start',

@@ -200,6 +200,7 @@ export default function App() {
 
   function getMovement(date) {
     for (let i = 0; i < movementData.length; i++) {
+      console.log(movementData[i].dateEntry)
       if (movementData[i].dateEntry === date) {
         return movementData[i];
       }
