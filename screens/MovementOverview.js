@@ -51,7 +51,7 @@ export default function MovementOverview({ route }) {
         setUniqueFeelings(temp)
         temp = []
         var firstItem = { title: 'Started the Day!', description: ':)'}
-        if (movement){
+        if (movement.motionEntry){
           var movementData = movement.motionEntry
           for (var entry of movementData) {
             temp.push({title: entry.feelings.join(', '), description: `from ${entry.name}`, circleColor: context.colorMapping[entry.feelings[0]], lineColor: context.colorMapping[entry.feelings[0]]})
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         height: 50,
         position: 'absolute',
         left: 0,
-        marginTop: 40
+        marginTop: 15
     },
     textButton: {
         fontSize: SCREEN_HEIGHT * 0.03
