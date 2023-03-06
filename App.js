@@ -218,9 +218,12 @@ export default function App() {
 
   function movementFeelings(term) {
     let feelings = [];
-    for (let i = 0; i < term.motionEntry.length; i++) {
-      feelings.push(term.motionEntry[i].feelings);
+    if(term) {
+      for (let i = 0; i < term.motionEntry.length; i++) {
+        feelings.push(term.motionEntry[i].feelings);
+      } 
     }
+    
     return feelings;
   }
   function addEmotionToData (basic, secondary) {
