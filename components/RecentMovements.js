@@ -12,29 +12,32 @@ import {
 import FeelingContext from '../components/FeelingContext'
 import { useContext, useState } from 'react'
 import Emotion from './Emotion'
+import hardcodedMovementData from '../utils/movementData';
+
 export default function RecentMovements({ navigator }) {
   const context = useContext(FeelingContext)
   const renderMovements = (i) => {
+    console.log("length inside rendermovements is " + hardcodedMovementData[i].motionEntry.length)
     return (
       <View style={styles.entryContainer}>
         <View style={styles.date}>
-          <Text>{context.movementData[i].dateEntry}</Text>
+          <Text>{hardcodedMovementData[i].dateEntry}</Text>
         </View>
-        {context.movementData[i].motionEntry.map((entry, idx) => {
+        {hardcodedMovementData[i].motionEntry.map((entry, idx) => {
           return (
             <View key={idx} style={styles.movement}>
               <View style={styles.emotionContainer}>
                 <Emotion feelings={entry.feelings} noPulse={true} />
               </View>
               <View style={styles.motionText}>
-                <Text style={styles.entryTitle}>{entry.name.substring(0, entry.name.length - 2)}</Text>
+                <Text style={styles.entryTitle}>{entry.name.substring(entry.name.length - 2, entry.name.length - 1) === " " ? entry.name.substring(0, entry.name.length - 2) : entry.name}</Text>
                 <Text>{entry.feelings.join(', ')} </Text>
               </View>
               <TouchableOpacity
                 style={styles.redo}
                 onPress={() =>
                   navigator.navigate('DuringMotion', {
-                    selectedMovement: entry.name.substring(0, entry.name.length - 2),
+                    selectedMovement: entry.name.substring(entry.name.length - 2, entry.name.length - 1) === " " ? entry.name.substring(0, entry.name.length - 2) : entry.name,
                   })
                 }
               >
@@ -49,7 +52,7 @@ export default function RecentMovements({ navigator }) {
   return (
       <ScrollView style={styles.container}>
           <Text style={styles.title}>Recent</Text>
-          {renderMovements(context.movementData.length - 1)}
+          {renderMovements(hardcodedMovementData.length - 1)}
       </ScrollView>
   )
 }
