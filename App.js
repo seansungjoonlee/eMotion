@@ -226,8 +226,19 @@ export default function App() {
   function addEmotionToData (basic, secondary) {
     emotionsData[basic].push(secondary)
   }
-  function updateMovement(name, feelings, movementDate) {
 
+//   function formatDate(inputDate){
+//     return `${inputDate.getMonth()+1 < 10 && '0'}${inputDate.getMonth()+1}/${inputDate.getDate()}/${inputDate.getFullYear()}` 
+// }
+  function updateMovement(name, feelings, movementDate) {
+    // console.log("movement date pre: " + movementDate);
+    // console.log("typeof: " + typeof(movementDate));
+    // movementDate = formatDate(Date(movementDate));
+    // console.log("movement date post: " + movementDate);
+
+    console.log(name)
+    console.log(feelings)
+    console.log(movementDate)
     let updated = [...movementData];
     if (name == "") {
       name = getTime();
@@ -276,7 +287,9 @@ export default function App() {
     if(movementData[movementData.length-1].dateEntry !== movementDate) { //if there isn't already a movement entry for today
       console.log("movement data is " + movementData);
       console.log("movement data length is " + movementData.length);
+      movementDate = '0'+movementDate; //TODO: less than 10
       set(ref(database, 'hardcodedMovementData/' + movementData.length), {
+        
           dateEntry: movementDate,
       })
       console.log("movement data is " + movementData);
