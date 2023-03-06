@@ -2,16 +2,20 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { NavigationContainer, NavigationHelpersContext } from './node_modules/@react-navigation/native';
 import React from 'react';
 import FeelingContext from './components/FeelingContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { basicToSecondary, basicColorMapping, mapAllColors } from './assets/feelings.js';
 import hardcodedMovementData from './utils/movementData';
 
 import friendsData from './utils/friendsData';
 import contactsData from './utils/contactsData';
+import loopData from './config/addData';
 import { LogBox } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import TabNavigator from './TabNavigator';
 import {TabContextProvider} from './utils/TabContext';
+
+import { getDatabase, set, ref, onValue} from "firebase/database";
+import database from "./config/firebase";
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notificationss
 
@@ -31,6 +35,11 @@ export default function App() {
   const [currentEmotions, setCurrentEmotions] = useState([])
   const current = new Date();
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
+
+  // useEffect(() => {
+  //   loopData();
+  //   console.log("looped");
+  // });
 
 
 
@@ -218,6 +227,7 @@ export default function App() {
     emotionsData[basic].push(secondary)
   }
   function updateMovement(name, feelings, movementDate) {
+
     let updated = [...movementData];
     if (name == "") {
       name = getTime();
@@ -259,6 +269,35 @@ export default function App() {
       movementEntry.motionEntry.push(newMotion);
       updated.push(movementEntry);
       setMovementData(updated);
+    }
+
+
+
+    if(movementData[movementData.length-1].dateEntry !== movementDate) { //if there isn't already a movement entry for today
+      console.log("movement data is " + movementData);
+      console.log("movement data length is " + movementData.length);
+      set(ref(database, 'hardcodedMovementData/' + movementData.length), {
+          dateEntry: movementDate,
+      })
+      console.log("movement data is " + movementData);
+      console.log("movement data length is " + movementData.length);
+      set(ref(database, 'hardcodedMovementData/' + (movementData.length - 1) + '/motionEntry/' + 0), {
+        feelings: feelings,
+        name: name,
+        note: "",
+      })
+    } else {
+      let length = 0;
+      console.log("movementData[movementData.length-1].motionEntry: " + movementData[movementData.length-1].motionEntry);
+      if(movementData[movementData.length-1].motionEntry) { //if a motionEntry exists
+        length = movementData[movementData.length-1].motionEntry.length;
+        console.log("in here, length is " + length);
+      }
+      set(ref(database, 'hardcodedMovementData/' + (movementData.length-1) + '/motionEntry/' + (length-1)), {
+        feelings: feelings,
+        name: name,
+        note: "",
+      })
     }
   }
 
