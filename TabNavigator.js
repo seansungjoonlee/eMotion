@@ -5,15 +5,16 @@ import { Ionicons } from '@expo/vector-icons'
 import ReflectionTask from './components/ReflectionTask'
 import SettingsTask from './components/SettingsTask'
 import NewMotionButton from './components/NewMotionButtton'
-
+import ColorsTask from './components/ColorsTask'
 import MainTask from './components/MainTask'
 import { useTabMenu } from './utils/TabContext'
+
 const TabNavigator = () => {
   const Tab = createBottomTabNavigator()
   const {opened, toggleOpened} = useTabMenu()
   return (
     <Tab.Navigator
-    initialRouteName={'Colors'}
+    initialRouteName={'Home'}
     screenOptions={{
         headerShown: false,
         tabBarShowLabel: true,
@@ -45,12 +46,7 @@ const TabNavigator = () => {
       ),
     }}
      name="Reflect" component={ReflectionTask} />
-    <Tab.Screen options={{
-      tabBarButton: () => {
-        return (<NewMotionButton opened={opened} toggleOpened={toggleOpened} />)
-      }
-    }}
-     name="Add" component={ReflectionTask}/>
+    
 
     <Tab.Screen options={{
       showLabel: false,
@@ -60,7 +56,7 @@ const TabNavigator = () => {
         </View>
       ),
     }}
-     name="Colors" component={SettingsTask} />
+     name="Colors" component={ColorsTask} />
     <Tab.Screen options={{
       tabBarIcon: ({focused}) => (
         <View style={styles.tabIconContainer}>

@@ -92,7 +92,7 @@ export default function CurrentEmotion() {
                 <Emotion feelings={movementFeelings} />
             </Pressable>
             {showBreakdown && <EmotionBreakdown panel={showBreakdown} setPanel={() => setShowBreakdown(!showBreakdown)}/>}
-            <SuggestedMoves style={styles.suggested} suggestedMovementsList={suggestedMotions}/>
+            <SuggestedMoves suggestedMovementsList={suggestedMotions}/>
             <RecentMovements navigator={navigator}/>
         </SafeAreaView>
     );

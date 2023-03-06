@@ -41,7 +41,6 @@ export default function DuringMotion({route}) {
                 }
             }
         }
-        console.log(motionList)
         return motionList;
     }
     const filterData = (data) => {

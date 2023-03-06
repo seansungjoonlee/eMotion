@@ -22,10 +22,8 @@ export default function CalendarWeek({navigator}) {
     }
     const showPressable = (day) => {
         var dayChange = formatDate(day)
-        console.log(dayChange)
         let movementFeelings = [];
         if (context.getMovement(dayChange) !== -1) {
-            console.log(context.getMovement(dayChange))
             var nestedFeelings = context.movementFeelings(context.getMovement(dayChange));
             var temp = []
             for (var i = nestedFeelings.length-1; i >= 0; i--){
