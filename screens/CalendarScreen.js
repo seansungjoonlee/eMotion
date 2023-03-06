@@ -7,8 +7,7 @@ import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import Emotion from '../components/Emotion';
-import { Ionicons } from '@expo/vector-icons'; 
-import hardcodedMovementData from '../utils/movementData';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';import hardcodedMovementData from '../utils/movementData';
 
 
 
@@ -35,20 +34,6 @@ function changeDateFormat(inputDate){  // expects Y-m-d
     return month + '/' + day + '/' + year;
 }
 
-
-function getTime() {
-    let newDate = new Date();
-    let time = newDate.getHours();
-    if(newDate.getMinutes() < 10) {
-      time += ':0' + newDate.getMinutes();
-    } else {
-      time += ':' + newDate.getMinutes();
-    }
-    return time;
-  }
-
-  
-
 export default function CalendarScreen() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
@@ -64,11 +49,15 @@ export default function CalendarScreen() {
       }
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.backArrow}>
+                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.goBack()}/>
+            </View> 
             <View style={styles.topBar}>
+            <MaterialCommunityIcons name="calendar-heart" size={28} color="black" />
+                <Text style={styles.title}>
+                    calendar
+                </Text>
             </View>
-            <Text style={styles.title}>
-                reflect
-            </Text>
             <View style={styles.calendarContainer}>
                 <Calendar
                     style={[styles.calendar]}
@@ -88,12 +77,19 @@ export default function CalendarScreen() {
                             movementFeelings = temp
                         }
                         return (
+                            <View>
                         <Pressable style={styles.date} onPress={() => navigator.navigate("MovementOverview", {date: newDate, feelings: movementFeelings})}>
                             {movementFeelings.length > 0 &&
                             <Emotion feelings={movementFeelings} noPulse={true}/>}
-                            <Text style={styles.dayText}>{date.day}</Text>
                         </Pressable>
+                        <Text style={styles.dayText}>{date.day}</Text>
+                        </View>
                         );
+                    }}
+                    theme={{
+                        arrowColor: 'black',
+                        backgroundColor: '#ffffff',
+                        textMonthFontSize: 25,
                     }}
                 />
             </View>
@@ -105,41 +101,58 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%',
-        backgroundColor: Themes.background,
+        backgroundColor: '#F1F3F5',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
+    calendar: {
+        borderRadius: 20,
+        shadowColor: 'gray',
+        shadowOpacity: 0.3,
+        shadowOffset: {
+            width: 0,
+            height: 10
+        },
+        shadowRadius: 3.5,
+        elevation: 5,
+    },
     topBar: {
         flexDirection: 'row',
-        justifyContent: 'flex-end',
+        alignItems: 'center',
+        justifyContent: 'center',
         height: '7.5%',
         paddingHorizontal: '7%',
         width: '100%'
     },
     title: {
-        fontSize: SCREEN_HEIGHT * 0.045,
-        // fontFamily: 'Avenir',
         textAlign: 'center',
-        fontWeight: 'bold',
-        paddingTop: '5%'
+        fontWeight: '700',
+        fontSize: 28,
+        margin: 10
     },
     date: {
-        width: '100%',
+        width: '80%',
         aspectRatio: 1,
         position: 'relative',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderWidth: 2,
+        borderRadius: 30,
+        borderColor: '#D2D2D2'
     },
     dayText: {
-        position: 'absolute'
-    },
-    calendar: {
-        height: '100%',
-        width: '100%',
+        textAlign: 'center',
+        color: '#616161'
     },
     calendarContainer: {
         width: '90%',
-        height: '70%'
-    }
+    },
+    backArrow: {
+        height: 50,
+        position: 'absolute',
+        left: 0,
+        marginTop: 60,
+        zIndex: 1000,
+    },
 });
