@@ -14,7 +14,8 @@ import TabNavigator from './TabNavigator';
 import {TabContextProvider} from './utils/TabContext';
 
 import { getDatabase, set, ref, onValue} from "firebase/database";
-import database from "./config/firebase";
+import database from "./config/firebase"
+
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notificationss
 
