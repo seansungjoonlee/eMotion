@@ -200,7 +200,6 @@ export default function App() {
 
   function getMovement(date) {
     for (let i = 0; i < movementData.length; i++) {
-      console.log(movementData[i].dateEntry)
       if (movementData[i].dateEntry === date) {
         return movementData[i];
       }
@@ -219,9 +218,6 @@ export default function App() {
     emotionsData[basic].push(secondary)
   }
   function updateMovement(name, feelings, movementDate) {
-    console.log(name)
-    console.log(feelings)
-    console.log(movementDate)
     let updated = [...movementData];
     if (name == "") {
       name = getTime();

@@ -7,14 +7,13 @@ import {
   ScrollView,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import FeelingContext from '../components/FeelingContext'
-import { basicToSecondary } from '../assets/feelings'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
 
 export default function Patterns() {
   const context = useContext(FeelingContext)
-  const navigator = useNavigation();
+  const navigator = useNavigation()
 
   const [localColorMapping, setLocalColorMapping] = useState(
     context.colorMapping,
@@ -22,6 +21,14 @@ export default function Patterns() {
 
   return (
     <SafeAreaView>
+      <View style={styles.backArrow}>
+        <MaterialIcons
+          name="keyboard-backspace"
+          size={50}
+          color="black"
+          onPress={() => navigator.goBack()}
+        />
+      </View>
       <View style={styles.instructionsContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Feeling Patterns</Text>
@@ -89,6 +96,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   titleContainer: {
+    marginTop: 20,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -148,5 +156,11 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 10,
     borderRadius: 10,
+  },
+  backArrow: {
+    height: 50,
+    position: 'absolute',
+    left: 0,
+    marginTop: 40,
   },
 })
