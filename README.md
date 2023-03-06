@@ -1,5 +1,5 @@
 # eMotion
-###Feel your workouts.
+Feel your workouts.
 ---
 Feel free to try out our app! From the project directory, run
 ```
