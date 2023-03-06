@@ -238,14 +238,14 @@ export default function App() {
     // console.log("typeof: " + typeof(movementDate));
     // movementDate = formatDate(Date(movementDate));
     // console.log("movement date post: " + movementDate);
-
-    console.log(name)
+    console.log("name is ***************" + name)
     console.log(feelings)
-    console.log(movementDate)
+    console.log("movement date is " + movementDate)
     let updated = [...movementData];
     if (name == "") {
       name = getTime();
     }
+
     let newMotion = {};
     //add a number to the motion name
     
@@ -287,15 +287,13 @@ export default function App() {
 
 
 
-    if(movementData[movementData.length-1].dateEntry !== movementDate) { //if there isn't already a movement entry for today
-      console.log("movement data is " + movementData);
+    if((movementData[movementData.length-1].dateEntry !== ('0'+movementDate)) && (movementData[movementData.length-1].dateEntry !== (movementDate))) { //if there isn't already a movement entry for today
       console.log("movement data length is " + movementData.length);
       movementDate = '0'+movementDate; //TODO: less than 10
       set(ref(database, 'hardcodedMovementData/' + movementData.length), {
         
           dateEntry: movementDate,
       })
-      console.log("movement data is " + movementData);
       console.log("movement data length is " + movementData.length);
       set(ref(database, 'hardcodedMovementData/' + (movementData.length - 1) + '/motionEntry/' + 0), {
         feelings: feelings,
