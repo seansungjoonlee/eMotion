@@ -49,7 +49,7 @@ export default function RecentMovements({ navigator }) {
   return (
       <ScrollView style={styles.container}>
           <Text style={styles.title}>Recent</Text>
-          {renderMovements(0)}
+          {renderMovements(context.movementData.length - 1)}
       </ScrollView>
   )
 }
