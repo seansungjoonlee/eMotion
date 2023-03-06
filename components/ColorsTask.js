@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Themes from '../assets/Themes.js';
-import SettingsPage from '../screens/SettingsPage.js';
-import WorkInProgress from '../screens/WorkInProgress.js';
+import ColorMenu from '../screens/ColorMenu.js';
+import Onboarding from '../screens/Onboarding.js';
+import ColorSelection from '../screens/ColorSelection.js';
 
-export default function SettingsTask({ navigation }) {
+export default function ColorsTask({ navigation }) {
   const Stack = createStackNavigator();
 
   const forFade = ({ current }) => ({
@@ -18,8 +19,10 @@ export default function SettingsTask({ navigation }) {
       headerShown: false,
       cardStyleInterpolator: forFade,
    }}>
-        <Stack.Screen options={{headerShown:false}} name="SettingsPage" component={SettingsPage} />
-        <Stack.Screen options={{headerShown:false}} name="WorkInProgress" component={WorkInProgress} />
+        <Stack.Screen options={{headerShown:false}} name="ColorMenu" component={ColorMenu} />
+        <Stack.Screen options={{headerShown:false}} name="ColorSelection" component={ColorSelection} />
+
+
     </Stack.Navigator>
   );
 }

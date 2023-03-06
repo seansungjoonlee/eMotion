@@ -1,4 +1,4 @@
-import { StyleSheet, Text, KeyboardAvoidingView, TextInput, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useNavigation, useIsFocused } from '@react-navigation/native';
@@ -6,11 +6,6 @@ import Themes from '../assets/Themes';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext, useState, useEffect } from 'react';
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons'; 
-
-const {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-} = Dimensions.get('window');
 
 
 export default function ColorMenu({route}) {

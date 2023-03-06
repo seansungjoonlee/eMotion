@@ -1,6 +1,6 @@
 let movementData = [
 
-{dateEntry: "01/4/2023", motionEntry: [{feelings: ["anxious", "dismayed"], name: "walk in the park", note: ""}, {feelings: ["anxious", "dismayed"], name: "squats 1", note: "lovely day!"}, {feelings: ["joyful", "surprised", "content", "anxious"], name: "squats 1", note: ""}]},
+{dateEntry: "03/4/2023", motionEntry: [{feelings: ["anxious", "dismayed"], name: "walk in the park", note: ""}, {feelings: ["anxious", "dismayed"], name: "squats 1", note: "lovely day!"}, {feelings: ["joyful", "surprised", "content", "anxious"], name: "squats 1", note: ""}]},
 
 {dateEntry: "01/1/2023", motionEntry: [{feelings: ["angry"], name: "11:33 1", note: ""}, {feelings: ["angry"], name: "pushups", note: "Getting my anger out!"}, {feelings: ["anxious", "interested", "joyful"], name: "pushups 2", note: ""}]},
 

@@ -1,4 +1,4 @@
-import { TextInput, Modal, StyleSheet, Text, Dimensions, View, Image, TouchableOpacity, Pressable} from 'react-native';
+import { StyleSheet, Dimensions, Pressable, Text} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Emotion from '../components/Emotion';
@@ -42,7 +42,6 @@ export default function CurrentEmotion() {
                 }
             }
         }
-        console.log(suggestions)
         //suggestions is now populated in reverse order of all movements associated with feelings (higher index = stronger association)
         //TODO: some math so that indices can add if a movement is associated with multiple feelings
         for (let i = suggestions.length - 1; i > -1; i--) {
@@ -63,7 +62,6 @@ export default function CurrentEmotion() {
                 motionFeelings: motions[motion],
             });
         }
-        console.log(motionList)
         return motionList
     }
 
@@ -87,14 +85,15 @@ export default function CurrentEmotion() {
 
     return (
         <SafeAreaView style={styles.container}>
+            <Text style={styles.appTitle}>eMotion</Text>
             <Pressable style={styles.movementBox} onLongPress={() => setShowBreakdown(true)} onPress = {() => {
                 navigator.navigate('HowDoYouFeel', {movement: ''})
                 }}>
                 <Emotion feelings={movementFeelings} />
             </Pressable>
             {showBreakdown && <EmotionBreakdown panel={showBreakdown} setPanel={() => setShowBreakdown(!showBreakdown)}/>}
-            <SuggestedMoves style={styles.suggested} suggestedMovementsList={suggestedMotions}/>
-            <RecentMovements />
+            <SuggestedMoves suggestedMovementsList={suggestedMotions}/>
+            <RecentMovements navigator={navigator}/>
         </SafeAreaView>
     );
 }
@@ -107,9 +106,10 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        backgroundColor: '#eee'
+        backgroundColor: '#eee',
+        marginTop: 20
     },
-    title: {
+    appTitle: {
         fontSize: 20,
         textAlign: 'center',
         fontWeight: 'bold',
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         aspectRatio: 1,
         height: '30%',
-        margin: 10
+        margin: 20
      },
      emotionBox: {
         aspectRatio: 1,

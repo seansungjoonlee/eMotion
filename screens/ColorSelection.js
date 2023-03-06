@@ -6,7 +6,6 @@ import React, { useContext, useState } from 'react';
 import Draggable from 'react-native-draggable'
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { GestureDetector } from 'react-native-gesture-handler';
 
 const {
     width: SCREEN_WIDTH,
@@ -133,7 +132,7 @@ export default function ColorSelection({ route }) {
                         <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.goBack()}/>
                     </View>
                 </View>
-                <View style={[styles.feelingView, {left: (Dimensions.get('window').width / 2) - (15*feeling.length/4),backgroundColor: `rgb(${selectedColor[0]}, ${selectedColor[1]}, ${selectedColor[2]})`}]}>
+                <View style={[styles.feelingView, {left: (Dimensions.get('window').width / 2) - (19*feeling.length/4),backgroundColor: `rgb(${selectedColor[0]}, ${selectedColor[1]}, ${selectedColor[2]})`}]}>
                     <Text style={styles.title}>
                         {feeling}
                     </Text>
@@ -141,15 +140,14 @@ export default function ColorSelection({ route }) {
                 <TouchableOpacity style={[styles.feelingView, styles.selectView]} onPress={() => {
                         var hex = rgbToHex(Math.floor(selectedColor[0]), Math.floor(selectedColor[1]), Math.floor(selectedColor[2]))
                         context.updateColorMapping(feeling, parent, hex);
-                        console.log(`updating to ${hex}`)
                         navigator.navigate('ColorMenu', {feeling: feeling, hex: hex});
                         alert(`Updated ${feeling}`);
                     }}>
                         <Text style={{color: 'white'}}>select color</Text>
                     </TouchableOpacity>
                 <Draggable
-                    x={0}
-                    y={100}
+                    x={100}
+                    y={400}
                     renderSize={40}
                     onDragRelease={(event) => {
                         console.log(event.nativeEvent.pageX)
@@ -187,7 +185,10 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 15,
-        marginBottom: 10
+        backgroundColor: 'white',
+        paddingRight: 10,
+        paddingLeft: 10,
+        borderRadius: 10
     },
     feelingView: {
         position: 'absolute', 

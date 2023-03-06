@@ -1,53 +1,39 @@
-import { Text, View, StyleSheet, Image, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import FeelingContext from './FeelingContext.js';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { SwipeablePanel } from 'rn-swipeable-panel';
-import Timeline from 'react-native-timeline-flatlist';
+import EmotionTimeline from './EmotionTimeline.js';
+
 
 export default function EmotionBreakdown({panel, setPanel}) {
     const context = useContext(FeelingContext);
-    const [panelProps, setPanelProps] = useState({
+    const [data, setData] = useState([])
+    const panelProps = {
         fullWidth: true,
-        openLarge: true,
+        openLarge: false,
         showCloseButton: true,
         noBackgroundOpacity: true,
         closeOnTouchOutside: true,
         onClose: () => setPanel(),
         onPressCloseButton: () => setPanel(),
-      });
+      };
+
     return (
-        <View style={styles.container}>
-            <SwipeablePanel {...panelProps} isActive={panel}>
-                <View style={styles.panelContent}>
-                    <Text style={styles.text}>Find out where your eMotions are from</Text>
-                    <Timeline /> 
-                </View>
-            </SwipeablePanel>
+      <SwipeablePanel {...panelProps} isActive={panel}>
+        <View style={{margin: 20}}>
+          <Text style={styles.text}>Find out where your eMotions are from</Text>
+          <EmotionTimeline movementDataProp={context?.movementData?.[context.getCurrentMovementIndex()]}/> 
         </View>
+      </SwipeablePanel>
     );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    alignContent: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%',
-  },
-  panelContent: {
-    display: 'flex',
-    alignItems: 'center',
-    textAlign: 'center',
-    justifyContent: 'center',
-    padding: 20,
-    width: '80%',
-    position: 'absolute',
-    left: '10%'
-},
-text: { 
+  text: { 
     fontSize: 25,
     fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 10
   },
   clickText: {
     position: 'absolute',
