@@ -9,6 +9,8 @@ import SuggestedMoves from '../components/SuggestedMoves';
 import RecentMovements from '../components/RecentMovements';
 import EmotionBreakdown from '../components/EmotionBreakdown';
 import motionData from '../utils/motionData'
+import hardcodedMovementData from '../utils/movementData';
+
 
 const {
     width: SCREEN_WIDTH,
@@ -75,7 +77,7 @@ export default function CurrentEmotion() {
         else {
 
             // var nestedFeelings = context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])
-            var nestedFeelings = context.movementFeelings(context.movementData[context.movementData.length-1])
+            var nestedFeelings = context.movementFeelings(hardcodedMovementData[hardcodedMovementData.length-1])
             var temp = []
             for (var i = nestedFeelings.length-1; i >= 0; i--){
                 for (var k = nestedFeelings[i].length-1; k >= 0; k--){
