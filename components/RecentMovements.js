@@ -27,14 +27,14 @@ export default function RecentMovements({ navigator }) {
                 <Emotion feelings={entry.feelings} noPulse={true} />
               </View>
               <View style={styles.motionText}>
-                <Text style={styles.entryTitle}>{entry.name}</Text>
+                <Text style={styles.entryTitle}>{entry.name.substring(0, entry.name.length - 2)}</Text>
                 <Text>{entry.feelings.join(', ')} </Text>
               </View>
               <TouchableOpacity
                 style={styles.redo}
                 onPress={() =>
                   navigator.navigate('DuringMotion', {
-                    selectedMovement: entry.name,
+                    selectedMovement: entry.name.substring(0, entry.name.length - 2),
                   })
                 }
               >
