@@ -66,12 +66,16 @@ export default function CurrentEmotion() {
     }
 
     useEffect(() => {
-        if (context.getCurrentMovementIndex() == -1){
+        if(context.movementData[context.movementData.length - 1].dateEntry !== ('0'+context.date)) {
+           
+        // if (context.getCurrentMovementIndex() == -1){
             setMovementFeelings(['startScreen'])
             setSuggestionMotions(staticListMotions)
         }
         else {
-            var nestedFeelings = context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])
+
+            // var nestedFeelings = context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])
+            var nestedFeelings = context.movementFeelings(context.movementData[context.movementData.length-1])
             var temp = []
             for (var i = nestedFeelings.length-1; i >= 0; i--){
                 for (var k = nestedFeelings[i].length-1; k >= 0; k--){
