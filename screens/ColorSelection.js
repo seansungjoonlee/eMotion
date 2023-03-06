@@ -6,7 +6,6 @@ import React, { useContext, useState } from 'react';
 import Draggable from 'react-native-draggable'
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { GestureDetector } from 'react-native-gesture-handler';
 
 const {
     width: SCREEN_WIDTH,
@@ -15,13 +14,13 @@ const {
 
 
 export default function ColorSelection({ route }) {
-    const { feeling } = route.params;
+    const { feeling, parent } = route.params;
     const [selectedColor, setSelectedColor] = useState([255, 255, 255])
 
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
     const boxWidth = Dimensions.get('window').width / 42;
-    const boxHeight = (Dimensions.get('window').height-100) / 87;
+    const boxHeight = (Dimensions.get('window').height) / 87;
     const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
         const hex = x.toString(16)
         return hex.length === 1 ? '0' + hex : hex
@@ -126,78 +125,88 @@ export default function ColorSelection({ route }) {
         )
     })
     return (
-        <SafeAreaView>
-            <View style={styles.topBar}>
-                <View style={styles.backArrow}>
-                    <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.navigate('ColorMenu')}/>
-                </View>
-                <Text style={[styles.title, {backgroundColor: `rgb(${selectedColor[0]}, ${selectedColor[1]}, ${selectedColor[2]})`}]}>
-                    {feeling}
-                </Text>
-                <TouchableOpacity onPress={() => {
-                    var hex = rgbToHex(Math.floor(selectedColor[0]), Math.floor(selectedColor[1]), Math.floor(selectedColor[2]))
-                    context.updateColorMapping(feeling, hex);
-                    navigator.navigate('ColorMenu');
-                    alert(`Updated ${feeling}`);
-                }} style={styles.saveButton}>
-                    <Text>Save</Text>
-                </TouchableOpacity>
-            </View>
+        <SafeAreaView style={styles.container}>
                 {renderColorBoxes}
+                <View style={styles.topBar}>
+                    <View style={styles.backArrow}>
+                        <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.goBack()}/>
+                    </View>
+                </View>
+                <View style={[styles.feelingView, {left: (Dimensions.get('window').width / 2) - (19*feeling.length/4),backgroundColor: `rgb(${selectedColor[0]}, ${selectedColor[1]}, ${selectedColor[2]})`}]}>
+                    <Text style={styles.title}>
+                        {feeling}
+                    </Text>
+                </View>
+                <TouchableOpacity style={[styles.feelingView, styles.selectView]} onPress={() => {
+                        var hex = rgbToHex(Math.floor(selectedColor[0]), Math.floor(selectedColor[1]), Math.floor(selectedColor[2]))
+                        context.updateColorMapping(feeling, parent, hex);
+                        navigator.navigate('ColorMenu', {feeling: feeling, hex: hex});
+                        alert(`Updated ${feeling}`);
+                    }}>
+                        <Text style={{color: 'white'}}>select color</Text>
+                    </TouchableOpacity>
                 <Draggable
-                    x={0}
-                    y={100}
+                    x={100}
+                    y={400}
                     renderSize={40}
                     onDragRelease={(event) => {
+                        console.log(event.nativeEvent.pageX)
                         console.log(event.nativeEvent.pageY)
-                    var xCoord = event.nativeEvent.pageX / boxWidth
-                    var yCoord = (event.nativeEvent.pageY - 100) / boxHeight
-                    if (event.nativeEvent.pageY > 100){
+                        var xCoord = event.nativeEvent.pageX / boxWidth
+                        var yCoord = (event.nativeEvent.pageY) / boxHeight
                         setSelectedColor(colorMatrix[Math.floor(yCoord)][Math.floor(xCoord)])
-                    }
                     }}
                     isCircle
                 />
-                {/* <ColorPicker
-                    onColorSelected={color => {
-                        context.updateColorMapping(feeling, color);
-                        navigator.navigate('ColorMenu');
-                        alert(`Color selected: ${color}`);
-                    }}
-                    style={{flex: 1}}
-                /> */}
         </SafeAreaView>
 
     );
 }
 const boxWidth = Dimensions.get('window').width / 42;
-const boxHeight = (Dimensions.get('window').height-100) / 87;
+const boxHeight = (Dimensions.get('window').height) / 87;
 const styles = StyleSheet.create({
     colorBox: {
         width: boxWidth, 
         height: boxHeight
     },
+    container: {
+        display: 'flex',
+    },
     topBar: {
         flexDirection: 'row',
         width: '100%',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: 60,
+        position: 'absolute',
     },
     
     colorRow: {
         flexDirection: 'row'
     },
     title: {
-        // fontFamily: 'Avenir',
-        padding: 10,
-        marginTop: 10,
-        // borderRadius: 10,
         fontSize: 15,
-        marginBottom: 10
+        backgroundColor: 'white',
+        paddingRight: 10,
+        paddingLeft: 10,
+        borderRadius: 10
+    },
+    feelingView: {
+        position: 'absolute', 
+        top: '50%',
+        borderRadius: 10,
+        padding: 10,
+        borderWidth: 1
+    },
+    selectView: {
+        top: '80%',
+        left: (Dimensions.get('window').width / 2 ) - 50,
+        borderColor: 'white'
     },
     backArrow: {
         height: 50,
         position: 'absolute',
-        left: 0
+        left: 0,
+        marginTop: 40
     },
     saveButton: {
         borderRadius: 10,

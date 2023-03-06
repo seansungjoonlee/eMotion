@@ -3,41 +3,32 @@ import { NavigationContainer, NavigationHelpersContext } from './node_modules/@r
 import React from 'react';
 import FeelingContext from './components/FeelingContext';
 import { useState } from 'react';
-import { basicFeelings, basicToSecondary, basicColorMapping, mapAllColors } from './assets/feelings.js';
-import Themes from './assets/Themes.js';
-import MainTask from './components/MainTask';
+import { basicToSecondary, basicColorMapping, mapAllColors } from './assets/feelings.js';
 import hardcodedMovementData from './utils/movementData';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ReflectionTask from './components/ReflectionTask';
-import CommunityTask from './components/CommunityTask';
-import { FontAwesome } from '@expo/vector-icons';
-import { useIsFocused } from "@react-navigation/native"; 
-import { useNavigation } from './node_modules/@react-navigation/native';
-import context from 'react-context';
+
 import friendsData from './utils/friendsData';
 import contactsData from './utils/contactsData';
 import { LogBox } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
-
+import TabNavigator from './TabNavigator';
+import {TabContextProvider} from './utils/TabContext';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs();//Ignore all log notifications
+LogBox.ignoreAllLogs();//Ignore all log notificationss
 
 console.disableYellowBox = true;
 
 
 export default function App() {
-  const Tab = createBottomTabNavigator();
   const [currentFeelings, setCurrentFeelings] = useState([]);
   const [basic, setBasic] = useState([]);
   const [secondary, setSecondary] = useState([]);
   const [motion, setMotion] = useState({name:'', feelings:[], note:""});
   const [movementData, setMovementData] = useState(hardcodedMovementData);
-  const [basicMapping, setBasicMapping] = useState(basicColorMapping);
   const [colorMapping, setColorMapping] = useState(mapAllColors(basicColorMapping));
   const [friends, setFriends] = useState(friendsData);
   const [contacts, setContacts] = useState(contactsData);
-
+  const [emotionsData, setEmotionsData] = useState(basicToSecondary)
+  const [currentEmotions, setCurrentEmotions] = useState([])
   const current = new Date();
   const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
 
@@ -76,25 +67,13 @@ export default function App() {
     setContacts(updatedContacts);
   }
 
-  function updateColorMapping(basicFeeling, newColor) {
-    let updated = {...basicMapping};
-    updated[basicFeeling] = newColor;
-    setBasicMapping(updated);
-    setColorMapping(mapAllColors(updated));
+  function updateColorMapping(feeling, parent, newColor) {
+    if (parent) {
+      addEmotionToData(parent, feeling)
+    }
+    colorMapping[feeling] = newColor
   }
   
-  function updateSecondary(newBasic) {
-    let updated = [];
-    for (let i = 0; i < newBasic.length; i++) {
-      for (let j = 0; j < basicToSecondary[newBasic[i]].length; j++) {
-        if (secondary.indexOf(basicToSecondary[newBasic[i]][j]) !== -1) {
-          updated.push(basicToSecondary[newBasic[i]][j]);
-        }
-      }
-    }
-    setSecondary(updated);
-  }
-
   function getCurrentMovementIndex() {
     for (let i = 0; i < movementData.length; i++) {
       if (movementData[i].dateEntry === date) {
@@ -107,7 +86,6 @@ export default function App() {
   async function updateCurrentFeelings(bas, sec) {
     let updated = [];
     for (let i = 0; i < bas.length; i++) {
-      //basic feeling
       updated.push(bas[i]);
     }
     
@@ -230,19 +208,17 @@ export default function App() {
   }
 
   function movementFeelings(term) {
-    console.log("inside movement feelings");
     let feelings = [];
     for (let i = 0; i < term.motionEntry.length; i++) {
       feelings.push(term.motionEntry[i].feelings);
     }
     return feelings;
   }
-
+  function addEmotionToData (basic, secondary) {
+    emotionsData[basic].push(secondary)
+  }
   function updateMovement(name, feelings, movementDate) {
-    console.log('updating movement')
-    console.log(name)
     let updated = [...movementData];
-
     if (name == "") {
       name = getTime();
     }
@@ -291,7 +267,6 @@ export default function App() {
     setBasic: setBasic,
     secondary: secondary,
     setSecondary: setSecondary,
-    updateSecondary: updateSecondary,
     currentFeelings: currentFeelings,
     updateCurrentFeelings: updateCurrentFeelings,
     motion: motion,
@@ -311,65 +286,21 @@ export default function App() {
     contacts: contacts,
     addFriend: addFriend,
     removeFriend: removeFriend,
+    currentEmotions: currentEmotions,
+    setCurrentEmotions: setCurrentEmotions,
+    emotionsData: emotionsData,
+    addEmotionToData: addEmotionToData
+
   };
   return (  
     <FeelingContext.Provider value={feelingSettings}>
     <SafeAreaProvider>
+    <TabContextProvider>
       <NavigationContainer>
-        <Tab.Navigator 
-        initialRouteName={'movement'}
-        screenOptions={
-          
-          ({ route }) => ({
-
-            tabBarActiveTintColor: 'black',
-            
-              tabBarLabelStyle: {
-                "fontSize": 14
-              },
-              tabBarStyle: [
-                {
-                  "display": "flex"
-                },
-                null
-              ],
-            
-          tabBarIcon: ({ focused }) => {
-            let iconName;
-            let size;
-            if (route.name === 'reflection') {
-              iconName = 'user';
-              size = focused ? 30: 20;
-            } else if (route.name === 'movement') {
-              iconName = 'dot-circle-o';
-              size = focused ? 30: 20;
-            } else if (route.name === 'community') {
-              iconName = 'users';
-              size = focused ? 30: 20;
-            }
-            return <FontAwesome name={iconName} size={size} color="black" />;
-          }
-        })}>
-
-          <Tab.Screen options={{headerShown:false}} name="reflection" component={ReflectionTask} />
-          <Tab.Screen options={{headerShown:false}} name="movement" component={MainTask} />
-          <Tab.Screen options={{headerShown:false}} name="community" component={CommunityTask} />
-        </Tab.Navigator>
+        <TabNavigator />
       </NavigationContainer>
+    </TabContextProvider>
       </SafeAreaProvider>
     </FeelingContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Themes.background,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%',
-    borderWidth: 3,
-    borderColor: 'red'
-  },
-});

@@ -4,7 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from '@react-navigation/native';
 import Emotion from '../components/Emotion';
 import Themes from '../assets/Themes';
-
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
@@ -16,8 +15,6 @@ export default function Start() {
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}> eMotion </Text>
-            <Text style={styles.subtitle}> feel your workouts! </Text>
-            {/* replace with emotion component */}
             <Pressable style={styles.emotionBox} onPress={() => navigator.navigate('HowDoYouFeel')}>
                 <Emotion feelings={['startScreen']}/>
                 <Text style={styles.buttonText}>click to begin</Text>

@@ -66,11 +66,11 @@ export default function CareToElaborate() {
                     }
                     else {
                         context.updateMovement(context.motion.name, newFeelings, context.date);
-                        navigator.navigate('DuringMotion');
+                        navigator.navigate('DuringMotion', { selectedMovement: context.motion.name});
                     }
             }
             }>
-            <Text style = {styles.buttonText}> select</Text>
+            <Text style = {styles.buttonText}>select</Text>
         </TouchableOpacity>
     </SafeAreaView>
     );

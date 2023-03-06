@@ -1,151 +1,142 @@
-import { TextInput, Modal, StyleSheet, Text, Dimensions, View, Image, TouchableOpacity, Pressable} from 'react-native';
+import { StyleSheet, Dimensions, Pressable, Text} from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Emotion from '../components/Emotion';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import FeelingContext from '../components/FeelingContext';
-import React, { useContext, useState } from 'react';
-import Themes from '../assets/Themes';
-import Movement from '../components/Movement';
-import SelectDropdown from 'react-native-select-dropdown'
-import { FontAwesome } from '@expo/vector-icons'; 
-
-
-
+import React, { useContext, useState, useEffect } from 'react';
+import SuggestedMoves from '../components/SuggestedMoves';
+import RecentMovements from '../components/RecentMovements';
+import EmotionBreakdown from '../components/EmotionBreakdown';
+import motionData from '../utils/motionData'
 
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
-
 export default function CurrentEmotion() {
-
-    const options = ["today's feelings", "current eMotion"];
-    const [selected, setSelected] = useState("today's feelings");
-
-    console.log(selected);
-    const navigator = useNavigation();
+    const isFocused = useIsFocused();
+    const [showBreakdown, setShowBreakdown] = useState(false)
+    const [movementFeelings, setMovementFeelings] = useState([])
     const context = useContext(FeelingContext);
-
-    let firstEmotion = (context.movementData[context.getCurrentMovementIndex()].motionEntry.length === 1);
-    console.log("*********************************************previsualization");
-    function Visualization() {
-
-        if (firstEmotion || selected === "current eMotion") {
-            return (
-                <View style={styles.movementBox}>
-                    <Pressable style={styles.emotionBox} onPress = {() => {
-                navigator.navigate('HowDoYouFeel')}}>
-                        <Emotion feelings={context.basic}/>
-                    </Pressable>
-                </View>
-            )
-        } else {
-            console.log("*******" + context.movementFeelings(context.movementData[context.getCurrentMovementIndex()]));
-            
-            return (
-                <Pressable style={styles.movementBox} onPress = {() => {
-                    navigator.navigate('HowDoYouFeel')}}>
-                    <Movement movementFeelings={context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])} status={'current'}/>
-                    
-                    {/* <Emotion feelings={context.basic}/> */}
-                </Pressable>
-            )
+    const navigator = useNavigation();
+    const staticListMotions = [{'name': 'Stretch', 'motionFeelings': null}, {'name': 'Walk to University Ave', 'motionFeelings': null}, {'name': 'Hike with Friends', 'motionFeelings': null}, {'name': 'Yoga', 'motionFeelings': null}]
+    const [suggestedMotions, setSuggestionMotions] = useState([])
+    function getMotions (currentFeelings) {
+        let motions = {};
+        let suggestions = [[]]; //sparse 2D array, index indicates instance (so later in the array is higher association)
+        for (let i = 0; i < currentFeelings.length; i++) { //for every feeling that the user feels right now, get matching movements
+            let currentFeeling = currentFeelings[i];
+            if (motionData[currentFeeling]){
+                let associatedMovements = motionData[currentFeeling]; //does this work? associatedMovements is now an object containing movement key and instance value
+                for (const movement in associatedMovements) {
+                    let suggestion = {};
+                    suggestion.movementName = movement;
+                    suggestion.feeling = currentFeeling;
+                    let index = associatedMovements[movement];
+                    if (suggestions[index] == undefined){
+                        suggestions[index] = []
+                    }
+                    suggestions[index].push(suggestion);
+                }
+            }
         }
-
+        //suggestions is now populated in reverse order of all movements associated with feelings (higher index = stronger association)
+        //TODO: some math so that indices can add if a movement is associated with multiple feelings
+        for (let i = suggestions.length - 1; i > -1; i--) {
+            if (suggestions[i]){
+                for (let j = 0; j < suggestions[i].length; j++) {
+                    if (suggestions[i][j].movementName in motions) {
+                        motions[suggestions[i][j].movementName].push(suggestions[i][j].feeling);
+                    } else {
+                        motions[suggestions[i][j].movementName] = [suggestions[i][j].feeling];
+                    }
+                }
+            }
+        }
+        let motionList = [];
+        for (const motion in motions) {
+            motionList.push({
+                name: motion,
+                motionFeelings: motions[motion],
+            });
+        }
+        return motionList
     }
+
+    useEffect(() => {
+        if (context.getCurrentMovementIndex() == -1){
+            setMovementFeelings(['startScreen'])
+            setSuggestionMotions(staticListMotions)
+        }
+        else {
+            var nestedFeelings = context.movementFeelings(context.movementData[context.getCurrentMovementIndex()])
+            var temp = []
+            for (var i = nestedFeelings.length-1; i >= 0; i--){
+                for (var k = nestedFeelings[i].length-1; k >= 0; k--){
+                    temp.push(nestedFeelings[i][k])
+                }
+            }
+            setMovementFeelings(temp)
+            setSuggestionMotions(getMotions(temp))
+        }
+    }, [isFocused])
 
     return (
         <SafeAreaView style={styles.container}>
-
-            <SelectDropdown
-                data={options}
-                onSelect={(selectedItem, index) => {
-                    setSelected(selectedItem);
-                }}
-                buttonTextAfterSelection={(selectedItem, index) => {
-                    // text represented after item is selected
-                    // if data array is an array of objects then return selectedItem.property to render after item is selected
-                    return selectedItem
-                }}
-                rowTextForSelection={(item, index) => {
-                    // text represented for each item in dropdown
-                    // if data array is an array of objects then return item.property to represent item in dropdown
-                    return item
-                }}
-                defaultValue={options[0]}
-                buttonStyle ={styles.titleContainer}
-                buttonTextStyle={styles.title}
-                rowTextStyle={styles.optionText}
-                dropdownStyle={{backgroundColor: Themes.background}}
-                renderDropdownIcon={isOpened => {
-                    return <FontAwesome name={isOpened ? 'chevron-up' : 'chevron-down'} color={'#444'} size={20} />;
-                  }}
-
-            />
-
-            <Visualization/>
-            <TouchableOpacity style = {styles.button} onPress={() => {
-                context.updateMotion('choosing', [])
-                navigator.navigate('ChooseMotion')}
-            }>
-                <Text style = {styles.buttonText}> new movement </Text>
-            </TouchableOpacity>
+            <Text style={styles.appTitle}>eMotion</Text>
+            <Pressable style={styles.movementBox} onLongPress={() => setShowBreakdown(true)} onPress = {() => {
+                navigator.navigate('HowDoYouFeel', {movement: ''})
+                }}>
+                <Emotion feelings={movementFeelings} />
+            </Pressable>
+            {showBreakdown && <EmotionBreakdown panel={showBreakdown} setPanel={() => setShowBreakdown(!showBreakdown)}/>}
+            <SuggestedMoves suggestedMovementsList={suggestedMotions}/>
+            <RecentMovements navigator={navigator}/>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
+        display: 'flex',
         flexDirection: 'column',
         height: '100%',
         width: '100%',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        backgroundColor: Themes.background
+        backgroundColor: '#eee',
+        marginTop: 20
     },
-    title: {
-        fontSize: SCREEN_HEIGHT * 0.045,
+    appTitle: {
+        fontSize: 20,
         textAlign: 'center',
-        paddingTop: '7%',
-        // fontFamily: 'Avenir',
         fontWeight: 'bold',
     },
     buttonText: {
-        // fontFamily: 'Avenir',
         fontSize: SCREEN_HEIGHT * 0.03
     },  
-    button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: Themes.background,
-        borderWidth: 1,
-        marginTop: '8%',
-        width: '65%',
-        height: '8%',
-        borderRadius: 1000
-     },
      movementBox: {
         position: 'relative',
         justifyContent: 'center',
         alignItems: 'center',
         aspectRatio: 1,
-        height: '58%',
+        height: '30%',
+        margin: 20
      },
      emotionBox: {
         aspectRatio: 1,
-        height: '50%',
+        height: '100%',
         position: 'absolute'
      },
      titleContainer: {
         height: '11%',
         justifyContent: 'center',
         width: '90%',
-        backgroundColor: Themes.background
+        fontSize: 20
      },
      optionText: {
-        // fontFamily: 'Avenir',
         fontSize: 20
      }
 });

@@ -45,41 +45,15 @@ export default function ChooseMotion({ route }) {
                     <TextInput
                         style={styles.buttonText}
                         placeholder="search:"
-                        // onSubmitEditing={(event) => 
-                        //     {
-                        //         setText( event.nativeEvent.text)
-                        //         console.log("context.basic " + context.basic);
-                        //         context.updateMovement(text, context.basic, context.date);
-                        //         context.updateMotion(text, context.basic);
-                        //     navigator.navigate('DuringMotion')
-
-                        //     }
-                        // }
                         onSubmitEditing={(event) => 
                             {
                                 setText( event.nativeEvent.text)
-                                console.log("context.basic " + context.basic);
                                 context.updateMovement(event.nativeEvent.text, context.basic, context.date); //NOT CONSISTENT
                                 context.updateMotion(event.nativeEvent.text, context.basic);
-                            navigator.navigate('DuringMotion')
-
-                            }
+                            navigator.navigate('DuringMotion', {selectedMovement: event.nativeEvent.text})}
                         }
                     />
                 </View>
-                {/* <View style={styles.searchedBox}>
-                    <SearchedMotions searched={text}/>
-                </View> */}
-                {/* <TouchableOpacity onPress={() => {
-                    console.log('adding motion')
-                    console.log(text)
-                    console.log(context.movement)
-                    
-                    console.log(context.movement)
-                    navigator.navigate('DuringMotion')
-                    // console.log('adding motion')
-                    // console.log(text)
-                }}><Text>Add Motion</Text></TouchableOpacity> */}
             </View>
         )
     };

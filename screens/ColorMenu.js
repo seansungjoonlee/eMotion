@@ -1,85 +1,79 @@
-import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import Themes from '../assets/Themes';
-import Emotion from '../components/Emotion';
 import FeelingContext from '../components/FeelingContext';
-import React, { useContext } from 'react';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import React, { useContext, useState, useEffect } from 'react';
+import { AntDesign, FontAwesome5 } from '@expo/vector-icons'; 
 
-const {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-} = Dimensions.get('window');
 
-function getTime() {
-    let newDate = new Date();
-    let time = newDate.getHours();
-    if(newDate.getMinutes() < 10) {
-      time += ':0' + newDate.getMinutes();
-    } else {
-      time += ':' + newDate.getMinutes();
-    }
-    return time;
-  }
-
-export default function ColorMenu() {
+export default function ColorMenu({route}) {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
+    const [newFeeling, setNewFeeling] = useState('')
+    const isFocused = useIsFocused();
+
+    const [showInputFeeling, setShowInputFeeling] = useState('')
+    const [localColorMapping, setLocalColorMapping] = useState(context.colorMapping)
+    useEffect(() => {
+        if (route.params?.feeling){
+            let temp = localColorMapping
+            temp[route.params.feeling] = route.params.hex
+            setLocalColorMapping(temp)
+        }
+        setShowInputFeeling('')
+        setNewFeeling('')
+    }, [context.colorMapping]);
+    useEffect(() => {
+        setNewFeeling('')
+        setShowInputFeeling('')
+    }, [isFocused])
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.backArrowBox}>
-                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => {
-                    console.log("TRACK: exited out of settings: " + getTime());
-                    navigator.navigate('CalendarScreen');
-                }}/>
-            </View>
-            <Text style={styles.title}>
-                color menu
-            </Text>
-            <Text style={styles.subtitle}>
-                select an emotion to customize its color
-            </Text>
-            <View style={styles.section}>
-                <Text style={styles.feelingName}>
-                    joyful: 
-                </Text>
-                <Pressable style={styles.orbBox} onPress={() => navigator.navigate('ColorSelection', {feeling: 'joyful'})}>
-                    <Emotion feelings={['joyful']}/>
-                </Pressable>
-            </View>
-            <View style={styles.section}>
-                <Text style={styles.feelingName}>
-                    anxious: 
-                </Text>
-                <Pressable style={styles.orbBox} onPress={() => navigator.navigate('ColorSelection', {feeling: 'anxious'})}>
-                    <Emotion feelings={['anxious']}/>
-                </Pressable>
-            </View>
-            <View style={styles.section}>
-                <Text style={styles.feelingName}>
-                    angry: 
-                </Text>
-                <Pressable style={styles.orbBox} onPress={() => navigator.navigate('ColorSelection', {feeling: 'angry'})}>
-                    <Emotion feelings={['angry']}/>
-                </Pressable>
-            </View>
-            <View style={styles.section}>
-                <Text style={styles.feelingName}>
-                    sad: 
-                </Text>
-                <Pressable style={styles.orbBox} onPress={() => navigator.navigate('ColorSelection', {feeling: 'sad'})}>
-                    <Emotion feelings={['sad']}/>
-                </Pressable>
-            </View>
-            <View style={styles.section}>
-                <Text style={styles.feelingName}>
-                    surprised: 
-                </Text>
-                <Pressable style={styles.orbBox} onPress={() => navigator.navigate('ColorSelection', {feeling: 'surprised'})}>
-                    <Emotion feelings={['surprised']}/>
-                </Pressable>
+            <View><Text style={styles.title}>Edit Colour & Emotion</Text></View>
+            <View><Text style={[styles.subtitle, {textAlign: 'center'}]}>Select an emotion to change its color or add a new emotion</Text></View>
+            <View style={styles.feelingsContainer}>
+            {showInputFeeling.length > 0 && 
+                        <View style={styles.inputHolder}>
+                            <TextInput style={styles.feelingInput} placeholder={`Add ${showInputFeeling} emotion`} value={newFeeling} onChangeText={(text) => setNewFeeling(text)} />
+                            <TouchableOpacity onPress={() => {
+                                navigator.navigate("ColorSelection", {feeling: newFeeling, parent: showInputFeeling})
+                            }}><FontAwesome5 name="arrow-circle-up" size={26} color={newFeeling.length > 0 ? '#59afff' : '#c3c3c3'} /></TouchableOpacity>
+                        </View>
+                    }
+                <ScrollView >
+                    {Object.keys(context.emotionsData).map(feeling => {
+                        return (
+                            <View>
+                                <View style={styles.feelingGroup}>
+                                    <TouchableOpacity onPress={() => {
+                                        navigator.navigate("ColorSelection", {feeling: feeling})
+                                    }} style={[styles.basic, {backgroundColor: localColorMapping[feeling]}]}>
+                                        <Text style={styles.basic}>{feeling}</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => {
+                                        setShowInputFeeling(feeling)
+                                    }} style={[styles.secondaryView, {backgroundColor: localColorMapping[feeling]}]}>
+                                        <AntDesign name="plus" size={24} color="black" />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.secondaryContainer}>
+                                    {context.emotionsData[feeling].map(secondary => {
+                                        return (
+                                            <TouchableOpacity onPress={() => {
+                                        navigator.navigate("ColorSelection", {feeling: secondary})
+                                    }} style={[styles.secondaryView, {backgroundColor: localColorMapping[secondary]}]}>
+                                                <Text style={styles.secondary}>{secondary}</Text>
+                                            </TouchableOpacity>
+                                        )
+                                    })}
+                                    
+                                </View>
+                            </View>
+                        )
+                    })}
+                </ScrollView>
             </View>
         </SafeAreaView>
 
@@ -92,38 +86,55 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: Themes.background,
         flexDirection: 'column',
-        justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    title: {
-        // fontFamily: 'Avenir',
-        fontWeight: 'bold',
-        fontSize: SCREEN_HEIGHT * 0.045
-    },
-    subtitle: {
-        // fontFamily: 'Avenir',
-        fontSize: SCREEN_WIDTH * 0.05
-    },
-    section: {
-        height: '13%',
-        margin: '2%',
-        width: '100%',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
+    feelingGroup: {
+        display: 'flex',
+        justifyContent: 'center',
         flexDirection: 'row'
     },
-    backArrowBox: {
-        width: '100%',
+    feelingsContainer: {
+        height: '70%',
+        width: '90%'
+    },
+    inputHolder: {
+        display: 'flex',
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        marginBottom: 20,
+    },
+    feelingInput: {
+        fontSize: 25,
+        width: '90%',
+        left: '5%'
+    },
+    secondary: {
+        fontSize: 20
+    },
+    basic: {
+        borderRadius: 10,
+        padding: 5,
+        fontSize: 25, 
+    },
+    secondaryView: {
+        margin: 5,
+        padding: 10,
+        borderRadius: 10,
+    },
+    secondaryContainer: {
+        display: 'flex', 
+        flexDirection: 'row',
         justifyContent: 'center',
-        height: '7.5%',
-        paddingHorizontal: '4%',
+        flexWrap: 'wrap',
     },
-    orbBox: {
-        aspectRatio: 1,
-        height: '90%'
+    title: {
+        fontWeight: '800',
+        fontSize: 25,
+        marginTop: 50
     },
-    feelingName: {
-        // fontFamily: 'Avenir',
-        fontSize: SCREEN_HEIGHT * 0.0375
-    }
+    subtitle: {
+        fontSize: 15,
+        fontWeight: '700',
+        margin: 30
+    },
 });

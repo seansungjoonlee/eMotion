@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/slider": "4.2.4",
     "@react-native-picker/picker": "^2.4.8",
     "@react-navigation/bottom-tabs": "^6.4.1",
@@ -24,6 +25,7 @@
     "react-context": "^0.0.3",
     "react-native": "0.70.5",
     "react-native-animated-pulse": "^1.0.1",
+    "react-native-autocomplete-input": "^5.2.0",
     "react-native-calendars": "^1.1291.1",
     "react-native-canvas": "^0.1.38",
     "react-native-color-panel": "^1.0.1",
@@ -32,6 +34,7 @@
     "react-native-dropdown-picker": "^5.4.3",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-gradients": "^2.0.1",
+    "react-native-multibar": "^1.1.5",
     "react-native-reanimated": "~2.12.0",
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "~3.18.0",
@@ -40,8 +43,10 @@
     "react-native-svg-charts": "^5.4.0",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-swiper-flatlist": "^3.0.17",
+    "react-native-timeline-flatlist": "^0.8.0",
     "react-native-webview": "11.23.1",
-    "rn-fetch-blob": "^0.12.0"
+    "rn-fetch-blob": "^0.12.0",
+    "rn-swipeable-panel": "^1.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
