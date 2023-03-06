@@ -66,7 +66,7 @@ export default function CurrentEmotion() {
     }
 
     useEffect(() => {
-        if(context.movementData[context.movementData.length - 1].dateEntry !== ('0'+context.date)) {
+        if((context.movementData[context.movementData.length - 1].dateEntry !== (context.date)) && (context.movementData[context.movementData.length - 1].dateEntry !== ('0'+context.date))) {
            
         // if (context.getCurrentMovementIndex() == -1){
             setMovementFeelings(['startScreen'])
