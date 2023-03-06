@@ -7,7 +7,10 @@ import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import FeelingContext from '../components/FeelingContext';
 import React, { useContext } from 'react';
 import Emotion from '../components/Emotion';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons'; 
+import hardcodedMovementData from '../utils/movementData';
+
+
 
 const {
     width: SCREEN_WIDTH,
@@ -32,28 +35,50 @@ function changeDateFormat(inputDate){  // expects Y-m-d
     return month + '/' + day + '/' + year;
 }
 
+
+function getTime() {
+    let newDate = new Date();
+    let time = newDate.getHours();
+    if(newDate.getMinutes() < 10) {
+      time += ':0' + newDate.getMinutes();
+    } else {
+      time += ':' + newDate.getMinutes();
+    }
+    return time;
+  }
+
+  
+
 export default function CalendarScreen() {
     const navigator = useNavigation();
     const context = useContext(FeelingContext);
+    console.log("latest entry: " + hardcodedMovementData[hardcodedMovementData.length-1].dateEntry);
+    
+    function getMovement(date) {
+        for (let i = 0; i < hardcodedMovementData.length; i++) {
+          if (hardcodedMovementData[i].dateEntry === date) {
+            return hardcodedMovementData[i];
+          }
+        }
+        return -1;
+      }
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.backArrow}>
-                <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.goBack()}/>
-            </View> 
             <View style={styles.topBar}>
-                <MaterialCommunityIcons name="calendar-heart" size={28} color="black" />
-                <Text style={styles.title}>
-                    calendar
-                </Text>
             </View>
+            <Text style={styles.title}>
+                reflect
+            </Text>
             <View style={styles.calendarContainer}>
                 <Calendar
                     style={[styles.calendar]}
+
                     dayComponent={({date, _}) => {
                         const newDate = changeDateFormat(date.dateString);
                         let movementFeelings = [];
-                        if (context.getMovement(newDate) !== -1) {
-                            var nestedFeelings = context.movementFeelings(context.getMovement(newDate));
+                        console.log("newdate: " + getMovement(newDate));
+                        if (getMovement(newDate) !== -1) {
+                            var nestedFeelings = context.movementFeelings(getMovement(newDate));
                             var temp = []
                             for (var i = nestedFeelings.length-1; i >= 0; i--){
                                 for (var k = nestedFeelings[i].length-1; k >= 0; k--){
@@ -63,20 +88,12 @@ export default function CalendarScreen() {
                             movementFeelings = temp
                         }
                         return (
-                        <View>
-
                         <Pressable style={styles.date} onPress={() => navigator.navigate("MovementOverview", {date: newDate, feelings: movementFeelings})}>
                             {movementFeelings.length > 0 &&
                             <Emotion feelings={movementFeelings} noPulse={true}/>}
-                        </Pressable>
                             <Text style={styles.dayText}>{date.day}</Text>
-                        </View>
+                        </Pressable>
                         );
-                    }}
-                    theme={{
-                        arrowColor: 'black',
-                        backgroundColor: '#ffffff',
-                        textMonthFontSize: 25,
                     }}
                 />
             </View>
@@ -88,58 +105,41 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%',
-        backgroundColor: '#F1F3F5',
+        backgroundColor: Themes.background,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
-    calendar: {
-        borderRadius: 20,
-        shadowColor: 'gray',
-        shadowOpacity: 0.3,
-        shadowOffset: {
-            width: 0,
-            height: 10
-        },
-        shadowRadius: 3.5,
-        elevation: 5,
-    },
     topBar: {
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         height: '7.5%',
         paddingHorizontal: '7%',
         width: '100%'
     },
-    
     title: {
+        fontSize: SCREEN_HEIGHT * 0.045,
+        // fontFamily: 'Avenir',
         textAlign: 'center',
-        fontWeight: '700',
-        fontSize: 28,
-        margin: 10
+        fontWeight: 'bold',
+        paddingTop: '5%'
     },
     date: {
-        width: '80%',
+        width: '100%',
         aspectRatio: 1,
         position: 'relative',
         justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 2,
-        borderRadius: 30,
-        borderColor: '#D2D2D2'
+        alignItems: 'center'
     },
     dayText: {
-        textAlign: 'center',
-        color: '#616161'
+        position: 'absolute'
+    },
+    calendar: {
+        height: '100%',
+        width: '100%',
     },
     calendarContainer: {
         width: '90%',
-    },
-    backArrow: {
-        height: 50,
-        position: 'absolute',
-        left: 0,
-        marginTop: 40
-    },
+        height: '70%'
+    }
 });
