@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, useWindowDimensions, TouchableOpacity } from 'react-native'
 
-export default function OnboardingItem ({item, navigator}) {
+export default function OnboardingItem ({item}) {
     const { width } = useWindowDimensions()
     return (
         <View style={[styles.container, {width}]}>
@@ -15,7 +15,6 @@ export default function OnboardingItem ({item, navigator}) {
                     )
                 })}
             </View>
-            <TouchableOpacity style={styles.skip} onPress={() => navigator.navigate('CurrentEmotion')}><Text style={styles.description}>Get Started</Text></TouchableOpacity>
         </View>
     )
 }
@@ -41,12 +40,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
         paddingHorizontal: 20
-    },
-    skip: {
-        padding: 10, 
-        borderRadius: 10,
-        fontSize: 58,
-        borderWidth: 2,
-        borderColor: 'black'
     }
 })

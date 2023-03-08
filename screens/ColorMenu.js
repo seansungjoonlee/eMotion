@@ -31,7 +31,7 @@ export default function ColorMenu({route}) {
     }, [isFocused])
     return (
         <SafeAreaView style={styles.container}>
-            <View><Text style={styles.title}>Edit Colour & Emotion</Text></View>
+            <View><Text style={styles.title}>Edit Color & Emotion</Text></View>
             <View><Text style={[styles.subtitle, {textAlign: 'center'}]}>Select an emotion to change its color or add a new emotion</Text></View>
             <View style={styles.feelingsContainer}>
             {showInputFeeling.length > 0 && 

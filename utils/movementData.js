@@ -6,6 +6,7 @@ import database from "../config/firebase";
 const movementDataRef = ref(database, 'hardcodedMovementData');
 let movementData = [];
 onValue(movementDataRef, (snapshot) => {
+  console.log("updating movementData");
     movementData.length = 0;
       const data = snapshot.val();
       for (let i = 0; i < data.length; i++) {
@@ -24,6 +25,7 @@ onValue(movementDataRef, (snapshot) => {
         obj.motionEntry = motionEntries;
         movementData.push(obj);
       }
+    console.log('movement data length' + movementData.length)
     //   console.log("******************************" + data[0].dateEntry);
     //   updateStarCount(postElement, data);
 });

@@ -33,7 +33,7 @@ export default function MainTask({ navigation }) {
       headerShown: false,
       cardStyleInterpolator: forFade,
    }}>
-        <Stack.Screen options={{headerShown: false}} name="Onboarding" component={Onboarding}/>
+        {/* first check if user has an account */}<Stack.Screen options={{headerShown: false}} name="Onboarding" component={Onboarding}/>
         <Stack.Screen options={{headerShown: false}} name="CurrentEmotion" component={CurrentEmotion} />
         <Stack.Screen options={{headerShown:false}} name="Start" component={Start} />
         <Stack.Screen options={{headerShown:false}} name="HowDoYouFeel" component={HowDoYouFeel} />

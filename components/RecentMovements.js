@@ -30,8 +30,8 @@ export default function RecentMovements({ navigator }) {
                 <Emotion feelings={entry.feelings} noPulse={true} />
               </View>
               <View style={styles.motionText}>
-                <Text style={styles.entryTitle}>{entry.name.substring(entry.name.length - 2, entry.name.length - 1) === " " ? entry.name.substring(0, entry.name.length - 2) : entry.name}</Text>
-                <Text>{entry.feelings.join(', ')} </Text>
+                <Text style={styles.entryTitle}>Felt {entry.feelings.join(', ')} </Text>
+                <Text>{entry.name.substring(entry.name.length - 2, entry.name.length - 1) === " " ? entry.name.substring(0, entry.name.length - 2) : entry.name}</Text>
               </View>
               <TouchableOpacity
                 style={styles.redo}

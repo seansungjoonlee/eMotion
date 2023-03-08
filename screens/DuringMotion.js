@@ -10,12 +10,6 @@ import Themes from "../assets/Themes";
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import motionData from "../utils/motionData";
-import startMovingComplete from '../assets/icons/start_movement_complete.png'
-import startMovingIncomplete from '../assets/icons/start_movement_incomplete.png'
-import endMovingComplete from '../assets/icons/end_movement_complete.png'
-import endMovingIncomplete from '../assets/icons/end_movement_incomplete.png'
-import logMovementComplete from '../assets/icons/log_movement_complete.png'
-import logMovementIncomplete from '../assets/icons/log_movement_incomplete.png'
 const {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
@@ -72,18 +66,11 @@ export default function DuringMotion({route}) {
                 {movement.length == 0 && 
                     motions.length > 0 && 
                     <View style={styles.autocompleteContainer}>
-                        <View style={{height: 70}}><ScrollView horizontal style={styles.optionView}>{renderOptions}</ScrollView></View>
+                        <View style={{height: 70}}><ScrollView horizontal>{renderOptions}</ScrollView></View>
                         <TextInput style={styles.textinput} onChangeText={setText} value={text} placeholder="Type a movement..." />
                     </View>}
             </View>
-            <View style={styles.progressBar}>
-                <View style={styles.progressLine}></View>
-                <View><Image source={movementStarted ? startMovingComplete : startMovingIncomplete} /></View>
-                <View style={[styles.progressLine, {backgroundColor: movementStarted ? 'black' : '#ccc'}]}></View>
-                <View><Image source={endMovingIncomplete} /></View>
-                <View style={[styles.progressLine, {backgroundColor: '#ccc'}]}></View>
-                <View><Image source={logMovementIncomplete} /></View>
-            </View>
+            
             {!movementStarted && (movement.length > 0 || text.length > 0) && 
                 <View style={styles.bottomViewContainer}>
                     <TouchableOpacity style={styles.startMovingContainer} onPress={() => {
@@ -122,11 +109,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        padding: 20
-    },
-    inputText: {
-        fontSize: 40,
-        fontWeight: '400'
+        padding: 20,
     },
     startMovingContainer: {
         borderRadius: 20,
@@ -139,73 +122,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         shadowRadius: 3,
     },
-    title: {
-        fontSize: SCREEN_HEIGHT * 0.045,
-    },
     motion: {
         fontWeight: 'bold',
         fontSize: SCREEN_HEIGHT * 0.045,
     },
-    button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: Themes.background,
-        borderWidth: 1,
-        marginTop: '6%',
-        width: '65%',
-        borderRadius: 1000
-     },
      option: {
         backgroundColor: 'black',
         borderRadius: 10,
         padding: 10, 
         margin: 10
      },
-    noteButton: {
-        height: '100%',
-        width: '50%',
-        backgroundColor: Themes.background,
-        borderRadius: 1000,
-        borderWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     textinput: {
-        fontSize: 30
-    },
-    notesSheet: {
-        width: '85%',
-        height: '80%',
-        backgroundColor: 'white',
-        flexDirection: 'column',
-        justifyContent:'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-
-    },
-    centeredView: {
-        height: '100%',
-        width: '100%',
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
-    noteBox: {
-        height: '80%',
-        width: '80%',
-        borderWidth: 1,
-        marginBottom: '3%'
-    },
-    topBar: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: '10%',
-        width: '100%',
-        paddingVertical: '2%',
-        paddingHorizontal: '10%',
+        fontSize: 28,
+        borderBottomWidth: 1,
+        width: '100%'
     },
     bottomText: {
         fontSize: 24,
@@ -218,17 +148,12 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     autocompleteContainer: {
-        flex: 1,
         left: '5%',
+        flex: 1,
         position: 'absolute',
         top: 100,
         zIndex: 1,
       },
-    headerContainer: {
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        height: '18%'
-    },
     backArrowBox: {
         width: '100%',
         justifyContent: 'center',
@@ -237,19 +162,4 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 20
     },
-    movementInput: {
-        fontSize: 30
-    },
-    progressBar: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    progressLine: {
-        height: 3,
-        width: 70, 
-        backgroundColor: 'black',
-        margin: 10
-    }
 });

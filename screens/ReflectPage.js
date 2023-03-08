@@ -13,13 +13,8 @@ export default function ReflectPage () {
     
     return (
         <SafeAreaView style={{margin: 20}}>
-            <View style={styles.instructionsContainer}>
-                <Text style={styles.title}>reflect</Text>
-            </View>
-            <View style={styles.subtitleContainer}><View style={styles.neutralOrb}/><Text style={styles.subtitle}>Welcome Back!</Text></View>
-            <CalendarWeek navigator={navigator}/>
-            <View style={styles.feelingContainer}><Text style={styles.subtitle}>Feeling Patterns</Text><MaterialCommunityIcons name="circle-half-full" size={24} color="black" /></View>
-            <FeelingPatterns navigator={navigator}/>
+            <View style={styles.calendarContainer}><CalendarWeek navigator={navigator}/></View>
+            <View style={styles.feelingContainer}><FeelingPatterns navigator={navigator}/></View>
             <View>
             </View>
         </SafeAreaView>
@@ -35,7 +30,11 @@ const styles = StyleSheet.create({
         fontWeight: '800',
         fontSize: 20,
         textAlign: 'left',
-        marginLeft: 10
+        marginLeft: 10,
+        marginBottom: 10
+    },
+    calendarContainer: {
+        marginTop: 40
     },
     subtitleContainer: {
         flexDirection: 'row',
@@ -54,10 +53,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     feelingContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 10
+        marginTop: 30
     },
     color: {
         width: 150,
@@ -71,5 +67,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexWrap: 'wrap',
+    },
+    instructionsContainer: {
+        marginTop: 20
     }
 })

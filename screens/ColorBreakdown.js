@@ -24,11 +24,6 @@ export default function ColorBreakdown (props) {
             </View> 
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>Feeling Patterns</Text>
-                <MaterialCommunityIcons
-                name="circle-half-full"
-                size={24}
-                color="black"
-                />
             </View>
             <View style={styles.selectedContainer}>
                 <Text style={styles.selectedText}>Selected emotion:</Text>

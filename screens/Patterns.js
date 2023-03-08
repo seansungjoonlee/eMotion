@@ -32,13 +32,8 @@ export default function Patterns() {
       <View style={styles.instructionsContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Feeling Patterns</Text>
-          <MaterialCommunityIcons
-            name="circle-half-full"
-            size={24}
-            color="black"
-          />
         </View>
-        <Text style={styles.title}>( Select an emotion to analyze )</Text>
+        <Text style={[styles.title, {fontSize: 20}]}>(Select an emotion to analyze)</Text>
       </View>
       <View style={styles.colorsContainer}>
         <ScrollView style={styles.emotionsContainer}>

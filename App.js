@@ -288,10 +288,9 @@ export default function App() {
 
 
     if((movementData[movementData.length-1].dateEntry !== ('0'+movementDate)) && (movementData[movementData.length-1].dateEntry !== (movementDate))) { //if there isn't already a movement entry for today
-      console.log("movement data length is " + movementData.length);
+      console.log("new, length is " + movementData.length);
       movementDate = '0'+movementDate; //TODO: less than 10
       set(ref(database, 'hardcodedMovementData/' + movementData.length), {
-        
           dateEntry: movementDate,
       })
       console.log("movement data length is " + movementData.length);
@@ -301,12 +300,15 @@ export default function App() {
         note: "",
       })
     } else {
+      console.log(movementData[movementData.length-1].dateEntry)
+      console.log('0'+movementDate)
       let length = 0;
       console.log("movementData[movementData.length-1].motionEntry: " + movementData[movementData.length-1].motionEntry);
       if(movementData[movementData.length-1].motionEntry) { //if a motionEntry exists
         length = movementData[movementData.length-1].motionEntry.length;
-        console.log("in here, length is " + length);
+        console.log("existing, length is " + length);
       }
+      console.log(movementData.length-1)
       set(ref(database, 'hardcodedMovementData/' + (movementData.length-1) + '/motionEntry/' + (length-1)), {
         feelings: feelings,
         name: name,

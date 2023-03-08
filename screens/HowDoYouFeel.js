@@ -44,7 +44,7 @@ export default function HowDoYouFeel({ route }) {
         </View>
       )}
       <View style={styles.questionView}>
-        <Text style={styles.question}>How are you feeling?</Text>
+        <Text style={styles.question}>What is your current eMotion?</Text>
       </View>
       {/* primary bubbles  */}
       {selectedCategory == 'all' && (
@@ -254,6 +254,7 @@ const styles = StyleSheet.create({
   question: {
     fontSize: 30,
     fontWeight: '500',
+    textAlign: 'center'
   },
   questionView: {
     marginTop: 40,

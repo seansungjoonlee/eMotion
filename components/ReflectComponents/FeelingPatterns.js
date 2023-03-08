@@ -23,7 +23,7 @@ export default function FeelingPatterns({navigator}) {
     return (
         <View style={styles.shadow}>
             <TouchableOpacity style={styles.container} onPress={() => navigator.navigate("Patterns")}>
-                <Text>Emotion</Text>
+                <View style={styles.titleView}><Text style={styles.title}>Your Recent eMotions</Text></View>
                 {renderPatterns}
             </TouchableOpacity>
         </View>
@@ -36,6 +36,15 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         padding: 10,
         overflow: 'hidden',
+    },
+    titleView: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: '600',
     },
     colorCircle: {
         width: 20, height: 20, borderRadius: 10
