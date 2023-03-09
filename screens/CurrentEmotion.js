@@ -11,6 +11,7 @@ import EmotionBreakdown from '../components/EmotionBreakdown';
 import motionData from '../utils/motionData'
 import hardcodedMovementData from '../utils/movementData';
 
+import Toast from 'react-native-toast-message';
 
 const {
     width: SCREEN_WIDTH,
@@ -88,18 +89,27 @@ export default function CurrentEmotion() {
             setSuggestionMotions(getMotions(temp))
         }
     }, [isFocused])
-
+    const showToast = () => {
+        Toast.show({
+          type: 'success',
+          text1: 'Your eMotion is logged successfully',
+          text2: 'Check out the change in your orb 👋'
+        });
+      }
+    
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.appTitle}>eMotion</Text>
             <Pressable style={styles.movementBox} onLongPress={() => setShowBreakdown(true)} onPress = {() => {
-                navigator.navigate('HowDoYouFeel', {movement: ''})
+                navigator.navigate('HowDoYouFeel', {movement: '',  showToast: showToast})
                 }}>
                 <Emotion feelings={movementFeelings} />
             </Pressable>
             {showBreakdown && <EmotionBreakdown panel={showBreakdown} setPanel={() => setShowBreakdown(!showBreakdown)}/>}
             <SuggestedMoves suggestedMovementsList={suggestedMotions}/>
             <RecentMovements navigator={navigator}/>
+            <Toast />
+
         </SafeAreaView>
     );
 }

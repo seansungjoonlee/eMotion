@@ -8,7 +8,6 @@ import React, { useContext } from 'react';
 import Themes from '../assets/Themes';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import Movement from '../components/Movement';
-import ReflectedMotions from '../components/ReflectedMotions';
 import Emotion from '../components/Emotion';
 import EmotionTimeline from '../components/EmotionTimeline';
 import Timeline from 'react-native-timeline-flatlist';

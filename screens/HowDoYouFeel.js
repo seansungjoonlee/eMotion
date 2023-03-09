@@ -21,6 +21,7 @@ export default function HowDoYouFeel({ route }) {
   const [currentEmotions, setCurrentEmotions] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('all')
   const movement = route?.params.movement
+  const showToast = route?.params.showToast
   const navigator = useNavigation()
   const positions = [
     [40, 20],
@@ -176,6 +177,7 @@ export default function HowDoYouFeel({ route }) {
             style={styles.selectButton}
             onPress={() => {
               context.updateMovement(movement, currentEmotions, context.date)
+              showToast()
               navigator.navigate('CurrentEmotion')
             }}
           >

@@ -1,31 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-import { View, Text, TouchableOpacity, Pressable, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
 import FeelingContext from '../FeelingContext';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; 
+import ColorBreakdown from '../../screens/ColorBreakdown';
 
-export default function FeelingPatterns({navigator}) {
-
+export default function FeelingPatterns({route, navigator}) {
     const context = useContext(FeelingContext);
     var hardcodedTopFeelings = ['powerful', 'amazed', 'peaceful', 'stressed', 'joyful']
+    const [localColorMapping, setLocalColorMapping] = useState(context.colorMapping)
+    useEffect(() => {
+        if (route?.params?.feeling){
+          let temp = localColorMapping
+          temp[route.params.feeling] = route.params.hex
+          setLocalColorMapping(temp)
+      }
+      console.log(localColorMapping)
+  }, [context.colorMapping]);
     const renderPatterns = hardcodedTopFeelings.map((feeling) => {
         return (
-            <View>
-            <View style={styles.separator}/>
-                <View style={styles.feelingInfo}>
-                    <View style={[styles.colorCircle, {backgroundColor: context.colorMapping[feeling]}]}/>
-                    <Text style={styles.feeling}>{feeling}</Text>
-                </View>
-            </View>
+            <ColorBreakdown feeling={feeling} localColorMapping={localColorMapping} navigator={navigator}/>
         )
     })
    
     return (
         <View style={styles.shadow}>
-            <TouchableOpacity style={styles.container} onPress={() => navigator.navigate("Patterns")}>
+            <View style={styles.container}>
                 <View style={styles.titleView}><Text style={styles.title}>Your Recent eMotions</Text></View>
-                {renderPatterns}
-            </TouchableOpacity>
+                <View style={{height: 400}}><ScrollView>{renderPatterns}</ScrollView></View>
+            </View>
         </View>
     )
 }

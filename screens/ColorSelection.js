@@ -140,10 +140,11 @@ export default function ColorSelection({ route }) {
                 <TouchableOpacity style={[styles.feelingView, styles.selectView]} onPress={() => {
                         var hex = rgbToHex(Math.floor(selectedColor[0]), Math.floor(selectedColor[1]), Math.floor(selectedColor[2]))
                         context.updateColorMapping(feeling, parent, hex);
-                        navigator.navigate('ColorMenu', {feeling: feeling, hex: hex});
+                        navigator.goBack({feeling: feeling, hex: hex});
+                        // navigator.goBack()
                         alert(`Updated ${feeling}`);
                     }}>
-                        <Text style={{color: 'white'}}>select color</Text>
+                        <Text style={{color: 'white'}}>Select Color</Text>
                     </TouchableOpacity>
                 <Draggable
                     x={100}
