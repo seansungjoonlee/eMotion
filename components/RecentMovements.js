@@ -14,8 +14,9 @@ import { useContext, useState } from 'react'
 import Emotion from './Emotion'
 import hardcodedMovementData from '../utils/movementData';
 
-export default function RecentMovements({ navigator }) {
+export default function RecentMovements({ navigator, showToast }) {
   const context = useContext(FeelingContext)
+  console.log(showToast)
   const renderMovements = (i) => {
     console.log("length inside rendermovements is " + hardcodedMovementData[i].motionEntry.length)
     return (
@@ -33,16 +34,17 @@ export default function RecentMovements({ navigator }) {
                 <Text style={styles.entryTitle}>Felt {entry.feelings.join(', ')} </Text>
                 <Text>{entry.name.substring(entry.name.length - 2, entry.name.length - 1) === " " ? entry.name.substring(0, entry.name.length - 2) : entry.name}</Text>
               </View>
-              <TouchableOpacity
+              {entry.name.length > 0 ? (<TouchableOpacity
                 style={styles.redo}
                 onPress={() =>
                   navigator.navigate('DuringMotion', {
                     selectedMovement: entry.name.substring(entry.name.length - 2, entry.name.length - 1) === " " ? entry.name.substring(0, entry.name.length - 2) : entry.name,
+                    showToast: showToast
                   })
                 }
               >
                 <Text style={{textAlign: 'center'}}>Redo</Text>
-              </TouchableOpacity>
+              </TouchableOpacity>) : <View style={[styles.redo, {backgroundColor: 'white'}]}/>}
             </View>
           )
         })}

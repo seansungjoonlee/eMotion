@@ -82,7 +82,14 @@ export default function App() {
     }
     colorMapping[feeling] = newColor
   }
-  
+  function deleteEmotionFromData(feeling, basic) {
+    console.log(`deleting: ${feeling}`)
+    emotionsData[basic].splice(emotionsData[basic].indexOf(feeling), 1)
+    
+  }
+  function addEmotionToData (basic, secondary) {
+    emotionsData[basic].push(secondary)
+  }
   function getCurrentMovementIndex() {
     for (let i = 0; i < movementData.length; i++) {
       if (movementData[i].dateEntry === date) {
@@ -152,17 +159,6 @@ export default function App() {
     }
   }
 
-  function getTime() {
-    let newDate = new Date();
-    let time = newDate.getHours();
-    if(newDate.getMinutes() < 10) {
-      time += ':0' + newDate.getMinutes();
-    } else {
-      time += ':' + newDate.getMinutes();
-    }
-    return time;
-  }
-
   function updateMotion(name, feelings, note) {
     let updated = {};
     if (motion.name !== name) {
@@ -226,9 +222,7 @@ export default function App() {
     
     return feelings;
   }
-  function addEmotionToData (basic, secondary) {
-    emotionsData[basic].push(secondary)
-  }
+
 
 //   function formatDate(inputDate){
 //     return `${inputDate.getMonth()+1 < 10 && '0'}${inputDate.getMonth()+1}/${inputDate.getDate()}/${inputDate.getFullYear()}` 
@@ -242,10 +236,6 @@ export default function App() {
     console.log(feelings)
     console.log("movement date is " + movementDate)
     let updated = [...movementData];
-    if (name == "") {
-      name = getTime();
-    }
-
     let newMotion = {};
     //add a number to the motion name
     
@@ -344,7 +334,8 @@ export default function App() {
     currentEmotions: currentEmotions,
     setCurrentEmotions: setCurrentEmotions,
     emotionsData: emotionsData,
-    addEmotionToData: addEmotionToData
+    addEmotionToData: addEmotionToData,
+    deleteEmotionFromData, deleteEmotionFromData
 
   };
   return (  

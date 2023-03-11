@@ -86,7 +86,7 @@ export default function DuringMotion({route}) {
                 <TouchableOpacity style={styles.startMovingContainer} onPress={() => 
                     {
                         context.updateMotion(text.length > 0 ? text : movement, []);
-                        navigator.navigate('HowDoYouFeel', {movement: text.length > 0 ? text : movement})
+                        navigator.navigate('HowDoYouFeel', {movement: text.length > 0 ? text : movement, showToast: route.params.showToast})
                     }}>
                     <Text style={styles.bottomText}>End movement</Text>
                 </TouchableOpacity>

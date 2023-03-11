@@ -10,25 +10,42 @@ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import motionData from '../utils/motionData';
 import FeelingContext from '../components/FeelingContext'
 
-
-export default function ColorBreakdown ({feeling, navigator, localColorMapping}) {
-    // const feeling = props.route.params.feeling
-    useEffect(() => {
-      console.log('heelo')
-    }, [localColorMapping])
+export default function ColorBreakdown ({route}) {
+  const {feeling, navigator} = route.params
+  const mainEmotions = ["joyful", "anxious", "angry", "sad", "surprised"]
+  console.log(motionData)
+  console.log(feeling)
+  const context = useContext(FeelingContext)
+  const renderOtherSecondary = () => {
     return (
-        <View style={styles.container}>
+      <View><Text>other secondary</Text></View>
+    )
+  }
+  const renderBasic = () => {
+    return (
+      <View><Text>render basic</Text></View>
+    )
+  }
+    return (
+        <SafeAreaView>
             <View style={styles.selectedContainer}>
-                <TouchableOpacity onPress={() => navigator.navigate('ColorSelection', {feeling: feeling})} style={styles.emotionContainer}><Text style={styles.emotionText}>{feeling} </Text><MaterialIcons name="edit" size={24} color={localColorMapping[feeling]} /></TouchableOpacity>
+                <TouchableOpacity onPress={() => navigator.navigate('ColorSelection', {feeling: feeling})} style={styles.emotionContainer}><Text style={styles.emotionText}>{feeling} </Text><MaterialIcons name="edit" size={24} color={context.colorMapping[feeling]} /></TouchableOpacity>
             </View>
             <View style={styles.explanationContainer}>
-              {motionData[feeling] ? <View style={styles.subtitleContainer}><Text style={styles.subtitle}>Here are some activities you like to do when you're feeling <Text style={[styles.emotionText, {color: localColorMapping[feeling]}]}>{feeling}</Text>:</Text></View> : <View><Text style={styles.subtitle}>You haven't logged any motions with this feeling yet!</Text></View>}
+              {motionData[feeling] ? <View style={styles.subtitleContainer}><Text style={styles.subtitle}>Here are some activities you like to do when you're feeling <Text style={[styles.emotionText, {color: context.colorMapping[feeling]}]}>{feeling}</Text>:</Text></View> : <View><Text style={styles.subtitle}>You haven't logged any motions with this feeling yet!</Text></View>}
                 
                 {motionData[feeling] && Object.keys(motionData[feeling]).map((activity, idx) => {
                     return (<Text style={styles.activity}>{idx+1}.&nbsp;{activity}</Text>)
                 })}
             </View>
-        </View>
+            <View style={styles.similar}><Text style={[styles.emotionText, {textAlign: 'center'}]}>Similar Emotions to {feeling}</Text></View>
+            <View style={styles.explanationContainer}>
+              {mainEmotions.indexOf(feeling) < 0 ? renderOtherSecondary() : renderBasic()}
+            </View>
+          <View style={styles.backArrow}>
+            <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.goBack()}/>
+          </View>
+        </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({ 
@@ -37,12 +54,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         marginLeft: 10
-    },
-    container: {
-      borderWidth: 1,
-      marginBottom: 10,
-      marginTop: 10,
-      borderRadius: 10
     },
     subtitleContainer: {
         flexDirection: 'row',
@@ -58,12 +69,16 @@ const styles = StyleSheet.create({
       selectedContainer: {
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 10
+        alignItems: 'space-around',
+        justifyContent: 'space-around',
+        marginTop: 40,
+        marginBottom: 20
       },
       selectedText: {
         fontSize: 18
+      },
+      similar: {
+        marginTop: 40
       },
       emotionText: {
         fontSize: 15, 
@@ -89,4 +104,10 @@ const styles = StyleSheet.create({
         left: 0,
         marginTop: 40
     },
+    backArrow: {
+      height: 50,
+      position: 'absolute',
+      left: 0,
+      marginTop: 40
+  },
 })

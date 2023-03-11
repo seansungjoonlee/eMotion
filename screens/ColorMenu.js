@@ -37,12 +37,12 @@ export default function ColorMenu({route}) {
             {showInputFeeling.length > 0 && 
                         <View style={styles.inputHolder}>
                             <TextInput style={styles.feelingInput} placeholder={`Add ${showInputFeeling} emotion`} value={newFeeling} onChangeText={(text) => setNewFeeling(text)} />
-                            <TouchableOpacity onPress={() => {
+                            {newFeeling.length > 0 && <TouchableOpacity onPress={() => {
                                 navigator.navigate("ColorSelection", {feeling: newFeeling, parent: showInputFeeling})
-                            }}><FontAwesome5 name="arrow-circle-up" size={26} color={newFeeling.length > 0 ? '#59afff' : '#c3c3c3'} /></TouchableOpacity>
+                            }}><FontAwesome5 name="plus" size={26} color={'black'} /></TouchableOpacity>}
                         </View>
                     }
-                <ScrollView >
+                <ScrollView>
                     {Object.keys(context.emotionsData).map(feeling => {
                         return (
                             <View>
@@ -52,23 +52,27 @@ export default function ColorMenu({route}) {
                                     }} style={[styles.basic, {backgroundColor: localColorMapping[feeling]}]}>
                                         <Text style={styles.basic}>{feeling}</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => {
-                                        setShowInputFeeling(feeling)
-                                    }} style={[styles.secondaryView, {backgroundColor: localColorMapping[feeling]}]}>
-                                        <AntDesign name="plus" size={24} color="black" />
-                                    </TouchableOpacity>
                                 </View>
                                 <View style={styles.secondaryContainer}>
                                     {context.emotionsData[feeling].map(secondary => {
                                         return (
                                             <TouchableOpacity onPress={() => {
-                                        navigator.navigate("ColorSelection", {feeling: secondary})
+                                        navigator.navigate("ColorSelection", {feeling: secondary, basic: feeling})
                                     }} style={[styles.secondaryView, {backgroundColor: localColorMapping[secondary]}]}>
                                                 <Text style={styles.secondary}>{secondary}</Text>
                                             </TouchableOpacity>
                                         )
                                     })}
                                     
+                                </View>
+                                <View style={{display: 'flex', alignItems:'center'}}>
+                                    <View style={styles.addButtonContainer}>
+                                        <TouchableOpacity onPress={() => {
+                                            setShowInputFeeling(feeling)
+                                        }} style={[styles.addButton, {borderColor: localColorMapping[feeling]}]}>
+                                            <FontAwesome5 name="plus" size={24} color={localColorMapping[feeling]} />
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                             </View>
                         )
@@ -87,15 +91,20 @@ const styles = StyleSheet.create({
         backgroundColor: Themes.background,
         flexDirection: 'column',
         alignItems: 'center',
+        paddingLeft: 20,
+        paddingRight: 20
     },
     feelingGroup: {
         display: 'flex',
         justifyContent: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        width: '100%',
+        marginBottom: 5
     },
     feelingsContainer: {
-        height: '70%',
-        width: '90%'
+        height: '84%',
+        width: '90%',
+        paddingBottom: 20
     },
     inputHolder: {
         display: 'flex',
@@ -115,17 +124,43 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 5,
         fontSize: 25, 
+        width: '100%',
+        textAlign: 'center'
     },
     secondaryView: {
         margin: 5,
         padding: 10,
         borderRadius: 10,
     },
+    addButton: {
+        width: 40, 
+        height:40,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        borderWidth: 3, 
+        borderRadius: 30,
+        padding: 5
+    },
+    addButtonContainer: {
+        backgroundColor: 'white',
+        width: 45,
+        height: 45,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 23,
+        top: -20
+    },
     secondaryContainer: {
         display: 'flex', 
         flexDirection: 'row',
         justifyContent: 'center',
         flexWrap: 'wrap',
+        backgroundColor: '#F1F1F1',
+        paddingBottom: 20,
+        borderRadius: 10
     },
     title: {
         fontWeight: '800',
@@ -135,6 +170,7 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 15,
         fontWeight: '700',
-        margin: 30
+        marginTop: 0,
+        marginBottom: 30
     },
 });

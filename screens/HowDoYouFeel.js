@@ -45,7 +45,7 @@ export default function HowDoYouFeel({ route }) {
         </View>
       )}
       <View style={styles.questionView}>
-        <Text style={styles.question}>What is your current eMotion?</Text>
+        <Text style={styles.question}>What's your eMotion?</Text>
       </View>
       {/* primary bubbles  */}
       {selectedCategory == 'all' && (

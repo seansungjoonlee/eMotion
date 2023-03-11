@@ -44,8 +44,11 @@ export default function Patterns() {
                   <View style={styles.feelingGroup}>
                     <TouchableOpacity
                       onPress={() => {
+                        console.log(feeling)
                         navigator.navigate('ColorBreakdown', {
                           feeling: feeling,
+                          navigator: navigator
+
                         })
                       }}
                       style={[
@@ -60,9 +63,12 @@ export default function Patterns() {
                     {context.emotionsData[feeling].map((secondary) => {
                       return (
                         <TouchableOpacity
+
                           onPress={() => {
+                        console.log(feeling)
                             navigator.navigate('ColorBreakdown', {
                               feeling: secondary,
+                              navigator: navigator
                             })
                           }}
                           style={[

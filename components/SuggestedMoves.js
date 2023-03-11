@@ -5,13 +5,13 @@ import { useContext } from 'react';
 import Emotion from './Emotion';
 import { AntDesign } from '@expo/vector-icons'; 
 
-export default function SuggestedMoves({suggestedMovementsList}) {
+export default function SuggestedMoves({showToast}) {
     const navigator = useNavigation();
 
     return (
         <View style={styles.container}>
             <Pressable style={styles.card} onPress={() => {
-                        navigator.navigate('DuringMotion', {selectedMovement: ''})
+                        navigator.navigate('DuringMotion', {selectedMovement: '', showToast: showToast})
                     }}>
                     <AntDesign name="plus" size={24} color="black" />
                     <Text style={styles.title}>Let's start moving again.</Text></Pressable>

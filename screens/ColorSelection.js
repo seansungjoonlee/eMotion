@@ -7,14 +7,9 @@ import Draggable from 'react-native-draggable'
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-} = Dimensions.get('window');
-
 
 export default function ColorSelection({ route }) {
-    const { feeling, parent } = route.params;
+    const { feeling, parent, basic } = route.params;
     const [selectedColor, setSelectedColor] = useState([255, 255, 255])
 
     const navigator = useNavigation();
@@ -131,21 +126,31 @@ export default function ColorSelection({ route }) {
                     <View style={styles.backArrow}>
                         <MaterialIcons name="keyboard-backspace" size={50} color="black" onPress={() => navigator.goBack()}/>
                     </View>
+                    {basic && <View style={styles.delete}>
+                        <MaterialIcons name="delete-outline" size={50} color="white" onPress={() => {
+                            context.deleteEmotionFromData(feeling, basic)
+                            navigator.goBack()
+                        }}/>
+                    </View>}
                 </View>
-                <View style={[styles.feelingView, {left: (Dimensions.get('window').width / 2) - (19*feeling.length/4),backgroundColor: `rgb(${selectedColor[0]}, ${selectedColor[1]}, ${selectedColor[2]})`}]}>
-                    <Text style={styles.title}>
-                        {feeling}
-                    </Text>
+                <View style={styles.feelingContainer}>
+
+                    <View style={[styles.feelingView, {backgroundColor: `rgb(${selectedColor[0]}, ${selectedColor[1]}, ${selectedColor[2]})`}]}>
+                        <Text style={styles.title}>
+                            {feeling}
+                        </Text>
+                    </View>
                 </View>
-                <TouchableOpacity style={[styles.feelingView, styles.selectView]} onPress={() => {
+                <View style={[styles.feelingContainer, {top:'80%'}]}>
+                    <TouchableOpacity style={[styles.feelingView, {borderColor: 'white'}]} onPress={() => {
                         var hex = rgbToHex(Math.floor(selectedColor[0]), Math.floor(selectedColor[1]), Math.floor(selectedColor[2]))
                         context.updateColorMapping(feeling, parent, hex);
                         navigator.goBack({feeling: feeling, hex: hex});
-                        // navigator.goBack()
                         alert(`Updated ${feeling}`);
                     }}>
                         <Text style={{color: 'white'}}>Select Color</Text>
                     </TouchableOpacity>
+                </View>
                 <Draggable
                     x={100}
                     y={400}
@@ -192,21 +197,31 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     feelingView: {
-        position: 'absolute', 
-        top: '50%',
         borderRadius: 10,
         padding: 10,
         borderWidth: 1
     },
+    feelingContainer:{ 
+        display: 'flex', 
+        width: '100%',
+        justifyContent: 'center', 
+        alignItems: 'center',
+        top: '50%', 
+        position: 'absolute'
+    },
     selectView: {
-        top: '80%',
-        left: (Dimensions.get('window').width / 2 ) - 50,
         borderColor: 'white'
     },
     backArrow: {
         height: 50,
         position: 'absolute',
         left: 0,
+        marginTop: 40
+    },
+    delete: {
+        height: 50,
+        position: 'absolute',
+        right: 0,
         marginTop: 40
     },
     saveButton: {

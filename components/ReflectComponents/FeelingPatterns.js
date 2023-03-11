@@ -3,12 +3,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
 import FeelingContext from '../FeelingContext';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'; 
-import ColorBreakdown from '../../screens/ColorBreakdown';
-
+import motionData from '../../utils/motionData';
+import { useIsFocused } from '@react-navigation/native';
 export default function FeelingPatterns({route, navigator}) {
     const context = useContext(FeelingContext);
     var hardcodedTopFeelings = ['powerful', 'amazed', 'peaceful', 'stressed', 'joyful']
     const [localColorMapping, setLocalColorMapping] = useState(context.colorMapping)
+    const isFocused = useIsFocused()
     useEffect(() => {
         if (route?.params?.feeling){
           let temp = localColorMapping
@@ -16,10 +17,21 @@ export default function FeelingPatterns({route, navigator}) {
           setLocalColorMapping(temp)
       }
       console.log(localColorMapping)
-  }, [context.colorMapping]);
+  }, [isFocused]);
     const renderPatterns = hardcodedTopFeelings.map((feeling) => {
         return (
-            <ColorBreakdown feeling={feeling} localColorMapping={localColorMapping} navigator={navigator}/>
+            <View style={styles.breakdownContainer}>
+                <View style={styles.selectedContainer}>
+                    <TouchableOpacity onPress={() => navigator.navigate('ColorSelection', {feeling: feeling})} style={styles.emotionContainer}><Text style={styles.emotionText}>{feeling} </Text><MaterialIcons name="edit" size={24} color={localColorMapping[feeling]} /></TouchableOpacity>
+                </View>
+                <View style={styles.explanationContainer}>
+                {motionData[feeling] ? <View style={styles.subtitleContainer}><Text style={styles.subtitle}>Here are some activities you like to do when you're feeling <Text style={[styles.emotionText, {color: localColorMapping[feeling]}]}>{feeling}</Text>:</Text></View> : <View><Text style={styles.subtitle}>You haven't logged any motions with this feeling yet!</Text></View>}
+                    
+                    {motionData[feeling] && Object.keys(motionData[feeling]).map((activity, idx) => {
+                        return (<Text style={styles.activity}>{idx+1}.&nbsp;{activity}</Text>)
+                    })}
+                </View>
+            </View>
         )
     })
    
@@ -107,5 +119,56 @@ const styles = StyleSheet.create({
         display: 'flex', 
         flexDirection: 'row',
         justifyContent: 'space-between'
-    }
+    },
+    subtitle: {
+        fontWeight: '300',
+        fontSize: 15,
+        textAlign: 'center',
+        marginLeft: 10
+    },
+    breakdownContainer: {
+      borderWidth: 1,
+      marginBottom: 10,
+      marginTop: 10,
+      borderRadius: 10
+    },
+    subtitleContainer: {
+        flexDirection: 'row',
+        marginBottom: 10
+    },
+    explanationContainer: {
+        backgroundColor: 'white',
+        width: '90%',
+        left: '5%',
+        borderRadius: 10,
+        padding: 10
+    },
+      selectedContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10
+      },
+      selectedText: {
+        fontSize: 18
+      },
+      emotionText: {
+        fontSize: 15, 
+        fontWeight: '800',
+        marginLeft: 4
+      },
+      emotionContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      circle: {
+        width: 20, 
+        height: 20,
+        borderRadius: 10
+      },
+      activity: {
+        fontSize: 15,
+        textAlign: 'center'
+      },
 })
