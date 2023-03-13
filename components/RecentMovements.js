@@ -22,7 +22,7 @@ export default function RecentMovements({ navigator, showToast }) {
     return (
       <View style={styles.entryContainer}>
         <View style={styles.date}>
-          <Text>{hardcodedMovementData[i].dateEntry}</Text>
+          <Text style={{fontSize: 12}}>{hardcodedMovementData[i].dateEntry}</Text>
         </View>
         {hardcodedMovementData[i].motionEntry.map((entry, idx) => {
           return (
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
   },
   entryContainer: {
     display: 'flex',
-    justifyContent: 'center', 
-    paddingLeft: 10, 
+    justifyContent: 'center',
+    paddingLeft: 10,
     paddingRight: 10,
   },
   title: {
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   entryTitle: {
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 15,
   },
   emotionContainer: {
     position: 'relative',
